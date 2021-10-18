@@ -13,7 +13,7 @@
     }
 
     li>a {
-        font-size: 30px;
+        font-size: 20px;
     }
     .headermenu{
         width:1000px !important;
@@ -28,6 +28,8 @@
         margin-right: 20px !important;
     }
     #icon{
+        margin-left: -100px;
+        margin-bottom: -92px;
         height: 100px;
     }
     .logo{
@@ -43,9 +45,16 @@
         margin-top: 86px;
         font-size: 16px;
     }
-    div.dropdown-menu{
-        background: red;
-        z-index: 1;
+
+    #subheader a{
+        color: black;
+    }
+    .dropdown-menu{
+        background: #d0dd7f;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
     }
 </style>
 <body style="margin: 0;">
@@ -55,7 +64,7 @@
         <div class="headerlogo four columns">
             <div class="logo">
                 <a href= "">
-                    <img id="icon" src="img/logo.png">
+                    <img id="icon" src="img/logo1.png">
                 </a>
                 <div class="info">
                     <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -69,7 +78,7 @@
     </div>
     <div class="clear">
     </div>
-    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important;">
+    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
         <div class="row">
             <div class="twelve columns dropdowner">
                 <div class="headermenu eight columns noleftmarg">
@@ -77,53 +86,50 @@
                         <ul id="main-menu" class="nav-bar sf-menu">
                             <li class="current">
                                 <a href="">귀농 지원</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a>마을회관</a></li>
-                                        <li><a>특산물 정보</a></li>
-                                        <li><a>농사 수업</a></li>
-                                        <li><a>농사 정보</a></li>
-                                    </ul>
-                                </div>
                             </li>
-                            <li>
-                                <a href="">귀농 체험</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a>주말 농부</a></li>
-                                        <li><a>체험</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="">떨이(이름 미정)</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a>떨이</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="">컴백촌 EXPO</a>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a>귀농 청년</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="">게시판</a><div class="dropdown-menu">
-                                <ul>
-                                    <li><a>공지사항</a></li>
-                                    <li><a>수매요청</a></li>
-                                    <li><a>임대, 매매</a></li>
-                                    <li><a>지식인</a></li>
-                                </ul>
-                            </div>
 
+                            <li class="current">
+                                <a href="">귀농 체험</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">떨이(이름 미정)</a>
+                            </li>
+                            <li class="current">
+                                <a href="">컴백촌 EXPO</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">게시판</a>
                             </li>
                         </ul>
+
+                        <div class="dropdown-menu">
+                            <ul style="margin-left: 32px;margin-right: 59px;">
+                                <li><a>마을회관</a></li>
+                                <li><a>특산물 정보</a></li>
+                                <li><a>농사 수업</a></li>
+                                <li><a>농사 정보</a></li>
+                            </ul>
+                            <ul style="margin-right: 77px;">
+                                <li><a>주말 농부</a></li>
+                                <li><a>체험</a></li>
+                            </ul>
+                            <ul style="margin-right: 179px;">
+                                <li><a>떨이</a></li>
+                            </ul>
+                            <ul style="margin-right: 104px;">
+                                <li><a>귀농 청년</a></li>
+                            </ul>
+                            <ul>
+                                <li><a>공지사항</a></li>
+                                <li><a>수매요청</a></li>
+                                <li><a>임대, 매매</a></li>
+                                <li><a>지식인</a></li>
+                            </ul>
+                        </div>
                     </nav>
+
                 </div>
             </div>
         </div>
@@ -180,14 +186,15 @@
 </div>
 <script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
 <script>
-    // $("div.dropdown-menu").hide();
-    // $("div.dropdowner").mouseover(function(){
-    //     $("div.dropdown-menu").slideDown();
-    //     $("div.dropdown-menu").css("display","block");
-    // })
-    // $("div.dropdowner").mouseleave(function () {
-    //     $("div.dropdown-menu").hide();
-    // })
+    $(".dropdown-menu").hide();
+    $("#main-menu").on("mouseenter", function (e) {
+        $("div.dropdown-menu").slideDown();
+        $("div.dropdown-menu").show();
+        $("div.dropdown-menu").children().show();
+    })
+    $(".dropdown-menu").on("mouseleave", function (e) {
+        $(".dropdown-menu").hide();
+    })
 </script>
 </body>
 </html>
