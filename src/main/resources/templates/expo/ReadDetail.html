@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>메인-YOU귀농</title>
-    <link rel="stylesheet" href="css/skin.css">
-    <link rel="stylesheet" href="css/style.css">
+    <title>EXPO-YOU귀농</title>
+    <link rel="stylesheet" href="/css/skin.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 </head>
 <style>
@@ -70,6 +70,45 @@
         filter: alpha(opacity=80);
         z-index: 1;
     }
+
+    .expoItem{
+        background-color: #fafcff;
+        padding : 20px 0;
+        border-bottom: 1px solid #3c3c3c;
+        width: 970px;
+        margin-top: 25px;
+    }
+
+    img{
+
+    }
+    .expoItemInner{
+        width: 970px;
+        display: flex;
+    }
+
+    .itemTitle{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 40px;
+        margin-bottom: 5px;
+        line-height: 20px;
+        display: block;
+    }
+
+    .itemInfo{
+        margin-left: 50px;
+    }
+    .itemDetailInner{
+        font-size: 15px;
+    }
+    div#searchWrap{display: flex;}
+    select[name='type']{width: 10%;border: solid 1px black;height: 37px;border-radius: 0%;}
+    input[name='keyword']{
+        width: 80%; margin: 0 auto; padding: 0 0; border: solid 1px black;height: 37px;border-radius: 0%;
+    }
+    form[name='searchForm']{overflow: hidden;}
+
 </style>
 <body style="margin: 0;">
 <!--HEADER -->
@@ -78,7 +117,7 @@
         <div class="headerlogo four columns">
             <div class="logo">
                 <a href= "">
-                    <img id="icon" src="img/logo1.png">
+                    <img id="icon" src="/img/logo1.png" style="">
                 </a>
                 <div class="info">
                     <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -148,10 +187,17 @@
         </div>
     </div>
 </header>
-
 <section>
     <div class="tle" style="height: auto;">
+        <div class="row">
+            <div class="category">
+                <h1 style="margin-top: 105px;margin-bottom:30px;"><strong>컴백촌 EXPO</strong></h1>
+            </div>
+            <hr>
+
+        </div>
     </div>
+            <hr>
 </section>
 
 <!-- FOOTER -->
@@ -192,6 +238,7 @@
             &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
         </div>
         <div class="six columns">
+            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
         </div>
     </div>
 </div>
