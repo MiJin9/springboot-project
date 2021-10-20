@@ -125,14 +125,11 @@
     }
 
 
-    #saleBtn, #buyBtn, #saleBtn1, #buyBtn1 {
+    #saleBtn, #buyBtn {
         height: 50px;
         font-size: 20px;
     }
 
-    #buyBtn {
-        margin-left: -3px;
-    }
     .bno, .writer, .regDate, .updateDate{/*테이블 내용 가운제 정렬 (제목 제외)*/
         text-align: center;
     }
@@ -143,8 +140,34 @@
 
     #img{
         width: 100%;
-        height: 200px;
+        height: 150px;
     }
+
+    .a-write{
+        margin-top: 87px;
+        float: right;
+        margin-right: -92px;
+        width: 108px;
+        height: 30px;
+        color: white;
+        font-size: 16px;
+        background: #CE4869;
+        border: 1px crimson;
+    }
+
+    .smallTitle{
+        font-size: 30px;
+        margin-left: 90px;
+        font-weight: 900;
+    }
+
+    .horizon {
+        width: 888px;
+        border-bottom: double;
+        margin-top: 10px;
+        margin-left: 90px;
+    }
+
 </style>
 <body style="margin: 0;">
 <!--HEADER -->
@@ -229,13 +252,20 @@
         <div class="tle" style="height: 1000px;/* background: lightgoldenrodyellow; */">
             <!---------------------------------------------------------------------------------------------------------------------->
             <div>
-                <img id="img" src="/img/mypicture.jpg">
+                <img id="img" src="/img/notice.png">
+            </div>
+            <div class="row">
+                <div>
+                    <p class="smallTitle">임대 매매</p>
+                </div>
+                <p class="horizon"></p>
             </div>
             <div class="table-wrapper" id="BtnDiv">
                 <div class="inputBtn">
                     <input type="button" id="saleBtn" name="saleBtn" value="팝니다" class="button primary icon solid">
                     <input type="button" id="buyBtn" name="buyBtn" value="삽니다" class="button primary icon solid">
                 </div>
+                <h3><a href="/board/register" class="button small a-write">글 등록</a></h3>
             </div>
 
             <div class="table-wrapper" id="sale">
@@ -249,77 +279,77 @@
                         <th class="updateDate">수정일</th>
                     </tr>
                     </thead>
-                        <tbody>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
+                    <tbody>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">Number</td>
+                        <td class="title">Title<a id="goRead" href="#"></a></td>
+                        <td class="writer">Writer</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
                     </tbody>
                     <tfoot>
                     </tfoot>
@@ -370,77 +400,14 @@
                         <th class="updateDate">수정일</th>
                     </tr>
                     </thead>
-                        <tbody>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
+                    <tbody>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
                     </tbody>
                     <tfoot>
                     </tfoot>
@@ -541,21 +508,10 @@
         $("div.dimmed").css("opacity","0");
     })
 
-    $("#saleBtn").css("background", "#ce4869");
-    $("#saleBtn").css("border", "2px double black");
-    $("#saleBtn").css("border-bottom", "none");
-    $("#buyBtn").css("border-bottom", "2px double black");
-
     $("#buy").hide();
     $("#saleBtn").on("click", function () {
-        $("#saleBtn").css("background", "#ce4869");
-        $("#saleBtn").css("border", "2px double black");
-        $("#saleBtn").css("border-bottom", "none");
-
-        $("#buyBtn").css("background", "#65cdd2");
-        $("#buyBtn").css("border", "none");
-        $("#buyBtn").css("border-bottom", "2px double black");
-
+        $("#saleBtn").css("background", "#ce4869")
+        $("#buyBtn").css("background", "#65cdd2")
         $("#sale").show();
         $("#buy").hide();
         $("#keyword").val("");
@@ -563,13 +519,7 @@
 
     $("#buyBtn").on("click", function () {
         $("#buyBtn").css("background", "#ce4869")
-        $("#buyBtn").css("border", "2px double black");
-        $("#buyBtn").css("border-bottom", "none");
-
         $("#saleBtn").css("background", "#65cdd2")
-        $("#saleBtn").css("border", "none");
-        $("#saleBtn").css("border-bottom", "2px double black");
-
         $("#sale").hide();
         $("#buy").show();
         $("#keyword").val("");

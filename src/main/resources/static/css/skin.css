@@ -9,7 +9,7 @@ ul.flyout li a:hover, .nav-bar li ul li a:hover {color:#a0a774;}
 .topborder { border-top:4px solid #a0a774;}
 #subheader{background: #88d52e;border-top: 1px solid #a0a774; color: #fff;}
 #subheader a {color: #fff;text-decoration: none;}
-#subheader a:hover { text-decoration: none; color: #fff; }
+#subheader a:hover { text-decoration: none;}
 .readmore {background:#a0a774;}
 #testimonials blockquote cite {color:#a0a774;}
 .tags {background:#333;}

@@ -146,7 +146,7 @@ form.custom .custom.disabled { background-color: #ddd }
 }
 .lt-ie9 form.custom div.custom.dropdown a.selector { height: 30px }
 /* The Grid ---------------------- */
-.row { width: 980px;  min-width: 768px; max-width: 100%; margin: 0 auto; }
+.row { width: 980px;  min-width: 768px; max-width: 100%; margin: 0 auto!important; }
 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
 .row.collapse .column,
 .row.collapse .columns { padding: 0 }
@@ -771,7 +771,7 @@ a:focus { outline: none }
 #subheader {  position: relative; padding: 25px 50px; position: relative; }
 #subheader p { font-size: 1.4em; margin-bottom: 0; }
 #subheader a { color: #fff; text-decoration: none; }
-#subheader a:hover { text-decoration: none; color: #fff; }
+#subheader a:hover { text-decoration: none;}
 .subheadertext {padding:40px 0 60px !important;}
 .bread { font-family: DroidSansRegular; margin-top: 8px; font-size: 16px !important; }
 .topborder { border-top: 4px solid }

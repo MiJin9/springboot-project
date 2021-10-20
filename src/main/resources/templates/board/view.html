@@ -95,13 +95,11 @@
     .vContent{
         min-height: 400px;
         width: 888px;
-        background: #e1ebe7;
     }
 
     .vTitel {
         border-bottom: double;
         width: 888px;
-        background: #d5e5d1;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
@@ -118,11 +116,11 @@
     }
 
     .horizon {
+        width: 888px;
         height: 49px;
         border-bottom: double;
-        margin-top: 10px;
         border-top: double;
-        width: 888px;
+        margin-top: 10px;
     }
     .register-form{
         width: 888px;
@@ -140,6 +138,10 @@
         border: 2px solid black;
         border-bottom: none;
         font-weight: bold;
+    }
+    #img{
+        width: 100%;
+        height: 150px;
     }
 </style>
 <body style="margin: 0;">
@@ -224,14 +226,21 @@
     <div>
         <div class="tle" style="height: 1000px;/* background: lightgoldenrodyellow; */">
             <!---------------------------------------------------------------------------------------------------------------------->
+            <div>
+                <img id="img" src="/img/notice.png">
+            </div>
             <div class="view">
                 <div class="vTitel">
-                    <h4>제목</h4><p>0000-00-00</p>
+                    <h4>제목</h4>
+                    <div>
+                        <p style="text-align: right">0000-00-00</p>
+                        <p style="width: fit-content; margin-bottom: 7px; text-align: right">작성자</p>
+                    </div>
                 </div>
                 <div class="vContent">
                     어떤 내용 인가요?
                 </div>
-                <div class="horizon"><p style="font-size: 30px;">댓글</p></div>
+                <div class="horizon"><p style="font-size: 30px;">댓글&nbsp;&nbsp;<span style="font-size: 19px;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 글은 제재가 있을 수 있습니다.</span></p></div>
                 <br>
                 <div class="register-form">
                     <div>
@@ -244,7 +253,7 @@
                     </div>
                 </div>
                 <br>
-                <br>
+                <hr style="border-top: double; width: 888px;">
                 <br>
                 <div class="replyDiv">
                     <ul class="reply">

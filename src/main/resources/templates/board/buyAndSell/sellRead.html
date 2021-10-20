@@ -8,10 +8,6 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 </head>
 <style>
-
-    h1, h2, h3, h4, a, p, li, div, input{
-    }
-
     li>a {
         font-size: 20px;
     }
@@ -32,7 +28,8 @@
         margin-bottom: -92px;
         height: 100px;
     }
-    .logo{
+
+    .logo {
         width: 1000px !important;
         margin-bottom: 10px;
         margin-top: 15px;
@@ -50,29 +47,20 @@
         color: black;
     }
     .dropdown-menu{
-        background: navajowhite;
+        background: tan;
         color: black;
         display: flex;
         min-width: fit-content;
         max-width: 1000px;
-    }
-    .table-wrapper{
-        width: 800px;
-        margin: 0 auto;
-        margin-top: 140px;
+        z-index: 10;
+        position: absolute;
+        top: 69px;
     }
     tr.tHead th{
         font-weight: bold;
         color: #fff;
         background: #ce4869;
         text-align: center;
-    }
-    .tle{
-        background: white;
-    }
-    #keyword{
-        margin:0;
-        border: 1px solid;
     }
     select{
         width: 125px;
@@ -82,18 +70,95 @@
         width: 70px;
         max-height: 31px;
     }
+    .tle{
+        background: white;
+    }
+    .dimmed{
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=80);
+        z-index: 1;
+    }
 
-    #searchWrap{
+    .view {
+        width: 1000px;
+        padding-left: 66px;
+        margin: 0 auto;
+        margin-top: 90px;
+    }
+
+    .vContent{
+        min-height: 400px;
+        width: 888px;
+    }
+
+    .vTitel {
+        border-bottom: double;
+        width: 888px;
         display: flex;
-        width: 896px;
-    }
-    th.title{
-        width: 500px;
-    }
-    th.bno{
-        width: 80px;
+        align-items: flex-end;
+        justify-content: space-between;
     }
 
+    .replyDiv {
+        width: 888px;
+        margin-left: -12px;
+    }
+
+    .reply {
+        margin-left: 12px;
+        width: 888px;
+    }
+
+    .horizon {
+        width: 888px;
+        height: 49px;
+        border-bottom: double;
+        border-top: double;
+        margin-top: 10px;
+    }
+    .register-form{
+        width: 888px;
+    }
+
+    .reContent {
+        min-height: 75px;
+        width: 888px;
+        border: 2px solid black;
+    }
+
+    p#writer{
+        width: 150px;
+        margin-bottom: 0;
+        border: 2px solid black;
+        border-bottom: none;
+        font-weight: bold;
+    }
+    #img{
+        width: 100%;
+        height: 150px;
+    }
+
+    .text p {
+        font-size: 30px;
+        margin-left: 57px;
+    }
+    .smallTitle{
+        font-size: 30px;
+        margin-left: 55px;
+        font-weight: 900;
+    }
+    #horizon {
+        width: 888px;
+        border-bottom: double;
+        margin-top: 10px;
+        margin-left: 55px;
+    }
 </style>
 <body style="margin: 0;">
 <!--HEADER -->
@@ -174,132 +239,65 @@
     </div>
 </header>
 <section style="background: lightgoldenrodyellow;">
-    <div class="tle" style="height: 1000px;/* background: lightgoldenrodyellow; */">
-        <!---------------------------------------------------------------------------------------------------------------------->
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                <tr class="tHead">
-                    <th class="bno">번호</th>
-                    <th class="title">제목</th>
-                    <th class="writer">작성자</th>
-                    <th class="regDate">작성일</th>
-                    <th class="updateDate">수정일</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="tBody">
-                    <td class="bno">10</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">9</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">8</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">7</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">6</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">5</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">4</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">3</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">2</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                <tr class="tBody">
-                    <td class="bno">1</td>
-                    <td class="title"><a id="goRead" href="#"></a></td>
-                    <td class="writer"></td>
-                    <td class="regDate"></td>
-                    <td class="updateDate"></td>
-                </tr>
-                </tbody>
-                <tfoot>
-                </tfoot>
-            </table>
-            <form action="/board/list" name="searchForm">
-                <div class="fields">
-                    <div class="field">
-                        <div id="searchWrap">
-                            <select name="type">
-                                <option value="">검색 기준</option>
-                                <option value="T">제목</option>
-                                <option value="C">내용</option>
-                                <option value="W">작성자</option>
-                                <option value="TC">제목 또는 내용</option>
-                                <option value="TW">제목 도는 작성자</option>
-                                <option value="TCW">제목 또는 내용 또는 작성자</option>
-                            </select>
-                            <input id="keyword" type="text" name="keyword">
-                            <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
-                        </div>
+    <div>
+        <div class="tle">
+            <!---------------------------------------------------------------------------------------------------------------------->
+            <div>
+                <img id="img" src="/img/notice.png">
+            </div>
+            <div class="row">
+                <div>
+                    <p class="smallTitle">팝니다</p>
+                </div>
+                <p id="horizon"></p>
+            </div>
+            <div class="view">
+                <div class="vTitel">
+                    <h4>제목</h4>
+                    <div>
+                        <p style="text-align: right">0000-00-00</p>
+                        <p style="width: fit-content; margin-bottom: 7px; text-align: right">작성자</p>
                     </div>
                 </div>
-            </form>
-            <div>
-
-                <div class="page" style="text-align: center">
-                    <a class="changePage"><code>&lt;</code></a>
-                    <code>1</code>
-                    <a class="changePage"><code>&gt;</code></a>
+                <div class="vContent">
+                    어떤 내용 인가요?
                 </div>
-                <form action="/board/list" name="pageForm">
-                    <input type="hidden" name="pageNum">
-                    <input type="hidden" name="amount">
-                    <input type="hidden" name="type">
-                    <input type="hidden" name="keyword">
-                </form>
+                <div class="horizon"><p style="font-size: 30px;">댓글&nbsp;&nbsp;<span style="font-size: 19px;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 글은 제재가 있을 수 있습니다.</span></p></div>
+                <br>
+                <div class="register-form">
+                    <div>
+                        <p id="writer">?????의 댓글</p>
+                        <textarea rows="6" name="reply" placeholder="Reply" style="resize: none;border: 2px solid black;"></textarea>
+                    </div>
+                    <div style="text-align: right; margin-top: -10px;">
+                        <a href="javascript:void(0)" class="finish button primary small">등록</a>
+                        <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                    </div>
+                </div>
+                <br>
+                <hr style="border-top: double; width: 888px;">
+                <br>
+                <div class="replyDiv">
+                    <ul class="reply">
+                        <li>
+                            <div>
+                                <p id="writer">작성자</p>
+                                <div class="reContent">내용</div>
+                                <div style="text-align: right;margin-right: -20px;margin-top: 1px;" id="changeBtn">
+                                    <a href="javascript:void(0)" class="modify button primary small">수정</a>
+                                    <a href="javascript:void(0)" class="delete button primary small">삭제</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <!---------------------------------------------------------------------------------------------------------------------->
         </div>
-        <!---------------------------------------------------------------------------------------------------------------------->
     </div>
 </section>
-
+<br>
+<br>
 <!-- FOOTER -->
 <div id="footer">
     <footer class="row">
@@ -344,17 +342,19 @@
 </div>
 <script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
 <script>
-/*******************************************************************************/
+    /*******************************************************************************/
     $(".dropdown-menu").hide();
     $("#main-menu").on("mouseenter", function (e) {
         $("div.dropdown-menu").slideDown();
         $("div.dropdown-menu").show();
         $("div.dropdown-menu").children().show();
+        $("div.dimmed").css("opacity","0.5");
     })
     $(".dropdown-menu").on("mouseleave", function (e) {
         $(".dropdown-menu").hide();
+        $("div.dimmed").css("opacity","0");
     })
-/*******************************************************************************/
+    /*******************************************************************************/
 </script>
 </body>
 </html>
