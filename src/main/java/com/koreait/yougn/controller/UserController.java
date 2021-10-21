@@ -37,4 +37,7 @@ public class UserController {
     public String userModify() {
         return "/user/userModify";
     }
+
+    @GetMapping("inquiry")
+    public String inquiry() {return "/user/inquiry";}
 }
