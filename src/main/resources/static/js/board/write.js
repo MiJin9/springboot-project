@@ -1,3 +1,4 @@
+/*썸머노트*/
 $("#sendSummer").click(function(){
     if(!$("#title").val()){
         alert("제목을 입력해주세요.");
