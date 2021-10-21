@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>YOU귀농-market 글 수정</title>
+    <link rel="stylesheet" href="/css/skin.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+</head>
+<style>
+    .dropdown-menu{
+        background: #ffff;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
+        z-index: 10;
+        position: absolute;
+        top: 69px;
+    }
+    .dimmed{
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=80);
+        z-index: 1;
+    }
+
+    h1, h2, h3, h4, a, p, li, div, input{
+    }
+
+    li>a {
+        font-size: 20px;
+    }
+    .headermenu{
+        width:1000px !important;
+    }
+    .twelve{
+        width: 200px;
+    }
+    table {
+        width: 112%;
+    }
+    li{
+        margin-right: 20px !important;
+    }
+    #icon{
+        margin-left: -100px;
+        margin-bottom: -92px;
+        height: 100px;
+    }
+    .logo{
+        width: 1000px !important;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+    .headerlogo{
+        width: 900px !important;
+    }
+    .info{
+        float: right;
+        margin-top: 86px;
+        font-size: 16px;
+    }
+
+    #subheader a{
+        color: black;
+    }
+    .dropdown-menu{
+        background: #d0dd7f;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
+    }
+</style>
+<body style="margin: 0;">
+<!--HEADER -->
+<header id="header">
+    <div class="row">
+        <div class="headerlogo four columns">
+            <div class="logo">
+                <a href= "">
+                    <img id="icon" src="/img/logo1.png">
+                </a>
+                <div class="info">
+                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">ID/PW 찾기</a>
+                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">마이 페이지</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+        <div class="row">
+            <div class="twelve columns dropdowner">
+                <div class="headermenu eight columns noleftmarg">
+                    <nav id="nav-wrap">
+                        <ul id="main-menu" class="nav-bar sf-menu">
+                            <li class="current">
+                                <a href="">귀농 지원</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">귀농 체험</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">떨이(이름 미정)</a>
+                            </li>
+                            <li class="current">
+                                <a href="">컴백촌 EXPO</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">게시판</a>
+                            </li>
+                        </ul>
+
+                        <div class="dropdown-menu">
+                            <ul style="margin-left: 32px;margin-right: 59px;">
+                                <li><a>마을회관</a></li>
+                                <li><a>특산물 정보</a></li>
+                                <li><a>농사 수업</a></li>
+                                <li><a>농사 정보</a></li>
+                            </ul>
+                            <ul style="margin-right: 77px;">
+                                <li><a>주말 농부</a></li>
+                                <li><a>체험</a></li>
+                            </ul>
+                            <ul style="margin-right: 179px;">
+                                <li><a>떨이</a></li>
+                            </ul>
+                            <ul style="margin-right: 104px;">
+                                <li><a>귀농 청년</a></li>
+                            </ul>
+                            <ul>
+                                <li><a>공지사항</a></li>
+                                <li><a>수매요청</a></li>
+                                <li><a>임대, 매매</a></li>
+                                <li><a>지식인</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section style="background: lightgoldenrodyellow;">
+    <div class="tle" style="height: auto;/* background: lightgoldenrodyellow; */">
+
+        <br>
+        <br>
+        <hr>
+        <div id="sit_ov_wrap" style="display: flex;width: 1000px;margin: auto;">
+            <!-- 상품이미지 미리보기 시작 { -->
+            <div id="sit_pvi">
+                <div id="sit_pvi_big" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                    <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1000px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 500px;"><div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image"><img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a></div></div></div></div>        <div class="owl-controls clickable" style="display: none;"><div class="owl-buttons"><div class="owl-prev">prev</div><div class="owl-next">next</div></div></div></div>
+                <br>
+                <script>
+                    $(document).ready(function() {
+                        $("#sit_pvi_big").owlCarousel({
+                            autoPlay : true,
+                            navigation : true, // Show next and prev buttons
+                            slideSpeed : 1000,
+                            pagination:false,
+                            singleItem:true,
+
+                        });
+                    });
+                </script>
+
+            </div>
+            <!-- } 상품이미지 미리보기 끝 -->
+
+            <section id="sit_ov" style="margin-left: -480px;margin-top: 30px;">
+                <h2 id="sit_title">아삭한 식감에 반하는 딱딱이 복숭아</h2>
+                <hr>
+                <div class="sit_ov_tbl">
+                    <div class="price">
+                        <div class="price_innerwrap">
+                            <span id="ucItemPrice_hdivPrice" class="price_original" style="font-size: 18px">시중가격 : 33,000원</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="con_w" style="font-size: 18px">
+                        <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                        <span class="con">상세페이지참조</span>
+                    </div>
+                    <br>
+                    <div class="con_w" style="font-size: 18px">
+                        <span class="ttl">브랜드&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                        <span class="con">상세페이지참조</span>
+                    </div>
+                    <br>
+                    <div class="con_w" style="font-size: 18px">
+                        <span class="ttl">원산지&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                        <span class="con">대한민국</span>
+                    </div>
+                    <br>
+                    <div class="con_w" style="font-size: 18px">
+                        <span class="ttl">배송비결제&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                        <span class="con">무료</span></div>
+                    <!-- 선택옵션 시작 { -->
+                    <hr>
+                    <section class="sit_sl_opt">
+                        <h3>선택옵션</h3>
+                        <table>
+                            <colgroup>
+                                <col class="grid_2">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th><label for="it_option_1">옵션</label></th>
+                                <td><select id="it_option_1" class="it_option">
+                                    <option value="">선택</option>
+                                    <option value="딱딱이 복숭아 2.5kg,0,9997">딱딱이 복숭아 2.5kg&nbsp;&nbsp;+ 0원</option>
+                                    <option value="딱딱이 복숭아 5kg,18800,9999">딱딱이 복숭아 5kg&nbsp;&nbsp;+ 18,800원</option>
+                                </select>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <!-- } 선택옵션 끝 -->
+
+                </div>
+            </section>
+        </div>
+        <hr>
+        <div id="bottom">
+            <!-- 필독 -->
+            <div id="sit_hhtml">
+                <div style="text-align:center;" align="center">
+                    <br>
+                </div>
+                <div style="text-align:center;" align="center">
+                    <img src="http://dmshop.kr/data/editor/2110/a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" title="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" alt="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg">
+                    <br style="clear:both;">
+                    <br style="clear:both;">
+                    <br style="clear:both;">
+                    <br style="clear:both;">&nbsp;
+                </div>
+            </div>
+            <!-- 필독끝 -->
+
+            <!-- 상풍 상세설명 -->
+            <hr>
+            <div style="text-align:center;" align="center">
+                <div align="center" style="text-align:center;">
+                    <span style="font-size:11pt;color:rgb(120,32,185);">
+                        <b>속이 꽉~ 옹골찬 새콤달콤 딱딱이복숭아!</b>
+                    </span>
+                </div>
+                <div align="center" style="text-align:center;">
+                    <br>
+                </div>
+                <div align="center" style="text-align:center;">
+                    <br>
+                </div>
+                <div align="center" style="text-align:center;">
+                    <span style="font-size:11pt;">아삭아삭 새콤달콤 딱딱이 복숭아!&nbsp;</span>
+                </div>
+                <div align="center" style="text-align:center;">
+                    <span style="font-size:11pt;"><br></span>
+                </div><div align="center" style="text-align:center;">
+                <br>
+            </div>
+                <div align="center" style="text-align:center;"><span style="font-size:11pt;">이맘때쯤 너~무 맛있는 딱딱이복숭아</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">안동에서 데려왔어요~</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">복숭아 딱~ 받아봤는데</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">한손에 꽉!! 차는 크기와</span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">향긋향 복숭아 향과 아삭한 식감!</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">새콤달콤한 맛에 반해버렸지 뭐에요~</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">한입 베어물면 과즙이 팡팡!!</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">달콤한 과즙이 가득차서 정말 군침돌아요~</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">정말~ 맛있어서 가족분들이서 드시기에</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">너무 좋아 ★★강.력.추.천★★드려요!!</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">✔ 속이 옹골차게 꽉꽉 찼구요</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">✔ 신선하고 좋은 복숭아만을 선별해</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">상품성이 특상 A+이에요~^^</span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">✔ 딱 요 시기에만 먹을 수 있는 딱딱이 복숭아!</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">넉넉한 양으로 하나씩 잘라드시고</span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">복숭아넣고~ 얼음넣고 물 조금 넣어 갈아주시면</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">넘 맛있고 시원한 복숭아 쥬스!</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div><div align="center" style="text-align:center;"><br></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">향과 맛에 반해버리는 옹골찬 딱딱이복숭아!</span></div><div align="center" style="text-align:center;"><span style="font-size:11pt;">오늘 간식으로 어떠세요~?</span></div></div>
+            <!-- 상풍 상세설명 끝 -->
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div id="footer">
+    <footer class="row">
+        <p class="back-top floatright">
+            <a href="#top" id="toTop"><span>top</span></a>
+        </p>
+        <div class="four columns">
+            <h1>도움이 필요하신가요?</h1>
+            <p>유귀농를 이용하시면서 불편함을 느끼셨나요?<br>혹은 도움이 필요하신가요?<br>언제든지 아래의 주소로 연락주세요!<br>유귀농는 여러분의 관심과 사랑에 항상 고맙습니다.</p>
+        </div>
+        <div class="four columns">
+            <h1>찾아오시는길</h1>
+            <ul class="contact">
+                <li class="icon solid fa-envelope">admin@yougn.com</li>
+                <li class="icon solid fa-phone">(02)1204-1204</li>
+                <li class="icon solid fa-home">서울특별시 강남구 테헤란로 146 현익빌딩 4층(역삼동)<br/></li>
+            </ul>
+        </div>
+        <div class="four columns">
+            <h1 class="newsmargin">NEWSLETTER</h1>
+            <div class="row collapse newsletter floatright">
+                <div class="ten mobile-three columns">
+                    <input type="text" class="nomargin" placeholder="Enter your e-mail address...">
+                </div>
+                <div class="two mobile-one columns">
+                    <a href="#" class="postfix button expand">GO</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+<div class="copyright">
+    <div class="row">
+        <div class="six columns">
+            &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
+        </div>
+        <div class="six columns">
+            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script>
+    $(".dropdown-menu").hide();
+    $("#main-menu").on("mouseenter", function (e) {
+        $("div.dropdown-menu").slideDown();
+        $("div.dropdown-menu").show();
+        $("div.dropdown-menu").children().show();
+        $("div.dimmed").css("opacity","0.5");
+    })
+    $(".dropdown-menu").on("mouseleave", function (e) {
+        $(".dropdown-menu").hide();
+        $("div.dimmed").css("opacity","0");
+    })
+</script>
+</body>
+</html>
