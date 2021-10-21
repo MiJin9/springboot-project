@@ -111,9 +111,10 @@
     }
     input[name='saleBtn']{
         width: 445px;
+        margin-left: -3px;
     }
 
-    input[name='buyBtn']{
+    input[name='rentalBtn']{
         width: 445px;
     }
     .inputBtn{ /*팝니다 삽니다 버튼*/
@@ -125,7 +126,7 @@
     }
 
 
-    #saleBtn, #buyBtn {
+    #saleBtn, #rentalBtn {
         height: 50px;
         font-size: 20px;
     }
@@ -262,10 +263,10 @@
             </div>
             <div class="table-wrapper" id="BtnDiv">
                 <div class="inputBtn">
-                    <input type="button" id="saleBtn" name="saleBtn" value="팝니다" class="button primary icon solid">
-                    <input type="button" id="buyBtn" name="buyBtn" value="삽니다" class="button primary icon solid">
+                    <input type="button" id="rentalBtn" name="rentalBtn" value="임대" class="button primary icon solid">
+                    <input type="button" id="saleBtn" name="saleBtn" value="매매" class="button primary icon solid">
                 </div>
-                <h3><a href="/board/register" class="button small a-write">글 등록</a></h3>
+                <h3><a href="/board/rentalWrite" class="button small a-write">글 등록</a></h3>
             </div>
 
             <div class="table-wrapper" id="sale">
@@ -389,7 +390,7 @@
                 </div>
             </div>
 
-            <div class="table-wrapper" id="buy">
+            <div class="table-wrapper" id="rental">
                 <table>
                     <thead>
                     <tr class="tHead">
@@ -401,6 +402,69 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
+                    <tr class="tBody">
+                        <td class="bno">번호</td>
+                        <td class="title">제목<a id="goRead" href="#"></a></td>
+                        <td class="writer">작성자</td>
+                        <td class="regDate">0000-00-00</td>
+                        <td class="updateDate">0000-00-00</td>
+                    </tr>
                     <tr class="tBody">
                         <td class="bno">번호</td>
                         <td class="title">제목<a id="goRead" href="#"></a></td>
@@ -508,20 +572,39 @@
         $("div.dimmed").css("opacity","0");
     })
 
-    $("#buy").hide();
+    $("#rentalBtn").css("background", "#ce4869");
+    $("#rentalBtn").css("border", "2px double black");
+    $("#rentalBtn").css("border-bottom", "none");
+    $("#saleBtn").css("border-bottom", "2px double black");
+
+    $("#rental").hide();
     $("#saleBtn").on("click", function () {
-        $("#saleBtn").css("background", "#ce4869")
-        $("#buyBtn").css("background", "#65cdd2")
+        $("#saleBtn").css("background", "#ce4869");
+        $("#saleBtn").css("border", "2px double black");
+        $("#saleBtn").css("border-bottom", "none");
+
+        $("#rentalBtn").css("background", "#65cdd2");
+        $("#rentalBtn").css("border", "none");
+        $("#rentalBtn").css("border-bottom", "2px double black");
+
+        $(".a-write").attr("href", "/board/saleWrite")
         $("#sale").show();
-        $("#buy").hide();
+        $("#rental").hide();
         $("#keyword").val("");
     });
 
-    $("#buyBtn").on("click", function () {
-        $("#buyBtn").css("background", "#ce4869")
+    $("#rentalBtn").on("click", function () {
+        $("#rentalBtn").css("background", "#ce4869")
+        $("#rentalBtn").css("border", "2px double black");
+        $("#rentalBtn").css("border-bottom", "none");
+
         $("#saleBtn").css("background", "#65cdd2")
+        $("#saleBtn").css("border", "none");
+        $("#saleBtn").css("border-bottom", "2px double black");
+
+        $(".a-write").attr("href", "/board/rentalWrite");
         $("#sale").hide();
-        $("#buy").show();
+        $("#rental").show();
         $("#keyword").val("");
     });
 /*******************************************************************************/

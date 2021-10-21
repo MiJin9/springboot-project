@@ -266,7 +266,7 @@
                     <input type="button" id="sellBtn" name="sellBtn" value="팝니다" class="button primary icon solid">
                     <input type="button" id="buyBtn" name="buyBtn" value="삽니다" class="button primary icon solid">
                 </div>
-                <h3><a href="/board/register" class="button small a-write">글 등록</a></h3>
+                <h3><a href="/board/sellWrite" class="button small a-write">글 등록</a></h3>
             </div>
 
             <div class="table-wrapper" id="sell">
@@ -586,7 +586,7 @@
         $("#buyBtn").css("background", "#65cdd2");
         $("#buyBtn").css("border", "none");
         $("#buyBtn").css("border-bottom", "2px double black");
-
+        $(".a-write").attr("href", "/board/sellWrite");
         $("#sell").show();
         $("#buy").hide();
         $("#keyword").val("");
@@ -601,6 +601,7 @@
         $("#sellBtn").css("border", "none");
         $("#sellBtn").css("border-bottom", "2px double black");
 
+        $(".a-write").attr("href", "/board/buyWrite");
         $("#sell").hide();
         $("#buy").show();
         $("#keyword").val("");
