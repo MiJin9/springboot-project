@@ -14,7 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @GetMapping("join")
-    public String join(){
+    public String join() {
         return "/user/join";
+    }
+
+    @GetMapping("login")
+    public String login() {
+        return "/user/login";
+    }
+
+    @GetMapping("myPage")
+    public String myPage() {
+        return "/user/myPage";
+    }
+
+    @GetMapping("writeCollection")
+    public String writeCollection() {
+        return "/user/writeCollection";
+    }
+
+    @GetMapping("userModify")
+    public String userModify() {
+        return "/user/userModify";
     }
 }

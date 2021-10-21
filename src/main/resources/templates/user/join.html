@@ -84,7 +84,7 @@
         border: 1px solid lightgray;
         height: 50px;
     }
-    
+
     .input2 input[type='password'] {
         border: 1px solid lightgray;
         height: 50px;
@@ -117,134 +117,151 @@
         text-decoration: underline;
     }
 
+    ::placeholder {
+        font-size: 16px;
+    }
+
+    div input[type='button'] {
+        height: 50px;
+        width: 120px;
+        float: right;
+        color: white;
+        background: #444444;
+        border: none
+    }
+
 </style>
-<body style="margin: 0;">
-<!--HEADER -->
-<header id="header">
-    <div class="row">
-        <div class="headerlogo four columns">
-            <div class="logo">
-                <a href="">
-                    <img id="icon" src="/img/logo1.png">
-                </a>
-                <div class="info">
-                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">ID/PW 찾기</a>
-                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">마이 페이지</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clear">
-    </div>
-    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+<form style="margin: 0;">
+    <!--HEADER -->
+    <header id="header">
         <div class="row">
-            <div class="twelve columns dropdowner">
-                <div class="headermenu eight columns noleftmarg">
-                    <nav id="nav-wrap">
-                        <ul id="main-menu" class="nav-bar sf-menu">
-                            <li class="current">
-                                <a href="">귀농 지원</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">귀농 체험</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">떨이(이름 미정)</a>
-                            </li>
-                            <li class="current">
-                                <a href="">컴백촌 EXPO</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">게시판</a>
-                            </li>
-                        </ul>
-
-                        <div class="dropdown-menu">
-                            <ul style="margin-left: 32px;margin-right: 59px;">
-                                <li><a>마을회관</a></li>
-                                <li><a>특산물 정보</a></li>
-                                <li><a>농사 수업</a></li>
-                                <li><a>농사 정보</a></li>
-                            </ul>
-                            <ul style="margin-right: 77px;">
-                                <li><a>주말 농부</a></li>
-                                <li><a>체험</a></li>
-                            </ul>
-                            <ul style="margin-right: 179px;">
-                                <li><a>떨이</a></li>
-                            </ul>
-                            <ul style="margin-right: 104px;">
-                                <li><a>귀농 청년</a></li>
-                            </ul>
-                            <ul>
-                                <li><a>공지사항</a></li>
-                                <li><a>수매요청</a></li>
-                                <li><a>임대, 매매</a></li>
-                                <li><a>지식인</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-
+            <div class="headerlogo four columns">
+                <div class="logo">
+                    <a href="">
+                        <img id="icon" src="/img/logo1.png">
+                    </a>
+                    <div class="info">
+                        <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="">ID/PW 찾기</a>
+                        <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="">마이 페이지</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+        <div class="clear">
+        </div>
+        <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+            <div class="row">
+                <div class="twelve columns dropdowner">
+                    <div class="headermenu eight columns noleftmarg">
+                        <nav id="nav-wrap">
+                            <ul id="main-menu" class="nav-bar sf-menu">
+                                <li class="current">
+                                    <a href="">귀농 지원</a>
+                                </li>
+
+                                <li class="current">
+                                    <a href="">귀농 체험</a>
+                                </li>
+
+                                <li class="current">
+                                    <a href="">떨이(이름 미정)</a>
+                                </li>
+                                <li class="current">
+                                    <a href="">컴백촌 EXPO</a>
+                                </li>
+
+                                <li class="current">
+                                    <a href="">게시판</a>
+                                </li>
+                            </ul>
+
+                            <div class="dropdown-menu">
+                                <ul style="margin-left: 32px;margin-right: 59px;">
+                                    <li><a>마을회관</a></li>
+                                    <li><a>특산물 정보</a></li>
+                                    <li><a>농사 수업</a></li>
+                                    <li><a>농사 정보</a></li>
+                                </ul>
+                                <ul style="margin-right: 77px;">
+                                    <li><a>주말 농부</a></li>
+                                    <li><a>체험</a></li>
+                                </ul>
+                                <ul style="margin-right: 179px;">
+                                    <li><a>떨이</a></li>
+                                </ul>
+                                <ul style="margin-right: 104px;">
+                                    <li><a>귀농 청년</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a>공지사항</a></li>
+                                    <li><a>수매요청</a></li>
+                                    <li><a>임대, 매매</a></li>
+                                    <li><a>지식인</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</form>
 <div id="all">
     <div class="group">
-        <h3>회원가입</h3>
-        <div id="input">
-            <div class="input2">
-                <label class="labelName">아이디<span style="color: red">*</span></label>
-                <input type="text" class="box" id="id" placeholder="아이디 입력(5~11자)" minlength="5" maxlength="11"
-                       style="font-size: 16px">
-            </div>
-            <div class="input2">
-                <label class="labelName">비밀번호<span style="color: red">*</span></label>
-                <input type="password" class="box" id="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)" minlength="8"
-                       maxlength="20" style="margin-bottom: 20px">
-                <input type="password" class="box" id="pwCheck" placeholder="비밀번호 확인" minlength="5" maxlength="20">
-            </div>
-            <div class="input2">
-                <label class="labelName">이름<span style="color: red">*</span></label>
-                <input type="text" class="box" id="name" placeholder="이름">
-            </div>
-            <div class="input2">
-                <label class="labelName">핸드폰 번호<span style="color: red">*</span></label>
-                <div>
-                    <input type="text" class="box" id="phone" placeholder="핸드폰 번호"
-                           style="width: 68%; float: left">
-                    <input type="button" style="height: 50px; width: 150px; float: right; color: white; background: #444444; border: none" value="인증번호 받기">
-                    <input type="text" placeholder="인증번호를 입력하세요" style="margin-top: 20px;">
+        <h3 style="text-align: center">회원가입</h3>
+        <hr>
+        <form>
+            <div id="input">
+                <div class="input2">
+                    <label class="labelName">아이디<span style="color: red">*</span></label>
+                    <input type="text" class="box" id="id" placeholder="아이디 입력(5~11자)" minlength="5" maxlength="11">
                 </div>
-            </div>
-            <div class="input2">
-                <label class="labelName">주소</label>
-                <div>
-                    <input type="text" class="box" id="address" placeholder="우편번호"
-                           style="width: 68%; float: left">
-                    <input type="button" style="height: 50px; width: 150px; float: right; color: white; background: #444444; border: none" value="우편번호 검색">
-                    <input type="text" placeholder="주소" style="margin-top: 20px;">
-                    <input type="text" placeholder="상세주소를 입력하세요" style="margin-top: 16px;">
+                <div class="input2">
+                    <label class="labelName">비밀번호<span style="color: red">*</span></label>
+                    <input type="password" class="box" id="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)" minlength="8"
+                           maxlength="20" style="margin-bottom: 20px">
+                    <input type="password" class="box" id="pwCheck" placeholder="비밀번호 확인" minlength="8"
+                           maxlength="20">
                 </div>
-            </div>
-            <div id="agree">
-                <div>
-                    <input type="checkbox" id="allAgree" style="zoom:1.8;">
-                    <label for="allAgree"><strong>약관 전체동의</strong></label>
+                <div class="input2">
+                    <label class="labelName">이름<span style="color: red">*</span></label>
+                    <input type="text" class="box" id="name" placeholder="이름">
                 </div>
-                <div>
-                    <input type="checkbox" id="mustAgree1" style="zoom:1.8;">
-                    <label for="mustAgree1">이용약관(필수)</label>
-                    <a href="javascript:void(0)" id="open1"
-                       style="margin: 7px auto; float: right; color: black; text-decoration: underline;">약관보기</a>
-                    <textarea rows="5" readonly id="text1" style="display: none; resize: none">제 1 장 총칙
+                <div class="input2">
+                    <label class="labelName">핸드폰 번호<span style="color: red">*</span></label>
+                    <div>
+                        <input type="text" class="box" id="phone" placeholder="핸드폰 번호(-없이 입력하세요)"
+                               style="width: 68%; float: left">
+                        <input type="button" value="인증번호 받기">
+                        <input type="text" placeholder="인증번호를 입력하세요" style="margin-top: 20px;">
+                    </div>
+                </div>
+                <div class="input2">
+                    <label class="labelName">주소</label>
+                    <div>
+                        <input type="text" class="box" id="address" placeholder="우편번호"
+                               style="width: 68%; float: left">
+                        <input type="button" value="우편번호 검색">
+                        <input type="text" placeholder="주소" style="margin-top: 20px;">
+                        <input type="text" placeholder="상세주소를 입력하세요" style="margin-top: 16px;">
+                    </div>
+                </div>
+                <div id="agree">
+                    <div>
+                        <input type="checkbox" id="allAgree" style="zoom:1.8;">
+                        <label for="allAgree"><strong>약관 전체동의</strong></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="mustAgree1" style="zoom:1.8;">
+                        <label for="mustAgree1">이용약관(필수)</label>
+                        <a href="javascript:void(0)" id="open1"
+                           style="margin: 7px auto; float: right; color: black; text-decoration: underline;">약관보기</a>
+                        <textarea rows="5" readonly id="text1"
+                                  style="display: none; resize: none; margin: 12px auto">제 1 장 총칙
 제 1 조 (목적)
 
 본 약관은 유귀농 시스템(이하 "당 사이트")이 제공하는 모든 서비스(이하 "서비스")의 이용조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
@@ -422,13 +439,13 @@
 (시행일) 본 약관은 2017년 4월 1일부터 시행됩니다.
 
 * 본 약관에 대한 저작권은 행정안전부에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.</textarea>
-                </div>
-                <div>
-                    <input type="checkbox" id="mustAgree2" style="zoom:1.8;">
-                    <label for="mustAgree2">개인정보 수집 이용동의(필수)</label>
-                    <a type="button" id="open2"
-                       style="margin: 7px auto; float: right; color: black; text-decoration: underline;">약관보기</a>
-                    <textarea rows="5" readonly style="resize: none; display: none" id="text2">개인정보보호정책
+                    </div>
+                    <div>
+                        <input type="checkbox" id="mustAgree2" style="zoom:1.8;">
+                        <label for="mustAgree2">개인정보 수집 이용동의(필수)</label>
+                        <a href="javascript:void(0)" id="open2"
+                           style="margin: 7px auto; float: right; color: black; text-decoration: underline;">약관보기</a>
+                        <textarea rows="5" id="text2" readonly style="resize: none; display: none; margin: 12px auto">개인정보보호정책
 
 유귀농 이용을 위해 수집한 귀하의 정보를 관리함에 있어서 「개인정보보호법」에서 규정하고 있는 책임과 의무를 준수하고 제공자가 동의한 내용 외 다른 목적으로는 활용하지 않음을 알려드립니다.
 
@@ -441,13 +458,13 @@
 - 개인정보 보유 및 이용기간 : 개인정보 및 초상권 수집, 이용목적이 달성된 후에는 지체 없이 파기합니다. 개인정보 보유 및 이용기간은 회원 탈퇴 시까지입니다.
 
 - 이용자는 유귀농에서 수집하는 개인정보 제공에 대한 동의를 거부할 권리가 있습니다. 다만, 유귀농 이용에 필요한 필수 항목의 제공에 대한 동의를 거부하시면 위의 서비스가 제한될 수 있습니다.</textarea>
+                    </div>
+                </div>
+                <div>
+                    <a class="button" style="width:100%; height:50px; line-height: 2.5;">동의하고 회원가입</a>
                 </div>
             </div>
-            <div>
-                <button type="button" class="button" style="width:100%; height:50px;">동의하고 회원가입</button>
-            </div>
-
-        </div>
+        </form>
     </div>
 </div>
 <!-- FOOTER -->
