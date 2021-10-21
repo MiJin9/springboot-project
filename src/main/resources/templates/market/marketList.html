@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>YOU귀농-market목록</title>
+    <link rel="stylesheet" href="/css/skin.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+</head>
+<style>
+    .dropdown-menu{
+        background: #ffff;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
+        z-index: 10;
+        position: absolute;
+        top: 69px;
+    }
+    .dimmed{
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=80);
+        z-index: 1;
+    }
+
+    .sct_10{
+        display:flex;
+    }
+
+    h1, h2, h3, h4, a, p, li, div, input{
+    }
+
+    li>a {
+        font-size: 20px;
+    }
+    .headermenu{
+        width:1000px !important;
+    }
+    .twelve{
+        width: 200px;
+    }
+    table {
+        width: 112%;
+    }
+    li{
+        margin-right: 20px !important;
+    }
+    #icon{
+        margin-left: -100px;
+        margin-bottom: -92px;
+        height: 100px;
+    }
+    .logo{
+        width: 1000px !important;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+    .headerlogo{
+        width: 900px !important;
+    }
+    .info{
+        float: right;
+        margin-top: 86px;
+        font-size: 16px;
+    }
+
+    #subheader a{
+        color: black;
+    }
+    .dropdown-menu{
+        background: #d0dd7f;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
+    }
+</style>
+<body style="margin: 0;">
+<!--HEADER -->
+<header id="header">
+    <div class="row">
+        <div class="headerlogo four columns">
+            <div class="logo">
+                <a href= "">
+                    <img id="icon" src="/img/logo1.png">
+                </a>
+                <div class="info">
+                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">ID/PW 찾기</a>
+                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">마이 페이지</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+        <div class="row">
+            <div class="twelve columns dropdowner">
+                <div class="headermenu eight columns noleftmarg">
+                    <nav id="nav-wrap">
+                        <ul id="main-menu" class="nav-bar sf-menu">
+                            <li class="current">
+                                <a href="">귀농 지원</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">귀농 체험</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">떨이(이름 미정)</a>
+                            </li>
+                            <li class="current">
+                                <a href="">컴백촌 EXPO</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">게시판</a>
+                            </li>
+                        </ul>
+
+                        <div class="dropdown-menu">
+                            <ul style="margin-left: 32px;margin-right: 59px;">
+                                <li><a>마을회관</a></li>
+                                <li><a>특산물 정보</a></li>
+                                <li><a>농사 수업</a></li>
+                                <li><a>농사 정보</a></li>
+                            </ul>
+                            <ul style="margin-right: 77px;">
+                                <li><a>주말 농부</a></li>
+                                <li><a>체험</a></li>
+                            </ul>
+                            <ul style="margin-right: 179px;">
+                                <li><a>떨이</a></li>
+                            </ul>
+                            <ul style="margin-right: 104px;">
+                                <li><a>귀농 청년</a></li>
+                            </ul>
+                            <ul>
+                                <li><a>공지사항</a></li>
+                                <li><a>수매요청</a></li>
+                                <li><a>임대, 매매</a></li>
+                                <li><a>지식인</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section style="background: lightgoldenrodyellow;">
+    <div class="tle" style="height: auto;/* background: lightgoldenrodyellow; */">
+<br>
+<br>
+<div id="wrapper">
+    <div id="container">
+        <section class="sct_wrap" style="margin-left: 18%;width: 1185px;border-top: solid;">
+            <br>
+            <br>
+            <h1 style="padding-left:48px; font-size: 17px; font-weight: 400; color: red">상품 리스트</h1>
+            <br>
+            <!-- 상품진열 10 시작 { -->
+            <ul class="sct sct_10" style="margin-left:50px;">
+                <li class="sct_li sct_clear" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210913/2109131001.gif" width="200" height="200" alt="미니사과 루비에스">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_name">
+                            미니사과 루비에스
+                        </a>
+                        <div class="sct_cost">
+                            <strike>22,800원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210913/2109131002.gif" width="200" height="200" alt="달콤한 벌집꿀(허니콤)" title="">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_name">
+                            달콤한 벌집꿀(허니콤)
+                        </a>
+                        <div class="sct_cost">
+                            <strike>22,900원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210913/thumb-2109131004_200x200.jpg" width="200" height="200" alt="흑임자인절미&amp;콩쑥개떡" title="">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_name">
+                            흑임자인절미&amp;콩쑥개떡
+                        </a>
+                        <div class="sct_cost">
+                            <strike>22,900원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210913/thumb-2109131005_200x200.jpg" width="200" height="200" alt="스테비아 방울토망고" title="">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_name">
+                            스테비아 방울토망고
+                        </a>
+                        <div class="sct_cost">
+                            <strike>21,500원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_rec.gif" alt="추천상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li sct_last" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210913/2109131005.gif" width="200" height="200" alt="해남 무농약 자색고구마 3kg">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_name">
+                            해남 무농약 자색고구마 3kg
+                        </a>
+                        <div class="sct_cost">
+                            <strike>24,900원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                </li>
+            </ul>
+            <!-- } 상품진열 10 끝 -->
+
+            <!-- 상품진열 10 시작 { -->
+            <ul class="sct sct_10" style="margin-left:50px;">
+                <li class="sct_li sct_clear" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108301018" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210830/thumb-2108301018_200x200.jpg" width="200" height="200" alt="들꽃잠 원앙 어깨 냉온 팥 찜질팩">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108301018" class="sct_name">
+                            들꽃잠 원앙 어깨 냉온 팥 찜질팩
+                        </a>
+                        <div class="sct_cost">
+                            <strike>95,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108301016" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210830/2108301016.gif" width="200" height="200" alt="[스위스밀리터리] 접이식 족욕기 (SMA-FC60)">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108301016" class="sct_name">
+                            [스위스밀리터리] 접이식 족욕기 (SMA-FC60)
+                        </a>
+                        <div class="sct_cost">
+                            <strike>80,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108247009" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210824/thumb-2108247009_200x200.jpg" width="200" height="200" alt="특별한날愛 해와달1호_M">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108247009" class="sct_name">
+                            특별한날愛 해와달1호_M
+                        </a>
+                        <div class="sct_cost">
+                            <strike>30,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108101001" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210810/2108101001.gif" width="200" height="200" alt="심플 무타공 치약칫솔걸이">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108101001" class="sct_name">
+                            심플 무타공 치약칫솔걸이
+                        </a>
+                        <div class="sct_cost">
+                            <strike>10,700원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li sct_last" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108101002" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210810/2108101002.gif" width="200" height="200" alt="욕실 드라이기 거치대">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2108101002" class="sct_name">
+                            욕실 드라이기 거치대
+                        </a>
+                        <div class="sct_cost">
+                            <strike>17,500원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+            </ul>
+            <!-- } 상품진열 10 끝 -->
+
+            <!-- 상품진열 10 시작 { -->
+            <ul class="sct sct_10" style="margin-left:50px;">
+                <li class="sct_li sct_clear" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103018" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210610/thumb-2106103018_200x200.jpg" width="200" height="200" alt="[리웰20] 가정용 살균수 제조기">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103018" class="sct_name">
+                            [리웰20] 가정용 살균수 제조기
+                        </a>
+                        <div class="sct_cost">
+                            <strike>598,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_best.gif" alt="인기상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103016" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210610/thumb-2106103016_200x200.jpg" width="200" height="200" alt="[아비스] 헬스파워 초고속 블렌더 AV-SB2011">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103016" class="sct_name">
+                            [아비스] 헬스파워 초고속 블렌더 AV-SB2011
+                        </a>
+                        <div class="sct_cost">
+                            <strike>199,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_best.gif" alt="인기상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103015" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210610/thumb-2106103015_200x200.jpg" width="200" height="200" alt="[브람스] 각선미 944 다리마사지기">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103015" class="sct_name">
+                            [브람스] 각선미 944 다리마사지기
+                        </a>
+                        <div class="sct_cost">
+                            <strike>698,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_best.gif" alt="인기상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103014" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210610/thumb-2106103014_200x200.jpg" width="200" height="200" alt="[모던하임] 에어프라이어 오븐 11L (MHAO-1100)">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103014" class="sct_name">
+                            [모던하임] 에어프라이어 오븐 11L (MHAO-1100)
+                        </a>
+                        <div class="sct_cost">
+                            <strike>399,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_best.gif" alt="인기상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li sct_last" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103012" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210610/2106103012.gif" width="200" height="200" alt="[스위스밀리터리] 아쿠아 스핀 무선 물걸레 청소기 (교체형 배터리) SMA-AP22">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2106103012" class="sct_name">
+                            [스위스밀리터리] 아쿠아 스핀 무선 물걸레 청소기 (교체형 배터리) SMA-AP22
+                        </a>
+                        <div class="sct_cost">
+                            <strike>190,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_best.gif" alt="인기상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+            </ul>
+            <!-- } 상품진열 10 끝 -->
+
+            <!-- 상품진열 10 시작 { -->
+            <ul class="sct sct_10" style="margin-left:50px;">
+                <li class="sct_li sct_clear" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303001" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210730/thumb-2107303001_200x200.jpg" width="200" height="200" alt="레오스마일상하복">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303001" class="sct_name">
+                            레오스마일상하복
+                        </a>
+                        <div class="sct_cost">
+                            <strike>27,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303002" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210730/thumb-2107303002_200x200.jpg" width="200" height="200" alt="베어프렌즈 상하복">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303002" class="sct_name">
+                            베어프렌즈 상하복
+                        </a>
+                        <div class="sct_cost">
+                            <strike>27,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303003" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210730/2107303003.gif" width="200" height="200" alt="유나하이웨스트상하복">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303003" class="sct_name">
+                            유나하이웨스트상하복
+                        </a>
+                        <div class="sct_cost">
+                            <strike>23,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303004" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210730/thumb-2107303004_200x200.jpg" width="200" height="200" alt="로라 빅케이프OPS">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303004" class="sct_name">
+                            로라 빅케이프OPS
+                        </a>
+                        <div class="sct_cost">
+                            <strike>27,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li sct_last" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303005" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/210730/thumb-2107303005_200x200.jpg" width="200" height="200" alt="베니베니 가디건">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2107303005" class="sct_name">
+                            베니베니 가디건
+                        </a>
+                        <div class="sct_cost">
+                            <strike>24,000원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+            </ul>
+            <!-- } 상품진열 10 끝 -->
+
+            <!-- 상품진열 10 시작 { -->
+            <ul class="sct sct_10" style="margin-left:50px;">
+                <li class="sct_li sct_clear" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187001" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211018/thumb-2110187001_200x200.jpg" width="200" height="200" alt="곰모자 후디">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187001" class="sct_name">
+                            곰모자 후디
+                        </a>
+                        <div class="sct_cost">
+                            <strike>39,100원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_new.gif" alt="최신상품" class="bnum"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187002" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211018/2110187002.gif" width="200" height="200" alt="세로줄 기본 티셔츠">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187002" class="sct_name">
+                            세로줄 기본 티셔츠
+                        </a>
+                        <div class="sct_cost">
+                            <strike>25,800원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_new.gif" alt="최신상품" class="bnum"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187003" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211018/thumb-2110187003_200x200.jpg" width="200" height="200" alt="뽀송 오버 롤즈">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187003" class="sct_name">
+                            뽀송 오버 롤즈
+                        </a>
+                        <div class="sct_cost">
+                            <strike>44,800원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_new.gif" alt="최신상품" class="bnum"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187004" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211018/2110187004.gif" width="200" height="200" alt="글로브 털 점퍼">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110187004" class="sct_name">
+                            글로브 털 점퍼
+                        </a>
+                        <div class="sct_cost">
+                            <strike>39,100원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_new.gif" alt="최신상품" class="bnum"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142004" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211014/thumb-2110141004_200x200.jpg" width="200" height="200" alt="캐스 벨벳 자수 롱 OPS">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142004" class="sct_name">
+                            캐스 벨벳 자수 롱 OPS
+                        </a>
+                        <div class="sct_cost">
+                            <strike>119,800원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+            </ul>
+            <!-- } 상품진열 10 끝 -->
+
+            <!-- 상품진열 10 시작 { -->
+            <ul class="sct sct_10" style="margin-left:50px;">
+                <li class="sct_li sct_clear" style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142001" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211014/thumb-2110141001_200x200.jpg" width="200" height="200" alt="로턴 기모 미니 skt">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142001" class="sct_name">
+                            로턴 기모 미니 skt
+                        </a>
+                        <div class="sct_cost">
+                            <strike>25,500원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"><img src="http://dmshop.kr/theme/moon/img/icon_best.gif" alt="인기상품"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142002" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211014/2110141002.jpg" width="200" height="200" alt="러나 A라인 롱 skt">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142002" class="sct_name">
+                            러나 A라인 롱 skt
+                        </a>
+                        <div class="sct_cost">
+                            <strike>33,400원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142003" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211014/thumb-2110141003_200x200.jpg" width="200" height="200" alt="더모 소매 자수 T">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142003" class="sct_name">
+                            더모 소매 자수 T
+                        </a>
+                        <div class="sct_cost">
+                            <strike>72,600원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142004" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211014/thumb-2110141004_200x200.jpg" width="200" height="200" alt="캐스 벨벳 자수 롱 OPS">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142004" class="sct_name">
+                            캐스 벨벳 자수 롱 OPS
+                        </a>
+                        <div class="sct_cost">
+                            <strike>119,800원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+                <li class="sct_li " style="width:200px">
+                    <div class="sct_img">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142004" class="sct_a">
+                            <img src="http://dmshop.kr/data/item/211014/thumb-2110141004_200x200.jpg" width="200" height="200" alt="캐스 벨벳 자수 롱 OPS">
+                        </a>
+                    </div>
+                    <div class="sct_txt">
+                        <a href="http://dmshop.kr/shop/item.php?it_id=2110142004" class="sct_name">
+                            캐스 벨벳 자수 롱 OPS
+                        </a>
+                        <div class="sct_cost">
+                            <strike>119,800원</strike>
+                        </div>
+                        <div class="icon_btn_wr">
+                            <div class="sct_icon"><span class="sit_icon"><img src="/theme/moon/img/icon_mu.gif" alt="무료배송"></span><span class="sct_icon"></span></div>
+                            <div class="sct_rvws">
+                                <span class="sct_ws"><i class="fa fa-heart" aria-hidden="true"></i><span class="sound_only">위시리스트</span> </span>
+                            </div>
+                        </div>
+                    </div></li>
+            </ul>
+            <!-- } 상품진열 10 끝 -->
+            </section>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- FOOTER -->
+<div id="footer">
+    <footer class="row">
+        <p class="back-top floatright">
+            <a href="#top" id="toTop"><span>top</span></a>
+        </p>
+        <div class="four columns">
+            <h1>도움이 필요하신가요?</h1>
+            <p>유귀농를 이용하시면서 불편함을 느끼셨나요?<br>혹은 도움이 필요하신가요?<br>언제든지 아래의 주소로 연락주세요!<br>유귀농는 여러분의 관심과 사랑에 항상 고맙습니다.</p>
+        </div>
+        <div class="four columns">
+            <h1>찾아오시는길</h1>
+            <ul class="contact">
+                <li class="icon solid fa-envelope">admin@yougn.com</li>
+                <li class="icon solid fa-phone">(02)1204-1204</li>
+                <li class="icon solid fa-home">서울특별시 강남구 테헤란로 146 현익빌딩 4층(역삼동)<br/></li>
+            </ul>
+        </div>
+        <div class="four columns">
+            <h1 class="newsmargin">NEWSLETTER</h1>
+            <div class="row collapse newsletter floatright">
+                <div class="ten mobile-three columns">
+                    <input type="text" class="nomargin" placeholder="Enter your e-mail address...">
+                </div>
+                <div class="two mobile-one columns">
+                    <a href="#" class="postfix button expand">GO</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+<div class="copyright">
+    <div class="row">
+        <div class="six columns">
+            &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
+        </div>
+        <div class="six columns">
+            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script>
+    $(".dropdown-menu").hide();
+    $("#main-menu").on("mouseenter", function (e) {
+        $("div.dropdown-menu").slideDown();
+        $("div.dropdown-menu").show();
+        $("div.dropdown-menu").children().show();
+        $("div.dimmed").css("opacity","0.5");
+    })
+    $(".dropdown-menu").on("mouseleave", function (e) {
+        $(".dropdown-menu").hide();
+        $("div.dimmed").css("opacity","0");
+    })
+</script>
+</body>
+</html>
