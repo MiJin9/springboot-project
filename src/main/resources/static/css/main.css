@@ -1590,7 +1590,7 @@ body {
 					text-align: center;
 					line-height: 45px;
 					position: fixed;
-					top: 795px;
+					top: 90%;
 					left: 90%;
 				}
 				a#toTop{
@@ -2004,7 +2004,7 @@ body {
 					transition: background-color 0.2s ease-in-out;
 					display: inline-block;
 					margin: 0;
-					padding: 0.8em 1.2em 0.8em 1.2em;
+					padding: 0.7em 1.2em 0.7em 1.2em;
 					letter-spacing: 0.06em;
 					text-decoration: none;
 					font-weight: 700;
@@ -2300,7 +2300,6 @@ body {
 		padding: 2em 5em 1.5em 5em;
 		background: #4e321c;
 		color: #FFF;
-		margin-bottom: 5em;
 	}
 
 		#footer .copyright {
