@@ -2,7 +2,7 @@
 /* Global Reset & Standards ---------------------- */
 * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 html { font-size: 62.5% }
-body { font-family: DroidSansRegular, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-size: 13px; line-height: 20px; color: #666; position: relative; -webkit-font-smoothing: antialiased; }
+body { font-family: DroidSansRegular, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-size: 13px; line-height: 20px; color: #000000; position: relative; -webkit-font-smoothing: antialiased; }
 /* Links ---------------------- */
 a { color: #000000; text-decoration: none; line-height: inherit; }
 a:hover { color: #88d52e }
@@ -17,7 +17,7 @@ img {border:0px;}
 figure { margin: 0 }
 /* Base Type Styles Using Modular Scale ---------------------- */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,th,td { margin: 0; padding: 0; font-size: 13px; direction: ltr; }
-p { font-size: 13px; line-height: 1.6; margin-bottom: 15px; }
+p { font-size: 15px; line-height: 1.6; margin-bottom: 15px; }
 p.lead { font-size: 17.5px; line-height: 1.6; margin-bottom: 17px; }
 ::-webkit-input-placeholder { font-size: 12px }
 aside p { font-size: 13px; line-height: 1.35; font-style: italic; }
@@ -790,15 +790,15 @@ a:focus { outline: none }
 #testimonials blockquote {  font-family: Georgia, "Times New Roman", Times, serif; font-style: italic; color: #808080; display: block; }
 #testimonials blockquote p { margin: 0 !important; padding: 5px!important; }
 #testimonials blockquote cite { font-style: normal; display: block; text-transform: uppercase; font-weight: bold; font-style: italic; padding-left: 5px; margin-top: 10px; }
-#footer { background: #88d52e; color: #666; padding: 30px 0;}
-#footer a { color: #000000; font-size: 12px; }
-#footer h1 { font-size: 16px; color:  #000000; margin-bottom: 20px; }
+#footer { background: #000000; color: #666; padding: 30px 0;}
+#footer a { color: #666; font-size: 12px; }
+#footer h1 { font-size: 16px; color:  #999999; margin-bottom: 20px; }
 .newsmargin { margin-left: 46px }
 .small.floatright a{color:#999;}
 #footer .button { box-shadow: none; width: auto; nowhitespace: afterproperty; background: #444; color: #999; cursor: pointer; display: inline-block; font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; line-height: 1; margin: 0; outline: none; padding: 10px 10px 11px; position: relative; text-align: center; text-decoration: none; -webkit-transition: background-color 0.15s ease-in-out; -moz-transition: background-color 0.15s ease-in-out; -o-transition: background-color 0.15s ease-in-out; transition: background-color 0.15s ease-in-out; }
 #footer input[type="text"] { background: #000000; font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; border: 1px solid #333; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; color: #999; display: block; font-size: 12px; margin: 0 0 12px 0; padding: 6px; height: 32px; width: 100%; -webkit-transition: all 0.15s linear; -moz-transition: all 0.15s linear; -o-transition: all 0.15s linear; transition: all 0.15s linear; box-shadow: none; }
-.copyright { background: #88d52e; padding: 7px 0; border-top: 1px solid #181818; color: #444; }
-.small { color: #444; font-size: 11px; }
+.copyright { background: #000000; padding: 7px 0; border-top: 1px solid #999999; color: #999999; }
+.small { color: #999999; font-size: 11px; }
 .grayscale {  }
 .submit { padding: 3px 10px; border: 0px; color: #fff; font-size: 15px; cursor: pointer; }
 .submit:hover { background: #444; -webkit-transition: background-color 300ms linear; -moz-transition: background-color 300ms linear; -o-transition: background-color 300ms linear; -ms-transition: background-color 300ms linear; transition: background-color 300ms linear; }
