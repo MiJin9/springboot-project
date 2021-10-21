@@ -1,0 +1,67 @@
+#sit_pvi_big{
+    opacity: 1;
+    float: left;
+    width: 500px;
+    margin-left: 40px;
+    margin-top: 30px
+}
+.owl-wrapper{
+    width: 500px;
+    left: 0px;
+    display: block;
+    transition: all 1000ms ease 0s;
+    transform: translate3d(0px, 0px, 0px);
+}
+.detailView{
+    width: 500px;
+    float: left;
+    margin-left: 50px;
+    margin-top: 70px
+}
+.con_w{
+    font-size: 17px;
+}
+.option{
+    font-family:'Jeju Gothic';
+    width: 300px;
+    border: solid 0.5px;
+}
+.btn-box input[type="button"]{
+    top: -4px;
+}
+
+.btn-box a{
+    height: 33.8px;
+    line-height: 120%;
+    top: -2px;
+
+}
+
+.container {
+    width: 100%!important;
+}
+#footer{
+    margin-left: -40px!important;
+}
+
+#logo div img{
+    vertical-align: inherit!important;
+}
+
+footer{
+    margin-left: -40px!important;
+}
+div.four{
+    font-size: 10pt;
+}
+div.four h1, div.four p{
+    font-size: 1em;
+}
+
+.info{
+    top: 12px!important;
+    font-size: 13.3333333333333px;
+}
+.info a {
+    color: #80B763;
+}
