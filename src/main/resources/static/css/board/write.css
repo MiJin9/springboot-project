@@ -1,0 +1,70 @@
+.note-icon-bar, .note-resizebar {
+    display: none;
+}
+input[id="title"]{
+    width: 888px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: 82px;
+    height: 63px;
+    font-size: 30px;
+}
+
+.note-editor{
+    width: 888px;
+    margin: 0 auto;
+}
+
+
+.smallTitle{
+    font-size: 30px;
+    margin-left: 48px;
+    font-weight: 900;
+}
+
+.horizon {
+    width: 888px;
+    border-bottom: double;
+    margin-top: 10px;
+    margin-left: 48px;
+}
+#postForm{
+    margin-top: 100px;
+}
+
+.btn-box input[type="button"]{
+    top: -4px;
+}
+
+.btn-box a{
+    height: 32.78px;
+}
+
+.container {
+    width: 100%!important;
+}
+#footer{
+    margin-left: -40px!important;
+}
+
+#logo div img{
+    vertical-align: inherit!important;
+}
+
+footer{
+    margin-left: -40px!important;
+}
+div.four{
+    font-size: 10pt;
+}
+div.four h1, div.four p{
+    font-size: 1em;
+}
+
+.info{
+    top: 12px!important;
+    font-size: 13.3333333333333px;
+}
+.info a {
+    color: #80B763;
+}

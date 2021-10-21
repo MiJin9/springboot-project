@@ -1,0 +1,85 @@
+.view {
+    width: 1000px;
+    padding-left: 66px;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+
+.vContent{
+    min-height: 400px;
+    width: 888px;
+    margin-top: 12px;
+    border: 3px double;
+    background: white;
+}
+
+.vTitle {
+    border: 3px double;
+    background: white;
+    width: 888px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+ p#p-title {
+    margin-bottom: 1.5rem;
+    font-size: 32px;
+}
+
+.replyDiv {
+    width: 888px;
+    margin-left: -12px;
+}
+
+ul.reply {
+    margin-left: -12px;
+    width: 888px;
+    list-style: none;
+}
+
+.horizon {
+    width: 888px;
+    height: 49px;
+    border-bottom: double;
+    border-top: double;
+    margin-top: 10px;
+}
+.register-form{
+    width: 888px;
+}
+
+.reContent {
+    min-height: 75px;
+    width: 888px;
+    border: 2px solid black;
+    background: white;
+}
+
+p.p-writer{
+    width: 150px;
+    margin-bottom: 0;
+    border: 2px solid black;
+    border-bottom: none;
+    font-weight: bold;
+    background: white;
+}
+
+.smallTitle{
+    font-size: 30px;
+    margin-left: 55px;
+    font-weight: 900;
+    border-bottom: double;
+}
+#horizon {
+    width: 888px;
+    border-bottom: double;
+    margin-top: 10px;
+    margin-left: 55px;
+}
+div.Btn{
+    text-align: center;
+}
+div.listBtn{
+    margin-top: -20px;
+    margin-bottom: 20px;
+}

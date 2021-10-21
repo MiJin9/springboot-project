@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메인-YOU귀농</title>
+    <link rel="stylesheet" href="/css/skin.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <!--썸머노트 링크-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+</head>
+<style>
+
+    h1, h2, h3, h4, a, p, li, div, input{
+    }
+
+    li>a {
+        font-size: 20px;
+    }
+    .headermenu{
+        width:1000px !important;
+    }
+    .twelve{
+        width: 200px;
+    }
+    table {
+        width: 112%;
+    }
+    li{
+        margin-right: 20px !important;
+    }
+    #icon{
+        margin-left: -100px;
+        margin-bottom: -92px;
+        height: 100px;
+    }
+    .logo{
+        width: 1000px !important;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+    .headerlogo{
+        width: 900px !important;
+    }
+    .info{
+        float: right;
+        margin-top: 86px;
+        font-size: 16px;
+    }
+
+    #subheader a{
+        color: black;
+    }
+    .h-dropdown-menu{
+        background: tan;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
+        z-index: 10;
+        position: absolute;
+        top: 69px;
+    }
+    .table-wrapper{
+        width: 800px;
+        margin: 0 auto;
+        margin-top: 140px;
+    }
+    tr.tHead th{
+        font-weight: bold;
+        color: #fff;
+        background: #ce4869;
+        text-align: center;
+    }
+
+    #keyword, #keyword1{
+        margin:0;
+        border: 1px solid;
+    }
+    select{
+        width: 125px;
+        max-height: 31px;
+    }
+    a.search{
+        width: 70px;
+        max-height: 31px;
+    }
+
+    #searchWrap{
+        display: flex;
+        width: 896px;
+    }
+    .tle{
+        background: white;
+    }
+    th.title{
+        width: 500px;
+    }
+    th.bno{
+        width: 80px;
+    }
+
+    .dimmed{
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=80);
+        z-index: 1;
+    }
+    input[name='saleBtn']{
+        width: 445px;
+    }
+
+    input[name='buyBtn']{
+        width: 445px;
+    }
+    .inputBtn{ /*팝니다 삽니다 버튼*/
+        width: 1000px;
+        height: fit-content;
+        margin-bottom: -70px;
+        margin-top: 74px;
+        /*margin-left: 224px;*/
+    }
+
+
+    #saleBtn, #buyBtn {
+        height: 50px;
+        font-size: 20px;
+    }
+
+    #buyBtn {
+        margin-left: -3px;
+    }
+
+    .bno, .writer, .regDate, .updateDate{/*테이블 내용 가운제 정렬 (제목 제외)*/
+        text-align: center;
+    }
+
+    #BtnDiv {
+        margin-top: 50px;
+    }
+
+    #img {
+        width: 100%;
+        height: 200px;
+    }
+    .note-icon-bar, .note-resizebar {
+        display: none;
+    }
+    input[id="title"]{
+        width: 888px;
+        margin: 0 auto;
+        margin-bottom: 15px;
+        margin-top: 82px;
+    }
+
+    .note-editor{
+        width: 888px;
+        margin: 0 auto;
+    }
+    #img{
+        width: 100%;
+        height: 150px;
+    }
+</style>
+<body style="margin: 0;">
+<!--HEADER -->
+<header id="header">
+    <div class="row">
+        <div class="headerlogo four columns">
+            <div class="logo">
+                <a href= "">
+                    <img id="icon" src="/img/logo1.png">
+                </a>
+                <div class="info">
+                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">ID/PW 찾기</a>
+                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">마이 페이지</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+        <div class="row">
+            <div class="twelve columns dropdowner">
+                <div class="headermenu eight columns noleftmarg">
+                    <nav id="nav-wrap">
+                        <ul id="main-menu" class="nav-bar sf-menu">
+                            <li class="current">
+                                <a href="">귀농 지원</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">귀농 체험</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">떨이(이름 미정)</a>
+                            </li>
+                            <li class="current">
+                                <a href="">컴백촌 EXPO</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">게시판</a>
+                            </li>
+                        </ul>
+
+                        <div class="h-dropdown-menu">
+                            <ul style="margin-left: 32px;margin-right: 59px;">
+                                <li><a>마을회관</a></li>
+                                <li><a>특산물 정보</a></li>
+                                <li><a>농사 수업</a></li>
+                                <li><a>농사 정보</a></li>
+                            </ul>
+                            <ul style="margin-right: 77px;">
+                                <li><a>주말 농부</a></li>
+                                <li><a>체험</a></li>
+                            </ul>
+                            <ul style="margin-right: 179px;">
+                                <li><a>떨이</a></li>
+                            </ul>
+                            <ul style="margin-right: 104px;">
+                                <li><a>귀농 청년</a></li>
+                            </ul>
+                            <ul>
+                                <li><a>공지사항</a></li>
+                                <li><a>수매요청</a></li>
+                                <li><a>임대, 매매</a></li>
+                                <li><a>지식인</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section style="background: lightgoldenrodyellow;">
+    <div>
+        <div class="tle" style="height: 1000px;/* background: lightgoldenrodyellow; */">
+            <!---------------------------------------------------------------------------------------------------------------------->
+            <div>
+                <img id="img" src="/img/notice.png">
+            </div>
+            <div class="row">
+            <form id="postForm" name="postForm" method="POST">
+
+
+                <!-- summernote와 관련된 영역 -->
+
+                <input type="text" placeholder ="제목" name="title" id="title" style="border: solid 0.1px #a9a9a9;">
+
+                <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+
+
+
+                <!-- 버튼과 관련된 영역 -->
+
+                <div align="center" class="btn-box">
+
+                    <input type="button" id="sendSummer" class="button" value="작성">
+
+                    <a class="button" onclick="history.back()">취소</a>
+
+                </div>
+
+            </form>
+            </div>
+            <!---------------------------------------------------------------------------------------------------------------------->
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div id="footer">
+    <footer class="row">
+        <p class="back-top floatright">
+            <a href="#top" id="toTop"><span>top</span></a>
+        </p>
+        <div class="four columns">
+            <h1>도움이 필요하신가요?</h1>
+            <p>유귀농를 이용하시면서 불편함을 느끼셨나요?<br>혹은 도움이 필요하신가요?<br>언제든지 아래의 주소로 연락주세요!<br>유귀농는 여러분의 관심과 사랑에 항상 고맙습니다.</p>
+        </div>
+        <div class="four columns">
+            <h1>찾아오시는길</h1>
+            <ul class="contact">
+                <li class="icon solid fa-envelope">admin@yougn.com</li>
+                <li class="icon solid fa-phone">(02)1204-1204</li>
+                <li class="icon solid fa-home">서울특별시 강남구 테헤란로 146 현익빌딩 4층(역삼동)<br/></li>
+            </ul>
+        </div>
+        <div class="four columns">
+            <h1 class="newsmargin">NEWSLETTER</h1>
+            <div class="row collapse newsletter floatright">
+                <div class="ten mobile-three columns">
+                    <input type="text" class="nomargin" placeholder="Enter your e-mail address...">
+                </div>
+                <div class="two mobile-one columns">
+                    <a href="#" class="postfix button expand">GO</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+<div class="copyright">
+    <div class="row">
+        <div class="six columns">
+            &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
+        </div>
+        <div class="six columns">
+            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
+        </div>
+    </div>
+</div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<!-- include summernote css/js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script>
+/*******************************************************************************/
+/*메뉴 드롭다운*/
+    $(".h-dropdown-menu").hide();
+    $("#main-menu").on("mouseenter", function (e) {
+        $("div.h-dropdown-menu").slideDown();
+        $("div.h-dropdown-menu").show();
+        $("div.h-dropdown-menu").children().show();
+        $("div.dimmed").css("opacity","0.5");
+    })
+    $(".h-dropdown-menu").on("mouseleave", function (e) {
+        $(".h-dropdown-menu").hide();
+        $("div.dimmed").css("opacity","0");
+    })
+
+
+    $("#saleBtn").css("background", "#ce4869");
+    $("#saleBtn").css("border", "2px double black");
+    $("#saleBtn").css("border-bottom", "none");
+    $("#buyBtn").css("border-bottom", "2px double black");
+
+    $("#buy").hide();
+    $("#saleBtn").on("click", function () {
+        $("#saleBtn").css("background", "#ce4869");
+        $("#saleBtn").css("border", "2px double black");
+        $("#saleBtn").css("border-bottom", "none");
+
+        $("#buyBtn").css("background", "#65cdd2");
+        $("#buyBtn").css("border", "none");
+        $("#buyBtn").css("border-bottom", "2px double black");
+
+        $("#sale").show();
+        $("#buy").hide();
+        $("#keyword").val("");
+    });
+
+    $("#buyBtn").on("click", function () {
+        $("#buyBtn").css("background", "#ce4869")
+        $("#buyBtn").css("border", "2px double black");
+        $("#buyBtn").css("border-bottom", "none");
+
+        $("#saleBtn").css("background", "#65cdd2")
+        $("#saleBtn").css("border", "none");
+        $("#saleBtn").css("border-bottom", "2px double black");
+
+        $("#sale").hide();
+        $("#buy").show();
+        $("#keyword").val("");
+    });
+/*******************************************************************************/
+/*썸머노트*/
+$("#sendSummer").click(function(){
+    if(!$("#title").val()){
+        alert("제목을 입력해주세요.");
+        return;
+    }
+    if(!$("#summernote").val()){
+        alert("내용을 입력해주세요.");
+        return;
+    }
+    document.postForm.submit();
+})
+
+$(document).ready(function () {
+    var fontList = ['맑은 고딕', '돋움', '궁서', '굴림', '굴림체', '궁서체', '나눔 고딕', '바탕', '바탕체', '새굴림', 'HY견고딕', 'HY견명조', 'HY궁서B', 'HY그래픽M', 'HY목각파임B', 'HY신명조', 'HY얕은샘물M', 'HY엽서L', 'HY엽서M', 'HY중고딕', 'HY헤드라인M', '휴먼매직체', '휴먼모음T', '휴먼아미체', '휴먼둥근헤드라인', '휴먼편지체', '휴먼옛체'];
+    var setting = {
+
+        placeholder:  '500자 이내로 자유롭게 글을 작성할 수 있습니다. 명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 글은 제재가 있을 수 있습니다.',
+        height: 500,
+        tabsize: 2,
+        maxHeight: null,
+        minHeight: null,
+        lang: 'ko-KR', // 언어 세팅
+        fontNames: fontList,
+        fontNamesIgnoreCheck: fontList,
+
+        toolbar: [
+            // [groupName, [list of button]]
+            ['Font Style', ['fontname']],
+            ['style', ['bold', 'italic', 'underline']],
+            ['font', ['strikethrough']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['paragraph']],
+            ['height', ['height']],
+            ['Insert', ['picture']],
+            ['Insert', ['link']],
+            ['Misc', ['fullscreen']]
+        ],
+
+        //콜백 함수
+        callbacks : {
+            onImageUpload: function(files, editor, welEditable) {
+                for (var i = files.length - 1; i >= 0; i--) {
+                    sendFile(files[i], this);
+                }
+            }
+        }
+
+    };
+    $('#summernote').summernote(setting);
+})
+function sendFile(file, el) {
+    var form_data = new FormData();
+    form_data.append('file', file);
+    $.ajax({
+        data: form_data,
+        type: "POST",
+        url: contextPath +"/boards/Fileupload.bo",
+        cache: false,
+        contentType: false,
+        dataType : "json",
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function(url) {
+            setTimeout(function(){
+                $(el).summernote('editor.insertImage', url.url);
+            },100)
+        }
+    });
+}
+/*****************************************************************************/
+</script>
+</body>
+</html>

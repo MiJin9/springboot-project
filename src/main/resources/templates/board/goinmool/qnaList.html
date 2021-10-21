@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>지식인</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/board/list.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Jeju Gothic";
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+        #logo {
+            padding: 0;
+            margin-top: 2em;
+        }
+        #logo div {
+            box-shadow: none;
+            top: 15px;
+            padding: 0;
+        }
+        nav {
+            background: #4e321c;
+        }
+
+        #nav li.current_page_item a {
+            background: #4e321c;
+            border-top-color: #16d18d;
+            color: #fff;
+            width: 156px;
+        }
+
+        #nav li.current_page_item a:hover{
+            background: #c97b1f;
+        }
+
+        #nav > ul {
+            background: #4e321c;
+        }
+
+        ul.dropdown {
+            background: #c97b1f;
+        }
+
+        #banner {
+            background: #4e321c21;
+        }
+
+    </style>
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <!---------------------------------------------------------------------------------------------------------------------->
+
+        <div class="row">
+            <div style="margin-left: -800px; margin-top: 121px; margin-bottom: -121px;">
+                <p class="smallTitle">지식인</p>
+            </div>
+        </div>
+        <div class="table-wrapper" id="BtnDiv">
+            <h3><a href="/board/qndWrite" class="button small a-write" style="top: -25px;">글 등록</a></h3>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr class="tHead">
+                    <th class="bno">번호</th>
+                    <th class="title">제목</th>
+                    <th class="writer">작성자</th>
+                    <th class="regDate">작성일</th>
+                    <th class="updateDate">수정일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tBody">
+                    <td class="bno">10</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">9</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">8</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">7</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">6</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">5</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">4</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">3</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">2</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">1</td>
+                    <td class="title"><a id="goRead" href="#"></a></td>
+                    <td class="writer"></td>
+                    <td class="regDate"></td>
+                    <td class="updateDate"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <form action="/board/list" name="searchForm">
+                <div class="fields">
+                    <div class="field">
+                        <div id="searchWrap">
+                            <select name="type">
+                                <option value="">검색 기준</option>
+                                <option value="T">제목</option>
+                                <option value="C">내용</option>
+                                <option value="W">작성자</option>
+                                <option value="TC">제목 또는 내용</option>
+                                <option value="TW">제목 도는 작성자</option>
+                                <option value="TCW">제목 또는 내용 또는 작성자</option>
+                            </select>
+                            <input id="keyword" type="text" name="keyword">
+                            <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div>
+
+                <div class="page" style="text-align: center">
+                    <a class="changePage"><code>&lt;</code></a>
+                    <code>1</code>
+                    <a class="changePage"><code>&gt;</code></a>
+                </div>
+                <form action="/board/list" name="pageForm">
+                    <input type="hidden" name="pageNum">
+                    <input type="hidden" name="amount">
+                    <input type="hidden" name="type">
+                    <input type="hidden" name="keyword">
+                </form>
+            </div>
+        </div>
+        <!---------------------------------------------------------------------------------------------------------------------->
+    </div>
+
+
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
