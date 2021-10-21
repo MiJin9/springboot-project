@@ -107,7 +107,7 @@ input, select, textarea {
 	h1, h2, h3, h4, h5, h6 {
 		line-height: 1em;
 		font-weight: bold;
-		color: #3E4442;
+		color: white;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -190,6 +190,9 @@ input, select, textarea {
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		align-items: stretch;
+		flex-direction: row;
+		align-content: stretch;
+		justify-content: center;
 	}
 
 		.row > * {
@@ -1410,7 +1413,7 @@ input, select, textarea {
 
 	.container {
 		margin: 0 auto;
-		width: 1200px;
+		width: 100%;
 	}
 
 		@media screen and (max-width: 1280px) {
@@ -1576,6 +1579,22 @@ input, select, textarea {
 				ul.icons li a:hover {
 					background: rgba(255, 255, 255, 0.05);
 					border-color: #6b7982;
+				}
+				#toTop{
+					font-size: 20px;
+					font-weight: bold;
+					color: white;
+					background: lightgray;
+					text-align: center;
+					line-height: 45px;
+					position: fixed;
+					top: 795px;
+					left: 90%;
+				}
+				a#toTop{
+					width: 50px;
+					border-radius: 50%;
+					background-color: #3e4442;
 				}
 
 /* Info */
@@ -1982,11 +2001,11 @@ input, select, textarea {
 					transition: background-color 0.2s ease-in-out;
 					display: inline-block;
 					margin: 0;
-					padding: 1.5em 1.6em 1.7em 1.6em;
+					padding: 1.0em 1.2em 1.0em 1.2em;
 					letter-spacing: 0.06em;
 					text-decoration: none;
 					font-weight: 700;
-					font-size: 1.2em;
+					font-size: 1.3em;
 					outline: 0;
 					color: #ccc;
 					color: rgba(255, 255, 255, 0.75);
@@ -2140,6 +2159,14 @@ input, select, textarea {
 
 /* Main */
 
+
+	.main{
+		height: auto;
+		width: 1100px;
+		background-color: #fbf9f4;
+		margin: auto;
+	}
+
 	#main {
 		position: relative;
 		padding: 5em 5em;
@@ -2267,9 +2294,8 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		position: relative;
 		padding: 2em 5em 1.5em 5em;
-		background: #4A514F;
+		background: #4e321c;
 		color: #FFF;
 		margin-bottom: 5em;
 	}
@@ -3031,7 +3057,6 @@ input, select, textarea {
 				}
 
 		/* Content */
-
 			#main {
 				padding: 3em 2em 2.5em 2em;
 			}
