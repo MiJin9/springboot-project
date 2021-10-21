@@ -1,9 +1,4 @@
 
-
-#img {
-    width: 100%;
-    height: 200px;
-}
 .note-icon-bar, .note-resizebar {
     display: none;
 }
@@ -19,10 +14,6 @@ input[id="title"]{
     margin: 0 auto;
 }
 
-#img{
-    width: 100%;
-    height: 150px;
-}
 
 .smallTitle{
     font-size: 30px;

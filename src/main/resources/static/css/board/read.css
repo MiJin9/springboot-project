@@ -8,14 +8,22 @@
 .vContent{
     min-height: 400px;
     width: 888px;
+    margin-top: 12px;
+    border: 3px double;
+    background: white;
 }
 
 .vTitle {
-    border-bottom: double;
+    border: 3px double;
+    background: white;
     width: 888px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+}
+ p#p-title {
+    margin-bottom: 1.5rem;
+    font-size: 32px;
 }
 
 .replyDiv {
@@ -23,9 +31,10 @@
     margin-left: -12px;
 }
 
-.reply {
-    margin-left: 12px;
+ul.reply {
+    margin-left: -12px;
     width: 888px;
+    list-style: none;
 }
 
 .horizon {
@@ -43,6 +52,7 @@
     min-height: 75px;
     width: 888px;
     border: 2px solid black;
+    background: white;
 }
 
 p.p-writer{
@@ -51,16 +61,14 @@ p.p-writer{
     border: 2px solid black;
     border-bottom: none;
     font-weight: bold;
-}
-#img{
-    width: 100%;
-    height: 150px;
+    background: white;
 }
 
 .smallTitle{
     font-size: 30px;
     margin-left: 55px;
     font-weight: 900;
+    border-bottom: double;
 }
 #horizon {
     width: 888px;
@@ -74,8 +82,4 @@ div.Btn{
 div.listBtn{
     margin-top: -20px;
     margin-bottom: 20px;
-}
-
-div.listBtn a {
-    width: 80px;
 }
