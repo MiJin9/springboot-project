@@ -43,9 +43,7 @@ input[id="title"]{
 .container {
     width: 100%!important;
 }
-#footer{
-    margin-left: -40px!important;
-}
+
 
 #logo div img{
     vertical-align: inherit!important;
@@ -67,4 +65,11 @@ div.four h1, div.four p{
 }
 .info a {
     color: #80B763;
+}
+
+body{
+    background: #fbf9f4!important;
+}
+.main{
+    background: #FFFFFF;
 }
