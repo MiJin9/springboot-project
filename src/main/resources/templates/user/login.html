@@ -58,11 +58,26 @@
     }
 
     .dropdown-menu {
-        background: #d0dd7f;
+        background: #ffff;
         color: black;
         display: flex;
         min-width: fit-content;
         max-width: 1000px;
+        z-index: 10;
+        position: absolute;
+        top: 69px;
+    }
+
+    .dimmed {
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=80);
+        z-index: 1;
     }
 
     #all {
@@ -260,11 +275,12 @@
         $("div.dropdown-menu").slideDown();
         $("div.dropdown-menu").show();
         $("div.dropdown-menu").children().show();
-    });
-
+        $("div.dimmed").css("opacity", "0.5");
+    })
     $(".dropdown-menu").on("mouseleave", function (e) {
         $(".dropdown-menu").hide();
-    });
+        $("div.dimmed").css("opacity", "0");
+    })
 
 </script>
 </body>
