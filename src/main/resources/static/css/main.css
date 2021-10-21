@@ -1590,7 +1590,7 @@ input, select, textarea {
 					text-align: center;
 					line-height: 45px;
 					position: fixed;
-					top: 795px;
+					top: 90%;
 					left: 90%;
 				}
 				a#toTop{

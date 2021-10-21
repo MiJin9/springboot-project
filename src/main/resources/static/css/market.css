@@ -1,0 +1,28 @@
+#sit_pvi_big{
+    opacity: 1;
+    float: left;
+    width: 500px;
+    margin-left: 40px;
+    margin-top: 30px
+}
+.owl-wrapper{
+    width: 500px;
+    left: 0px;
+    display: block;
+    transition: all 1000ms ease 0s;
+    transform: translate3d(0px, 0px, 0px);
+}
+.detailView{
+    width: 500px;
+    float: left;
+    margin-left: 50px;
+    margin-top: 70px
+}
+.con_w{
+    font-size: 17px;
+}
+.option{
+    font-family:'Jeju Gothic';
+    width: 300px;
+    border: solid 0.5px;
+}
