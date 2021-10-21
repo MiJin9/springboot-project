@@ -1,0 +1,107 @@
+.table-wrapper{
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 140px;
+}
+tr.tHead th{
+    font-weight: bold;
+    color: #fff;
+    background: #ce4869;
+    text-align: center;
+}
+
+#keyword, #keyword1{
+    margin:0;
+    border: 1px solid;
+    width: 562px;
+}
+select{
+    width: 125px;
+    max-height: 31px;
+    padding: 0!important;
+    max-width: 168px;
+    background: white!important;
+}
+a.search{
+    width: 70px;
+    max-height: 31px;
+}
+
+#searchWrap{
+    display: flex;
+    width: 896px;
+}
+.tle{
+    background: white;
+}
+th.title{
+    width: 500px;
+}
+th.bno{
+    width: 80px;
+}
+
+input[name='choice1'], input[name='choice2'] {
+    width: 400px;
+}
+
+.inputBtn{ /*팝니다 삽니다 버튼*/
+    width: 1000px;
+    height: fit-content;
+    margin-bottom: -70px;
+    margin-top: 74px;
+    /*margin-left: 224px;*/
+}
+
+
+#choice1, #choice2{
+    height: 50px;
+    font-size: 20px;
+}
+
+#choice2 {
+    margin-left: -3px;
+}
+.bno, .writer, .regDate, .updateDate{/*테이블 내용 가운제 정렬 (제목 제외)*/
+    text-align: center;
+}
+
+#BtnDiv {
+    margin-top: 50px;
+}
+
+.tBody{
+    border-bottom: 1px solid black;
+}
+
+table{
+    background: white;
+    height: 500px;
+}
+
+.tBody td{
+    vertical-align: middle;
+}
+
+.a-write{
+    margin-top: 87px;
+    float: right;
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    background: #CE4869;
+    border: 1px crimson;
+}
+
+.smallTitle{
+    font-size: 30px;
+    margin-left: 90px;
+    font-weight: 900;
+}
+
+.horizon {
+    width: 888px;
+    border-bottom: double;
+    margin-top: 10px;
+    margin-left: 90px;
+}
