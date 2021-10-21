@@ -40,4 +40,7 @@ public class UserController {
 
     @GetMapping("inquiry")
     public String inquiry() {return "/user/inquiry";}
+
+    @GetMapping("checkPw")
+    public String checkPw() {return "/user/checkPw";}
 }
