@@ -1,186 +1,75 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
-    <title>YOU귀농-market상세보기</title>
-    <link rel="stylesheet" href="/css/skin.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/support.css">
+    <style>
+        * {
+            font-family: "Jeju Gothic";
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+        #logo {
+            padding: 0;
+            margin-top: 2em;
+        }
+        #logo div {
+            box-shadow: none;
+            top: 15px;
+            padding: 0;
+        }
+        nav {
+            background: #4e321c;
+        }
+
+        #nav li.current_page_item a {
+            background: #4e321c;
+            border-top-color: #16d18d;
+            color: #fff;
+            width: 156px;
+        }
+
+        #nav li.current_page_item a:hover{
+            background: #c97b1f;
+        }
+
+        #nav > ul {
+            background: #4e321c;
+        }
+
+        ul.dropdown {
+            background: #c97b1f;
+        }
+
+        #banner {
+            background: #4e321c21;
+        }
+
+    </style>
 </head>
-<style>
-    .dropdown-menu {
-        background: #ffff;
-        color: black;
-        display: flex;
-        min-width: fit-content;
-        max-width: 1000px;
-        z-index: 10;
-        position: absolute;
-        top: 69px;
-    }
+<body class="homepage is-preload">
+<div id="page-wrapper">
 
-    .dimmed {
-        display: block;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #000;
-        opacity: 0;
-        filter: alpha(opacity=80);
-        z-index: 1;
-    }
+    <th:block th:include="header.html"></th:block>
 
-    h1, h2, h3, h4, a, p, li, div, input {
-    }
-
-    li > a {
-        font-size: 20px;
-    }
-
-    .headermenu {
-        width: 1000px !important;
-    }
-
-    .twelve {
-        width: 200px;
-    }
-
-    table {
-        width: 112%;
-    }
-
-    li {
-        margin-right: 20px !important;
-    }
-
-    #icon {
-        margin-left: -100px;
-        margin-bottom: -92px;
-        height: 100px;
-    }
-
-    .logo {
-        width: 1000px !important;
-        margin-bottom: 10px;
-        margin-top: 15px;
-    }
-
-    .headerlogo {
-        width: 900px !important;
-    }
-
-    .info {
-        float: right;
-        margin-top: 86px;
-        font-size: 16px;
-    }
-
-    #subheader a {
-        color: black;
-    }
-
-    .dropdown-menu {
-        background: #d0dd7f;
-        color: black;
-        display: flex;
-        min-width: fit-content;
-        max-width: 1000px;
-    }
-    div.item{
-        text-align: center;
-        background: white;
-        border: 1px solid lightgray;
-    }
-    .item img{
-        object-fit: cover;
-    }
-</style>
-<body style="margin: 0;">
-<!--HEADER -->
-<header id="header">
-    <div class="row">
-        <div class="headerlogo four columns">
-            <div class="logo">
-                <a href="">
-                    <img id="icon" src="/img/logo1.png">
-                </a>
-                <div class="info">
-                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">ID/PW 찾기</a>
-                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">마이 페이지</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clear">
-    </div>
-    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
-        <div class="row">
-            <div class="twelve columns dropdowner">
-                <div class="headermenu eight columns noleftmarg">
-                    <nav id="nav-wrap">
-                        <ul id="main-menu" class="nav-bar sf-menu">
-                            <li class="current">
-                                <a href="">귀농 지원</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">귀농 체험</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">떨이(이름 미정)</a>
-                            </li>
-                            <li class="current">
-                                <a href="">컴백촌 EXPO</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">게시판</a>
-                            </li>
-                        </ul>
-
-                        <div class="dropdown-menu">
-                            <ul style="margin-left: 32px;margin-right: 59px;">
-                                <li><a>마을회관</a></li>
-                                <li><a>특산물 정보</a></li>
-                                <li><a>농사 수업</a></li>
-                                <li><a>농사 정보</a></li>
-                            </ul>
-                            <ul style="margin-right: 77px;">
-                                <li><a>주말 농부</a></li>
-                                <li><a>체험</a></li>
-                            </ul>
-                            <ul style="margin-right: 179px;">
-                                <li><a>떨이</a></li>
-                            </ul>
-                            <ul style="margin-right: 104px;">
-                                <li><a>귀농 청년</a></li>
-                            </ul>
-                            <ul>
-                                <li><a>공지사항</a></li>
-                                <li><a>수매요청</a></li>
-                                <li><a>임대, 매매</a></li>
-                                <li><a>지식인</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<section style="background: lightgoldenrodyellow;">
-    <div class="tle" style="height: auto;/* background: lightgoldenrodyellow; */">
-        <div class="row" >
-            <h1 class="h1">귀농지원</h1>
+    <!--Main-->
+    <div class="main">
+        <div class="tle" >
+            <h1 class="h1">농사수업</h1>
+            <h6>홈>귀농지원>농사수업</h6>
             <hr>
             <div id="sit_ov_wrap" style="display: flex;width: 1000px;margin: auto;">
-                <!-- 상품이미지 미리보기 시작 { -->
                 <div id="sit_pvi">
                     <div id="sit_pvi_big" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
                         <div class="owl-wrapper-outer">
@@ -246,10 +135,10 @@
                 </section>
             </div>
         </div>
-        <div class="row">
+        <div class="tle">
             <div id="bottom">
-            <!-- 상풍 상세설명 -->
-            <hr>
+                <!-- 상풍 상세설명 -->
+                <hr>
                 <div id="content" style="text-align:center;" align="center">
                     <div align="center" style="text-align:center;">
                         <span style="font-size:11pt;color:rgb(120,32,185);">
@@ -331,33 +220,20 @@
             <hr>
         </div>
     </div>
-</section>
-<!-- FOOTER -->
-<th:block th:include="/footer.html"></th:block>
 
-<script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
-<script>
-    $(".dropdown-menu").hide();
-    $("#main-menu").on("mouseenter", function (e) {
-        $("div.dropdown-menu").slideDown();
-        $("div.dropdown-menu").show();
-        $("div.dropdown-menu").children().show();
-        $("div.dimmed").css("opacity", "0.5");
-    })
-    $(".dropdown-menu").on("mouseleave", function (e) {
-        $(".dropdown-menu").hide();
-        $("div.dimmed").css("opacity", "0");
-    })
-    $(document).ready(function () {
-        $("#sit_pvi_big").owlCarousel({
-            autoPlay: true,
-            navigation: true, // Show next and prev buttons
-            slideSpeed: 1000,
-            pagination: false,
-            singleItem: true,
 
-        });
-    });
-</script>
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
 </body>
 </html>

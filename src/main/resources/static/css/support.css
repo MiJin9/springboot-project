@@ -139,3 +139,10 @@ table input[type=button] {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.item{
+    text-align: center;
+}
+.tle h2{
+    color: black;
+    font-size: 35px;
+}
