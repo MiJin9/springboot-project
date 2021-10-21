@@ -1989,6 +1989,7 @@ body {
 			text-align: center;
 			padding-left: 0;
 			background: #c36839;
+			height: 58px;
 		}
 
 			#nav > ul > li {
@@ -2003,7 +2004,7 @@ body {
 					transition: background-color 0.2s ease-in-out;
 					display: inline-block;
 					margin: 0;
-					padding: 1.0em 1.2em 1.0em 1.2em;
+					padding: 0.8em 1.2em 0.8em 1.2em;
 					letter-spacing: 0.06em;
 					text-decoration: none;
 					font-weight: 700;
