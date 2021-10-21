@@ -43,4 +43,7 @@ public class UserController {
 
     @GetMapping("checkPw")
     public String checkPw() {return "/user/checkPw";}
+
+    @GetMapping("findUser")
+    public String findUser() {return "user/findUser";}
 }
