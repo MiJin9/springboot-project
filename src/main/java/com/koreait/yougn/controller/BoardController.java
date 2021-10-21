@@ -14,6 +14,9 @@ public class BoardController {
     @GetMapping("notice")     // 공지사항 리스트
     public String notice(){return "/board/notice/notice";}
 
+    @GetMapping("noticeRead")     // 공지사항 리스트
+    public String noticeRead(){return "/board/notice/noticeRead";}
+
     /*수매*/
     @GetMapping("buyAndSell")   // 수매 리스트
     public String buyAndSell(){
