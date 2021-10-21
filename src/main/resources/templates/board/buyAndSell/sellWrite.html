@@ -1,161 +1,82 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
-    <title>메인-YOU귀농</title>
-    <link rel="stylesheet" href="/css/skin.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/board/write.css">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-    <!--썸머노트 링크-->
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/board/write.css" />
+
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <!--썸머노트-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Jeju Gothic";
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+        #logo {
+            padding: 0;
+            margin-top: 2em;
+        }
+        #logo div {
+            box-shadow: none;
+            top: 15px;
+            padding: 0;
+        }
+        nav {
+            background: #4e321c;
+        }
+
+        #nav li.current_page_item a {
+            background: #4e321c;
+            border-top-color: #16d18d;
+            color: #fff;
+            width: 156px;
+        }
+
+        #nav li.current_page_item a:hover{
+            background: #c97b1f;
+        }
+
+        #nav > ul {
+            background: #4e321c;
+        }
+
+        ul.dropdown {
+            background: #c97b1f;
+        }
+
+        #banner {
+            background: #4e321c21;
+        }
+
+    </style>
 </head>
-<style>
+<body class="homepage is-preload">
+<div id="page-wrapper">
 
-    h1, h2, h3, h4, a, p, li, div, input{
-    }
+    <th:block th:include="header.html"></th:block>
 
-    li>a {
-        font-size: 20px;
-    }
-    .headermenu{
-        width:1000px !important;
-    }
-    .twelve{
-        width: 200px;
-    }
-    table {
-        width: 112%;
-    }
-    li{
-        margin-right: 20px !important;
-    }
-    #icon{
-        margin-left: -100px;
-        margin-bottom: -92px;
-        height: 100px;
-    }
-    .logo{
-        width: 1000px !important;
-        margin-bottom: 10px;
-        margin-top: 15px;
-    }
-    .headerlogo{
-        width: 900px !important;
-    }
-    .info{
-        float: right;
-        margin-top: 86px;
-        font-size: 16px;
-    }
+    <!--Main-->
+    <div class="main">
+        <!---------------------------------------------------------------------------------------------------------------------->
 
-    #subheader a{
-        color: black;
-    }
-    .h-dropdown-menu{
-        background: tan;
-        color: black;
-        display: flex;
-        min-width: fit-content;
-        max-width: 1000px;
-        z-index: 10;
-        position: absolute;
-        top: 69px;
-    }
-</style>
-<body style="margin: 0;">
-<!--HEADER -->
-<header id="header">
-    <div class="row">
-        <div class="headerlogo four columns">
-            <div class="logo">
-                <a href= "">
-                    <img id="icon" src="/img/logo1.png">
-                </a>
-                <div class="info">
-                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">ID/PW 찾기</a>
-                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">마이 페이지</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clear">
-    </div>
-    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
         <div class="row">
-            <div class="twelve columns dropdowner">
-                <div class="headermenu eight columns noleftmarg">
-                    <nav id="nav-wrap">
-                        <ul id="main-menu" class="nav-bar sf-menu">
-                            <li class="current">
-                                <a href="">귀농 지원</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">귀농 체험</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">떨이(이름 미정)</a>
-                            </li>
-                            <li class="current">
-                                <a href="">컴백촌 EXPO</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">게시판</a>
-                            </li>
-                        </ul>
-
-                        <div class="h-dropdown-menu">
-                            <ul style="margin-left: 32px;margin-right: 59px;">
-                                <li><a>마을회관</a></li>
-                                <li><a>특산물 정보</a></li>
-                                <li><a>농사 수업</a></li>
-                                <li><a>농사 정보</a></li>
-                            </ul>
-                            <ul style="margin-right: 77px;">
-                                <li><a>주말 농부</a></li>
-                                <li><a>체험</a></li>
-                            </ul>
-                            <ul style="margin-right: 179px;">
-                                <li><a>떨이</a></li>
-                            </ul>
-                            <ul style="margin-right: 104px;">
-                                <li><a>귀농 청년</a></li>
-                            </ul>
-                            <ul>
-                                <li><a>공지사항</a></li>
-                                <li><a>수매요청</a></li>
-                                <li><a>임대, 매매</a></li>
-                                <li><a>지식인</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-
-                </div>
+            <div style="margin-left: -800px; margin-top: 121px; margin-bottom: -121px;">
+                <p class="smallTitle">팝니다</p>
             </div>
         </div>
-    </div>
-</header>
-<section style="background: lightgoldenrodyellow;">
-    <div>
-        <div class="tle" style="height: 1000px;/* background: lightgoldenrodyellow; */">
-            <!---------------------------------------------------------------------------------------------------------------------->
-            <div>
-                <img id="img" src="/img/notice.png">
-            </div>
-            <div class="row">
-                <div>
-                    <p class="smallTitle">팝니다</p>
-                </div>
-                <p class="horizon"></p>
-            </div>
-            <div class="row">
+        <div class="row">
             <form id="postForm" name="postForm" method="POST">
 
 
@@ -178,74 +99,28 @@
                 </div>
 
             </form>
-            </div>
-            <!---------------------------------------------------------------------------------------------------------------------->
         </div>
+        <!---------------------------------------------------------------------------------------------------------------------->
     </div>
-</section>
 
-<!-- FOOTER -->
-<div id="footer">
-    <footer class="row">
-        <p class="back-top floatright">
-            <a href="#top" id="toTop"><span>top</span></a>
-        </p>
-        <div class="four columns">
-            <h1>도움이 필요하신가요?</h1>
-            <p>유귀농를 이용하시면서 불편함을 느끼셨나요?<br>혹은 도움이 필요하신가요?<br>언제든지 아래의 주소로 연락주세요!<br>유귀농는 여러분의 관심과 사랑에 항상 고맙습니다.</p>
-        </div>
-        <div class="four columns">
-            <h1>찾아오시는길</h1>
-            <ul class="contact">
-                <li class="icon solid fa-envelope">admin@yougn.com</li>
-                <li class="icon solid fa-phone">(02)1204-1204</li>
-                <li class="icon solid fa-home">서울특별시 강남구 테헤란로 146 현익빌딩 4층(역삼동)<br/></li>
-            </ul>
-        </div>
-        <div class="four columns">
-            <h1 class="newsmargin">NEWSLETTER</h1>
-            <div class="row collapse newsletter floatright">
-                <div class="ten mobile-three columns">
-                    <input type="text" class="nomargin" placeholder="Enter your e-mail address...">
-                </div>
-                <div class="two mobile-one columns">
-                    <a href="#" class="postfix button expand">GO</a>
-                </div>
-            </div>
-        </div>
 
-    </footer>
+
+    <th:block th:include="footer.html"></th:block>
 </div>
-<div class="copyright">
-    <div class="row">
-        <div class="six columns">
-            &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
-        </div>
-        <div class="six columns">
-            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
-        </div>
-    </div>
-</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<!--썸머노트-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script src="/js/board/write.js"></script>
-<script>
-/*******************************************************************************/
-/*메뉴 드롭다운*/
-    $(".h-dropdown-menu").hide();
-    $("#main-menu").on("mouseenter", function (e) {
-        $("div.h-dropdown-menu").slideDown();
-        $("div.h-dropdown-menu").show();
-        $("div.h-dropdown-menu").children().show();
-        $("div.dimmed").css("opacity","0.5");
-    })
-    $(".h-dropdown-menu").on("mouseleave", function (e) {
-        $(".h-dropdown-menu").hide();
-        $("div.dimmed").css("opacity","0");
-    })
-/*****************************************************************************/
-</script>
 </body>
 </html>

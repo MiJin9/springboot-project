@@ -1,4 +1,3 @@
-
 .note-icon-bar, .note-resizebar {
     display: none;
 }
@@ -7,6 +6,8 @@ input[id="title"]{
     margin: 0 auto;
     margin-bottom: 15px;
     margin-top: 82px;
+    height: 63px;
+    font-size: 30px;
 }
 
 .note-editor{
@@ -26,4 +27,36 @@ input[id="title"]{
     border-bottom: double;
     margin-top: 10px;
     margin-left: 48px;
+}
+#postForm{
+    margin-top: 100px;
+}
+
+.btn-box input[type="button"]{
+    top: -4px;
+}
+
+.btn-box a{
+    height: 32.78px;
+}
+
+.container {
+    width: 100%!important;
+}
+#footer{
+    margin-left: -40px!important;
+}
+
+#logo div img{
+    vertical-align: inherit!important;
+}
+
+footer{
+    margin-left: -40px!important;
+}
+div.four{
+    font-size: 10pt;
+}
+div.four h1, div.four p{
+    font-size: 1em;
 }

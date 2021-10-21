@@ -1,469 +1,349 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
-    <title>메인-YOU귀농</title>
-    <link rel="stylesheet" href="/css/skin.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/board/list.css">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <title>수매 요청</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/board/list.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Jeju Gothic";
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+        #logo {
+            padding: 0;
+            margin-top: 2em;
+        }
+        #logo div {
+            box-shadow: none;
+            top: 15px;
+            padding: 0;
+        }
+        nav {
+            background: #4e321c;
+        }
+
+        #nav li.current_page_item a {
+            background: #4e321c;
+            border-top-color: #16d18d;
+            color: #fff;
+            width: 156px;
+        }
+
+        #nav li.current_page_item a:hover{
+            background: #c97b1f;
+        }
+
+        #nav > ul {
+            background: #4e321c;
+        }
+
+        ul.dropdown {
+            background: #c97b1f;
+        }
+
+        #banner {
+            background: #4e321c21;
+        }
+
+    </style>
 </head>
-<style>
+<body class="homepage is-preload">
+<div id="page-wrapper">
 
-    h1, h2, h3, h4, a, p, li, div, input{
-    }
+    <th:block th:include="header.html"></th:block>
 
-    li>a {
-        font-size: 20px;
-    }
-    .headermenu{
-        width:1000px !important;
-    }
-    .twelve{
-        width: 200px;
-    }
-    table {
-        width: 112%;
-    }
-    li{
-        margin-right: 20px !important;
-    }
-    #icon{
-        margin-left: -100px;
-        margin-bottom: -92px;
-        height: 100px;
-    }
-    .logo{
-        width: 1000px !important;
-        margin-bottom: 10px;
-        margin-top: 15px;
-    }
-    .headerlogo{
-        width: 900px !important;
-    }
-    .info{
-        float: right;
-        margin-top: 86px;
-        font-size: 16px;
-    }
-
-    #subheader a{
-        color: black;
-    }
-    .dropdown-menu{
-        background: tan;
-        color: black;
-        display: flex;
-        min-width: fit-content;
-        max-width: 1000px;
-        z-index: 10;
-        position: absolute;
-        top: 69px;
-    }
-</style>
-<body style="margin: 0;">
-<!--HEADER -->
-<header id="header">
-    <div class="row">
-        <div class="headerlogo four columns">
-            <div class="logo">
-                <a href= "">
-                    <img id="icon" src="/img/logo1.png">
-                </a>
-                <div class="info">
-                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">ID/PW 찾기</a>
-                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="">마이 페이지</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clear">
-    </div>
-    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+    <!--Main-->
+    <div class="main">
+        <!---------------------------------------------------------------------------------------------------------------------->
         <div class="row">
-            <div class="twelve columns dropdowner">
-                <div class="headermenu eight columns noleftmarg">
-                    <nav id="nav-wrap">
-                        <ul id="main-menu" class="nav-bar sf-menu">
-                            <li class="current">
-                                <a href="">귀농 지원</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">귀농 체험</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">떨이(이름 미정)</a>
-                            </li>
-                            <li class="current">
-                                <a href="">컴백촌 EXPO</a>
-                            </li>
-
-                            <li class="current">
-                                <a href="">게시판</a>
-                            </li>
-                        </ul>
-
-                        <div class="dropdown-menu">
-                            <ul style="margin-left: 32px;margin-right: 59px;">
-                                <li><a>마을회관</a></li>
-                                <li><a>특산물 정보</a></li>
-                                <li><a>농사 수업</a></li>
-                                <li><a>농사 정보</a></li>
-                            </ul>
-                            <ul style="margin-right: 77px;">
-                                <li><a>주말 농부</a></li>
-                                <li><a>체험</a></li>
-                            </ul>
-                            <ul style="margin-right: 179px;">
-                                <li><a>떨이</a></li>
-                            </ul>
-                            <ul style="margin-right: 104px;">
-                                <li><a>귀농 청년</a></li>
-                            </ul>
-                            <ul>
-                                <li><a>공지사항</a></li>
-                                <li><a>수매요청</a></li>
-                                <li><a>임대, 매매</a></li>
-                                <li><a>지식인</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<section style="background: lightgoldenrodyellow;">
-    <div>
-        <div class="tle" style="height: 1000px;/* background: lightgoldenrodyellow; */">
-            <!---------------------------------------------------------------------------------------------------------------------->
             <div>
-                <img id="img" src="/img/notice.png">
+                <p class="smallTitle">수매 요청</p>
             </div>
-            <div class="row">
-                <div>
-                    <p class="smallTitle">수매 요청</p>
-                </div>
-                <p class="horizon"></p>
+        </div>
+        <div class="table-wrapper" id="BtnDiv">
+            <div class="inputBtn">
+                <input type="button" id="choice1" name="choice1" value="팝니다" class="button primary icon solid">
+                <input type="button" id="choice2" name="choice2" value="삽니다" class="button primary icon solid">
             </div>
-            <div class="table-wrapper" id="BtnDiv">
-                <div class="inputBtn">
-                    <input type="button" id="choice1" name="choice1" value="팝니다" class="button primary icon solid">
-                    <input type="button" id="choice2" name="choice2" value="삽니다" class="button primary icon solid">
-                </div>
-                <h3><a href="/board/sellWrite" class="button small a-write">글 등록</a></h3>
-            </div>
+            <h3><a href="/board/sellWrite" class="button small a-write">글 등록</a></h3>
+        </div>
 
-            <div class="table-wrapper" id="table1">
-                <table>
-                    <thead>
-                    <tr class="tHead">
-                        <th class="bno">번호</th>
-                        <th class="title">제목</th>
-                        <th class="writer">작성자</th>
-                        <th class="regDate">작성일</th>
-                        <th class="updateDate">수정일</th>
-                    </tr>
-                    </thead>
-                        <tbody>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">Number</td>
-                            <td class="title">Title<a id="goRead" href="#"></a></td>
-                            <td class="writer">Writer</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-                <form action="/board/list" name="searchForm">
-                    <div class="fields">
-                        <div class="field">
-                            <div id="searchWrap">
-                                <select name="type">
-                                    <option value="">검색 기준</option>
-                                    <option value="T">제목</option>
-                                    <option value="C">내용</option>
-                                    <option value="W">작성자</option>
-                                    <option value="TC">제목 또는 내용</option>
-                                    <option value="TW">제목 도는 작성자</option>
-                                    <option value="TCW">제목 또는 내용 또는 작성자</option>
-                                </select>
-                                <input id="keyword" type="text" name="keyword">
-                                <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
-                            </div>
+        <div class="table-wrapper" id="table1">
+            <table>
+                <thead>
+                <tr class="tHead">
+                    <th class="bno">번호</th>
+                    <th class="title">제목</th>
+                    <th class="writer">작성자</th>
+                    <th class="regDate">작성일</th>
+                    <th class="updateDate">수정일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">Number</td>
+                    <td class="title">Title<a id="goRead" href="#"></a></td>
+                    <td class="writer">Writer</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <form action="/board/list" name="searchForm">
+                <div class="fields">
+                    <div class="field">
+                        <div id="searchWrap">
+                            <select name="type">
+                                <option value="">검색 기준</option>
+                                <option value="T">제목</option>
+                                <option value="C">내용</option>
+                                <option value="W">작성자</option>
+                                <option value="TC">제목 또는 내용</option>
+                                <option value="TW">제목 도는 작성자</option>
+                                <option value="TCW">제목 또는 내용 또는 작성자</option>
+                            </select>
+                            <input id="keyword" type="text" name="keyword">
+                            <a href="javascript:void(0)" class="search button primary icon solid fa-search" style="vertical-align: top;"></a>
                         </div>
                     </div>
-                </form>
-                <div>
-
-                    <div class="page" style="text-align: center">
-                        <a class="changePage"><code>&lt;</code></a>
-                        <code>1</code>
-                        <a class="changePage"><code>&gt;</code></a>
-                    </div>
-                    <form action="/board/list" name="pageForm">
-                        <input type="hidden" name="pageNum">
-                        <input type="hidden" name="amount">
-                        <input type="hidden" name="type">
-                        <input type="hidden" name="keyword">
-                    </form>
                 </div>
-            </div>
+            </form>
+            <div>
 
-            <div class="table-wrapper" id="table2">
-                <table>
-                    <thead>
-                    <tr class="tHead">
-                        <th class="bno">번호</th>
-                        <th class="title">제목</th>
-                        <th class="writer">작성자</th>
-                        <th class="regDate">작성일</th>
-                        <th class="updateDate">수정일</th>
-                    </tr>
-                    </thead>
-                        <tbody>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                        <tr class="tBody">
-                            <td class="bno">번호</td>
-                            <td class="title">제목<a id="goRead" href="#"></a></td>
-                            <td class="writer">작성자</td>
-                            <td class="regDate">0000-00-00</td>
-                            <td class="updateDate">0000-00-00</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-                <form action="/board/list" name="searchForm">
-                    <div class="fields">
-                        <div class="field">
-                            <div id="searchWrap">
-                                <select name="type">
-                                    <option value="">검색 기준</option>
-                                    <option value="T">제목</option>
-                                    <option value="C">내용</option>
-                                    <option value="W">작성자</option>
-                                    <option value="TC">제목 또는 내용</option>
-                                    <option value="TW">제목 도는 작성자</option>
-                                    <option value="TCW">제목 또는 내용 또는 작성자</option>
-                                </select>
-                                <input id="keyword1" type="text" name="keyword">
-                                <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
-                            </div>
+                <div class="page" style="text-align: center">
+                    <a class="changePage"><code>&lt;</code></a>
+                    <code>1</code>
+                    <a class="changePage"><code>&gt;</code></a>
+                </div>
+                <form action="/board/list" name="pageForm">
+                    <input type="hidden" name="pageNum">
+                    <input type="hidden" name="amount">
+                    <input type="hidden" name="type">
+                    <input type="hidden" name="keyword">
+                </form>
+            </div>
+        </div>
+
+        <div class="table-wrapper" id="table2">
+            <table>
+                <thead>
+                <tr class="tHead">
+                    <th class="bno">번호</th>
+                    <th class="title">제목</th>
+                    <th class="writer">작성자</th>
+                    <th class="regDate">작성일</th>
+                    <th class="updateDate">수정일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                <tr class="tBody">
+                    <td class="bno">번호</td>
+                    <td class="title">제목<a id="goRead" href="#"></a></td>
+                    <td class="writer">작성자</td>
+                    <td class="regDate">0000-00-00</td>
+                    <td class="updateDate">0000-00-00</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <form action="/board/list" name="searchForm">
+                <div class="fields">
+                    <div class="field">
+                        <div id="searchWrap">
+                            <select name="type">
+                                <option value="">검색 기준</option>
+                                <option value="T">제목</option>
+                                <option value="C">내용</option>
+                                <option value="W">작성자</option>
+                                <option value="TC">제목 또는 내용</option>
+                                <option value="TW">제목 도는 작성자</option>
+                                <option value="TCW">제목 또는 내용 또는 작성자</option>
+                            </select>
+                            <input id="keyword1" type="text" name="keyword">
+                            <a href="javascript:void(0)" class="search button primary icon solid fa-search" style="vertical-align: top;"></a>
                         </div>
                     </div>
+                </div>
+            </form>
+            <div>
+
+                <div class="page" style="text-align: center">
+                    <a class="changePage"><code>&lt;</code></a>
+                    <code>1</code>
+                    <a class="changePage"><code>&gt;</code></a>
+                </div>
+                <form action="/board/list" name="pageForm">
+                    <input type="hidden" name="pageNum">
+                    <input type="hidden" name="amount">
+                    <input type="hidden" name="type">
+                    <input type="hidden" name="keyword">
                 </form>
-                <div>
-
-                    <div class="page" style="text-align: center">
-                        <a class="changePage"><code>&lt;</code></a>
-                        <code>1</code>
-                        <a class="changePage"><code>&gt;</code></a>
-                    </div>
-                    <form action="/board/list" name="pageForm">
-                        <input type="hidden" name="pageNum">
-                        <input type="hidden" name="amount">
-                        <input type="hidden" name="type">
-                        <input type="hidden" name="keyword">
-                    </form>
-                </div>
-            </div>
-            <!---------------------------------------------------------------------------------------------------------------------->
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<div id="footer">
-    <footer class="row">
-        <p class="back-top floatright">
-            <a href="#top" id="toTop"><span>top</span></a>
-        </p>
-        <div class="four columns">
-            <h1>도움이 필요하신가요?</h1>
-            <p>유귀농를 이용하시면서 불편함을 느끼셨나요?<br>혹은 도움이 필요하신가요?<br>언제든지 아래의 주소로 연락주세요!<br>유귀농는 여러분의 관심과 사랑에 항상 고맙습니다.</p>
-        </div>
-        <div class="four columns">
-            <h1>찾아오시는길</h1>
-            <ul class="contact">
-                <li class="icon solid fa-envelope">admin@yougn.com</li>
-                <li class="icon solid fa-phone">(02)1204-1204</li>
-                <li class="icon solid fa-home">서울특별시 강남구 테헤란로 146 현익빌딩 4층(역삼동)<br/></li>
-            </ul>
-        </div>
-        <div class="four columns">
-            <h1 class="newsmargin">NEWSLETTER</h1>
-            <div class="row collapse newsletter floatright">
-                <div class="ten mobile-three columns">
-                    <input type="text" class="nomargin" placeholder="Enter your e-mail address...">
-                </div>
-                <div class="two mobile-one columns">
-                    <a href="#" class="postfix button expand">GO</a>
-                </div>
             </div>
         </div>
-
-    </footer>
-</div>
-<div class="copyright">
-    <div class="row">
-        <div class="six columns">
-            &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
-        </div>
-        <div class="six columns">
-            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
-        </div>
+        <!---------------------------------------------------------------------------------------------------------------------->
     </div>
+
+
+
+    <th:block th:include="footer.html"></th:block>
 </div>
-<script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 <script src="/js/board/list.js"></script>
-<script>
-/*******************************************************************************/
-    $(".dropdown-menu").hide();
-    $("#main-menu").on("mouseenter", function (e) {
-        $("div.dropdown-menu").slideDown();
-        $("div.dropdown-menu").show();
-        $("div.dropdown-menu").children().show();
-        $("div.dimmed").css("opacity","0.5");
-    })
-    $(".dropdown-menu").on("mouseleave", function (e) {
-        $(".dropdown-menu").hide();
-        $("div.dimmed").css("opacity","0");
-    })
-/*******************************************************************************/
-</script>
 </body>
+<script>
+    $("#choice1").on("click", function () {
+        $(".a-write").attr("href", "/board/sellWrite");
+    })
+    $("#choice2").on("click", function () {
+        $(".a-write").attr("href", "/board/buyWrite");
+    })
+</script>
 </html>

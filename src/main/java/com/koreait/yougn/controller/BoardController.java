@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/board/*")
 public class BoardController {
-
+                                                                    
     /*공지*/
     @GetMapping("notice")     // 공지사항 리스트
     public String notice(){return "/board/notice/notice";}
@@ -29,8 +29,14 @@ public class BoardController {
     @GetMapping("buyWrite")    // 삽니다 글 작성
     public String buyWrite(){return "/board/buyAndSell/buyWrite";}
 
-    @GetMapping("sellWrite")    // 삽니다 글 작성
+    @GetMapping("sellWrite")    // 팝니다 글 작성
     public String sellWrite(){return "/board/buyAndSell/sellWrite";}
+
+    @GetMapping("buyModify")    // 삽니다 글 수정
+    public String buyModify(){return "/board/buyAndSell/buyModify";}
+
+    @GetMapping("sellModify")    // 팝니다 글 수정
+    public String sellModify(){return "/board/buyAndSell/sellModify";}
 
     /*임대 매매*/
     @GetMapping("rentalAndSale") // 임대 매매 리스트
@@ -48,14 +54,23 @@ public class BoardController {
     @GetMapping("saleWrite")    // 매매 글 작성
     public String saleWrite(){return "/board/rentalAndSale/saleWrite";}
 
+    @GetMapping("rentalModify")    // 임대 글 수정
+    public String rentalModify(){return "/board/rentalAndSale/rentalModify";}
+
+    @GetMapping("saleModify")    // 매매 글 수정
+    public String saleModify(){return "/board/rentalAndSale/saleModify";}
+
     /*고인물*/
-    @GetMapping("qnaList") // 임대 매매 리스트
+    @GetMapping("qnaList") // 지식인 리스트
     public String qnaList(){return "/board/goinmool/qnaList";}
 
-    @GetMapping("qnaRead")     // 팝니다 상세 보기
+    @GetMapping("qnaRead")     // 지식인 상세 보기
     public String qnaView(){return "/board/goinmool/qnaRead";}
 
-    @GetMapping("qnaRegister")    // 매매 글 작성
+    @GetMapping("qnaRegister")    // 지식인 글 작성
     public String qnaRegister(){return "/board/goinmool/qnaRegister";}
+
+    @GetMapping("qnaModify")    // 지식인 글 작성
+    public String qnaModify(){return "/board/goinmool/qnaModify";}
 
 }

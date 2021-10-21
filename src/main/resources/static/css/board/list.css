@@ -13,10 +13,14 @@ tr.tHead th{
 #keyword, #keyword1{
     margin:0;
     border: 1px solid;
+    width: 562px;
 }
 select{
     width: 125px;
     max-height: 31px;
+    padding: 0!important;
+    max-width: 168px;
+    background: white!important;
 }
 a.search{
     width: 70px;
@@ -37,13 +41,10 @@ th.bno{
     width: 80px;
 }
 
-input[name='choice1']{
-    width: 445px;
+input[name='choice1'], input[name='choice2'] {
+    width: 400px;
 }
 
-input[name='choice2']{
-    width: 445px;
-}
 .inputBtn{ /*팝니다 삽니다 버튼*/
     width: 1000px;
     height: fit-content;
@@ -69,11 +70,22 @@ input[name='choice2']{
     margin-top: 50px;
 }
 
+.tBody{
+    border-bottom: 1px solid black;
+}
+
+table{
+    background: white;
+    height: 500px;
+}
+
+.tBody td{
+    vertical-align: middle;
+}
+
 .a-write{
     margin-top: 87px;
     float: right;
-    margin-right: -92px;
-    width: 108px;
     height: 30px;
     color: white;
     font-size: 16px;
