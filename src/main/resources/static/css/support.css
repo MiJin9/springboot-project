@@ -72,10 +72,12 @@ div.bigCate select, div.midCate select{
     padding-top: 105px;
     font-size: 40px;
     color: black;
+    padding-left: 30px;
 }
 .main h6{
     color: #7a8186;
     margin-top: 10px;
+    padding-left: 30px;
 }
 * {
     font-family: "Jeju Gothic";
