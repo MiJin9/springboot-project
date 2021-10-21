@@ -1,0 +1,38 @@
+
+
+#img {
+    width: 100%;
+    height: 200px;
+}
+.note-icon-bar, .note-resizebar {
+    display: none;
+}
+input[id="title"]{
+    width: 888px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: 82px;
+}
+
+.note-editor{
+    width: 888px;
+    margin: 0 auto;
+}
+
+#img{
+    width: 100%;
+    height: 150px;
+}
+
+.smallTitle{
+    font-size: 30px;
+    margin-left: 48px;
+    font-weight: 900;
+}
+
+.horizon {
+    width: 888px;
+    border-bottom: double;
+    margin-top: 10px;
+    margin-left: 48px;
+}
