@@ -22,8 +22,10 @@ section, summary, time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+	font-family: "Jeju Gothic";
+				  }
+
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -41,10 +43,10 @@ blockquote, q {
 	quotes: none;
 }
 
-	blockquote:before, blockquote:after, q:before, q:after {
-		content: '';
-		content: none;
-	}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
 
 table {
 	border-collapse: collapse;
@@ -74,17 +76,17 @@ input, select, textarea {
 
 /* Basic */
 
-	html {
-		box-sizing: border-box;
-	}
+html {
+	box-sizing: border-box;
+}
 
-	*, *:before, *:after {
-		box-sizing: inherit;
-	}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
 
-	body {
-		background: #2D3130;
-	}
+body {
+	background: #fbf9f4;
+}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 			-moz-animation: none !important;
@@ -1940,7 +1942,6 @@ input, select, textarea {
 
 	#logo {
 		position: relative;
-		padding: 3em 0em 5em 0em;
 		letter-spacing: 3px;
 		text-align: center;
 		color: #FFF;
@@ -1978,7 +1979,7 @@ input, select, textarea {
 
 	#nav {
 		position: relative;
-		height: 6em;
+		height: 5px;
 		background: #4A514F;
 		cursor: default;
 	}
@@ -1987,6 +1988,7 @@ input, select, textarea {
 			list-style: none;
 			text-align: center;
 			padding-left: 0;
+			background: #c36839;
 		}
 
 			#nav > ul > li {
@@ -2021,8 +2023,8 @@ input, select, textarea {
 		}
 
 		#nav li.current_page_item a {
-			background: #3E4442;
-			border-top-color: #80B763;
+			background: #c36839;
+			border-top-color: #80b763;
 			color: #fff;
 		}
 
@@ -2163,7 +2165,7 @@ input, select, textarea {
 	.main{
 		height: auto;
 		width: 1100px;
-		background-color: #fbf9f4;
+		background-color: white;
 		margin: auto;
 	}
 
