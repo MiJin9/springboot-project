@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>YOU귀농</title>
+    <link rel="stylesheet" href="/css/skin.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/support.css">
+</head>
+<style>
+
+    h1, h2, h3, h4, a, p, li, div, input{
+    }
+
+    li>a {
+        font-size: 20px;
+    }
+    .headermenu{
+        width:1000px !important;
+    }
+    .twelve{
+        width: 200px;
+    }
+    table {
+        width: 980px;
+    }
+    li{
+        margin-right: 20px !important;
+    }
+    #icon{
+        margin-left: -100px;
+        margin-bottom: -92px;
+        height: 100px;
+    }
+    .logo{
+        width: 1000px !important;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+    .headerlogo{
+        width: 900px !important;
+    }
+    .info{
+        float: right;
+        margin-top: 86px;
+        font-size: 16px;
+    }
+
+    #subheader a{
+        color: black;
+    }
+    .dropdown-menu{
+        background: #ffff;
+        color: black;
+        display: flex;
+        min-width: fit-content;
+        max-width: 1000px;
+        z-index: 10;
+        position: absolute;
+        top: 69px;
+    }
+    .dimmed{
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        opacity: 0;
+        filter: alpha(opacity=80);
+        z-index: 1;
+    }
+
+</style>
+<body style="margin: 0;">
+<!--HEADER -->
+<header id="header">
+    <div class="row">
+        <div class="headerlogo four columns">
+            <div class="logo">
+                <a href= "">
+                    <img id="icon" src="/img/logo1.png">
+                </a>
+                <div class="info">
+                    <a href="">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">ID/PW 찾기</a>
+                    <a href="">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="">마이 페이지</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="subheader" class="subheadertext" style="padding:0px 0px !Important; max-height: 70px">
+        <div class="row">
+            <div class="twelve columns dropdowner">
+                <div class="headermenu eight columns noleftmarg">
+                    <nav id="nav-wrap">
+                        <ul id="main-menu" class="nav-bar sf-menu">
+                            <li class="current">
+                                <a href="">귀농 지원</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">귀농 체험</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">떨이(이름 미정)</a>
+                            </li>
+                            <li class="current">
+                                <a href="">컴백촌 EXPO</a>
+                            </li>
+
+                            <li class="current">
+                                <a href="">게시판</a>
+                            </li>
+                        </ul>
+
+                        <div class="dropdown-menu">
+                            <ul style="margin-left: 32px;margin-right: 59px;">
+                                <li><a>마을회관</a></li>
+                                <li><a>특산물 정보</a></li>
+                                <li><a>농사 수업</a></li>
+                                <li><a>농사 정보</a></li>
+                            </ul>
+                            <ul style="margin-right: 77px;">
+                                <li><a>주말 농부</a></li>
+                                <li><a>체험</a></li>
+                            </ul>
+                            <ul style="margin-right: 179px;">
+                                <li><a>떨이</a></li>
+                            </ul>
+                            <ul style="margin-right: 104px;">
+                                <li><a>귀농 청년</a></li>
+                            </ul>
+                            <ul>
+                                <li><a>공지사항</a></li>
+                                <li><a>수매요청</a></li>
+                                <li><a>임대, 매매</a></li>
+                                <li><a>지식인</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section style="background: lightgoldenrodyellow;">
+    <div class="tle" style="height: auto;">
+        <div class="row">
+            <h1 class="h1">귀농지원</h1>
+            <hr>
+            <div class="cateBox">
+                <a href="/support/hallList">
+                    <div class="cate none">
+                        <img src="/img/hallCall.png">
+                        <span>지역 연락망</span>
+                    </div>
+                </a>
+                <a href="/support/returnList">
+                    <div class="cate none">
+                        <img src="/img/persent.png">
+                        <span>특산물 및 수익률</span>
+                    </div>
+                </a>
+                <a href="/support/classList">
+                    <div class="cate none">
+                        <img src="/img/nongsasuup.png">
+                        <span>농사 수업</span>
+                    </div>
+                </a>
+                <div class="cate on">
+                    <img src="/img/info.png">
+                    <span>이외 각종 정보</span>
+                </div>
+            </div>
+            <div class="listWrapper">
+                <div class="list">
+                    <table>
+                        <caption style="text-align: right">(단위:연, 천원)</caption>
+                        <tr>
+                            <th>지역</th>
+                            <th>작물</th>
+                            <th>경영규모</th>
+                            <th>평균 투자비</th>
+                            <th>운영비</th>
+                            <th>평균 수입</th>
+                            <th>수익률</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div id="footer">
+    <footer class="row">
+        <p class="back-top floatright">
+            <a href="#top" id="toTop"><span>top</span></a>
+        </p>
+        <div class="four columns">
+            <h1>도움이 필요하신가요?</h1>
+            <p>유귀농를 이용하시면서 불편함을 느끼셨나요?<br>혹은 도움이 필요하신가요?<br>언제든지 아래의 주소로 연락주세요!<br>유귀농는 여러분의 관심과 사랑에 항상 고맙습니다.</p>
+        </div>
+        <div class="four columns">
+            <h1>찾아오시는길</h1>
+            <ul class="contact">
+                <li class="icon solid fa-envelope">admin@yougn.com</li>
+                <li class="icon solid fa-phone">(02)1204-1204</li>
+                <li class="icon solid fa-home">서울특별시 강남구 테헤란로 146 현익빌딩 4층(역삼동)<br/></li>
+            </ul>
+        </div>
+        <div class="four columns">
+            <h1 class="newsmargin">NEWSLETTER</h1>
+            <div class="row collapse newsletter floatright">
+                <div class="ten mobile-three columns">
+                    <input type="text" class="nomargin" placeholder="Enter your e-mail address...">
+                </div>
+                <div class="two mobile-one columns">
+                    <a href="#" class="postfix button expand">GO</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+<div class="copyright">
+    <div class="row">
+        <div class="six columns">
+            &copy;<span class="small"> YOU귀농 2021. All rights reserved.</span>
+        </div>
+        <div class="six columns">
+            <span class="small floatright"> Template by <a href="www.wowthemes.net">WowThemes.net</a></span>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script>
+    $(".dropdown-menu").hide();
+    $("#main-menu").on("mouseenter", function (e) {
+        $("div.dropdown-menu").slideDown();
+        $("div.dropdown-menu").show();
+        $("div.dropdown-menu").children().show();
+        $("div.dimmed").css("opacity","0.5");
+    })
+    $(".dropdown-menu").on("mouseleave", function (e) {
+        $(".dropdown-menu").hide();
+        $("div.dimmed").css("opacity","0");
+    })
+</script>
+</body>
+</html>
