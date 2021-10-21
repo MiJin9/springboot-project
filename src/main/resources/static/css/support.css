@@ -1,102 +1,141 @@
-.cate{
+.cate {
     width: 240px;
     text-align: center;
 }
-.cateBox{
+
+.cateBox {
     display: flex;
     width: 980px;
     margin: 40px auto;
     justify-content: space-around;
 }
-.cateBox a{
+
+.cateBox a {
     text-decoration: none;
 }
-.cate img{
+
+.cate img {
     width: 80px;
     display: block;
     margin: 10px auto;
 }
-.cate span{
+
+.cate span {
     font-size: 20px;
     font-width: bold;
 }
-.cate.none:hover{
+
+.cate.none:hover {
     filter: opacity(0.5) drop-shadow(0 0 0 darkgoldenrod);
 }
-div.on{
+
+div.on {
     background: rgb(121 85 72 / 92%);
     color: white;
 }
-div.none{
+
+div.none {
     color: black;
 }
-div.on img, div.on span{
+
+div.on img, div.on span {
     filter: opacity(0.5) drop-shadow(0 0 0 white);
 }
-div.searchBox{
+
+div.searchBox {
     border: 1px solid #7788995c;
     margin: 0 30px 30px 30px;
     padding: 20px;
 }
-div.searchMenu{
+
+div.searchMenu {
     width: 940px;
     margin: 0 auto;
 }
-div.bigCate, div.midCate{
+
+div.bigCate, div.midCate {
     display: inline-block;
 }
-div.bigCate select, div.midCate select{
+
+div.bigCate select, div.midCate select {
     width: 170px;
     padding: .6em .5em;
     border: 1px solid #999;
     border-radius: 4px;
     height: 40px;
 }
-.searchMenu .button{
+
+.searchMenu .button {
     height: 40px;
     line-height: 10px;
 }
-.searchMenu img{
+
+.searchMenu img {
     width: 490px;
     height: 39px;
     margin: 0;
     display: inline-block;
 }
-.searchMenu input[type="search"]{
+
+.searchMenu input[type="search"] {
     width: 490px;
     height: 40px;
     margin: 0;
     display: inline-block;;
 }
-.main h1.h1{
+
+.main h1.h1 {
     padding-top: 105px;
     font-size: 40px;
     color: black;
     padding-left: 30px;
 }
-.main h6{
+
+.main h6 {
     color: #7a8186;
     margin-top: 10px;
     padding-left: 30px;
 }
+
 * {
     font-family: "Jeju Gothic";
 }
-.tle{
+
+.tle {
     width: 1100px;
 }
-.tle table{
+
+.tle table {
     margin: 0 auto;
     width: 900px;
 }
-.paging{
+
+.paging {
     margin: 0 auto;
     width: 900px;
 }
-.paging table{
+
+.paging table {
     margin: 0 auto;
     width: auto;
 }
-.paging table td{
+
+.paging table td {
     padding: 5px;
+}
+
+table input[type=button] {
+    width: 100px;
+    height: 35px;
+    padding: 0;
+    font-size: 13px;
+    border-radius: 20px;
+}
+
+.list table td {
+    text-align: center;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
