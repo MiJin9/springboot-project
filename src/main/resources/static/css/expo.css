@@ -146,3 +146,13 @@ p.contentInner{
 
 #listButton{
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-items: stretch;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: center;
+}
