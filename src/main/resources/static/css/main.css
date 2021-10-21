@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700");
 @import url(fontawesome-all.min.css);
+
 
 /*
 	Axiom by Pixelarity
@@ -22,8 +22,10 @@ section, summary, time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+	font-family: "Jeju Gothic";
+				  }
+
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
