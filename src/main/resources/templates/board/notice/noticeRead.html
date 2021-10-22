@@ -6,7 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>공지 상세보기</title>
+    <title>공지사항 상세보기</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -22,14 +22,9 @@
     <!--Main-->
     <div class="main">
         <!---------------------------------------------------------------------------------------------------------------------->
-        <div class="row">
-            <div  style="margin-top: 120px; margin-left: 55px;">
-                <p class="smallTitle">공지</p>
-            </div>
-            <hr>
-        </div>
         <div class="view">
             <div class="listBtn">
+                <span id="choice1">공지사항</span>
                 <a href="/board/buyAndSell" class="button primary small">목록</a>
             </div>
             <div class="vTitle">
@@ -43,6 +38,39 @@
                 어떤 내용 인가요?
             </div>
             <br>
+            <div class="Btn">
+                <a href="/board/buyModify" class="button primary small">수정</a>
+                <a href="#" class="button primary small">삭제</a>
+            </div>
+            <div class="horizon"><p style="font-size: 20px;margin-top: 8px; text-align: center;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 댓글은 제재가 있을 수 있습니다.</p></div>
+            <br>
+            <div class="register-form">
+                <div>
+                    <p class="p-writer">?????의 댓글</p>
+                    <textarea rows="6" name="reply" placeholder="Reply"></textarea>
+                </div>
+                <div style="text-align: right; margin-top: -7px;">
+                    <a href="javascript:void(0)" class="finish button primary small">등록</a>
+                    <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                </div>
+            </div>
+            <br>
+            <hr style="border-top: 1px solid;width: 888px;margin: unset;">
+            <br>
+            <div class="replyDiv">
+                <ul class="reply">
+                    <li>
+                        <div>
+                            <p class="p-writer">작성자</p>
+                            <div class="reContent">내용</div>
+                            <div style="text-align: right;margin-right: -20px;margin-top: 1px;" id="changeBtn">
+                                <a href="javascript:void(0)" class="modify button primary small">수정</a>
+                                <a href="javascript:void(0)" class="delete button primary small">삭제</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!---------------------------------------------------------------------------------------------------------------------->
     </div>

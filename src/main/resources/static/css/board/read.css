@@ -9,17 +9,17 @@
     min-height: 400px;
     width: 888px;
     margin-top: 12px;
-    border: 3px double;
+    border: 1px double;
     background: white;
 }
 
 .vTitle {
-    border: 3px double;
     background: white;
     width: 888px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    border-bottom: 2px solid;
 }
  p#p-title {
     margin-bottom: 1.5rem;
@@ -51,21 +51,27 @@ ul.reply {
 .reContent {
     min-height: 75px;
     width: 888px;
-    border: 2px solid black;
+    border: 1px solid black;
     background: white;
 }
 
 p.p-writer{
     width: 150px;
     margin-bottom: 0;
-    border: 2px solid black;
+    border: 1px solid black;
     border-bottom: none;
     font-weight: bold;
     background: white;
 }
 
+textarea {
+    resize: none;
+    border: 1px solid black;
+    width: 888px;
+}
+
 .smallTitle{
-    font-size: 30px;
+    font-size: 20px;
     margin-left: 55px;
     font-weight: 900;
     border-bottom: double;
@@ -82,4 +88,21 @@ div.Btn{
 div.listBtn{
     margin-top: -20px;
     margin-bottom: 20px;
+    width: 888px;
+    display: flex;
+    justify-content: space-between;
 }
+
+#choice1{
+    background: #FFFFFF;
+    width: 120px;
+    font-size: 20px;
+    text-align: center;
+    color: #80B763;
+    border-bottom: 3px solid green;
+}
+.main{
+    padding-top: 60px;
+    padding-bottom: 26px;
+}
+
