@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/support.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <div class="tle">
+            <h1 class="h1">농사정보</h1>
+            <h6>홈>귀농지원>농사정보</h6>
+            <hr>
+            <div class="cateBox">
+                <a href="/support/hallList">
+                    <div class="cate none">
+                        <img src="/img/hallCall.png">
+                        <span>지역 연락망</span>
+                    </div>
+                </a>
+                <a href="/support/returnList">
+                    <div class="cate none">
+                        <img src="/img/persent.png">
+                        <span>특산물 및 수익률</span>
+                    </div>
+                </a>
+                <a href="/support/classList">
+                    <div class="cate none">
+                        <img src="/img/nongsasuup.png">
+                        <span>농사 수업</span>
+                    </div>
+                </a>
+                <div class="cate on">
+                    <img src="/img/info.png">
+                    <span>이외 각종 정보</span>
+                </div>
+            </div>
+            <div class="listWrapper">
+                <div class="list">
+                    <table>
+                        <tr>
+                            <th>정보이름 api이름</th>
+                            <th style="width: 50px;">자세히보기</th>
+                        </tr>
+                        <tr>
+                            <td>정보이름 api이름</td>
+                            <td><input type="button" class="button" value="자세히보기"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="paging">
+                <table>
+                    <tr>
+                        <td>&lt;</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>&gt;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

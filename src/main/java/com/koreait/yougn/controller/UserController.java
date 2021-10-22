@@ -37,4 +37,13 @@ public class UserController {
     public String userModify() {
         return "/user/userModify";
     }
+
+    @GetMapping("inquiry")
+    public String inquiry() {return "/user/inquiry";}
+
+    @GetMapping("checkPw")
+    public String checkPw() {return "/user/checkPw";}
+
+    @GetMapping("findUser")
+    public String findUser() {return "user/findUser";}
 }
