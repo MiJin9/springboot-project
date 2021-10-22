@@ -1,0 +1,115 @@
+#all {
+    font-size: 20px;
+    display: flex;
+    margin-top: 60px;
+}
+
+#all h3, h4 {
+    color: black;
+}
+
+#all input[type='text'] {
+    border: 0.5px solid lightgrey;
+    height: 35px;
+    width: 70%;
+    box-shadow: none;
+    margin: 10px 0;
+    background: none;
+}
+
+#all input[type='button'] {
+    height: 35px;
+    font-size: 13px;
+    width: 123px;
+    margin-left: 9px;
+    font-family: 'Jeju Gothic';
+    font-weight: 500;
+    line-height: normal;
+    background: #c97b1f;
+    color: white;
+    margin-top: 10px;
+}
+
+.content div {
+    float: left;
+    height: 500px;
+}
+
+.contentLeft {
+    width: 30%;
+    padding: 40px 0px 20px 30px;
+}
+
+#all ul {
+    list-style: none;
+}
+
+.contentCenter {
+    width: 100%;
+}
+
+.sub_depth1 li {
+    margin-top: 10px;
+}
+
+#table {
+    border: none;
+    border-top: 0.5px solid #696f72;
+    border-collapse: collapse;
+    width: 95%;
+    margin: 50px 0 20px 0;
+    color: black;
+}
+
+#table tr {
+    border-bottom: 0.1px solid #696f72;
+    height: 50px;
+}
+
+#table th {
+    text-align: left;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 50px;
+    font-weight: 500;
+    width: 281px;
+    background-color: #f5f2f2;
+}
+
+#table td {
+    padding-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #696f72;
+}
+
+#all input {
+    color: black;
+}
+
+#all input:focus {
+    outline: none;
+}
+
+.subMenu {
+    padding-left: 0px;
+    color: black;
+}
+
+.sub_depth1 li {
+    font-size: 15px;
+}
+
+.button {
+    height: 45px;
+    font-size: 15px;
+    width: 150px;
+    font-family: 'Jeju Gothic';
+    line-height: 2;
+    font-weight: 500;
+    background: #c97b1f;
+    color: white;
+    text-align: center;
+}

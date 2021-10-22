@@ -1,12 +1,17 @@
 <!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>Untitled</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css"/>
-    <link rel="stylesheet" href="/css/userModify.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/writeCollection.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
 </head>
@@ -41,75 +46,45 @@
                 </div>
             </div>
             <div class="contentCenter">
-                <h3 style="margin-top: 40px">회원 정보 수정</h3>
+                <h3 style="margin-top: 40px">비밀번호 변경</h3>
                 <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
                 <table id="table">
                     <tbody>
                     <tr>
-                        <th>아이디</th>
+                        <th style="background-color: #f5f2f2">현재 비밀번호</th>
                         <td>
-                            <input type="text" name="memId" style="border: none" readonly value="/아이디자리/">
+                            <input type="text" value="">
                         </td>
                     <tr>
-                        <th>비밀번호<span style="color: red">*</span></th>
-                        <td class="member_password">
-                            <div>
-                                <a href="" id="pwChange" class="button"
-                                   style="height: 35px; font-size: 13px; width: 130px; margin-left: 2px;
-                                   font-family: 'Jeju Gothic'; font-weight: 500;
-                                   background-color: #888787; color: white; margin-top: 10px;">비밀번호 변경</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>이름<span style="color: red">*</span></th>
+                        <th style="background-color: #f5f2f2">새 비밀번호</th>
                         <td>
                             <div>
                                 <input type="text" value="">
                             </div>
                         </td>
                     </tr>
-                    <tr class="tHead">
-                        <th>이메일<span style="color: red">*</span></th>
-                        <td class="member_email">
+                    <tr>
+                        <th style="background-color: #f5f2f2">새 비밀번호 확인</th>
+                        <td>
                             <div>
                                 <input type="text" value="">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>휴대폰번호<span style="color: red">*</span></th>
-                        <td class="member_address">
-                            <div class="address_postcode">
-                                <input type="text" class="box" id="phone" maxlength="12"
-                                       style="float: left; width: 43%">
-                                <input type="button" value="인증번호 받기">
-                                <input type="text" style="margin-top: 5px;">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>주소</th>
-                        <td class="member_address">
-                            <div>
-                                <input type="text" class="box" id="address" placeholder="우편번호"
-                                       style="width: 43%; float: left">
-                                <input type="button" value="우편번호 검색">
-                                <input type="text" placeholder="주소" style="margin-top: 5px;">
-                                <input type="text" placeholder="상세주소" style="margin-top: 5px;">
                             </div>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <div style="margin-bottom: 40px; margin-left: 185px">
+                <div style="margin-bottom: 20px; margin-left: 185px">
                     <a href="" id="modify" class="button"
-                       style="">수정</a>
-                    <a href="" id="cancel" class="button"style="margin-left: 8px; background-color: #888787">취소</a>
+                       style="height: 45px; font-size: 15px; width: 150px; font-family: 'Jeju Gothic'; line-height: 2;
+                        font-weight: 500; background: #c97b1f; color: white; text-align: center">수정</a>
+                    <a href="" id="cancel" class="button"
+                       style="height: 45px; font-size: 15px; width: 150px; margin-left: 8px; font-family: 'Jeju Gothic'; line-height: 2;
+                        font-weight: 500; background: #888787; color: white; text-align: center">취소</a>
                 </div>
             </div>
         </div>
     </div>
+
 
     <th:block th:include="footer.html"></th:block>
 </div>
