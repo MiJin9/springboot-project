@@ -1,20 +1,17 @@
 package com.koreait.yougn.beans.dao;
-package com.example.board.beans.dao;
 
 import com.koreait.yougn.beans.vo.BoardsVO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.mappers.BoardsMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class BoardDAO {
-    //    @Autowired
-//    private BoardMapper mapper;
+public class BoardsDAO {
+
     private final BoardsMapper mapper;
 
     public void register(BoardsVO boards){
