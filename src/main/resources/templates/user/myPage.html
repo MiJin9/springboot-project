@@ -5,131 +5,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/myPage.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
-    <style>
-        * {
-            font-family: "Jeju Gothic";
-        }
 
-        body {
-            background: #FFFFFF;
-        }
-
-        #logo div {
-            box-shadow: none;
-            top: 15px;
-            padding: 0;
-        }
-
-        nav {
-            background: #4e321c;
-        }
-
-        #nav li.current_page_item a {
-            background: #4e321c;
-            border-top-color: #16d18d;
-            color: #fff;
-            width: 156px;
-        }
-
-        #nav li.current_page_item a:hover {
-            background: #c97b1f;
-        }
-
-        #nav > ul {
-            background: #4e321c;
-        }
-
-        #all {
-            font-size: 20px;
-            display: flex;
-            margin-top: 60px;
-        }
-
-        #all h3, h4 {
-            color: black;
-        }
-
-        #all input[type='text'] {
-            border: none;
-            height: 35px;
-            width: 70%;
-            box-shadow: none;
-            margin-bottom: 1px;
-        }
-
-        .content div {
-            float: left;
-            height: 500px;
-        }
-
-        .contentLeft {
-            width: 30%;
-            padding: 40px 0px 20px 30px;
-        }
-
-        #all ul {
-            list-style: none;
-        }
-
-        .contentCenter {
-            width: 100%;
-        }
-
-        .sub_depth1 li {
-            margin-top: 10px;
-        }
-
-        #table {
-            border: none;
-            border-top: 0.5px solid lightgrey;
-            border-collapse: collapse;
-            width: 95%;
-            margin: 50px 0;
-            color: black;
-        }
-
-        #table tr {
-            border-bottom: 0.1px solid lightgrey;
-            background: white;
-            height: 50px;
-        }
-
-        #table th {
-            text-align: left;
-            padding-left: 20px;
-            font-size: 16px;
-            line-height: 50px;
-            font-weight: bold;
-        }
-
-        #table td {
-            padding-left: 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #696f72;
-        }
-
-        #all input {
-            color: black;
-        }
-
-        #all input:focus {
-            outline: none;
-        }
-
-        .subMenu {
-            padding-left: 0px;
-            color: black;
-        }
-
-        .sub_depth1 li {
-            font-size: 15px;
-        }
-
-    </style>
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
@@ -138,7 +17,7 @@
 
     <!--Main-->
     <div class="main">
-        <div id="all">
+        <div id="all" style="padding-bottom: 50px">
             <div class="contentLeft">
                 <div>
                     <h4>마이페이지</h4>
@@ -146,7 +25,6 @@
                     <ul class="subMenu">
                         <li style="font-size: 18px; margin: 25px 0px">회원정보
                             <ul class="sub_depth1">
-                                <li><a href="">땅 등록</a></li>
                                 <li><a href="">회원 정보 수정</a></li>
                                 <li><a href="">비밀번호 변경</a></li>
                                 <li><a href="">회원 탈퇴</a></li>
@@ -168,30 +46,30 @@
                 <table id="table">
                     <tbody>
                     <tr>
-                        <th style="background: #fbfbfb">아이디</th>
+                        <th>아이디</th>
                         <td>
                             <input type="text" name="memId" readonly value="/아이디자리/">
                         </td>
 
                     </tr>
-                    <tr style="background: white">
-                        <th style="background: #fbfbfb">이름</th>
+                    <tr>
+                        <th>이름</th>
                         <td>
                             <div>
                                 <input type="text" value="/이름자리/" readonly>
                             </div>
                         </td>
                     </tr>
-                    <tr class="tHead" style="background: white">
-                        <th style="background: #fbfbfb">이메일</th>
+                    <tr class="tHead">
+                        <th>이메일</th>
                         <td class="member_email">
                             <div>
                                 <input type="text" readonly value="/이메일자리/">
                             </div>
                         </td>
                     </tr>
-                    <tr style="background: white">
-                        <th style="background: #fbfbfb">휴대폰번호</th>
+                    <tr>
+                        <th>휴대폰번호</th>
                         <td class="member_address">
                             <div class="address_postcode">
                                 <input type="text" maxlength="12" value="/휴대폰번호자리/" readonly>
@@ -199,14 +77,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <th style="background: #fbfbfb">주소</th>
+                        <th>주소</th>
                         <td class="member_address">
                             <div>
-                                <input type="text" name="zipcode" readonly value="00000">
+                                <input type="text" name="zipcode" readonly value="00000" style="margin-bottom: 0px;">
                             </div>
                             <div>
                                 <div>
-                                    <input type="text" name="address" readonly value="서울시">
+                                    <input type="text" name="address" readonly value="서울시" style="margin-bottom: 0px">
                                 </div>
                                 <div>
                                     <input type="text" name="addressSub" value="강남구" readonly>

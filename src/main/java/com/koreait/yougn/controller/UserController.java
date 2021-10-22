@@ -33,9 +33,19 @@ public class UserController {
         return "/user/writeCollection";
     }
 
+    @GetMapping("bye")
+    public String bye() {
+        return "/user/bye";
+    }
+
     @GetMapping("userModify")
     public String userModify() {
         return "/user/userModify";
+    }
+
+    @GetMapping("changePw")
+    public String changePw() {
+        return "/user/changePw";
     }
 
     @GetMapping("inquiry")
