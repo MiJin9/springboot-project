@@ -62,3 +62,8 @@ div.four h1, div.four p{
 .info a {
     color: #80B763;
 }
+.sct{
+    display: flex;
+    justify-content: space-around;
+    list-style:none;
+}

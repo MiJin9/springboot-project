@@ -30,7 +30,8 @@
             <br>
             <br>
             <br>
-            <h1 style="float: left; width: 400px; padding-left:48px; font-size: 17px; font-weight: 400; color: red">상품 등록</h1>
+            <h1 style="float: left; width: 400px; padding-left:48px; font-size: 17px; font-weight: 400; color: #80B763">상품 등록</h1>
+            <br>
             <br>
             <br>
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
@@ -48,10 +49,10 @@
 
                 <section class="detailView">
                     <div class="sit_ov_tbl">
-                        <input style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                        <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
                         <hr>
                         <div class="con_w">
-                            <input style="width: 300px" type="text" placeholder="가격">
+                            <input id="tagprice" style="width: 300px" type="text" placeholder="가격">
                         </div>
                         <br>
                         <div class="con_w">
@@ -65,11 +66,11 @@
                         </div>
                         <br>
                         <div class="con_w">
-                            <input style="width: 300px" type="text" placeholder="원산지">
+                            <input id="taghometown" style="width: 300px" type="text" placeholder="원산지">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input style="width: 300px" type="text" placeholder="배송비">
+                            <input id="tagdeltip" style="width: 300px" type="text" placeholder="배송비">
                         </div>
                         <!-- 선택옵션 시작 { -->
                         <hr>
@@ -101,8 +102,6 @@
                     <!-- summernote와 관련된 영역 -->
 
                     <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
-
-
 
                     <!-- 버튼과 관련된 영역 -->
 
@@ -137,7 +136,7 @@
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<script src="/js/board/write.js"></script>
+<script src="/js/board/marketwrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script>
@@ -152,9 +151,6 @@
         });
     });
 
-    $(document).ready(function () {
-        $("div.note-placeholder").html("자유롭게 상품설명 기재하시면 되겠습니다.");
-    })
 </script>
 </body>
 </html>
