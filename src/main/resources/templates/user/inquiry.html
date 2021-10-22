@@ -6,137 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
-    <style>
-        * {
-            font-family: "Jeju Gothic";
-        }
-
-        body {
-            background: #FFFFFF;
-        }
-
-        #logo div {
-            box-shadow: none;
-            top: 15px;
-            padding: 0;
-        }
-
-        nav {
-            background: #4e321c;
-        }
-
-        #nav li.current_page_item a {
-            background: #4e321c;
-            border-top-color: #16d18d;
-            color: #fff;
-            width: 156px;
-        }
-
-        #nav li.current_page_item a:hover {
-            background: #c97b1f;
-        }
-
-        #nav > ul {
-            background: #4e321c;
-        }
-
-        #all {
-            font-size: 20px;
-            display: flex;
-            margin-top: 60px;
-        }
-
-        #all h3, h4 {
-            color: black;
-        }
-
-        #all input[type='text'] {
-            border: none;
-            height: 35px;
-            width: 70%;
-            box-shadow: none;
-            margin-bottom: 1px;
-        }
-
-        .content div {
-            float: left;
-            height: 500px;
-        }
-
-        .contentLeft {
-            width: 30%;
-            padding: 40px 0px 20px 30px;
-        }
-
-        #all ul {
-            list-style: none;
-        }
-
-        .contentCenter {
-            width: 100%;
-        }
-
-        .sub_depth1 li {
-            margin-top: 10px;
-        }
-
-        #table {
-            border: none;
-            border-top: 0.5px solid lightgrey;
-            border-collapse: collapse;
-            width: 95%;
-            margin: 50px 0;
-            color: black;
-        }
-
-        #table tr {
-            border-bottom: 0.1px solid lightgrey;
-            background: white;
-            height: 50px;
-        }
-
-        #table th {
-            text-align: left;
-            padding-left: 20px;
-            font-size: 16px;
-            line-height: 50px;
-            font-weight: bold;
-        }
-
-        #table td {
-            padding-left: 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #696f72;
-        }
-
-        #all input {
-            color: black;
-        }
-
-        #all input:focus {
-            outline: none;
-        }
-
-        .subMenu {
-            padding-left: 0px;
-            color: black;
-        }
-
-        .sub_depth1 li {
-            font-size: 15px;
-        }
-
-        #contentt {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: -15px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/inquiry.css">
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
@@ -177,7 +48,7 @@
                     <div style="
     margin-right: 42px;
 ">
-                        <a href="#" class="button">문의하기</a>
+                        <a href="#" class="button" id="inquiryBtn">문의하기</a>
                     </div>
                 </div>
 
