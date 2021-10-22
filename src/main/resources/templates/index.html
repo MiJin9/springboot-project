@@ -7,27 +7,41 @@
 <html>
 <head>
     <title>Untitled</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
         * {
             font-family: "Jeju Gothic" !important;
         }
 
+        div#page-wrapper {
+            position: relative;
+        }
+
         body {
             background: #FFFFFF;
         }
+
+        .container {
+            width: 1200px;
+            position: relative;
+            top: 53px;
+            margin-top: 50px;
+        }
+
         #logo {
             padding: 0;
             margin-top: 2em;
         }
+
         #logo div {
             box-shadow: none;
             top: 15px;
             padding: 0;
         }
+
         nav {
             background: #4e321c;
         }
@@ -38,7 +52,7 @@
             color: #fff;
         }
 
-        #nav li.current_page_item a:hover{
+        #nav li.current_page_item a:hover {
             background: #c97b1f;
         }
 
@@ -69,7 +83,7 @@
             background: #16d18d78;
             width: 67px;
             text-align: center;
-            border-radius: 40%;
+            border-radius: 10%;
             border: 2px solid;
         }
 
@@ -78,43 +92,50 @@
             top: 105px;
         }
 
-        div#gangwon-pin{
+        div#gangwon-pin {
             left: 189px;
             top: 78px;
         }
-        div#chungnam-pin{
+
+        div#chungnam-pin {
             left: 81px;
             top: 195px;
         }
-        div#chungbuk-pin{
+
+        div#chungbuk-pin {
             left: 152px;
             top: 159px;
         }
-        div#gyeongbuk-pin{
+
+        div#gyeongbuk-pin {
             left: 226px;
             top: 200px;
         }
-        div#gyeongnam-pin{
+
+        div#gyeongnam-pin {
             left: 186px;
             top: 304px;
         }
-        div#jeonbuk-pin{
+
+        div#jeonbuk-pin {
             left: 95px;
             top: 272px;
         }
-        div#jeonnam-pin{
+
+        div#jeonnam-pin {
             left: 91px;
             top: 340px;
         }
-        div#jeju-pin{
+
+        div#jeju-pin {
             left: 44px;
             top: 479px;
         }
+
         div.table {
-            padding-top: 2%;
             text-align: center;
             background: #e4f2fe80;
-            height: 300px;
+            height: 198px;
             line-height: 40px;
         }
 
@@ -128,9 +149,10 @@
             border-radius: 10%;
             color: white;
         }
+
         div.table table {
-            margin-top: 10%;
-            font-size: 16px;
+            margin: 0;
+            font-size: 12px;
         }
 
         div.contents {
@@ -138,13 +160,44 @@
             width: 33%;
         }
 
-        div.title {
+        div.title-wrap {
+            display: flex;
+        }
+
+        div.title1 {
             width: 63%;
             font-size: 14px;
-            height: 43px;
-            line-height: 45px;
+            height: 31px;
+            line-height: 40px;
             background: #4e321c17;
             text-align: center;
+        }
+
+        div.title2 {
+            width: 37%;
+            font-size: 14px;
+            height: 31px;
+            line-height: 40px;
+            background: #4e321c17;
+            text-align: center;
+            border-left: 1px solid #00000038;
+            z-index: -1;
+        }
+
+        div.sub-title-wrap {
+            display: flex;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        div.sub-title-wrap div.area {
+            width: 30%;
+            background: #0000001f;
+        }
+
+        div.sub-title-wrap div.area-detail {
+            width: 33%;
+            background: #0000001f;
         }
 
     </style>
@@ -233,7 +286,14 @@
 
     <!-- Banner -->
     <div class="container">
-        <div class="title">지역별 지원</div>
+        <div class="title-wrap">
+            <div class="title1">지역별 지원</div>
+            <div class="title2">귀농 박람회</div>
+        </div>
+        <div class="sub-title-wrap">
+            <div class="area">지역</div>
+            <div class="area-detail">시·군·구</div>
+        </div>
         <div style="display: flex">
             <div class="map">
                 <div id="gyeonggi-pin" class="pin">경기도</div>
@@ -286,12 +346,15 @@
                         </tr>
                     </table>
                 </div>
-                <div style="height:300px; background: #16d18d"></div>
+                <div style="height:402px; background: #16d18d"></div>
                 <!-- Slider -->
+            </div>
+            <div class="expo-wrap">
+                <div class="expo-board"></div>
+                <div class="etc"></div>
             </div>
         </div>
     </div>
-
 
 
     <!-- Main -->
@@ -303,25 +366,29 @@
                 <section class="col-6 col-12-narrower">
                     <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
                     <h3>Phasellus ultri</h3>
-                    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</p>
+                    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean
+                        dignissim pellentesque felis.</p>
                     <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
                 </section>
                 <section class="col-6 col-12-narrower">
                     <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
                     <h3>Aliquam tincid</h3>
-                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies
+                        in, diam. Sed arcu. Cras consequat.</p>
                     <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
                 </section>
                 <section class="col-6 col-12-narrower">
                     <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
                     <h3>Phasellus ultri</h3>
-                    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</p>
+                    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean
+                        dignissim pellentesque felis.</p>
                     <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
                 </section>
                 <section class="col-6 col-12-narrower">
                     <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
                     <h3>Aliquam tincid</h3>
-                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies
+                        in, diam. Sed arcu. Cras consequat.</p>
                     <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
                 </section>
             </div>
@@ -341,21 +408,25 @@
                 <section class="col-4 col-12-narrower">
                     <span class="pennant"><span class="icon solid fa-tint"></span></span>
                     <div class="box">
-                        <p>Praesent dapibus, neque id fio intion supendibus, tortor neque egestas augu uspendisse urna vulputate magna eros. Aliquam erat volut enean dignissim pellentesque felis</p>
+                        <p>Praesent dapibus, neque id fio intion supendibus, tortor neque egestas augu uspendisse urna
+                            vulputate magna eros. Aliquam erat volut enean dignissim pellentesque felis</p>
                     </div>
                     <a href="#" class="link">More Info</a>
                 </section>
                 <section class="col-4 col-12-narrower">
                     <span class="pennant"><span class="icon solid fa-pencil-alt"></span></span>
                     <div class="box">
-                        <p>Donec nec justo eget felis fafermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim arcuat uspendisse urna pellentesqu, tincidunt quis, accumsan porttitor, facilisis</p>
+                        <p>Donec nec justo eget felis fafermentum. Aliquam porttitor mauris sit amet orci. Aenean
+                            dignissim arcuat uspendisse urna pellentesqu, tincidunt quis, accumsan porttitor,
+                            facilisis</p>
                     </div>
                     <a href="#" class="link">More Info</a>
                 </section>
                 <section class="col-4 col-12-narrower">
                     <span class="pennant"><span class="icon solid fa-user"></span></span>
                     <div class="box">
-                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies ciam nibh, viverra non, semper suscipi uspendisse mitind vulputate simpoem</p>
+                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a,
+                            ultricies ciam nibh, viverra non, semper suscipi uspendisse mitind vulputate simpoem</p>
                     </div>
                     <a href="#" class="link">More Info</a>
                 </section>
@@ -372,7 +443,7 @@
                 <span class="byline">Vivamus vestibulum nulla nec ante</span>
             </header>
             <form method="post" action="#" id="subscribe">
-                <input type="text" class="text" name="search" placeholder="Email address" />
+                <input type="text" class="text" name="search" placeholder="Email address"/>
                 <a href="#" class="button">Submit</a>
             </form>
         </section>
