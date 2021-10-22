@@ -58,23 +58,23 @@
 
         .input2 #name {
             border: 1px solid lightgray;
-            height: 50px;
+            height: 45px;
             width: 100%;
         }
         .input2 #phoneNum {
             border: 1px solid lightgray;
-            height: 50px;
+            height: 45px;
             width: 100%;
         }
 
         .input3 #findId {
             border: 1px solid lightgray;
-            height: 50px;
+            height: 45px;
             width: 100%;
         }
         .input3 #phoneNum {
             border: 1px solid lightgray;
-            height: 50px;
+            height: 45px;
             width: 100%;
         }
 
@@ -98,21 +98,46 @@
             margin-bottom: 50px;
         }
 
+        a#findIdBtn:hover {
+            background: #e1e1e1;
+        }
         a#findIdBtn {
             width: 100%;
-            height: 50px;
+            height: 45px;
             margin-top: 20px;
             text-align: center;
-            background: #c97b1f;
-            font-size: 1em;
+            color: #000000;
+            background:white;
+            font-size: 18px;
+        }
+        a#findPwBtn:hover {
+            background: #e1e1e1;
         }
         a#findPwBtn {
             width: 100%;
-            height: 50px;
+            height: 45px;
             margin-top: 20px;
             text-align: center;
-            background: #c97b1f;
-            font-size: 1em;
+            color: #000000;
+            font-size: 18px;
+            background:white;
+        }
+
+        .pin {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        #pinNum {
+            width: 70%;
+            height: 45px;
+            border: 1px solid lightgray;
+        }
+
+        #pinNumBtn {
+            width: 30%;
+            font-size: 10px;
         }
 
     </style>
@@ -137,8 +162,12 @@
                             <input type="text" class="box" id="phoneNum" placeholder="핸드폰번호" minlength="8" maxlength="20">
                         </div>
                     </div>
+                    <div class="pin">
+                        <input type="text" id="pinNum" >
+                        <input type="button" id="pinNumBtn" value="인증번호">
+                    </div>
                     <div class="findBtn">
-                        <a class="button" id="findIdBtn">ID찾기</a>
+                        <a class="button" id="findIdBtn">확인</a>
                     </div>
                 </div>
 
@@ -155,8 +184,12 @@
                             <input type="text" class="box" id="phoneNum" placeholder="핸드폰 번호" minlength="8" maxlength="20">
                         </div>
                     </div>
+                    <div class="pin">
+                        <input type="text" id="pinNum" >
+                        <input type="button" id="pinNumBtn" value="인증번호">
+                    </div>
                     <div class="findBtn">
-                        <a class="button" id="findPwBtn">PW찾기</a>
+                        <a class="button" id="findPwBtn">확인</a>
                     </div>
                 </div>
             </div>
