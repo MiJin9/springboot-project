@@ -67,3 +67,20 @@ div.four h1, div.four p{
     justify-content: space-around;
     list-style:none;
 }
+.sct_name{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+#h_name{
+    font-size: 44px;
+    font-weight: 100;
+    background: #7ebf5b;
+    color: white;
+    height: 80px;
+    line-height: 80px;
+    padding-left: 20px;
+    margin-top: -8px;
+    margin-bottom: -40px;
+}
