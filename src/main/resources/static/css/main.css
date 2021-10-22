@@ -22,8 +22,10 @@ section, summary, time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+	font-family: "Jeju Gothic";
+				  }
+
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -41,10 +43,10 @@ blockquote, q {
 	quotes: none;
 }
 
-	blockquote:before, blockquote:after, q:before, q:after {
-		content: '';
-		content: none;
-	}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
 
 table {
 	border-collapse: collapse;
@@ -74,17 +76,17 @@ input, select, textarea {
 
 /* Basic */
 
-	html {
-		box-sizing: border-box;
-	}
+html {
+	box-sizing: border-box;
+}
 
-	*, *:before, *:after {
-		box-sizing: inherit;
-	}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
 
-	body {
-		background: #2D3130;
-	}
+body {
+	background: #fbf9f4;
+}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 			-moz-animation: none !important;
@@ -107,7 +109,7 @@ input, select, textarea {
 	h1, h2, h3, h4, h5, h6 {
 		line-height: 1em;
 		font-weight: bold;
-		color: #3E4442;
+		color: white;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -190,6 +192,9 @@ input, select, textarea {
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		align-items: stretch;
+		flex-direction: row;
+		align-content: stretch;
+		justify-content: center;
 	}
 
 		.row > * {
@@ -1410,7 +1415,7 @@ input, select, textarea {
 
 	.container {
 		margin: 0 auto;
-		width: 1200px;
+		width: 100%;
 	}
 
 		@media screen and (max-width: 1280px) {
@@ -1576,6 +1581,22 @@ input, select, textarea {
 				ul.icons li a:hover {
 					background: rgba(255, 255, 255, 0.05);
 					border-color: #6b7982;
+				}
+				#toTop{
+					font-size: 20px;
+					font-weight: bold;
+					color: white;
+					background: lightgray;
+					text-align: center;
+					line-height: 45px;
+					position: fixed;
+					top: 90%;
+					left: 90%;
+				}
+				a#toTop{
+					width: 50px;
+					border-radius: 50%;
+					background-color: #3e4442;
 				}
 
 /* Info */
@@ -1921,7 +1942,6 @@ input, select, textarea {
 
 	#logo {
 		position: relative;
-		padding: 3em 0em 5em 0em;
 		letter-spacing: 3px;
 		text-align: center;
 		color: #FFF;
@@ -1959,7 +1979,7 @@ input, select, textarea {
 
 	#nav {
 		position: relative;
-		height: 6em;
+		height: 5px;
 		background: #4A514F;
 		cursor: default;
 	}
@@ -1968,6 +1988,8 @@ input, select, textarea {
 			list-style: none;
 			text-align: center;
 			padding-left: 0;
+			background: #c36839;
+			height: 58px;
 		}
 
 			#nav > ul > li {
@@ -1982,11 +2004,11 @@ input, select, textarea {
 					transition: background-color 0.2s ease-in-out;
 					display: inline-block;
 					margin: 0;
-					padding: 1.5em 1.6em 1.7em 1.6em;
+					padding: 0.7em 1.2em 0.7em 1.2em;
 					letter-spacing: 0.06em;
 					text-decoration: none;
 					font-weight: 700;
-					font-size: 1.2em;
+					font-size: 1.3em;
 					outline: 0;
 					color: #ccc;
 					color: rgba(255, 255, 255, 0.75);
@@ -2002,8 +2024,8 @@ input, select, textarea {
 		}
 
 		#nav li.current_page_item a {
-			background: #3E4442;
-			border-top-color: #80B763;
+			background: #c36839;
+			border-top-color: #80b763;
 			color: #fff;
 		}
 
@@ -2140,6 +2162,14 @@ input, select, textarea {
 
 /* Main */
 
+
+	.main{
+		height: auto;
+		width: 1100px;
+		background-color: white;
+		margin: auto;
+	}
+
 	#main {
 		position: relative;
 		padding: 5em 5em;
@@ -2267,11 +2297,9 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		position: relative;
 		padding: 2em 5em 1.5em 5em;
-		background: #4A514F;
+		background: #4e321c;
 		color: #FFF;
-		margin-bottom: 5em;
 	}
 
 		#footer .copyright {
@@ -3031,7 +3059,6 @@ input, select, textarea {
 				}
 
 		/* Content */
-
 			#main {
 				padding: 3em 2em 2.5em 2em;
 			}

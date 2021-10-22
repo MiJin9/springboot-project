@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>마켓상품등록</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/market.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <!--썸머노트-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+
+</head>
+<body class="homepage is-preload"  style="background: #fbf9f4">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <form>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1 style="float: left; width: 400px; padding-left:48px; font-size: 17px; font-weight: 400; color: red">상품 등록</h1>
+            <br>
+            <br>
+            <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
+                <!-- 상품이미지 미리보기 시작 { -->
+                <div id="sit_pvi_big" class="owl-carousel owl-theme">
+                    <div class="owl-item" style="width: 500px;">
+                        <div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image">
+                            <img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <!-- } 상품이미지 미리보기 끝 -->
+
+                <section class="detailView">
+                    <div class="sit_ov_tbl">
+                        <input style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                        <hr>
+                        <div class="con_w">
+                            <input style="width: 300px" type="text" placeholder="가격">
+                        </div>
+                        <br>
+                        <div class="con_w">
+                            <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con">상세페이지참조</span>
+                        </div>
+                        <br>
+                        <div class="con_w">
+                            <span class="ttl">브랜드&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con">상세페이지참조</span>
+                        </div>
+                        <br>
+                        <div class="con_w">
+                            <input style="width: 300px" type="text" placeholder="원산지">
+                        </div>
+                        <br>
+                        <div class="con_w">
+                            <input style="width: 300px" type="text" placeholder="배송비">
+                        </div>
+                        <!-- 선택옵션 시작 { -->
+                        <hr>
+                        <br>
+                        <section>
+                            <form>
+                                <select class="option">
+                                    <option value="선택옵션">선택옵션</option>
+                                    <option value="옵션1">옵션1</option>
+                                    <option value="옵션2">옵션2</option>
+                                    <option value="옵션3">옵션3</option>
+                                    <option value="옵션4">옵션4</option>
+                                </select>
+                            </form>
+                        </section>
+                        <!-- } 선택옵션 끝 -->
+                        <!--버튼-->
+                       <!-- <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">-->
+                        <!--버튼 끝-->
+                    </div>
+                </section>
+            </div>
+            <hr>
+            <div id="bottom">
+
+                <form id="postForm" name="postForm" method="POST">
+
+
+                    <!-- summernote와 관련된 영역 -->
+
+                    <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+
+
+
+                    <!-- 버튼과 관련된 영역 -->
+
+                    <div align="center" class="btn-box">
+
+                        <input type="button" id="sendSummer" class="button" value="작성">
+
+                        <a class="button" onclick="history.back()">취소</a>
+
+                    </div>
+
+                    <br>
+
+                </form>
+
+            </div>
+
+        </form>
+    </div>
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="/js/board/write.js"></script>
+<!-- include summernote css/js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#sit_pvi_big").owlCarousel({
+            autoPlay : true,
+            navigation : true, // Show next and prev buttons
+            slideSpeed : 1000,
+            pagination:false,
+            singleItem:true,
+
+        });
+    });
+
+    $(document).ready(function () {
+        $("div.note-placeholder").html("자유롭게 상품설명 기재하시면 되겠습니다.");
+    })
+</script>
+</body>
+</html>

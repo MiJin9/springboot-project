@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>마켓상세보기</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/market.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
+</head>
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <th:block th:include="header.html"></th:block>
+
+        <!--Main-->
+        <div class="main">
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1 style="float: left; width: 400px; padding-left:48px; font-size: 17px; font-weight: 400; color: red">상품 상세보기</h1>
+            <input style="float: right; margin-right: 55px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="글수정">
+            <input style="float: right; margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="글삭제">
+            <br>
+            <br>
+            <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
+                <!-- 상품이미지 미리보기 시작 { -->
+                    <div id="sit_pvi_big" class="owl-carousel owl-theme">
+                            <div class="owl-item" style="width: 500px;">
+                                <div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image">
+                                    <img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a>
+                                </div>
+                            </div>
+                    </div>
+
+                <br>
+                <!-- } 상품이미지 미리보기 끝 -->
+
+                <section class="detailView">
+                    <div class="sit_ov_tbl">
+                        <div id="sit_title" style="color: #4a514f; font-size: 22px" >아삭한 식감에 반하는 딱딱이 복숭아</div>
+                            <hr>
+                                <div class="con_w">
+                                    <span>시중가격 : 33,000원</span>
+                                </div>
+                            <br>
+                            <div class="con_w">
+                                <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                                <span class="con">상세페이지참조</span>
+                            </div>
+                            <br>
+                            <div class="con_w">
+                                <span class="ttl">브랜드&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                                <span class="con">상세페이지참조</span>
+                            </div>
+                            <br>
+                            <div class="con_w">
+                                <span class="ttl">원산지&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                                <span class="con">대한민국</span>
+                            </div>
+                            <br>
+                            <div class="con_w">
+                                <span class="ttl">배송비결제&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                                <span class="con">무료</span></div>
+                            <!-- 선택옵션 시작 { -->
+                            <hr>
+                            <br>
+                            <section>
+                                <form>
+                                   <select class="option">
+                                        <option value="선택옵션">선택옵션</option>
+                                        <option value="딱딱이 복숭아 2.5kg,0,9997">딱딱이 복숭아 2.5kg  + 0원</option>
+                                        <option value="딱딱이 복숭아 5kg,18800,9999">딱딱이 복숭아 5kg  + 18,800원</option>
+                                   </select>
+                                </form>
+                            </section>
+                            <!-- } 선택옵션 끝 -->
+                            <!--버튼-->
+                            <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
+                            <!--버튼 끝-->
+                    </div>
+                </section>
+            </div>
+            <hr>
+            <div id="bottom">
+                <!-- 필독 -->
+                <div id="sit_hhtml">
+                    <div style="text-align:center;" align="center">
+                        <br>
+                    </div>
+                    <div style="text-align:center;" align="center">
+                        <img src="http://dmshop.kr/data/editor/2110/a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" title="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" alt="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg">
+                        <br style="clear:both;">
+                        <br style="clear:both;">
+                        <br style="clear:both;">
+                        <br style="clear:both;">&nbsp;
+                    </div>
+                </div>
+                <!-- 필독끝 -->
+
+                <!-- 상풍 상세설명 -->
+                <hr>
+                <div style="text-align:center;" align="center">
+                    <p>상품 상세 설명</p>
+                    <!--상품 상세설명 끝-->
+                </div>
+            </div>
+
+
+        </div>
+        <th:block th:include="footer.html"></th:block>
+    </div>
+
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#sit_pvi_big").owlCarousel({
+                autoPlay : true,
+                navigation : true, // Show next and prev buttons
+                slideSpeed : 1000,
+                pagination:false,
+                singleItem:true,
+
+            });
+        });
+    </script>
+</body>
+</html>
