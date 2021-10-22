@@ -1,0 +1,44 @@
+.tle {
+    padding-top: 52px;
+    width: 1100px;
+    margin: 0 auto;
+}
+footer.row{
+    display: flex;
+}
+
+img.contentPicture {
+    width: 100%;
+}
+
+.tle h1, h2, h3, h4, h5, h6 {
+    color: black;
+}
+
+.content{
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+    padding-bottom: 1.25em;
+}
+
+.bottom{
+    padding: 45px 0 40px 0px;
+}
+
+img.bottomPicture{
+    width: 100px;
+    height: 100px;
+}
+
+.ddaompyo2{
+    text-align: right;
+}
+
+.contentInner{
+    font-size: 16px;
+    text-align: left;
+}
+
+.companyName{
+    font-size: 24px;
+}
