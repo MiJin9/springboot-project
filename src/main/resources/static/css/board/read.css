@@ -51,14 +51,14 @@ ul.reply {
 .reContent {
     min-height: 75px;
     width: 888px;
-    border: 1px solid black;
+    border: 1px solid #7a8186;
     background: white;
 }
 
 p.p-writer{
     width: 150px;
     margin-bottom: 0;
-    border: 1px solid black;
+    border: 1px solid #7a8186;
     border-bottom: none;
     font-weight: bold;
     background: white;
@@ -66,7 +66,7 @@ p.p-writer{
 
 textarea {
     resize: none;
-    border: 1px solid black;
+    border: 1px solid #7a8186;
     width: 888px;
 }
 
