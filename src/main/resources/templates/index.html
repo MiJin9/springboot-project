@@ -4,59 +4,469 @@
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 -->
-<html xmlns:th="http://www.thymeleaf.org/">
+<html>
 <head>
     <title>Untitled</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
+    <style>
+        * {
+            font-family: "Jeju Gothic" !important;
+        }
+
+        div#page-wrapper {
+            position: relative;
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+
+        .container {
+            width: 1200px;
+            position: relative;
+            top: 53px;
+            margin-top: 50px;
+        }
+
+        #logo {
+            padding: 0;
+            margin-top: 2em;
+        }
+
+        #logo div {
+            box-shadow: none;
+            top: 15px;
+            padding: 0;
+        }
+
+        nav {
+            background: #4e321c;
+        }
+
+        #nav li.current_page_item a {
+            background: #4e321c;
+            border-top-color: #16d18d;
+            color: #fff;
+        }
+
+        #nav li.current_page_item a:hover {
+            background: #c97b1f;
+        }
+
+        #nav > ul {
+            background: #4e321c;
+        }
+
+        ul.dropdown {
+            background: #c97b1f;
+        }
+
+        #banner {
+            background: #4e321c21;
+        }
+
+        div.map {
+            width: 30%;
+            height: 600px;
+            background: #e4f2fe url("/img/map.png") no-repeat center center;
+            background-position-y: inherit;
+            position: relative;
+            z-index: -1;
+        }
+
+        div.pin {
+            position: absolute;
+            color: #fff;
+            background: #16d18d78;
+            width: 67px;
+            text-align: center;
+            border-radius: 10%;
+            border: 2px solid;
+        }
+
+        div#gyeonggi-pin {
+            left: 104px;
+            top: 105px;
+        }
+
+        div#gangwon-pin {
+            left: 189px;
+            top: 78px;
+        }
+
+        div#chungnam-pin {
+            left: 81px;
+            top: 195px;
+        }
+
+        div#chungbuk-pin {
+            left: 152px;
+            top: 159px;
+        }
+
+        div#gyeongbuk-pin {
+            left: 226px;
+            top: 200px;
+        }
+
+        div#gyeongnam-pin {
+            left: 186px;
+            top: 304px;
+        }
+
+        div#jeonbuk-pin {
+            left: 95px;
+            top: 272px;
+        }
+
+        div#jeonnam-pin {
+            left: 91px;
+            top: 340px;
+        }
+
+        div#jeju-pin {
+            left: 44px;
+            top: 479px;
+        }
+
+        div.table {
+            text-align: center;
+            background: #e4f2fe80;
+            height: 198px;
+            line-height: 40px;
+        }
+
+        div.table td {
+            width: 80px;
+            cursor: pointer;
+        }
+
+        div.table td:hover {
+            background: #16d18da6;
+            border-radius: 10%;
+            color: white;
+        }
+
+        div.table table {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        div.contents {
+            height: 600px;
+            width: 33%;
+        }
+
+        div.title-wrap {
+            display: flex;
+        }
+
+        div.title1 {
+            width: 63%;
+            font-size: 14px;
+            height: 31px;
+            line-height: 40px;
+            background: #4e321c17;
+            text-align: center;
+        }
+
+        div.title2 {
+            width: 37%;
+            font-size: 14px;
+            height: 31px;
+            line-height: 40px;
+            background: #4e321c17;
+            text-align: center;
+            border-left: 1px solid #00000038;
+            z-index: -1;
+        }
+
+        div.sub-title-wrap {
+            display: flex;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        div.sub-title-wrap div.area {
+            width: 30%;
+            background: #0000001f;
+        }
+
+        div.sub-title-wrap div.area-detail {
+            width: 33%;
+            background: #0000001f;
+        }
+
+    </style>
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
 
-    <th:block th:include="header.html"></th:block>
+    <!-- Header -->
+    <div id="header">
+        <div class="container">
 
-    <!--Main-->
-    <div class="main">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+            <!-- Logo -->
+            <div id="logo">
+                <div style="box-shadow: none">
+                    <img src="/img/logo.png" width="600">
+                </div>
+            </div>
+
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li class="current_page_item">
+                        <a href="index.html">귀농 지원</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Lorem ipsum dolor</a></li>
+                            <li><a href="#">Magna phasellus</a></li>
+                            <li><a href="#">Etiam dolore nisl</a></li>
+                            <li>
+                                <span>Phasellus consequat</span>
+                                <ul>
+                                    <li><a href="#">Lorem ipsum dolor</a></li>
+                                    <li><a href="#">Phasellus consequat</a></li>
+                                    <li><a href="#">Magna phasellus</a></li>
+                                    <li><a href="#">Etiam dolore nisl</a></li>
+                                    <li><a href="#">Veroeros feugiat</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Veroeros feugiat</a></li>
+                        </ul>
+                    </li>
+                    <li class="current_page_item">
+                        <a href="index.html">귀농 체험</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Lorem ipsum dolor</a></li>
+                            <li><a href="#">Magna phasellus</a></li>
+                            <li><a href="#">Etiam dolore nisl</a></li>
+                            <li>
+                                <span>Phasellus consequat</span>
+                                <ul>
+                                    <li><a href="#">Lorem ipsum dolor</a></li>
+                                    <li><a href="#">Phasellus consequat</a></li>
+                                    <li><a href="#">Magna phasellus</a></li>
+                                    <li><a href="#">Etiam dolore nisl</a></li>
+                                    <li><a href="#">Veroeros feugiat</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Veroeros feugiat</a></li>
+                        </ul>
+                    </li>
+                    <li class="current_page_item"><a href="index.html">떨이</a></li>
+                    <li class="current_page_item"><a href="index.html">컴백촌 EXPO</a></li>
+                    <li class="current_page_item">
+                        <a href="index.html">게시판</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Lorem ipsum dolor</a></li>
+                            <li><a href="#">Magna phasellus</a></li>
+                            <li><a href="#">Etiam dolore nisl</a></li>
+                            <li>
+                                <span>Phasellus consequat</span>
+                                <ul>
+                                    <li><a href="#">Lorem ipsum dolor</a></li>
+                                    <li><a href="#">Phasellus consequat</a></li>
+                                    <li><a href="#">Magna phasellus</a></li>
+                                    <li><a href="#">Etiam dolore nisl</a></li>
+                                    <li><a href="#">Veroeros feugiat</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Veroeros feugiat</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="container">
+        <div class="title-wrap">
+            <div class="title1">지역별 지원</div>
+            <div class="title2">귀농 박람회</div>
+        </div>
+        <div class="sub-title-wrap">
+            <div class="area">지역</div>
+            <div class="area-detail">시·군·구</div>
+        </div>
+        <div style="display: flex">
+            <div class="map">
+                <div id="gyeonggi-pin" class="pin">경기도</div>
+                <div id="gangwon-pin" class="pin">강원도</div>
+                <div id="chungnam-pin" class="pin">충청남도</div>
+                <div id="chungbuk-pin" class="pin">충청북도</div>
+                <div id="jeonnam-pin" class="pin">전라남도</div>
+                <div id="jeonbuk-pin" class="pin">전라북도</div>
+                <div id="gyeongnam-pin" class="pin">경상남도</div>
+                <div id="gyeongbuk-pin" class="pin">경상북도</div>
+                <div id="jeju-pin" class="pin">제주도</div>
+            </div>
+            <div class="contents">
+                <div id="seoul-table" class="table">
+                    <table>
+                        <tr>
+                            <td>강남구</td>
+                            <td>강동구</td>
+                            <td>강북구
+                            <td>강서구
+                            <td>관악구
+                        </tr>
+                        <tr>
+                            <td>광진구
+                            <td>구로구
+                            <td>금천구
+                            <td>노원구
+                            <td>도봉구
+                        </tr>
+                        <tr>
+                            <td>동대문구
+                            <td>동작구
+                            <td>마포구
+                            <td>서대문구
+                            <td>서초구
+                        </tr>
+                        <tr>
+                            <td>성동구
+                            <td>성북구
+                            <td>송파구
+                            <td>양천구
+                            <td>영등포구
+                        </tr>
+                        <tr>
+                            <td>용산구
+                            <td>은평구
+                            <td>종로구
+                            <td>중구
+                            <td>중랑구
+                        </tr>
+                    </table>
+                </div>
+                <div style="height:402px; background: #16d18d"></div>
+                <!-- Slider -->
+            </div>
+            <div class="expo-wrap">
+                <div class="expo-board"></div>
+                <div class="etc"></div>
+            </div>
+        </div>
     </div>
 
 
+    <!-- Main -->
+    <div id="main" class="container">
 
-    <th:block th:include="footer.html"></th:block>
+        <div id="featured">
+
+            <div class="row gtr-uniform">
+                <section class="col-6 col-12-narrower">
+                    <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+                    <h3>Phasellus ultri</h3>
+                    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean
+                        dignissim pellentesque felis.</p>
+                    <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
+                </section>
+                <section class="col-6 col-12-narrower">
+                    <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+                    <h3>Aliquam tincid</h3>
+                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies
+                        in, diam. Sed arcu. Cras consequat.</p>
+                    <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
+                </section>
+                <section class="col-6 col-12-narrower">
+                    <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+                    <h3>Phasellus ultri</h3>
+                    <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean
+                        dignissim pellentesque felis.</p>
+                    <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
+                </section>
+                <section class="col-6 col-12-narrower">
+                    <a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
+                    <h3>Aliquam tincid</h3>
+                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies
+                        in, diam. Sed arcu. Cras consequat.</p>
+                    <a href="#" class="link2">More<span class="icon solid fa-plus-circle"></span></a>
+                </section>
+            </div>
+
+        </div>
+        <div id="intro">
+            <section>
+                <div class="heading">
+                    <span class="txt1">Fusce pellentesque</span>
+                    <span class="txt2">Integer vitae libero ac risus egestas placerat</span>
+                </div>
+            </section>
+        </div>
+
+        <div id="extra">
+            <div class="row gtr-200">
+                <section class="col-4 col-12-narrower">
+                    <span class="pennant"><span class="icon solid fa-tint"></span></span>
+                    <div class="box">
+                        <p>Praesent dapibus, neque id fio intion supendibus, tortor neque egestas augu uspendisse urna
+                            vulputate magna eros. Aliquam erat volut enean dignissim pellentesque felis</p>
+                    </div>
+                    <a href="#" class="link">More Info</a>
+                </section>
+                <section class="col-4 col-12-narrower">
+                    <span class="pennant"><span class="icon solid fa-pencil-alt"></span></span>
+                    <div class="box">
+                        <p>Donec nec justo eget felis fafermentum. Aliquam porttitor mauris sit amet orci. Aenean
+                            dignissim arcuat uspendisse urna pellentesqu, tincidunt quis, accumsan porttitor,
+                            facilisis</p>
+                    </div>
+                    <a href="#" class="link">More Info</a>
+                </section>
+                <section class="col-4 col-12-narrower">
+                    <span class="pennant"><span class="icon solid fa-user"></span></span>
+                    <div class="box">
+                        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a,
+                            ultricies ciam nibh, viverra non, semper suscipi uspendisse mitind vulputate simpoem</p>
+                    </div>
+                    <a href="#" class="link">More Info</a>
+                </section>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Newsletter -->
+    <div id="newsletter" class="container">
+        <section>
+            <header>
+                <h2>Morbi insem uisdui</h2>
+                <span class="byline">Vivamus vestibulum nulla nec ante</span>
+            </header>
+            <form method="post" action="#" id="subscribe">
+                <input type="text" class="text" name="search" placeholder="Email address"/>
+                <a href="#" class="button">Submit</a>
+            </form>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <span class="copyright">&copy; Untitled. All rights reserved.</span>
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-facebook-f"><span>Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-twitter"><span>Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-google-plus-g"><span>Google+</span></a></li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <!-- Scripts -->
