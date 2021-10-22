@@ -13,7 +13,7 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
         * {
-            font-family: "Jeju Gothic";
+            font-family: "Jeju Gothic" !important;
         }
 
         body {
@@ -52,6 +52,99 @@
 
         #banner {
             background: #4e321c21;
+        }
+
+        div.map {
+            width: 30%;
+            height: 600px;
+            background: #e4f2fe url("/img/map.png") no-repeat center center;
+            background-position-y: inherit;
+            position: relative;
+            z-index: -1;
+        }
+
+        div.pin {
+            position: absolute;
+            color: #fff;
+            background: #16d18d78;
+            width: 67px;
+            text-align: center;
+            border-radius: 40%;
+            border: 2px solid;
+        }
+
+        div#gyeonggi-pin {
+            left: 104px;
+            top: 105px;
+        }
+
+        div#gangwon-pin{
+            left: 189px;
+            top: 78px;
+        }
+        div#chungnam-pin{
+            left: 81px;
+            top: 195px;
+        }
+        div#chungbuk-pin{
+            left: 152px;
+            top: 159px;
+        }
+        div#gyeongbuk-pin{
+            left: 226px;
+            top: 200px;
+        }
+        div#gyeongnam-pin{
+            left: 186px;
+            top: 304px;
+        }
+        div#jeonbuk-pin{
+            left: 95px;
+            top: 272px;
+        }
+        div#jeonnam-pin{
+            left: 91px;
+            top: 340px;
+        }
+        div#jeju-pin{
+            left: 44px;
+            top: 479px;
+        }
+        div.table {
+            padding-top: 2%;
+            text-align: center;
+            background: #e4f2fe80;
+            height: 300px;
+            line-height: 40px;
+        }
+
+        div.table td {
+            width: 80px;
+            cursor: pointer;
+        }
+
+        div.table td:hover {
+            background: #16d18da6;
+            border-radius: 10%;
+            color: white;
+        }
+        div.table table {
+            margin-top: 10%;
+            font-size: 16px;
+        }
+
+        div.contents {
+            height: 600px;
+            width: 33%;
+        }
+
+        div.title {
+            width: 63%;
+            font-size: 14px;
+            height: 43px;
+            line-height: 45px;
+            background: #4e321c17;
+            text-align: center;
         }
 
     </style>
@@ -139,36 +232,63 @@
     </div>
 
     <!-- Banner -->
-    <div id="banner" class="container" style="display: flex">
-        <div style="height:300px; background: #1c218b21">
-        </div>
-        <div>
-            <div style="height:300px; background: #FFFFFF"></div>
-            <div style="height:300px; background: #16d18d"></div>
-            <!-- Slider -->
-            <!--<div id="slider" class="container">
-                <a href="#"><span class="previous-button icon solid fa-angle-left"></span></a>
-                <a href="#"><span class="next-button icon solid fa-angle-right"></span></a>
-                <div class="viewer">
-                    <div class="reel">
-                        <div class="slide">
-                            <span class="pennant"><span class="icon solid fa-rocket"></span></span>
-                            <p>Phasellus ultrices nulla quis nibh. Quisque a lectu. Donec consectetuer ligula et vulputate.</p>
-                            <a href="#" class="links">More</a>
-                        </div>
-                        <div class="slide">
-                            <span class="pennant"><span class="icon solid fa-cogs"></span></span>
-                            <p>Etiam neque. Vivamus consequat lorem. Nullam semper eleifend. Donec mattis libero eget urna.</p>
-                            <a href="#" class="links">More</a>
-                        </div>
-                        <div class="slide">
-                            <span class="pennant"><span class="icon solid fa-file"></span></span>
-                            <p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor.</p>
-                            <a href="#" class="links">More</a>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="title">지역별 지원</div>
+        <div style="display: flex">
+            <div class="map">
+                <div id="gyeonggi-pin" class="pin">경기도</div>
+                <div id="gangwon-pin" class="pin">강원도</div>
+                <div id="chungnam-pin" class="pin">충청남도</div>
+                <div id="chungbuk-pin" class="pin">충청북도</div>
+                <div id="jeonnam-pin" class="pin">전라남도</div>
+                <div id="jeonbuk-pin" class="pin">전라북도</div>
+                <div id="gyeongnam-pin" class="pin">경상남도</div>
+                <div id="gyeongbuk-pin" class="pin">경상북도</div>
+                <div id="jeju-pin" class="pin">제주도</div>
+            </div>
+            <div class="contents">
+                <div id="seoul-table" class="table">
+                    <table>
+                        <tr>
+                            <td>강남구</td>
+                            <td>강동구</td>
+                            <td>강북구
+                            <td>강서구
+                            <td>관악구
+                        </tr>
+                        <tr>
+                            <td>광진구
+                            <td>구로구
+                            <td>금천구
+                            <td>노원구
+                            <td>도봉구
+                        </tr>
+                        <tr>
+                            <td>동대문구
+                            <td>동작구
+                            <td>마포구
+                            <td>서대문구
+                            <td>서초구
+                        </tr>
+                        <tr>
+                            <td>성동구
+                            <td>성북구
+                            <td>송파구
+                            <td>양천구
+                            <td>영등포구
+                        </tr>
+                        <tr>
+                            <td>용산구
+                            <td>은평구
+                            <td>종로구
+                            <td>중구
+                            <td>중랑구
+                        </tr>
+                    </table>
                 </div>
-            </div>-->
+                <div style="height:300px; background: #16d18d"></div>
+                <!-- Slider -->
+            </div>
         </div>
     </div>
 
