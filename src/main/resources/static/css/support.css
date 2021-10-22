@@ -1,27 +1,36 @@
 .cate {
-    width: 240px;
+    width: 70px;
     text-align: center;
+    margin-bottom: -2px;
 }
+
 
 .cateBox {
     display: flex;
-    width: 980px;
-    margin: 40px auto;
-    justify-content: space-around;
+    margin: 40px 0;
+    justify-content: flex-start;
+    padding: 0 50px;
 }
+
 
 .cateBox a {
     text-decoration: none;
+    padding-top: 20px;
 }
 
 .cate img {
-    width: 80px;
+    width: 20px;
     display: block;
     margin: 10px auto;
 }
 
+.cate.on img {
+    width: 40px;
+    filter: invert(1);
+}
+
 .cate span {
-    font-size: 20px;
+    font-size: 11px;
     font-width: bold;
 }
 
@@ -30,8 +39,8 @@
 }
 
 div.on {
-    background: rgb(121 85 72 / 92%);
     color: white;
+    background: #80b763;
 }
 
 div.none {
@@ -39,7 +48,6 @@ div.none {
 }
 
 div.on img, div.on span {
-    filter: opacity(0.5) drop-shadow(0 0 0 white);
 }
 
 div.searchBox {
@@ -139,10 +147,12 @@ table input[type=button] {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.item{
+
+.item {
     text-align: center;
 }
-.tle h2{
+
+.tle h2 {
     color: black;
     font-size: 35px;
 }
