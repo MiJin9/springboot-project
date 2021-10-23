@@ -9,6 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class Criteria {
     private int pageNum;
     private int amount;
+    private int boardType;
     private String type;
     private String keyword;
 

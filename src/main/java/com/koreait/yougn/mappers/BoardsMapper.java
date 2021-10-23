@@ -22,6 +22,7 @@ public interface BoardsMapper {
     public int delete(Long bno);
     //    게시글 전체 개수
     public int getTotal(Criteria criteria);
+
     //조회수 1증가
     public int plusOne(Long bno);
 }

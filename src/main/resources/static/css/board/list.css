@@ -30,6 +30,7 @@ a.search{
 #searchWrap{
     display: flex;
     width: 896px;
+
 }
 .tle{
     background: white;
@@ -57,14 +58,12 @@ th.bno{
     width: 120px;
     font-size: 20px;
     text-align: center;
-    color: #80B763;
-    border-bottom: 3px solid green;
 }
 
 #choice2 {
     margin-left: -4px;
 }
-.bno, .writer, .regDate, .updateDate{/*테이블 내용 가운제 정렬 (제목 제외)*/
+.bno, .writer, .regDate, .updateDate, .viewCtn{/*테이블 내용 가운제 정렬 (제목 제외)*/
     text-align: center;
 }
 
@@ -78,7 +77,7 @@ th.bno{
 
 table{
     background: white;
-    height: 500px;
+    min-height: 500px;
 }
 
 .tBody td{
@@ -109,4 +108,8 @@ table{
 
 .main{
     padding-top: 60px!important;
+}
+
+a#goRead {
+    color : #7a8186;
 }

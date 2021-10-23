@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SpringBootTest
 @Slf4j
 public class BoardsMapperTest {
@@ -19,7 +22,8 @@ public class BoardsMapperTest {
         Criteria cri = new Criteria();
         cri.setPageNum(1);
         cri.setAmount(10);
-        mapper.getList(cri).forEach(board -> log.info(board.toString()));
+        cri.setBoardType(1);
+        mapper.getList(cri).forEach(boards -> log.info(mapper.toString()));
     }
 
     @Test
@@ -68,6 +72,15 @@ public class BoardsMapperTest {
         }else{
             log.info("DELETE COUNT : " + mapper.delete(4L));
         }
+    }
+
+    @Test
+    public void testGetTotal(){
+        Criteria cri = new Criteria();
+        cri.setType("T");
+        cri.setKeyword("업로드");
+        cri.setBoardType(4);
+        mapper.getTotal(cri);
     }
     
 }

@@ -34,7 +34,13 @@
             /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
             SELECT /*+ INDEX_DESC(T_BOARDS PK_BOARDS) */
             ROWNUM R, BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT, "TYPE"
-            FROM T_BOARDS
+            FROM
+            (
+                SELECT /*+ INDEX_DESC(T_BOARDS PK_BOARDS) */
+                 BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT, "TYPE"
+                FROM T_BOARDS
+                WHERE "TYPE" = #{boardType}
+            )
             WHERE
         ]]>
         <include refid="search"></include>
@@ -48,7 +54,7 @@
     <!--게시글 작성-->
     <insert id="insert">
         INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
-        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
+        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{boardType})
     </insert>
 
     <!--
@@ -61,7 +67,7 @@
             SELECT SEQ_BOARDS.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
-        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
+        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{boardType})
     </insert>
 
     <!--상세보기-->
@@ -90,11 +96,11 @@
     </delete>
 
     <select id="getTotal" resultType="_int">
-        SELECT COUNT(BNO) FROM T_BOARDS
-        <where>
-            <trim suffixOverrides="AND">
-                <include refid="search"></include>
-            </trim>
-        </where>
+            SELECT COUNT(BNO) FROM (SELECT BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT,"TYPE" FROM T_BOARDS WHERE "TYPE" = #{boardType})
+            <where>
+                <trim suffixOverrides="AND">
+                    <include refid="search"></include>
+                </trim>
+            </where>
     </select>
 </mapper>

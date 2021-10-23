@@ -6,7 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>공지</title>
+    <title>매매 요청</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -15,7 +15,8 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
 <style>
-    #choice1 {
+
+    #choice2 {
         color: #80B763;
         border-bottom: 3px solid green;
     }
@@ -27,12 +28,16 @@
 
     <!--Main-->
     <div class="main">
+        <!---------------------------------------------------------------------------------------------------------------------->
         <div class="table-wrapper" id="BtnDiv">
             <div class="inputBtn">
-                <span id="choice1">공지사항</span>
+                <span id="choice1">임대</span>
+                <span id="choice2">매매</span>
             </div>
+            <h3><a href="/board/saleWrite" class="button small a-write">글 등록</a></h3>
         </div>
-        <div class="table-wrapper">
+
+        <div class="table-wrapper" id="table1">
             <table>
                 <thead>
                 <tr class="tHead">
@@ -59,7 +64,7 @@
                 <tfoot>
                 </tfoot>
             </table>
-            <form action="/board/notice" name="searchForm">
+            <form action="/board/sale" name="searchForm">
                 <div class="fields">
                     <div class="field">
                         <div id="searchWrap" th:object="${pageMaker}">
@@ -87,7 +92,7 @@
                     </th:block>
                     <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                 </div>
-                <form action="/board/buy" th:object="${criteria}" name="pageForm">
+                <form action="/board/sale" th:object="${criteria}" name="pageForm">
                     <input type="hidden" name="pageNum" th:field="*{pageNum}">
                     <input type="hidden" name="amount" th:field="*{amount}">
                     <input type="hidden" name="type" th:field="*{type}">
@@ -111,8 +116,12 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/board/list.js"></script>
 </body>
 <script th:inline="javascript">
+    $("#choice1").on("click", function () { //팝니다 버튼 클릭시
+        location.href = "/board/rental";
+    })
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);
