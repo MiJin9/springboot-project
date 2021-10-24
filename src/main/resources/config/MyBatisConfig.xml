@@ -3,5 +3,6 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.koreait.yougn.beans.vo.BoardsVO" alias="boardsVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.UserVO" alias="userVO"/>
     </typeAliases>
 </configuration>
