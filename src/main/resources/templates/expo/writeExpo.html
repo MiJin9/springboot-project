@@ -22,23 +22,16 @@
 <div id="page-wrapper">
 
     <th:block th:include="header.html"></th:block>
-    <br>
-    <br>
-    <br>
-
     <!--Main-->
         <div class="main" style="height: auto;">
                 <div class="category">
-                    <h1 id="h_name">
-                        박람회 글 작성</h1>
+                    <img src="/img/pageBanner_write.png" style="padding-top: 53px;">
                 </div>
-            <br>
-            <br>
             <form id="postForm" name="postForm" method="POST">
 
 
                 <!-- summernote와 관련된 영역 -->
-                <input type="text" placeholder ="제목" name="title" id="title" style="background:#fbf9f4;  width: 100%; height: 50px; border: solid 0.3px #a9a9a9;">
+                <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" style="background:white;  width: 100%; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 60px;font-size: 20px; padding-left: 10px;">
 
                 <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
@@ -46,9 +39,9 @@
 
                 <div align="center" class="btn-box">
 
-                    <input type="button" id="sendSummer" class="button" value="작성">
+                    <input type="button" id="sendSummer" class="button" value="작성" >
 
-                    <a class="button" onclick="history.back()">취소</a>
+                    <a class="button" onclick="history.back()" >취소</a>
 
                 </div>
 

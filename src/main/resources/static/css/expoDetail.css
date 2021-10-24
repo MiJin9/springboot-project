@@ -42,3 +42,15 @@ img.bottomPicture{
 .companyName{
     font-size: 24px;
 }
+
+.contentOutLine{
+    margin: 0 auto;
+    width: 992px;
+    border: 1px solid #f4f4f4;
+    padding: 40px 0px 20px 0px;
+}
+
+.button{
+    font-weight: 100;
+    border: solid 1px green;
+}
