@@ -58,6 +58,7 @@ th.bno{
     width: 120px;
     font-size: 20px;
     text-align: center;
+    cursor: pointer;
 }
 
 #choice2 {

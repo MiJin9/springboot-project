@@ -41,4 +41,16 @@ public class BoardsControllerTest {
                         .andReturn().getModelAndView().getModelMap().toString());
     }
 
+    @Test
+    public void testRegister() throws Exception {
+        String bno = mockMvc.perform(
+                MockMvcRequestBuilders.post("/board/write")
+                        .param("title", "팝니다 등록 컨트롤러 테스트")
+                        .param("content", "팝니다 등록 컨트롤러 테스트")
+                        .param("id", "장태순")
+                        .param("type", "1")
+        ).andReturn().getFlashMap().toString();
+
+        log.info(bno);
+    }
 }

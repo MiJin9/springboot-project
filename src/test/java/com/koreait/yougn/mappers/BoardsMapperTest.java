@@ -29,17 +29,17 @@ public class BoardsMapperTest {
     @Test
     public void testInsert(){
         BoardsVO boards = new BoardsVO();
-        boards.setTitle("새로 작성한 글 제목");
+
+        boards.setTitle("공지 사항 매퍼 테스트");
         boards.setContent("새로 작성한 글 내용");
         boards.setId("장태순");
-        boards.setType(0);
         mapper.insert(boards);
     }
 
     @Test
     public void testInsertSelectKey_bno(){
         BoardsVO boards = new BoardsVO();
-        boards.setTitle("새로 작성한 글 제목");
+        boards.setTitle("공지 사항 매퍼 테스트");
         boards.setContent("새로 작성한 글 내용");
         boards.setId("장태순");
         boards.setType(0);

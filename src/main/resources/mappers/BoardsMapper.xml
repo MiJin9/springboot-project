@@ -54,7 +54,7 @@
     <!--게시글 작성-->
     <insert id="insert">
         INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
-        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{boardType})
+        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
     </insert>
 
     <!--
@@ -67,7 +67,7 @@
             SELECT SEQ_BOARDS.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
-        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{boardType})
+        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
     </insert>
 
     <!--상세보기-->

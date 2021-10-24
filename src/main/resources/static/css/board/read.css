@@ -7,10 +7,14 @@
 
 .vContent{
     min-height: 400px;
-    width: 888px;
+    width: 888px!important;
     margin-top: 12px;
     border: 1px double;
     background: white;
+}
+.vContent * {
+    max-width: 300px!important;
+    max-height: 300px!important;
 }
 
 .vTitle {
@@ -104,5 +108,10 @@ div.listBtn{
 .main{
     padding-top: 60px;
     padding-bottom: 26px;
+}
+
+p img {
+    max-height: 300px;
+    max-width: 300px;
 }
 

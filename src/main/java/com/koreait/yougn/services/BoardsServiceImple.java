@@ -18,12 +18,13 @@ public class BoardsServiceImple implements BoardsService {
 
     @Override
     public void register(BoardsVO board) {
-
+        boardsDAO.register(board);
     }
 
+    //상세보기
     @Override
     public BoardsVO get(Long bno) {
-        boardsDAO.plusOne(bno);
+        boardsDAO.plusOne(bno); // 조회수 + 1
         return boardsDAO.get(bno);
     }
 
@@ -37,6 +38,7 @@ public class BoardsServiceImple implements BoardsService {
         return false;
     }
 
+    //리스트
     @Override
     public List<BoardsVO> getList(Criteria criteria) {
         List<BoardsVO> list = boardsDAO.getList(criteria);

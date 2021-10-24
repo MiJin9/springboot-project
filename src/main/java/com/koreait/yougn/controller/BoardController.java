@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,8 +23,8 @@ public class BoardController {
 
     /*리스트*/
     @GetMapping("list")
-    public String list(@RequestParam("boardType") int boardType, Criteria criteria, Model model){
-        criteria.setBoardType(boardType);
+    public String list(@RequestParam("type") int type, Criteria criteria, Model model){
+        criteria.setBoardType(type);
         model.addAttribute("list", boardsService.getList(criteria));    // 목록
         model.addAttribute("pageMaker", new PageDTO(boardsService.getTotal(criteria), 10, criteria));   //페이징
         return "/board/list";
@@ -38,7 +40,21 @@ public class BoardController {
         model.addAttribute("criteria", criteria);
     }
 
-    /*글작성*/
+    /* 글 작성 */
+    @GetMapping("write")
+    public void write(BoardsVO vo, Model model){
+        vo.setId("이렇게"); // 로그인 된 아이디
+        model.addAttribute("vo", vo);
+    }
+
+    @PostMapping("write")
+    public RedirectView write(BoardsVO boardsVO, RedirectAttributes rttr){
+        boardsVO.setId("이렇게");
+        boardsService.register(boardsVO);
+        rttr.addFlashAttribute("bno",boardsVO.getBno());
+        return new RedirectView("list?type=" + boardsVO.getType());
+    }
+
     @GetMapping("buyWrite")    // 삽니다 글 작성
     public String buyWrite(){return "/board/buyAndSell/buyWrite";}
 
