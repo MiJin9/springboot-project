@@ -1,0 +1,260 @@
+* {
+    font-family: "Jeju Gothic" !important;
+}
+
+div#page-wrapper {
+    position: relative;
+}
+
+
+#logo {
+    padding: 0;
+    margin-top: 2em;
+}
+
+#logo div {
+    box-shadow: none;
+    top: 15px;
+    padding: 0;
+}
+
+nav {
+    background: #4e321c;
+}
+
+
+#nav li.current_page_item a:hover {
+    background: #c97b1f;
+}
+
+
+ul.dropdown {
+    background: #c97b1f;
+}
+
+#banner {
+    background: #4e321c21;
+}
+
+div.map {
+    width: 30%;
+    height: 600px;
+    background: #e4f2fe url("/img/map.png") no-repeat center center;
+    background-position-y: inherit;
+    position: relative;
+    z-index: 1;
+}
+
+div.pin {
+    position: absolute;
+    color: #fff;
+    background: #16d18d78;
+    width: 67px;
+    text-align: center;
+    border-radius: 5%;
+    border: 2px solid;
+    cursor: pointer;
+}
+
+div#gyeonggi-pin {
+    left: 104px;
+    top: 105px;
+}
+
+div#gangwon-pin {
+    left: 189px;
+    top: 78px;
+}
+
+div#chungnam-pin {
+    left: 81px;
+    top: 195px;
+}
+
+div#chungbuk-pin {
+    left: 152px;
+    top: 159px;
+}
+
+div#gyeongbuk-pin {
+    left: 226px;
+    top: 200px;
+}
+
+div#gyeongnam-pin {
+    left: 186px;
+    top: 304px;
+}
+
+div#jeonbuk-pin {
+    left: 95px;
+    top: 272px;
+}
+
+div#jeonnam-pin {
+    left: 91px;
+    top: 340px;
+}
+
+div#jeju-pin {
+    left: 44px;
+    top: 479px;
+}
+
+div.table {
+    text-align: center;
+    background: #e4f2fe80;
+    height: 240px;
+    line-height: 40px;
+}
+
+div.table td {
+    width: 80px;
+    cursor: pointer;
+}
+
+div.table td:hover {
+    background: #16d18da6;
+    border-radius: 10%;
+    color: white;
+}
+
+div.table table {
+    margin: 0;
+    font-size: 12px;
+}
+
+div.contents {
+    height: 600px;
+    width: 33%;
+}
+
+div.title-wrap {
+    display: flex;
+}
+
+div.title1 {
+    width: 63%;
+    font-size: 14px;
+    height: 31px;
+    line-height: 40px;
+    background: #4e321c17;
+    text-align: center;
+}
+
+div.title2 {
+    width: 37%;
+    font-size: 14px;
+    height: 31px;
+    line-height: 40px;
+    background: #4e321c17;
+    text-align: center;
+    border-left: 1px solid #00000038;
+    z-index: 0;
+}
+
+div.sub-title-wrap {
+    display: flex;
+    font-size: 12px;
+    text-align: center;
+}
+
+div.sub-title-wrap div.area {
+    width: 30%;
+    background: #0000001f;
+}
+
+div.sub-title-wrap div.area-detail {
+    width: 33%;
+    background: #0000001f;
+}
+
+.tle {
+    padding-top: 54px;
+    width: 1200px;
+    margin: 0 auto;
+    background: white;
+}
+
+.expo {
+    padding: 10px;
+    height: 120px;
+}
+
+.expo-img {
+    width: 100px;
+    float: left;
+}
+
+.expo-img img {
+    width: 100%;
+}
+
+.expo-title {
+    display: inline-block;
+    font-size: 25px;
+    padding-left: 20px;
+    width: 290px;
+    padding-top: 15px;
+}
+
+.expo-content {
+    display: -webkit-box;
+    padding-left: 25px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.expo-wrap {
+    width: 37%;
+    background: #e0e0e0;
+    margin-top: -26px;
+    height: 626px;
+}
+
+.expo-board {
+    border-radius: 10%;
+    background: white;
+    border: 1px solid lightgrey;
+    padding: 5px;
+    margin: 30px 10px;
+}
+
+.etc {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+.etc img {
+    width: 50px;
+}
+
+.etc .etc1, .etc .etc2 {
+    padding: 22px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    border-radius: 35px;
+}
+
+.etc-content {
+    color: white;
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: top;
+    font-size: 17px;
+    width: 100px;
+    font-weight: 600;
+}
+
+.etc1 {
+    background: pink;
+    border-color: pink;
+}
+
+.etc2 {
+    background: #b3e6b7;
+    border-color: #b3e6b7;
+}
