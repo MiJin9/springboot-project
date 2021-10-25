@@ -2,7 +2,7 @@
     display: none;
 }
 input[id="title"]{
-    width: 888px;
+    width: 1060px;
     margin: 0 auto;
     margin-bottom: 15px;
     margin-top: 82px;
@@ -11,12 +11,14 @@ input[id="title"]{
 }
 
 .note-editor{
-    width: 888px;
+    width: 1060px;
     margin: 0 auto;
 }
 
 .titleDiv{
-    margin-left: -853px; margin-top: 121px; margin-bottom: -121px;
+    margin-left: -1010px;
+    margin-top: 70px;
+    margin-bottom: -121px;
 }
 
 .smallTitle{
@@ -86,4 +88,8 @@ body{
 .note-editable p img {
     max-width: 300px;
     max-height: 300px;
+}
+
+.row {
+    margin-right: 0!important;
 }
