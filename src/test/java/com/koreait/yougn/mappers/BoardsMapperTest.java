@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @SpringBootTest
 @Slf4j
 public class BoardsMapperTest {
@@ -77,7 +74,7 @@ public class BoardsMapperTest {
     @Test
     public void testGetTotal(){
         Criteria cri = new Criteria();
-        cri.setType("T");
+        cri.setKeyType("T");
         cri.setKeyword("업로드");
         cri.setBoardType(4);
         mapper.getTotal(cri);

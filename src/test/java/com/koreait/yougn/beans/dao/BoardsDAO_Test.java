@@ -17,7 +17,7 @@ public class BoardsDAO_Test {
     @Test
     public void testGetList(){
         Criteria criteria = new Criteria();
-        criteria.setType("1");
+        criteria.setKeyType("1");
         boardsDAO.getList(criteria).forEach(board -> log.info(board.toString()));
     }
 

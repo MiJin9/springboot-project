@@ -5,18 +5,18 @@
 
     <!--검색-->
     <sql id="search">
-        <if test="type != null and keyword != null">
+        <if test="keyType != null and keyword != null">
             <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-                <foreach item="type" collection="typeArr">
+                <foreach item="keyType" collection="typeArr">
                     <trim prefix="OR">
                         <choose>
-                            <when test="type == 'T'.toString()">
+                            <when test="keyType == 'T'.toString()">
                                 (TITLE LIKE '%'||#{keyword}||'%')
                             </when>
-                            <when test="type == 'C'.toString()">
+                            <when test="keyType == 'C'.toString()">
                                 (CONTENT LIKE '%'||#{keyword}||'%')
                             </when>
-                            <when test="type == 'W'.toString()">
+                            <when test="keyType == 'W'.toString()">
                                 (ID LIKE '%'||#{keyword}||'%')
                             </when>
                         </choose>

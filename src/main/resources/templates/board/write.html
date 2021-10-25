@@ -35,8 +35,13 @@
         </div>
         <div class="row">
             <form action="/board/write" id="postForm" name="postForm" method="POST">
-                <input type="hidden" name="type" id="type" th:value="${vo.type}">
-
+                <input type="hidden" name="type" id="type" th:field="${vo.type}">
+                <input type="hidden" name="bno" id="bno" th:field="${vo.bno}">
+                <input type="hidden" name="id" id="id" th:field="${vo.id}">
+                <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
+                <input type="hidden" name="amount" th:field="${criteria.amount}">
+                <input type="hidden" name="keyType" th:field="${criteria.keyType}">
+                <input type="hidden" name="keyword" th:field="${criteria.keyword}">
 
                 <!-- summernote와 관련된 영역 -->
 

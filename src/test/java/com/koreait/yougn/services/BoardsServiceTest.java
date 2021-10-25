@@ -16,7 +16,7 @@ public class BoardsServiceTest {
     @Test
     public void testGetList(){
         Criteria criteria = new Criteria();
-        criteria.setType("2");
+        criteria.setKeyType("2");
         boardsService.getList(criteria).forEach(board -> log.info(board.toString()));
     }
     @Test

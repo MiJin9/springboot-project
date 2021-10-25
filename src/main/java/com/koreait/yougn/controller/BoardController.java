@@ -74,7 +74,6 @@ public class BoardController {
             rttr.addAttribute("result", "success");
             rttr.addAttribute("bno", boardsVO.getBno());
         }
-        criteria.setKeyword("");
         return new RedirectView("read"+ criteria.getListLink() +  "type=" + boardsVO.getType());
     }
 
