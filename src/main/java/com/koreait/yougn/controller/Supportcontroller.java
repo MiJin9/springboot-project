@@ -26,4 +26,7 @@ public class Supportcontroller {
 
     @GetMapping("classView")
     public void classView(){}
+
+    @GetMapping("home")
+    public String home(){ return "home";}
 }
