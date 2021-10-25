@@ -13,6 +13,16 @@
     <link rel="stylesheet" href="/css/expoDetail.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
+<style>
+    .photo{
+        width: 500px;
+        height: 500px;
+        line-height: 450px;
+        border-right: solid 0.5px;
+        background: ivory;
+        text-align: center;
+    }
+</style>
 <body class="homepage is-preload">
 <div id="page-wrapper">
     <th:block th:include="header.html"></th:block>
@@ -28,7 +38,39 @@
             <a href="/expo/list" class="primary button" style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px;margin: 17px 0 30px 960px;">
                 목록 보기
             </a>
+            <h3 style="font-size: 30px; height: 50px; text-align: center">딸기 스마트팜 놀러오세요!</h3>
             <!--내용 시작-->
+            <div style="display: flex">
+                <div class="photo" style="margin-left: 20px">썸네일 미리보기 사진</div>
+                <div style="margin-top: 30px">
+                    <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
+                    <div>
+                        <h4 style="margin-left: 50px">농장이름</h4>
+                        <p style="height: 30px; width: 500px; margin-left: 50px" type="text">딸기농장</p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">농장주</h4>
+                        <p style="height: 30px; width: 500px; margin-left: 50px" type="text">이멜론</p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">농장 주소</h4>
+                        <p style="height: 30px; width: 500px; margin-left: 50px" type="text">서울특별시 강남구 역삼동 12-123</p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">농장 전화번호</h4>
+                        <p style="height: 30px; width: 500px; margin-left: 50px" type="text">02-123-1234</p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">농장 주요 품목</h4>
+                        <p style="height: 30px; width: 500px; margin-left: 50px" type="text">딸기</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <div class="contentOutLine" >
                 <div class="content">
                     <div class="frontContent">
