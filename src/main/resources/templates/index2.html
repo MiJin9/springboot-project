@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Jeju Gothic";
+        }
+
+        body {
+            background: #FFFFFF;
+        }
+        #logo {
+            padding: 0;
+            margin-top: 2em;
+        }
+        #logo div {
+            box-shadow: none;
+            top: 15px;
+            padding: 0;
+        }
+        nav {
+            background: #4e321c;
+        }
+
+        #nav li.current_page_item a {
+            background: #4e321c;
+            border-top-color: #16d18d;
+            color: #fff;
+            width: 156px;
+        }
+
+        #nav li.current_page_item a:hover{
+            background: #c97b1f;
+        }
+
+        #nav > ul {
+            background: #4e321c;
+        }
+
+        ul.dropdown {
+            background: #c97b1f;
+        }
+
+        #banner {
+            background: #4e321c21;
+        }
+
+    </style>
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+<th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+<section class="main">
+
+</section>
+
+
+
+
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
