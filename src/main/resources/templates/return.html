@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<!--
+   Axiom by Pixelarity
+   pixelarity.com | hello@pixelarity.com
+   License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/support.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <div class="tle">
+            <h1 class="h1">특산물 정보</h1>
+            <h6>홈>귀농지원>특산물 정보</h6>
+            <hr>
+            <div class="cateBox">
+                <a href="/support/hallList">
+                    <div class="cate none">
+                        <img src="/img/hallCall.png">
+                        <span>지역 연락망</span>
+                    </div>
+                </a>
+                <div class="cate on">
+                    <img src="/img/persent.png">
+                    <span>특산물 정보</span>
+                </div>
+                <a href="/support/classList">
+                    <div class="cate none">
+                        <img src="/img/nongsasuup.png">
+                        <span>농사 수업</span>
+                    </div>
+                </a>
+                <a href="/support/infoList">
+                    <div class="cate none">
+                        <img src="/img/info.png">
+                        <span>이외 각종 정보</span>
+                    </div>
+                </a>
+            </div>
+            <div class="searchBox">
+                <div class="searchMenu">
+                    <div class="bigCate">
+                        <select name="sido">
+                        </select>
+                    </div>
+                    <div class="midCate">
+                        <select name="goods">
+                            <option value="">작물</option>
+                        </select>
+                    </div>
+                    <input type="search">
+                    <input type="button" class="button large" value="검색">
+                </div>
+            </div>
+            <div class="listWrapper">
+                <div class="list">
+                    <table>
+                        <caption style="text-align: right">(단위:연, 천원)</caption>
+                        <tr>
+                            <th>지역</th>
+                            <th>작물</th>
+                            <th>경영규모</th>
+                            <th>평균 투자비</th>
+                            <th>운영비</th>
+                            <th>평균 수입</th>
+                            <th>수익률</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="paging">
+                <table>
+                    <tr>
+                        <td>&lt;</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>&gt;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var area0 = ["시/도 선택", "서울특별시", "인천광역시", "대전광역시", "광주광역시", "대구광역시", "울산광역시", "부산광역시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"];
+        var area1 = [""];//서울
+        var area2 = [""];//인천
+        var area3 = [""];//대전
+        var area4 = [""];//광주
+        var area5 = [""];//대구
+        var area6 = [""];//울산
+        var area7 = [""];//부산
+        var area8 = ["전체","느타리버섯","부추","블루베리","엽채류","율무","체리","콩","화훼"];//경기
+        var area9 = ["전체","곤드레","곰취","느타리버섯","더덕","딸기","멜론","배추","복숭아","사과","산마늘","산채","산채류","토마토","파프리카","풋고추","풋찰옥수수","한우"];//강원
+        var area10 = ["전체","고추","감자","대추","밤","복숭아","호박","아로니아","오미자","오이","인삼","절임배추","찰옥수수","한우"];//충북
+        var area11 = ["전체","고구마","깻잎","노지고추","딸리","멜론","배","사과","상추","수박","강낭콩","고추","구기자","쌈채","쪽파","쌀","양송이","오이","인삼","토마토","포도","표고버섯"];//충남
+        var area12 = ["전체","노지고추","머루","복분자","블루베리","상추","생강","서리태","수박","오디","포도","표고버섯"];//전북
+        var area13 = ["전체","감","갓","검정쌀","고구마","단감","대파","마늘","매실","멜론","무화과","배","산야초","양상추","호박","쌈채소","양파","울금","인삼","장미","토마토","표고버섯","한우"];//전남
+        var area14 = ["전체","가지","감자","노지고추","마늘","미나리","반시","벼","사과","산채","양파","오미자","오이","자두","찰옥수수","참외","파프리카","포도","풋고추"];//경북
+        var area15 = ["전체","고구마","곶감","노지시금치","단감","당근","대붕감","딸기","마늘","매실","부추","블루베리","수박","시금치","호박","알로에","약초","양파","오미자","참다래","파프리카","한라봉"];//경남
+        var area16 = ["전체","감귤","당근","무","브로콜리"];//제주
+
+        $("select[name=sido]").each(function() {
+            $selsido = $(this);
+            $.each(eval(area0), function() {
+                $selsido.append("<option value='"+this+"'>"+this+"</option>");
+            });
+            $selsido.next().append("<option value=''>구/군 선택</option>");
+        });
+
+        $("select[name=sido]").change(function() {
+            var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
+            var $gugun = $("select[name=goods]"); // 선택영역 군구 객체
+            $("option",$gugun).remove(); // 구군 초기화
+
+            if(area == "area0")
+                $gugun.append("<option value=''>구/군 선택</option>");
+            else {
+                $.each(eval(area), function() {
+                    $gugun.append("<option value='"+this+"'>"+this+"</option>");
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>
