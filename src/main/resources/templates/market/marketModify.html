@@ -6,16 +6,19 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>마켓수정</title>
+    <title>마켓상품수정</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/market.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <!--썸머노트-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 
 </head>
-<body class="homepage is-preload">
+<body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
     <th:block th:include="header.html"></th:block>
@@ -27,7 +30,8 @@
             <br>
             <br>
             <br>
-            <h1 style="float: left; width: 400px; padding-left:48px; font-size: 17px; font-weight: 400; color: red">글 수정</h1>
+            <h1 style="float: left; width: 400px; padding-left:48px; font-size: 17px; font-weight: 400; color: #80B763">상품 수정</h1>
+            <br>
             <br>
             <br>
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
@@ -45,10 +49,10 @@
 
                 <section class="detailView">
                     <div class="sit_ov_tbl">
-                        <input style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                        <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
                         <hr>
                         <div class="con_w">
-                            <input style="width: 300px" type="text" placeholder="가격">
+                            <input id="tagprice" style="width: 300px" type="text" placeholder="가격">
                         </div>
                         <br>
                         <div class="con_w">
@@ -62,55 +66,59 @@
                         </div>
                         <br>
                         <div class="con_w">
-                            <input style="width: 300px" type="text" placeholder="원산지">
+                            <input id="taghometown" style="width: 300px" type="text" placeholder="원산지">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input style="width: 300px" type="text" placeholder="배송비">
-                            <!-- 선택옵션 시작 { -->
-                            <hr>
-                            <br>
-                            <section>
-                                <form>
-                                    <select class="option">
-                                        <option value="선택옵션">선택옵션</option>
-                                        <option value="옵션1">옵션1</option>
-                                        <option value="옵션2">옵션2</option>
-                                        <option value="옵션3">옵션3</option>
-                                        <option value="옵션4">옵션4</option>
-                                    </select>
-                                </form>
-                            </section>
-                            <!-- } 선택옵션 끝 -->
-                            <!--버튼-->
-                            <!-- <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">-->
-                            <!--버튼 끝-->
+                            <input id="tagdeltip" style="width: 300px" type="text" placeholder="배송비">
                         </div>
+                        <!-- 선택옵션 시작 { -->
+                        <hr>
+                        <br>
+                        <section>
+                            <form>
+                                <select class="option">
+                                    <option value="선택옵션">선택옵션</option>
+                                    <option value="옵션1">옵션1</option>
+                                    <option value="옵션2">옵션2</option>
+                                    <option value="옵션3">옵션3</option>
+                                    <option value="옵션4">옵션4</option>
+                                </select>
+                            </form>
+                        </section>
+                        <!-- } 선택옵션 끝 -->
+                        <!--버튼-->
+                        <!-- <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">-->
+                        <!--버튼 끝-->
+                    </div>
                 </section>
             </div>
             <hr>
             <div id="bottom">
-                <!-- 필독 -->
-                <div id="sit_hhtml">
-                    <div style="text-align:center;" align="center">
-                        <br>
-                    </div>
-                    <div style="text-align:center;" align="center">
-                        <img src="http://dmshop.kr/data/editor/2110/a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" title="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" alt="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg">
-                        <br style="clear:both;">
-                        <br style="clear:both;">
-                        <br style="clear:both;">
-                        <br style="clear:both;">&nbsp;
-                    </div>
-                </div>
-                <!-- 필독끝 -->
 
-                <!-- 상풍 상세설명 -->
-                <hr>
-                <div style="text-align:center;" align="center">
-                    <p>상품 상세 설명</p>
-                    <!--상품 상세설명 끝-->
-                </div>
+                <form id="postForm" name="postForm" method="POST">
+
+
+                    <!-- summernote와 관련된 영역 -->
+
+                    <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+
+
+
+                    <!-- 버튼과 관련된 영역 -->
+
+                    <div align="center" class="btn-box">
+
+                        <input type="button" id="sendSummer" class="button" value="수정">
+
+                        <a class="button" onclick="history.back()">취소</a>
+
+                    </div>
+
+                    <br>
+
+                </form>
+
             </div>
 
         </form>
@@ -127,6 +135,12 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="/js/board/marketwrite.js"></script>
+<!-- include summernote css/js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script>
     $(document).ready(function() {
         $("#sit_pvi_big").owlCarousel({
@@ -138,6 +152,7 @@
 
         });
     });
+
 </script>
 </body>
 </html>
