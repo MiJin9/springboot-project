@@ -1,14 +1,14 @@
 .cate {
-    width: 70px;
+    width: 130px;
     text-align: center;
     margin-bottom: -2px;
 }
 
 
 .cateBox {
-    display: flex;
-    margin: 40px 0;
-    justify-content: flex-start;
+    display: inline-flex;
+    margin: 40px 240px;
+    justify-content: space-evenly;
     padding: 0 50px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .cate span {
-    font-size: 11px;
+    font-size: 16px;
     font-width: bold;
 }
 
@@ -75,7 +75,8 @@ div.bigCate select, div.midCate select {
 
 .searchMenu .button {
     height: 40px;
-    line-height: 10px;
+    line-height: 27px;
+    font-weight: 300;
 }
 
 .searchMenu img {
@@ -155,4 +156,8 @@ table input[type=button] {
 .tle h2 {
     color: black;
     font-size: 35px;
+}
+
+.button{
+    font-family: "Jeju Gothic";
 }
