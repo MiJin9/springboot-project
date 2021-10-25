@@ -18,6 +18,16 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 
 </head>
+<style>
+    .photo{
+       width: 500px;
+        height: 500px;
+        line-height: 450px;
+        border-right: solid 0.5px;
+        background: ivory;
+        text-align: center;
+    }
+</style>
 <body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
@@ -28,10 +38,41 @@
                     <img src="/img/pageBanner_write.png" style="padding-top: 53px;">
                 </div>
             <form id="postForm" name="postForm" method="POST">
-
+            <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
+                <hr>
+                <div style="display: flex">
+                    <div class="photo" style="margin-left: 20px">썸네일 미리보기 사진</div>
+                    <div style="margin-top: 30px">
+                        <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
+                        <div>
+                            <h4 style="margin-left: 50px">농장이름 *</h4>
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 이름">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장주 *</h4>
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장 주소 *</h4>
+                            <input style="height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장 전화번호</h4>
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장 주요 품목</h4>
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
+                        </div>
+                    </div>
+                </div>
+                <hr>
 
                 <!-- summernote와 관련된 영역 -->
-                <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" style="background:white;  width: 100%; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 60px;font-size: 20px; padding-left: 10px;">
 
                 <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 

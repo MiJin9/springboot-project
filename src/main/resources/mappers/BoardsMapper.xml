@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.BoardsMapper">
+
+    <!--검색-->
+    <sql id="search">
+        <if test="type != null and keyword != null">
+            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type == 'T'.toString()">
+                                (TITLE LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'C'.toString()">
+                                (CONTENT LIKE '%'||#{keyword}||'%')
+                            </when>
+                            <when test="type == 'W'.toString()">
+                                (ID LIKE '%'||#{keyword}||'%')
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    <!--리스트 목록-->
+    <select id="getList" resultType="boardsVO">
+        <![CDATA[
+        SELECT BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT, "TYPE"
+        FROM
+        (
+            /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
+            SELECT /*+ INDEX_DESC(T_BOARDS PK_BOARDS) */
+            ROWNUM R, BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT, "TYPE"
+            FROM
+            (
+                SELECT /*+ INDEX_DESC(T_BOARDS PK_BOARDS) */
+                 BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT, "TYPE"
+                FROM T_BOARDS
+                WHERE "TYPE" = #{boardType}
+            )
+            WHERE
+        ]]>
+        <include refid="search"></include>
+        <![CDATA[
+        ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <!--게시글 작성-->
+    <insert id="insert">
+        INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
+        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
+    </insert>
+
+    <!--
+        PK값을 미리 SQL을 통해서 처리해 두고 지정한 이름으로 결과를 보관하는 방식이다.
+        SQL을 한 번 더 실행하는 부담이 있기는 하지만 자동으로 추가되는 PK값을 확인해야 하는 상황에서는
+        유용하게 사용될 수 있다.
+    -->
+    <insert id="insertSelectKey_bno">
+        <selectKey keyProperty="bno" order="BEFORE" resultType="long">
+            SELECT SEQ_BOARDS.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
+        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
+    </insert>
+
+    <!--상세보기-->
+    <select id="read" resultType="boardsVO">
+        SELECT BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT,"TYPE" FROM T_BOARDS
+        WHERE BNO = #{bno}
+    </select>
+
+    <!--조회수 +1 -->
+    <update id="plusOne">
+        UPDATE T_BOARDS
+        SET VIEWCNT = VIEWCNT +1
+        WHERE BNO = #{bno}
+    </update>
+
+    <!--수정-->
+    <update id="update">
+        UPDATE T_BOARDS
+        SET TITLE = #{title}, CONTENT = #{content}, UPDATEDATE = SYSDATE
+        WHERE BNO = #{bno}
+    </update>
+
+    <!--삭제-->
+    <delete id="delete">
+        DELETE FROM T_BOARDS WHERE BNO = #{bno}
+    </delete>
+
+    <select id="getTotal" resultType="_int">
+            SELECT COUNT(BNO) FROM (SELECT BNO, TITLE, CONTENT, ID, REGDATE, UPDATEDATE, VIEWCNT,"TYPE" FROM T_BOARDS WHERE "TYPE" = #{boardType})
+            <where>
+                <trim suffixOverrides="AND">
+                    <include refid="search"></include>
+                </trim>
+            </where>
+    </select>
+</mapper>
