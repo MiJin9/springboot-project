@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <form>
+            <div id="all">
+                <div class="group">
+                    <h3 style="text-align: center">로그인</h3>
+                    <hr>
+                    <div id="input">
+                        <div class="input2">
+                            <input type="text" class="box" id="id" placeholder="아이디" minlength="5" maxlength="11">
+                        </div>
+                        <div class="input2">
+                            <input type="password" class="box" id="pw" placeholder="비밀번호" minlength="8" maxlength="20">
+                        </div>
+                    </div>
+                    <div>
+                        <a class="button" id="login">로그인</a>
+                    </div>
+                    <div style="margin-top: 18px;">
+                        <div style="float: left">
+                            <a href="" class="other" id="join">회원가입</a>
+                        </div>
+                        <div style="float:right;">
+                            <a href="" class="other" id="findId">아이디 찾기</a>
+                            <span></span>
+                            <a href="" class="other" id="findPw">비밀번호 찾기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

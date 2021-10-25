@@ -28,4 +28,8 @@ public class MarketController {
     public String marketView() {
         return "/market/marketView";
     }
+    @GetMapping("marketKart")
+    public String marketKart() {
+        return "/market/marketKart";
+    }
 }
