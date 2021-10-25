@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/board/write.css" />
+    <link rel="stylesheet" href="/css/board/pageBanner.css" />
 
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <!--썸머노트-->
@@ -27,7 +28,7 @@
     <!--Main-->
     <div class="main">
         <!---------------------------------------------------------------------------------------------------------------------->
-
+        <div class="pageBanner-w"><img src="/img/board/boardList.png" alt=""></div>
         <div class="row">
             <div class="titleDiv">
                 <p class="smallTitle"></p>
@@ -35,8 +36,13 @@
         </div>
         <div class="row">
             <form action="/board/write" id="postForm" name="postForm" method="POST">
-                <input type="hidden" name="type" id="type" th:value="${vo.type}">
-
+                <input type="hidden" name="type" id="type" th:field="${vo.type}">
+                <input type="hidden" name="bno" id="bno" th:field="${vo.bno}">
+                <input type="hidden" name="id" id="id" th:field="${vo.id}">
+                <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
+                <input type="hidden" name="amount" th:field="${criteria.amount}">
+                <input type="hidden" name="keyType" th:field="${criteria.keyType}">
+                <input type="hidden" name="keyword" th:field="${criteria.keyword}">
 
                 <!-- summernote와 관련된 영역 -->
 
@@ -59,6 +65,9 @@
             </form>
         </div>
         <!---------------------------------------------------------------------------------------------------------------------->
+        <br>
+        <br>
+        <br>
     </div>
 
 
@@ -84,25 +93,34 @@
 <script th:inline="javascript">
     let postForm = document.postForm;
     let type = [[${vo.type}]];
+    console.log(type)
 
     switch (type) {
         case 1:
-            $("p.smallTitle").html("팝니다");
+            $(".smallTitle").html("팝니다");
+            $(".pageBanner-w").children().attr("src", "/img/board/sellWrite.png");
             break;
         case 2:
             $(".smallTitle").html("삽니다");
+            $(".pageBanner-w").children().attr("src", "/img/board/buyingWrite.png");
             break;
         case 3:
             $(".smallTitle").html("임대");
+            $(".pageBanner-w").children().attr("src", "/img/board/rentWrite.png");
             break;
         case 4:
             $(".smallTitle").html("매매");
+            $(".pageBanner-w").children().attr("src", "/img/board/dealWrite.png");
             break;
         case 5:
             $(".smallTitle").html("지식인");
+            $(".pageBanner-w").children().attr("src", "/img/board/jisikInWrite.png");
             break;
         case 0:
             $(".smallTitle").html("공지");
+            $(".pageBanner-w").children().attr("src", "/img/board/noticeWrite.png");
+            alert("접근이 불가 합니다.")
+            location.href = history.back(); /*관리자 아이디일때만 가능하게 만들기*/
             break;
     };
 

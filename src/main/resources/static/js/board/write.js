@@ -48,6 +48,7 @@ $(document).ready(function () {
     };
     $('#summernote').summernote(setting);
 
+
 })
 function sendFile(file, el) {
     var form_data = new FormData();
