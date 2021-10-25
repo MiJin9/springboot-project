@@ -5,8 +5,8 @@
 }
 tr.tHead th{
     font-weight: bold;
-    color: #fff;
-    background: #ce4869;
+    color: #888888;
+    background: #EEEEEE;
     text-align: center;
 }
 
@@ -30,39 +30,41 @@ a.search{
 #searchWrap{
     display: flex;
     width: 896px;
+
 }
 .tle{
     background: white;
 }
 th.title{
-    width: 500px;
+    width: 430px;
 }
 th.bno{
     width: 80px;
 }
 
-input[name='choice1'], input[name='choice2'] {
-    width: 400px;
-}
 
 .inputBtn{ /*팝니다 삽니다 버튼*/
-    width: 1000px;
+    display: flex;
+    width: 636px;
     height: fit-content;
-    margin-bottom: -70px;
+    margin-bottom: -120px;
     margin-top: 74px;
-    /*margin-left: 224px;*/
+    justify-content: flex-start;
 }
 
 
 #choice1, #choice2{
-    height: 50px;
+    background: #FFFFFF;
+    width: 120px;
     font-size: 20px;
+    text-align: center;
+    cursor: pointer;
 }
 
 #choice2 {
-    margin-left: -3px;
+    margin-left: -4px;
 }
-.bno, .writer, .regDate, .updateDate{/*테이블 내용 가운제 정렬 (제목 제외)*/
+.bno, .writer, .regDate, .updateDate, .viewCtn{/*테이블 내용 가운제 정렬 (제목 제외)*/
     text-align: center;
 }
 
@@ -76,7 +78,7 @@ input[name='choice1'], input[name='choice2'] {
 
 table{
     background: white;
-    height: 500px;
+    min-height: 500px;
 }
 
 .tBody td{
@@ -87,10 +89,9 @@ table{
     margin-top: 87px;
     float: right;
     height: 30px;
-    color: white;
+    color: #888888;
     font-size: 16px;
-    background: #CE4869;
-    border: 1px crimson;
+    background: #EEEEEE;
 }
 
 .smallTitle{
@@ -104,4 +105,12 @@ table{
     border-bottom: double;
     margin-top: 10px;
     margin-left: 90px;
+}
+
+.main{
+    padding-top: 60px!important;
+}
+
+a#goRead {
+    color : #7a8186;
 }

@@ -6,7 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>공지</title>
+    <title>게시판</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -14,12 +14,6 @@
     <link rel="stylesheet" href="/css/board/list.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
-<style>
-    #choice1 {
-        color: #80B763;
-        border-bottom: 3px solid green;
-    }
-</style>
 <body class="homepage is-preload">
 <div id="page-wrapper">
 
@@ -27,12 +21,16 @@
 
     <!--Main-->
     <div class="main">
+        <!---------------------------------------------------------------------------------------------------------------------->
         <div class="table-wrapper" id="BtnDiv">
             <div class="inputBtn">
-                <span id="choice1">공지사항</span>
+                <span id="choice1"></span>
+                <span id="choice2"></span>
             </div>
+            <h3><a href="javascript:void(0)" class="button small a-write">글 등록</a></h3>
         </div>
-        <div class="table-wrapper">
+
+        <div class="table-wrapper" id="table1">
             <table>
                 <thead>
                 <tr class="tHead">
@@ -59,7 +57,7 @@
                 <tfoot>
                 </tfoot>
             </table>
-            <form action="/board/notice" name="searchForm">
+            <form action="/board/list" name="searchForm">
                 <div class="fields">
                     <div class="field">
                         <div id="searchWrap" th:object="${pageMaker}">
@@ -72,6 +70,7 @@
                                 <option value="TW" th:selected="*{type} == 'TW'">제목 도는 작성자</option>
                                 <option value="TCW" th:selected="*{type} == 'TCW'">제목 또는 내용 또는 작성자</option>
                             </select>
+                            <input type="hidden" name="type" th:value="*{criteria.boardType}">
                             <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}">
                             <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
                         </div>
@@ -87,11 +86,12 @@
                     </th:block>
                     <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                 </div>
-                <form action="/board/buy" th:object="${criteria}" name="pageForm">
+                <form action="/board/list" th:object="${criteria}" name="pageForm">
                     <input type="hidden" name="pageNum" th:field="*{pageNum}">
                     <input type="hidden" name="amount" th:field="*{amount}">
                     <input type="hidden" name="type" th:field="*{type}">
                     <input type="hidden" name="keyword" th:field="*{keyword}">
+                    <input type="hidden" name="type" th:field="*{boardType}">
                 </form>
             </div>
         </div>
@@ -111,13 +111,16 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+
 </body>
 <script th:inline="javascript">
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);
 
+    let boardType = [[${criteria.boardType}]];
     $(document).ready(function(){
+
         let bno = [[${bno}]];
         if(bno == null || history.state){
             return;
@@ -128,6 +131,7 @@
 
     $("a.changePage").click(function(e){
         e.preventDefault();
+        pageForm.attr("action", "/board/list")
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));
         pageForm.submit();
     });
@@ -148,6 +152,7 @@
             alert("키워드를 입력하세요");
             return;
         }
+        searchForm.attr("action", "/board/list?type=" + boardType);
         searchForm.submit();
     });
 
@@ -156,5 +161,12 @@
             e.preventDefault();
         }
     })
+
+    $("a.a-write").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/board/write?type=" + boardType;
+    })
+
 </script>
+<script src="/js/board/list.js"></script>
 </html>

@@ -22,4 +22,5 @@ public class UserDAO {
 
     //비밀번호 수정
     public boolean modifyPw(UserVO userVO){return userMapper.updatePw(userVO) == 1;}
+
 }

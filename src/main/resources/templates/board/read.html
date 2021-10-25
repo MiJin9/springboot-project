@@ -22,25 +22,26 @@
     <!--Main-->
     <div class="main">
         <!---------------------------------------------------------------------------------------------------------------------->
-        <div class="view">
+        <div class=view th:object="${board}">
             <div class="listBtn">
                 <span id="choice1">삽니다</span>
-                <a href="/board/buyAndSell" class="button primary small">목록</a>
+                <a href="javascript:void(0)" id="goList" class="button primary small">목록</a>
             </div>
             <div class="vTitle">
-                <p id="p-title">제목</p>
+                <p id="p-title" th:text="*{title}">제목</p>
                 <div>
-                    <p style="text-align: right">0000-00-00</p>
-                    <p style="width: fit-content; margin-bottom: 7px; text-align: right">작성자</p>
+                    <p style="text-align: right" th:text="*{regDate}">0000-00-00</p>
+                    <p style="width: fit-content; margin-bottom: 7px; text-align: right" th:text="*{id}">작성자</p>
                 </div>
+                <input type="hidden" name="bno" th:field="*{bno}">
             </div>
             <div class="vContent">
-                어떤 내용 인가요?
             </div>
             <br>
             <div class="Btn">
-                <a href="/board/buyModify" class="button primary small">수정</a>
-                <a href="#" class="button primary small">삭제</a>
+                <input type="hidden" name="boardType" th:field="${criteria.boardType}">
+                <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
+                <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
             </div>
             <div class="horizon"><p style="font-size: 20px;margin-top: 8px; text-align: center;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 댓글은 제재가 있을 수 있습니다.</p></div>
             <br>
@@ -90,4 +91,14 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 </body>
+<script th:inline="javascript">
+    let boardType = [[${board.type}]];
+    console.log(boardType);
+    $("#goList").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/board/list?type=" + boardType;
+    })
+    let content = [[${board.content}]];
+    $(".vContent").html(content);
+</script>
 </html>
