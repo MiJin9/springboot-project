@@ -10,7 +10,7 @@ public class Criteria {
     private int pageNum;
     private int amount;
     private int boardType;
-    private String type;
+    private String keyType;
     private String keyword;
 
     public Criteria(){
@@ -26,12 +26,12 @@ public class Criteria {
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
                 .queryParam("pageNum", pageNum)
                 .queryParam("amount", amount)
-                .queryParam("type", type)
+                .queryParam("keyType", keyType)
                 .queryParam("keyword", keyword);
         return builder.toUriString();
     }
 
     public String[] getTypeArr(){
-        return type == null ? new String[] {} : type.split("");
+        return keyType == null ? new String[] {} : keyType.split("");
     }
 }

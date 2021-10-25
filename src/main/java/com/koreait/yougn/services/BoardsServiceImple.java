@@ -30,12 +30,12 @@ public class BoardsServiceImple implements BoardsService {
 
     @Override
     public boolean modify(BoardsVO board) {
-        return false;
+        return boardsDAO.modify(board);
     }
 
     @Override
     public boolean remove(Long bno) {
-        return false;
+        return boardsDAO.remove(bno);
     }
 
     //리스트
