@@ -70,7 +70,7 @@
                                 <option value="TW" th:selected="*{type} == 'TW'">제목 도는 작성자</option>
                                 <option value="TCW" th:selected="*{type} == 'TCW'">제목 또는 내용 또는 작성자</option>
                             </select>
-                            <input type="hidden" name="type" th:value="*{criteria.boardType}">
+                            <input type="hidden" name="boardType" th:value="*{criteria.boardType}">
                             <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}">
                             <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
                         </div>
@@ -91,7 +91,7 @@
                     <input type="hidden" name="amount" th:field="*{amount}">
                     <input type="hidden" name="type" th:field="*{type}">
                     <input type="hidden" name="keyword" th:field="*{keyword}">
-                    <input type="hidden" name="type" th:field="*{boardType}">
+                    <input type="hidden" name="boardType" th:field="*{boardType}">
                 </form>
             </div>
         </div>
@@ -119,6 +119,7 @@
     let searchForm = $(document.searchForm);
 
     let boardType = [[${criteria.boardType}]];
+    console.log(boardType);
     $(document).ready(function(){
 
         let bno = [[${bno}]];
@@ -138,7 +139,7 @@
 
     $("a#goRead").on("click", function(e){
         e.preventDefault();
-        location.href = "/board/read" + paging + "&bno=" + $(this).attr("href");
+        location.href = "/board/read" + paging + "&boardType=" + boardType + "&bno=" + $(this).attr("href");
     })
 
     $("a.search").on("click", function(e){
@@ -152,7 +153,7 @@
             alert("키워드를 입력하세요");
             return;
         }
-        searchForm.attr("action", "/board/list?type=" + boardType);
+        searchForm.attr("action", "/board/list?boardType=" + boardType);
         searchForm.submit();
     });
 

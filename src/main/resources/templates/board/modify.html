@@ -6,7 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>게시판 글 작성</title>
+    <title>수정</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -30,12 +30,18 @@
 
         <div class="row">
             <div class="titleDiv">
-                <p class="smallTitle"></p>
+                <p class="smallTitle">삽니다</p>
             </div>
         </div>
         <div class="row">
-            <form action="/board/write" id="postForm" name="postForm" method="POST">
-                <input type="hidden" name="type" id="type" th:value="${vo.type}">
+            <form action="/board/modify" id="postForm" name="postForm" method="POST">
+                <input type="hidden" name="type" id="type" th:field="${vo.type}">
+                <input type="hidden" name="bno" id="bno" th:field="${vo.bno}">
+                <input type="hidden" name="id" id="id" th:field="${vo.id}">
+                <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
+                <input type="hidden" name="amount" th:field="${criteria.amount}">
+                <input type="hidden" name="type" th:field="${criteria.type}">
+                <input type="hidden" name="keyword" th:field="${criteria.keyword}">
 
 
                 <!-- summernote와 관련된 영역 -->
@@ -50,7 +56,7 @@
 
                 <div align="center" class="btn-box">
 
-                    <input type="button" id="sendSummer" class="button" value="작성">
+                    <input type="button" id="sendSummer" class="button" value="수정">
 
                     <a class="button" onclick="history.back()">취소</a>
 
@@ -82,31 +88,39 @@
 <script src="/js/board/write.js"></script>
 </body>
 <script th:inline="javascript">
-    let postForm = document.postForm;
-    let type = [[${vo.type}]];
-    console.log(type)
 
-    switch (type) {
+    let title = [[${vo.title}]];
+    let content = [[${vo.content}]];
+    let boardType = [[${cri.boardType}]];
+    $("#title").val(title);
+
+    $(document).ready(function () {
+        $("#title").val(title);
+        $(".note-placeholder").css("display","none");
+        $("div.panel-body").html(content);
+    })
+
+
+    switch (boardType) {
         case 1:
-            $("p.smallTitle").html("팝니다");
+            $("#choice1").html("팝니다");
             break;
         case 2:
-            $(".smallTitle").html("삽니다");
+            $("#choice1").html("삽니다");
             break;
         case 3:
-            $(".smallTitle").html("임대");
+            $("#choice1").html("임대");
             break;
         case 4:
-            $(".smallTitle").html("매매");
+            $("#choice1").html("매매");
             break;
         case 5:
-            $(".smallTitle").html("지식인");
+            $("#choice1").html("지식인");
             break;
         case 0:
-            $(".smallTitle").html("공지");
+            $("#choice1").html("공지");
             break;
     };
-
 
 </script>
 </html>

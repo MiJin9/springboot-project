@@ -24,7 +24,7 @@
         <!---------------------------------------------------------------------------------------------------------------------->
         <div class=view th:object="${board}">
             <div class="listBtn">
-                <span id="choice1">삽니다</span>
+                <span id="choice1"></span>
                 <a href="javascript:void(0)" id="goList" class="button primary small">목록</a>
             </div>
             <div class="vTitle">
@@ -35,7 +35,7 @@
                 </div>
                 <input type="hidden" name="bno" th:field="*{bno}">
             </div>
-            <div class="vContent">
+            <div class="vContent" name="content">
             </div>
             <br>
             <div class="Btn">
@@ -93,12 +93,44 @@
 </body>
 <script th:inline="javascript">
     let boardType = [[${board.type}]];
+    let bno = [[${board.getBno()}]];
+    let paging = [[${criteria.listLink}]];
     console.log(boardType);
+
+    switch (boardType) {
+        case 1:
+            $("#choice1").html("팝니다");
+            break;
+        case 2:
+            $("#choice1").html("삽니다");
+            break;
+        case 3:
+            $("#choice1").html("임대");
+            break;
+        case 4:
+            $("#choice1").html("매매");
+            break;
+        case 5:
+            $("#choice1").html("지식인");
+            break;
+        case 0:
+            $("#choice1").html("공지");
+            break;
+    };
+
+
+
     $("#goList").on("click", function (e) {
         e.preventDefault();
-        location.href = "/board/list?type=" + boardType;
+        location.href = "/board/list" + paging + "&boardType=" + boardType;
     })
     let content = [[${board.content}]];
     $(".vContent").html(content);
+
+    $("#modify").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/board/modify" + paging + "&boardType=" + boardType + "&bno=" + bno;
+    })
+
 </script>
 </html>

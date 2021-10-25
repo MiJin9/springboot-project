@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    switch (type) {
+    switch (boardType) {
         case 1: case 2:
             $("#choice1").html("팝니다");
             $("#choice2").html("삽니다");
@@ -15,7 +15,7 @@ $(document).ready(function() {
                 $("#choice1").html("공지");
                 break;
     };
-    switch (type) {
+    switch (boardType) {
         case 1: case 3:
             $("#choice1").css("border-bottom", "3px solid green");
             $("#choice1").css("color", "#80b763");
@@ -38,10 +38,10 @@ $(document).ready(function() {
     $("#choice1").on("click", function () {
         switch ($("#choice1").text()) {
             case "팝니다":
-                location.href = "/board/list?type=1";
+                location.href = "/board/list?boardType=1";
                 break;
             case "임대":
-                location.href = "/board/list?type=3";
+                location.href = "/board/list?boardType=3";
                 break;
             case "지식인":
                 location.href = "/board/list?boardType=5";
