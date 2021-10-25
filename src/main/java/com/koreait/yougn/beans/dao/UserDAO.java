@@ -5,6 +5,8 @@ import com.koreait.yougn.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class UserDAO {
@@ -22,4 +24,13 @@ public class UserDAO {
 
     //비밀번호 수정
     public boolean modifyPw(UserVO userVO){return userMapper.updatePw(userVO) == 1;}
+
+    //회원 탈퇴
+    public boolean signOut(UserVO userVO){return userMapper.updateStatus(userVO) == 1;}
+
+    //아이디 찾기
+    public List<String> fingId(UserVO userVO){return userMapper.getId(userVO);}
+
+    //비밀번호 찾기
+    public boolean findPw(UserVO userVO){return userMapper.getPw(userVO) == 1;}
 }
