@@ -1,19 +1,25 @@
 package com.koreait.yougn.controller;
 
+import com.koreait.yougn.beans.vo.MailSenderRunner;
 import com.koreait.yougn.beans.vo.UserVO;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Controller
@@ -139,7 +145,35 @@ public class UserController {
         return "index";
     }
 
-//아이디 찾기
+//아이디 찾기(인증번호 보내기)
+//    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<String> findUser(UserVO userVO) throws UnsupportedEncodingException{
+//        List<String> idList = userService.fintId(userVO);
+//        MailSenderRunner msr = new MailSenderRunner();
+//        if (idList.size() == 0 || idList == null){
+//            return new ResponseEntity<>("result", "일치하는 정보가 없습니다.");
+//        }
+//        String pin = makePin();
+//        String title = "";
+//        String to = userService.getUser(userVO.getId()).getEmail();
+//        HashMap<String, String> emails = new HashMap<>();
+//        emails.put(userVO.getName(), to);
+//        emails.forEach((name, email) -> {
+//            msr.send(to, title, pin);
+//        });
+//    }
+
+//    인증번호 만들기
+    private String makePin(){
+        String nums = "0123456789";
+        String pin = "";
+        Random random = new Random();
+        for (int i=0; i <6; i++){
+            pin += nums.charAt(random.nextInt(10));
+        }
+        return pin;
+    }
+
 
 //비밀번호 찾기
 }
