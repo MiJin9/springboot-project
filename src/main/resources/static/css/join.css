@@ -1,0 +1,76 @@
+#all {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#input {
+    width: 100%;
+}
+
+.input2 {
+    margin-top: 30px;
+}
+
+#all input[type='text'], input[type='password'] {
+    border: 0.5px solid lightgrey;
+    height: 45px;
+    width: 100%;
+    box-shadow: none;
+    margin: 10px 0;
+    background: none;
+}
+
+
+.labelName {
+    font-size: 18px;
+}
+
+.group {
+    margin-top: 30px;
+    margin-bottom: 80px;
+    width: 40%;
+}
+
+#agree {
+    margin: 30px auto;
+}
+
+div#agree label {
+    display: inline-block;
+}
+
+div#agree input[type='button'] {
+    float: right;
+    margin: 7px auto;
+    text-decoration: underline;
+}
+
+::placeholder {
+    font-size: 16px;
+}
+
+#all input[type='button'] {
+    height: 45px;
+    font-size: 13px;
+    width: 130px;
+    margin-left: 9px;
+    font-family: 'Jeju Gothic';
+    font-weight: 500;
+    line-height: normal;
+    color: white;
+    margin-top: 10px;
+    background: #80B763;
+}
+
+#all input[type='checkbox']{
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 11px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+    zoom:1.4;
+}
