@@ -4,7 +4,7 @@
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 -->
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>삽니다 상세보기</title>
     <meta charset="utf-8" />
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/board/read.css">
+    <link rel="stylesheet" href="/css/board/pageBanner.css">
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
 <body class="homepage is-preload">
@@ -22,56 +23,60 @@
     <!--Main-->
     <div class="main">
         <!---------------------------------------------------------------------------------------------------------------------->
+        <div class="pageBanner "><img src="/img/board/boardList.png" alt=""></div>
         <div class=view th:object="${board}">
-            <div class="listBtn">
-                <span id="choice1"></span>
-                <a href="javascript:void(0)" id="goList" class="button primary small">목록</a>
-            </div>
-            <div class="vTitle">
-                <p id="p-title" th:text="*{title}">제목</p>
-                <div>
-                    <p style="text-align: right" th:text="*{regDate}">0000-00-00</p>
-                    <p style="width: fit-content; margin-bottom: 7px; text-align: right" th:text="*{id}">작성자</p>
+            <form action="/board/remove" method="post" name="removeForm">
+                <div class="listBtn">
+                    <span id="choice1"></span>
+                    <a href="javascript:void(0)" id="goList" class="button primary small">목록</a>
                 </div>
-                <input type="hidden" name="bno" th:field="*{bno}">
-            </div>
-            <div class="vContent" name="content">
-            </div>
-            <br>
-            <div class="Btn">
-                <input type="hidden" name="boardType" th:field="${criteria.boardType}">
-                <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
-                <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
-            </div>
-            <div class="horizon"><p style="font-size: 20px;margin-top: 8px; text-align: center;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 댓글은 제재가 있을 수 있습니다.</p></div>
-            <br>
-            <div class="register-form">
-                <div>
-                    <p class="p-writer">?????의 댓글</p>
-                    <textarea rows="6" name="reply" placeholder="Reply"></textarea>
+
+                <div class="vTitle">
+                    <p id="p-title" th:text="*{title}">제목</p>
+                    <div>
+                        <p style="text-align: right" th:text="*{regDate}">0000-00-00</p>
+                        <p style="width: fit-content; margin-bottom: 7px; text-align: right" th:text="*{id}">작성자</p>
+                    </div>
+                    <input type="hidden" name="bno" th:field="*{bno}">
                 </div>
-                <div style="text-align: right; margin-top: -7px;">
-                    <a href="javascript:void(0)" class="finish button primary small">등록</a>
-                    <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                <div class="vContent" name="content">
                 </div>
-            </div>
-            <br>
-            <hr style="border-top: 1px solid;width: 888px;margin: unset;">
-            <br>
-            <div class="replyDiv">
-                <ul class="reply">
-                    <li>
-                        <div>
-                            <p class="p-writer">작성자</p>
-                            <div class="reContent">내용</div>
-                            <div style="text-align: right;margin-right: -20px;margin-top: 1px;" id="changeBtn">
-                                <a href="javascript:void(0)" class="modify button primary small">수정</a>
-                                <a href="javascript:void(0)" class="delete button primary small">삭제</a>
+                <br>
+                <div class="Btn">
+                    <input type="hidden" name="boardType" th:field="${criteria.boardType}">
+                    <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
+                    <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
+                </div>
+                <div class="horizon"><p style="font-size: 20px;margin-top: 8px; text-align: center;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 댓글은 제재가 있을 수 있습니다.</p></div>
+                <br>
+                <div class="register-form">
+                    <div>
+                        <p class="p-writer">?????의 댓글</p>
+                        <textarea rows="6" name="reply" placeholder="Reply"></textarea>
+                    </div>
+                    <div style="text-align: right; margin-top: -7px;">
+                        <a href="javascript:void(0)" class="finish button primary small">등록</a>
+                        <a href="javascript:void(0)" class="cancel button primary small">취소</a>
+                    </div>
+                </div>
+                <br>
+                <hr style="border-top: 1px solid;width: 888px;margin: unset;">
+                <br>
+                <div class="replyDiv">
+                    <ul class="reply">
+                        <li>
+                            <div>
+                                <p class="p-writer">작성자</p>
+                                <div class="reContent">내용</div>
+                                <div style="text-align: right;margin-right: -20px;margin-top: 1px;" id="changeBtn">
+                                    <a href="javascript:void(0)" class="modify button primary small">수정</a>
+                                    <a href="javascript:void(0)" class="delete button primary small">삭제</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
         <!---------------------------------------------------------------------------------------------------------------------->
     </div>
@@ -100,21 +105,27 @@
     switch (boardType) {
         case 1:
             $("#choice1").html("팝니다");
+            $(".pageBanner").children().attr("src", "/img/board/sellDetail.png");
             break;
         case 2:
             $("#choice1").html("삽니다");
+            $(".pageBanner").children().attr("src", "/img/board/buyingDetail.png");
             break;
         case 3:
             $("#choice1").html("임대");
+            $(".pageBanner").children().attr("src", "/img/board/rentDetail.png");
             break;
         case 4:
             $("#choice1").html("매매");
+            $(".pageBanner").children().attr("src", "/img/board/dealDetail.png");
             break;
         case 5:
             $("#choice1").html("지식인");
+            $(".pageBanner").children().attr("src", "/img/board/jisikInDetail.png");
             break;
         case 0:
             $("#choice1").html("공지");
+            $(".pageBanner").children().attr("src", "/img/board/noticeDetail.png");
             break;
     };
 
@@ -130,6 +141,11 @@
     $("#modify").on("click", function (e) {
         e.preventDefault();
         location.href = "/board/modify" + paging + "&boardType=" + boardType + "&bno=" + bno;
+    })
+
+    $("#delete").on("click", function (e) {
+        e.preventDefault();
+        document.removeForm.submit();
     })
 
 </script>

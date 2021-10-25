@@ -14,6 +14,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @Slf4j
@@ -43,10 +46,10 @@ public class BoardController {
 
     /* 글 작성 */
     @GetMapping("write")
-    public void write(BoardsVO vo, Model model){
-
+    public void write(BoardsVO vo,Criteria criteria, Model model){
         vo.setId("이렇게"); // 로그인 된 아이디
         model.addAttribute("vo", vo);
+        model.addAttribute("criteria", criteria);
     }
 
     @PostMapping("write")
@@ -77,21 +80,18 @@ public class BoardController {
         return new RedirectView("read" + criteria.getListLink());
     }
 
+    @PostMapping("remove")
+    public RedirectView remove(@RequestParam("bno") Long bno, @RequestParam("boardType") int boardType, RedirectAttributes rttr) {
+        log.info("-------------------------------");
+        log.info("remove : " + bno);
+        log.info("-------------------------------");
+        if (boardsService.remove(bno)) {
 
-    /*글 수정*/
-    @GetMapping("buyModify")    // 삽니다 글 수정
-    public String buyModify(){return "/board/buyAndSell/buyModify";}
-
-    @GetMapping("sellModify")    // 팝니다 글 수정
-    public String sellModify(){return "/board/buyAndSell/sellModify";}
-
-    @GetMapping("rentalModify")    // 임대 글 수정
-    public String rentalModify(){return "/board/rentalAndSale/rentalModify";}
-
-    @GetMapping("saleModify")    // 매매 글 수정
-    public String saleModify(){return "/board/rentalAndSale/saleModify";}
-
-    @GetMapping("qnaModify")    // 지식인 글 수정
-    public String qnaModify(){return "/board/goinmool/qnaModify";}
+            rttr.addFlashAttribute("result", "success");
+        } else {
+            rttr.addFlashAttribute("result", "fail");
+        }
+        return new RedirectView("list?boardType=" + boardType );
+    }
 
 }

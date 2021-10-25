@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/board/list.css" />
+    <link rel="stylesheet" href="/css/board/pageBanner.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
 <body class="homepage is-preload">
@@ -22,6 +23,7 @@
     <!--Main-->
     <div class="main">
         <!---------------------------------------------------------------------------------------------------------------------->
+        <div class="pageBanner "><img src="/img/board/boardList.png" alt=""></div>
         <div class="table-wrapper" id="BtnDiv">
             <div class="inputBtn">
                 <span id="choice1"></span>
@@ -73,7 +75,7 @@
                             <input type="hidden" name="boardType" th:value="*{criteria.boardType}">
                             <input id="keyword" type="text" name="keyword">
                             <input type="hidden" th:value="${criteria.keyword}">
-                            <a href="javascript:void(0)" class="search button primary icon solid fa-search">검색</a>
+                            <a href="javascript:void(0)" class="search button primary icon solid fa-search"></a>
                         </div>
                     </div>
                 </div>

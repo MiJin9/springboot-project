@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    if(boardType == 0){
+        $(".a-write").parent().hide()
+    }
     switch (boardType) {
         case 1: case 2:
             $("#choice1").html("팝니다");
