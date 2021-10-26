@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.ReplyMapper">
+    <insert id="insert">
+        INSERT INTO T_REPBO (RNO, BNO, CONTENT, ID)
+        VALUES (SEQ_REPLY.NEXTVAL, #{bno}, #{content}, #{id})
+    </insert>
+
+    <select id="read" resultType="replyVO">
+        SELECT RNO, BNO, CONTENT, ID, REGDATE, UPDATEDATE FROM T_REPBO
+        WHERE RNO = #{rno}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM T_REPBO WHERE RNO = #{rno}
+    </delete>
+
+    <update id="update">
+        UPDATE T_REPBO
+        SET CONTENT = #{content}, UPDATEDATE = SYSDATE
+        WHERE RNO = #{rno}
+    </update>
+
+    <select id="getListWithPaging" resultType="replyVO">
+        <![CDATA[
+        SELECT RNO, BNO, CONTENT, ID, REGDATE, UPDATEDATE
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(T_REPBO PK_REPLY) */
+            ROWNUM R, RNO, BNO, CONTENT, ID, REGDATE, UPDATEDATE
+            FROM T_REPBO
+            WHERE BNO = #{bno}
+            AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+        )
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(RNO) FROM T_REPBO WHERE BNO = #{bno}
+    </select>
+</mapper>
