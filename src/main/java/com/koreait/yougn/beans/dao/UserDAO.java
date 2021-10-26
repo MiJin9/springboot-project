@@ -29,7 +29,7 @@ public class UserDAO {
     public boolean signOut(UserVO userVO){return userMapper.updateStatus(userVO) == 1;}
 
     //아이디 찾기
-    public List<String> fingId(UserVO userVO){return userMapper.getId(userVO);}
+    public List<String> findId(UserVO userVO){return userMapper.getId(userVO);}
 
     //비밀번호 찾기
     public boolean findPw(UserVO userVO){return userMapper.getPw(userVO) == 1;}

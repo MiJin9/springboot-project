@@ -5,6 +5,7 @@ import com.koreait.yougn.beans.vo.UserVO;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,12 @@ public class UserController {
     @GetMapping("login")
     public String login() {
         return "/user/login";
+    }
+
+    @RequestMapping(value = "logout", method = {RequestMethod.GET,RequestMethod.POST})
+    public RedirectView logout(HttpServletRequest r){
+        r.getSession().invalidate();;
+        return new RedirectView("/");
     }
 
     @GetMapping("myPage")
@@ -67,7 +74,8 @@ public class UserController {
     }
 
     @GetMapping("changePw")
-    public String changePw() {
+    public String changePw(@RequestParam("pin") String pin, UserVO userVO, Model model) {
+        model.addAttribute("userVO",userVO);
         return "/user/changePw";
     }
 
@@ -75,7 +83,24 @@ public class UserController {
     public String inquiry() {return "/user/inquiry";}
 
     @GetMapping("checkPw")
-    public String checkPw() {return "/user/checkPw";}
+    public String checkPw() {
+        return "/user/checkPw";
+    }
+
+    @PostMapping(value = "checkPw", consumes = "application/json",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public HashMap<String,String> checkPw(String pw,HttpServletRequest r){
+        String id = (String) r.getSession().getAttribute("sessionId");
+        HashMap<String,String> map = new HashMap<>();
+
+        if(userService.getUser(id).getPw().equals(pw)){
+            map.put("id",id);
+            map.put("result","변경 페이지로 이동합니다.");
+            return map;
+        }
+        map.put("result","비밀번호가 일치하지 않습니다.");
+        return map;
+    }
 
     @GetMapping("findUser")
     public String findUser() {return "user/findUser";}
@@ -84,10 +109,10 @@ public class UserController {
     @PostMapping("join")
     public String join(UserVO userVO){
         userService.join(userVO);
-        return "index";
+        return "/";
     }
 
-    //로그인
+//로그인
     @PostMapping("login")
     public String login(UserVO userVO, HttpServletRequest r, Model model){
         if(userService.login(userVO)){
@@ -95,17 +120,17 @@ public class UserController {
             return "index";
         }
         model.addAttribute("result", false);
-        return "login";
+        return "user/login";
     }
-    //아이디 중복확인
+//아이디 중복확인
     @PostMapping(value = "{id}", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> checkId(@PathVariable("id") String id) throws UnsupportedEncodingException {
         return userService.checkId(id) ? new ResponseEntity<>(new String("사용 가능".getBytes(), "UTF-8"), HttpStatus.OK) :
-                new ResponseEntity<>(new String("사용 불가".getBytes(),"UTF-8"),HttpStatus.OK);
+        new ResponseEntity<>(new String("사용 불가".getBytes(),"UTF-8"),HttpStatus.OK);
     }
 
 
-    //회원정보 수정
+//회원정보 수정
     @PostMapping("userModify")
     public String userModify(UserVO user,Model model){
         if(userService.modifyUserInfo(user)){
@@ -118,7 +143,7 @@ public class UserController {
         return "user/userModify";
     }
 
-    //비밀번호 수정
+//비밀번호 수정
     @PostMapping("changePw")
     public String changePw(String pw, String newpPw,HttpServletRequest r,Model model){
         String id = (String)r.getSession().getAttribute("sessionId");
@@ -136,7 +161,7 @@ public class UserController {
         return "user/changePw";
     }
 
-    //회원 탈퇴
+//회원 탈퇴
     @PostMapping("bye")
     public String bye(HttpServletRequest r){
         String id = (String)r.getSession().getAttribute("sessionId");
@@ -146,11 +171,11 @@ public class UserController {
         return "index";
     }
 
-    private MailSenderRunner msr;
-    //아이디 찾기(인증번호 보내기)
+//아이디 찾기(인증번호 보내기)
 //    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<String> findUser(UserVO userVO) throws UnsupportedEncodingException{
 //        List<String> idList = userService.fintId(userVO);
+//        MailSenderRunner msr = new MailSenderRunner();
 //        if (idList.size() == 0 || idList == null){
 //            return new ResponseEntity<>("result", "일치하는 정보가 없습니다.");
 //        }
@@ -164,7 +189,7 @@ public class UserController {
 //        });
 //    }
 
-    //    인증번호 만들기
+//    인증번호 만들기
     private String makePin(){
         String nums = "0123456789";
         String pin = "";
