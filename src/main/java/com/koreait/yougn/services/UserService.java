@@ -40,4 +40,7 @@ public interface UserService {
 
     //비밀번호 찾기
     public boolean findPw(UserVO userVO);
+
+    //인증번호 보내기
+    public void certified(String phoneNumber, String cerNum);
 }

@@ -21,11 +21,11 @@
             <div class="group">
                 <h3 style="text-align: center">회원가입</h3>
                 <hr>
-                <form>
+                <form id="join" action="/user/join" method="post">
                     <div id="input">
                         <div class="input2">
                             <label class="labelName">아이디<span style="color: red">*</span></label>
-                            <input type="text" class="box" id="id" placeholder="아이디 입력(5~11자)" minlength="5"
+                            <input type="text" class="box" id="id" name="id" placeholder="아이디 입력(5~11자)" minlength="5"
                                    maxlength="11">
                             <span>
                                 <p id="checkId_text" style="font-size: 14px"></p>
@@ -34,7 +34,7 @@
 
                         <div class="input2">
                             <label class="labelName">비밀번호<span style="color: red">*</span></label>
-                            <input type="password" class="box" id="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)"
+                            <input type="password" class="box" id="pw" name="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)"
                                    minlength="8" maxlength="20" style="margin-bottom: 5px">
                             <input type="password" class="box" id="pwCheck" placeholder="비밀번호 확인" minlength="8"
                                    maxlength="20">
@@ -44,26 +44,30 @@
                         </div>
                         <div class="input2">
                             <label class="labelName">이름<span style="color: red">*</span></label>
-                            <input type="text" class="box" id="name" placeholder="이름">
+                            <input type="text" class="box" id="name" name="name" placeholder="이름">
                         </div>
                         <div class="input2">
                             <label class="labelName">이메일<span style="color: red">*</span></label>
-                            <input type="text" class="box" id="email" placeholder="이메일">
+                            <input type="text" class="box" id="email" name="email" placeholder="이메일">
                             <p style="font-size: 13px">※입력하신 이메일 주소는 아이디 찾기에 사용되니 정확히 입력해주세요.</p>
                         </div>
                         <div class="input2">
                             <label class="labelName">핸드폰 번호<span style="color: red">*</span></label>
                             <div>
-                                <input type="text" class="box" id="phone" placeholder="-없이 입력하세요"
+                                <input type="text" class="box" id="phone" name="phone" placeholder="-없이 입력하세요"
                                        style="width: 68%; float: left">
-                                <input type="button" value="인증번호 받기">
-                                <input type="text" placeholder="인증번호를 입력하세요" style="margin-top: 5px;">
+                                <input type="button" id="pinButton" value="인증번호 받기">
+                                <input type="text" id="phoneCheck" placeholder="인증번호를 입력하세요" onclick="" style="margin-top: 5px; margin-bottom: 0px; width: 68%; float: left">
+                                <input type="button" id="checkButton" value="확인" style="margin-top: 15px">
+                                <span>
+                                <p id="checkPin_text" style="font-size: 14px; float: left"></p>
+                            </span>
                             </div>
                         </div>
-                        <div class="input2">
+                        <div class="input2" style="margin-top: 60px;">
                             <label class="labelName">주소</label>
                             <div>
-                                <input type="text" class="box postcodify_postcode5" id="address" name=""
+                                <input type="text" class="box postcodify_postcode5" id="address"
                                        placeholder="우편번호" value=""
                                        style="width: 68%; float: left">
                                 <input type="button" id="postcodify_search_button" value="우편번호 검색">
@@ -71,16 +75,16 @@
                                        style="margin-top: 5px;" value="">
                                 <input type="text" class="postcodify_details" name="addressDetail" placeholder="상세주소"
                                        style="margin-top: 5px;" value="">
-                                <!--                                <input type="text" class="postcodify_extra_info" name="" placeholder="참고항목" style="margin-top: 5px;" value="">-->
+                                <!--<input type="text" class="postcodify_extra_info" name="" placeholder="참고항목" style="margin-top: 5px;" value="">-->
                             </div>
                         </div>
                         <div id="agree">
                             <div>
-                                <input type="checkbox" id="term" name="allAgree">
+                                <input type="checkbox" id="term">
                                 <label for="term" style="font-size: 18px"><strong>약관 전체동의</strong></label>
                             </div>
                             <div>
-                                <input type="checkbox" id="mustAgree1" class="terms" name="terms">
+                                <input type="checkbox" id="mustAgree1" class="terms">
                                 <label for="mustAgree1" style="font-size: 18px">이용약관(필수)</label>
                                 <a href="javascript:void(0)" id="open1"
                                    style="margin-top: 15px; float: right; font-size: 17px; color: black; text-decoration: underline;">약관보기</a>
@@ -265,7 +269,7 @@
 * 본 약관에 대한 저작권은 행정안전부에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.</textarea>
                             </div>
                             <div>
-                                <input type="checkbox" id="mustAgree2" class="terms" name="terms">
+                                <input type="checkbox" id="mustAgree2" class="terms">
                                 <label for="mustAgree1" style="font-size: 18px">개인정보 수집 이용동의(필수)</label>
                                 <a href="javascript:void(0)" id="open2"
                                    style="margin-top: 15px; float: right; font-size: 17px; color: black; text-decoration: underline;">약관보기</a>
@@ -286,7 +290,7 @@
                             </div>
                         </div>
                         <div>
-                            <a class="button"
+                            <a class="button" id="joinButton"
                                style="width:100%; height:45px; text-align: center; font-weight: 300; font-size: 20px; background: #888787; line-height: 1.5">동의하고
                                 회원가입</a>
                         </div>
@@ -369,6 +373,7 @@
                if(e.status == 200){
                    $("#checkId_text").text(e.responseText);
                    $("#checkId_text").css("color","green");
+                   $("#id").attr("readonly",true);
                }else{
                    $("#checkId_text").text(e.responseText);
                    $("#checkId_text").css("color","red");
@@ -378,6 +383,40 @@
        });
    })
     // 인증번호 보내기
+    let pin = "";
+
+    $('#pinButton').click(function(){
+        let phoneNumber = $('#phone').val();
+        alert("인증번호 발송 완료")
+
+        $.ajax({
+            type: "POST",
+            url: "/user/sendSMS",
+            data: {"phoneNumber" : phoneNumber},
+            success: function(map){
+                console.log(map);
+                console.log(map.result);
+                $("#checkPin_text").text(map.result);
+                pin = map.numStr;
+            }
+
+        })
+    });
+
+    $('#checkButton').click(function(){
+        if($("#phoneCheck").val() == null){
+            $("#checkPin_text").text("인증번호를 입력해주세요.");
+        }
+        if($("#phoneCheck").val() == pin){
+            $("#checkPin_text").text("인증번호가 일치합니다.");
+            $("#phoneCheck").attr("readonly",true);
+            $("#phone").attr("readonly",true);
+            $("#pinButton").off("click");
+        } else{
+            $("#checkPin_text").text("인증번호가 일치하지 않습니다.");
+        }
+    });
+
 
     // 비밀번호 확인
     $("#pwCheck").focusout(function() {
@@ -387,6 +426,9 @@
         }else{
             $("#checkPw_text").css("color","green");
             $("#checkPw_text").text("비밀번호가 일치합니다.");
+            $("#pwCheck").attr("readonly",true);
+            $("#pw").attr("readonly",true);
+
         }
     })
 
@@ -400,9 +442,56 @@
             $("#checkPw_text").css("color","green");
             $("#checkPw_text").text("사용가능한 비밀번호입니다.");
         }
-    })
+    });
 
-    // 아이디 사용가능 만들어놓고 회원가입 버튼 누르기 방지
+    $("#id").on("click", function(){
+        $("#id").attr("readonly",false);
+    });
+
+    $("#pw").on("click", function(){
+        $("#pw").attr("readonly",false);
+        $("#pwCheck").attr("readonly",false);
+    });
+
+    $("#joinButton").on("click", function(){
+        if(!$("#id").attr("readonly")){
+            alert("아이디를 입력해주세요.")
+            return;
+        }
+        if(!$("#pw").attr("readonly")){
+            alert("비밀번호를 입력해주세요.")
+            return;
+        }
+        if(!$("#pwCheck").attr("readonly")){
+            alert("비밀번호를 확인해주세요.")
+            return;
+        }
+        if(!$("#name").val()){
+            alert("이름을 입력해주세요.")
+            return;
+        }
+        if(!$("#email").val()){
+            alert("이메일을 입력해주세요.")
+            return;
+        }else if($("#email").val().indexOf("@") == -1 || $("#email").val().indexOf(".") == -1){
+            alert("이메일을 확인해주세요.")
+            return;
+        }
+        if(!$("#pw").attr("readonly")){
+            alert("비밀번호를 입력해주세요.")
+            return;
+        }
+        if(!$("#phoneCheck").attr("readonly")){
+            alert("핸드폰 인증을 해주세요.")
+            return;
+        }
+        if(!$("#term").is(":checked") == true){
+            alert("약관 동의를 해주세요.")
+            return;
+        }
+
+        $("#join").submit();
+    });
 
 
 </script>
