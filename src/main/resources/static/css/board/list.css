@@ -1,7 +1,8 @@
 .table-wrapper{
-    width: 800px;
+    width: 1050px;
     margin: 0 auto;
-    margin-top: 140px;
+    margin-top: 30px;
+    padding-bottom: 30px;
 }
 tr.tHead th{
     font-weight: bold;
@@ -29,7 +30,8 @@ a.search{
 
 #searchWrap{
     display: flex;
-    width: 896px;
+    width: 900px;
+    justify-content: center;
 
 }
 .tle{
@@ -78,7 +80,7 @@ th.bno{
 
 table{
     background: white;
-    min-height: 500px;
+    min-height: 350px;
 }
 
 .tBody td{
@@ -114,3 +116,13 @@ table{
 a#goRead {
     color : #7a8186;
 }
+
+
+.big-width{
+    text-align: center;
+}
+
+select[NAME="keyType"]{
+    border: solid 0.5px black;
+}
+

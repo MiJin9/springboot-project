@@ -61,7 +61,7 @@
             </table>
             <form action="/board/list" name="searchForm">
                 <div class="fields">
-                    <div class="field">
+                    <div class="field" style="display: flex; justify-content: space-evenly;">
                         <div id="searchWrap" th:object="${pageMaker}">
                             <select name="keyType" th:object="${criteria}">
                                 <option value="">검색 기준</option>
@@ -81,7 +81,7 @@
                 </div>
             </form>
             <div th:object="${pageMaker}">
-                <div class="big-width" style="text-align: center">
+                <div class="big-width" style="text-align: center; margin-top: 10px;">
                     <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
                     <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                         <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>

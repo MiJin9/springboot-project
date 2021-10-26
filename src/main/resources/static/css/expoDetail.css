@@ -1,3 +1,8 @@
+input{
+    font-family: "Jeju Gothic";
+    font-weight: 100;
+}
+
 .tle {
     padding-top: 52px;
     width: 1100px;
