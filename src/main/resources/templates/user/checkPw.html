@@ -27,8 +27,9 @@
                     <h3 style="text-align: center">비밀번호 확인</h3>
                     <hr>
                     <div id="input">
-                        <div class="input1">
-                            <input type="password" class="box" id="checkPw" placeholder="비밀번호" minlength="8" maxlength="20">
+                        <div class="input1" th:object="${map}">
+                            <input type="hidden" id="id" th:name="*{id}">
+                            <input type="password" class="box" id="checkPw" name="checkPw" placeholder="비밀번호" minlength="8" maxlength="20">
                         </div>
                     </div>
                     <div>
@@ -52,6 +53,9 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-
+<script>
+let id = [[${map.id}]];
+console.log("id : " + id);
+</script>
 </body>
 </html>

@@ -402,7 +402,7 @@
 
         })
     });
-
+    //인증번호 일치 여부
     $('#checkButton').click(function(){
         if($("#phoneCheck").val() == null){
             $("#checkPin_text").text("인증번호를 입력해주세요.");
@@ -475,10 +475,6 @@
             return;
         }else if($("#email").val().indexOf("@") == -1 || $("#email").val().indexOf(".") == -1){
             alert("이메일을 확인해주세요.")
-            return;
-        }
-        if(!$("#pw").attr("readonly")){
-            alert("비밀번호를 입력해주세요.")
             return;
         }
         if(!$("#phoneCheck").attr("readonly")){

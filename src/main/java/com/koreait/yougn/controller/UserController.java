@@ -41,7 +41,6 @@ public class UserController {
     @RequestMapping(value = "logout", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView logout(HttpServletRequest r) {
         r.getSession().invalidate();
-        ;
         return new RedirectView("/");
     }
 
@@ -92,12 +91,13 @@ public class UserController {
     public HashMap<String, String> checkPw(String pw, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         HashMap<String, String> map = new HashMap<>();
+        map.put("id", id);
 
         if (userService.getUser(id).getPw().equals(pw)) {
-            map.put("id", id);
             map.put("result", "변경 페이지로 이동합니다.");
             return map;
         }
+        log.info("id는" + id);
         map.put("result", "비밀번호가 일치하지 않습니다.");
         return map;
     }

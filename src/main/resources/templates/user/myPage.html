@@ -18,37 +18,16 @@
     <!--Main-->
     <div class="main">
         <div id="all" style="padding-bottom: 50px">
-            <div class="contentLeft">
-                <div>
-                    <h4>마이페이지</h4>
-                    <hr style="margin: 20px 0 0 -1px; width: 120px">
-                    <ul class="subMenu">
-                        <li style="font-size: 18px; margin: 25px 0px">회원정보
-                            <ul class="sub_depth1">
-                                <li><a href="">회원 정보 수정</a></li>
-                                <li><a href="">비밀번호 변경</a></li>
-                                <li><a href="">회원 탈퇴</a></li>
-                                <li><a href="">1:1 문의</a></li>
-                            </ul>
-                        </li>
-
-                        <li style="font-size: 18px; margin: 25px 0px">게시판
-                            <ul class="sub_depth1">
-                                <li><a href="">내 글 모아보기</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <th:block th:include="user/subMenu.html"></th:block>
             <div class="contentCenter">
                 <h3 style="margin-top: 40px">기본 정보</h3>
                 <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
-                <table id="table">
+                <table id="table" th:object="${user}">
                     <tbody>
                     <tr>
                         <th>아이디</th>
                         <td>
-                            <input type="text" name="memId" readonly value="/아이디자리/">
+                            <input type="text" name="memId" readonly th:field="*{id}">
                         </td>
 
                     </tr>
@@ -56,7 +35,7 @@
                         <th>이름</th>
                         <td>
                             <div>
-                                <input type="text" value="/이름자리/" readonly>
+                                <input type="text" readonly th:field="*{name}">
                             </div>
                         </td>
                     </tr>
@@ -64,7 +43,7 @@
                         <th>이메일</th>
                         <td class="member_email">
                             <div>
-                                <input type="text" readonly value="/이메일자리/">
+                                <input type="text" readonly th:field="*{email}">
                             </div>
                         </td>
                     </tr>
@@ -72,7 +51,7 @@
                         <th>휴대폰번호</th>
                         <td class="member_address">
                             <div class="address_postcode">
-                                <input type="text" maxlength="12" value="/휴대폰번호자리/" readonly>
+                                <input type="text" maxlength="12" readonly th:field="*{phone}">
                             </div>
                         </td>
                     </tr>
@@ -80,14 +59,11 @@
                         <th>주소</th>
                         <td class="member_address">
                             <div>
-                                <input type="text" name="zipcode" readonly value="00000" style="margin-bottom: 0px;">
-                            </div>
-                            <div>
                                 <div>
-                                    <input type="text" name="address" readonly value="서울시" style="margin-bottom: 0px">
+                                    <input type="text" name="address" readonly style="margin-bottom: 0px;" th:field="*{address}">
                                 </div>
                                 <div>
-                                    <input type="text" name="addressSub" value="강남구" readonly>
+                                    <input type="text" name="addressSub" readonly th:field="*{addressDetail}">
                                 </div>
                             </div>
                         </td>
