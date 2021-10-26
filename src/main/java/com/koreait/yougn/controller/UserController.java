@@ -5,19 +5,19 @@ import com.koreait.yougn.beans.vo.UserVO;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -37,6 +37,12 @@ public class UserController {
     @GetMapping("login")
     public String login() {
         return "/user/login";
+    }
+
+    @RequestMapping(value = "logout", method = {RequestMethod.GET,RequestMethod.POST})
+    public RedirectView logout(HttpServletRequest r){
+        r.getSession().invalidate();;
+        return new RedirectView("/");
     }
 
     @GetMapping("myPage")
@@ -66,7 +72,8 @@ public class UserController {
     }
 
     @GetMapping("changePw")
-    public String changePw() {
+    public String changePw(@RequestParam("pin") String pin, UserVO userVO, Model model) {
+        model.addAttribute("userVO",userVO);
         return "/user/changePw";
     }
 
@@ -74,7 +81,24 @@ public class UserController {
     public String inquiry() {return "/user/inquiry";}
 
     @GetMapping("checkPw")
-    public String checkPw() {return "/user/checkPw";}
+    public String checkPw() {
+        return "/user/checkPw";
+    }
+
+    @PostMapping(value = "checkPw", consumes = "application/json",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public HashMap<String,String> checkPw(String pw,HttpServletRequest r){
+        String id = (String) r.getSession().getAttribute("sessionId");
+        HashMap<String,String> map = new HashMap<>();
+
+        if(userService.getUser(id).getPw().equals(pw)){
+            map.put("id",id);
+            map.put("result","변경 페이지로 이동합니다.");
+            return map;
+        }
+        map.put("result","비밀번호가 일치하지 않습니다.");
+        return map;
+    }
 
     @GetMapping("findUser")
     public String findUser() {return "user/findUser";}
@@ -83,7 +107,7 @@ public class UserController {
     @PostMapping("join")
     public String join(UserVO userVO){
         userService.join(userVO);
-        return "index";
+        return "/";
     }
 
 //로그인
@@ -94,7 +118,7 @@ public class UserController {
             return "index";
         }
         model.addAttribute("result", false);
-        return "login";
+        return "user/login";
     }
 //아이디 중복확인
     @PostMapping(value = "{id}", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -119,17 +143,17 @@ public class UserController {
 
 //비밀번호 수정
     @PostMapping("changePw")
-    public String changePw(String pw, String newpPw,HttpServletRequest r,Model model){
+    public String changePw(String pw, String newPw,HttpServletRequest r,Model model){
         String id = (String)r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
         if(!user.getPw().equals(pw)){
             model.addAttribute("result","현재 비밀번호가 일치하지 않습니다.");
             return "user/changePw";
         }
-        user.setPw(newpPw);
+        user.setPw(newPw);
         if(userService.modifyPw(user)){
             r.getSession().invalidate();
-            return "index";
+            return "/";
         }
         model.addAttribute("result","비밀번호 변경에 실패하였습니다.");
         return "user/changePw";
@@ -142,26 +166,37 @@ public class UserController {
         UserVO user = userService.getUser(id);
         userService.singOut(user);
         r.getSession().invalidate();
-        return "index";
+        return "/";
     }
 
 //아이디 찾기(인증번호 보내기)
-//    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String> findUser(UserVO userVO) throws UnsupportedEncodingException{
-//        List<String> idList = userService.fintId(userVO);
-//        MailSenderRunner msr = new MailSenderRunner();
-//        if (idList.size() == 0 || idList == null){
-//            return new ResponseEntity<>("result", "일치하는 정보가 없습니다.");
-//        }
-//        String pin = makePin();
-//        String title = "";
-//        String to = userService.getUser(userVO.getId()).getEmail();
-//        HashMap<String, String> emails = new HashMap<>();
-//        emails.put(userVO.getName(), to);
-//        emails.forEach((name, email) -> {
-//            msr.send(to, title, pin);
-//        });
-//    }
+    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public HashMap<String,String> findUser(UserVO userVO) throws UnsupportedEncodingException{
+        HashMap<String,String> map = new HashMap<>();
+        List<String> idList = userService.findId(userVO);
+
+        if (idList.size() == 0 || idList == null){
+            map.put("result","일치하는 정보가 없습니다.");
+            return  map;
+        }
+
+        String pin = makePin();
+        String title = "유귀농 인증번호입니다.";
+        String content = "유귀농 본인인증 인증번호 입니다. \n다른 사람에게 유출되지 않게 유의하시기 바랍니다.\n 인증번호 : " + pin;
+
+        HashSet<String> emailList = userService.getEmailList(userVO);
+        userService.sendEmail(emailList,title,content);
+
+        map.put("result","인증번호 발송");
+        map.put("idPin",pin);
+        return map;
+    }
+
+    @GetMapping("showId")
+    public void showId(UserVO userVO, @RequestParam("pin") String pin,Model model){
+        model.addAttribute("idList",userService.findId(userVO));
+    }
 
 //    인증번호 만들기
     private String makePin(){
@@ -176,4 +211,31 @@ public class UserController {
 
 
 //비밀번호 찾기
+    //아이디 , 폰번호 입력
+    //이메일로 인증번호 발송
+    @PostMapping(value = "findPw", consumes = "application/json",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public HashMap<String,String> findPw(UserVO userVO){
+        HashMap<String,String> map = new HashMap<>();
+        if(userService.findPw(userVO)){
+            String pin = makePin();
+            String title = "유귀농 인증번호입니다.";
+            String content = "유귀농 본인인증 인증번호 입니다. \n다른 사람에게 유출되지 않게 유의하시기 바랍니다.\n 인증번호 : " + pin;
+            userService.sendEmail(userService.getEmailList(userVO), title, content);
+            map.put("result","인증번호 발송");
+            map.put("pwPin",pin);
+            return map;
+        }
+        map.put("result","일치하는 정보가 없습니다.");
+        return  map;
+    }
+
+    //인증번호 입력
+    //찾기 -> 비밀번호 변경
+    @PatchMapping("changePw")
+    public RedirectView changePw(UserVO userVO, @RequestParam("checkPw") String checkPw){
+        userService.modifyPw(userVO);
+        return new RedirectView("/");
+    }
+
 }

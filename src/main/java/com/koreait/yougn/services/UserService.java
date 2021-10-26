@@ -3,6 +3,7 @@ package com.koreait.yougn.services;
 import com.koreait.yougn.beans.vo.UserVO;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -29,7 +30,13 @@ public interface UserService {
     public boolean singOut(UserVO userVO);
 
     //아이디 찾기
-    public List<String> fintId(UserVO userVO);
+    public List<String> findId(UserVO userVO);
+
+    //이메일 리스트 가져오기
+    public HashSet<String> getEmailList(UserVO userVO);
+
+    //이메일 보내기
+    public void sendEmail(HashSet<String> emailList, String title, String content);
 
     //비밀번호 찾기
     public boolean findPw(UserVO userVO);
