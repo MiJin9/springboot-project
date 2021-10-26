@@ -6,6 +6,7 @@ import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -86,7 +87,7 @@ public class UserController {
         return "index";
     }
 
-//로그인
+    //로그인
     @PostMapping("login")
     public String login(UserVO userVO, HttpServletRequest r, Model model){
         if(userService.login(userVO)){
@@ -96,15 +97,15 @@ public class UserController {
         model.addAttribute("result", false);
         return "login";
     }
-//아이디 중복확인
+    //아이디 중복확인
     @PostMapping(value = "{id}", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> checkId(@PathVariable("id") String id) throws UnsupportedEncodingException {
         return userService.checkId(id) ? new ResponseEntity<>(new String("사용 가능".getBytes(), "UTF-8"), HttpStatus.OK) :
-        new ResponseEntity<>(new String("사용 불가".getBytes(),"UTF-8"),HttpStatus.OK);
+                new ResponseEntity<>(new String("사용 불가".getBytes(),"UTF-8"),HttpStatus.OK);
     }
 
 
-//회원정보 수정
+    //회원정보 수정
     @PostMapping("userModify")
     public String userModify(UserVO user,Model model){
         if(userService.modifyUserInfo(user)){
@@ -117,7 +118,7 @@ public class UserController {
         return "user/userModify";
     }
 
-//비밀번호 수정
+    //비밀번호 수정
     @PostMapping("changePw")
     public String changePw(String pw, String newpPw,HttpServletRequest r,Model model){
         String id = (String)r.getSession().getAttribute("sessionId");
@@ -135,7 +136,7 @@ public class UserController {
         return "user/changePw";
     }
 
-//회원 탈퇴
+    //회원 탈퇴
     @PostMapping("bye")
     public String bye(HttpServletRequest r){
         String id = (String)r.getSession().getAttribute("sessionId");
@@ -145,11 +146,11 @@ public class UserController {
         return "index";
     }
 
-//아이디 찾기(인증번호 보내기)
+    private MailSenderRunner msr;
+    //아이디 찾기(인증번호 보내기)
 //    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<String> findUser(UserVO userVO) throws UnsupportedEncodingException{
 //        List<String> idList = userService.fintId(userVO);
-//        MailSenderRunner msr = new MailSenderRunner();
 //        if (idList.size() == 0 || idList == null){
 //            return new ResponseEntity<>("result", "일치하는 정보가 없습니다.");
 //        }
@@ -163,7 +164,7 @@ public class UserController {
 //        });
 //    }
 
-//    인증번호 만들기
+    //    인증번호 만들기
     private String makePin(){
         String nums = "0123456789";
         String pin = "";

@@ -26,7 +26,7 @@ public class MailSenderRunner implements ApplicationRunner {
     public void send(String to, String title, String content) throws Exception{
         MimeMessage m = mailSender.createMimeMessage();
         MimeMessageHelper h = new MimeMessageHelper(m,"UTF-8");
-        h.setFrom("fullbear_p@naver.com");
+        h.setFrom(from);
         h.setTo(to);
         h.setSubject(title);
         h.setText(content);
