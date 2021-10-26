@@ -123,10 +123,11 @@ public class UserController {
         return "user/login";
     }
 //아이디 중복확인
-    @PostMapping(value = "{id}", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "{id}", consumes = "application/json", produces = "text/plain; charset=utf-8")
     public ResponseEntity<String> checkId(@PathVariable("id") String id) throws UnsupportedEncodingException {
+        log.info(id);
         return userService.checkId(id) ? new ResponseEntity<>(new String("사용 가능".getBytes(), "UTF-8"), HttpStatus.OK) :
-        new ResponseEntity<>(new String("사용 불가".getBytes(),"UTF-8"),HttpStatus.OK);
+        new ResponseEntity<>(new String("사용 불가".getBytes(),"UTF-8"),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
