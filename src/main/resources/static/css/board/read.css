@@ -11,10 +11,7 @@
     margin-top: 12px;
     background: white;
 }
-.vContent * {
-    max-width: 300px!important;
-    max-height: 300px!important;
-}
+
 
 .vTitle {
     background: white;
@@ -108,7 +105,7 @@ div.listBtn{
     padding-bottom: 26px;
 }
 
-p img {
+.vContent p img {
     max-height: 300px;
     max-width: 300px;
 }
