@@ -28,12 +28,12 @@
 
 <select id="getList" resultType="expoVO">
     <![CDATA[
-        SELECT EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE
+        SELECT EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT
         FROM
         (
             /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
             SELECT /*+ INDEX_DESC(T_EXPO PK_EXPO) */
-            ROWNUM R, EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE
+            ROWNUM R, EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT
             FROM T_EXPO
             WHERE
         ]]>
@@ -48,33 +48,33 @@
         <!--게시글 작성-->
 <insert id="insert">
 INSERT INTO T_EXPO (EXPONUM, EXPOTITLE, EXPOCONTENT, USERID)
-VALUES(SEQ_EXPO.NEXTVAL, #{expotitle}, #{expocontent}, #{userid})
+VALUES(SEQ_EXPO.NEXTVAL, #{expoTitle}, #{expoContent}, #{userId})
 </insert>
 
 <insert id="insertSelectKey_expoNum">
-<selectKey keyProperty="EXPONUM" order="BEFORE" resultType="long">
+<selectKey keyProperty="expoNum" order="BEFORE" resultType="Long">
     SELECT SEQ_EXPO.NEXTVAL FROM DUAL
 </selectKey>
 INSERT INTO T_EXPO (EXPONUM, EXPOTITLE, EXPOCONTENT, USERID)
-VALUES(SEQ_EXPO.NEXTVAL, #{expotitle}, #{expocontent}, #{userid})
+VALUES(SEQ_EXPO.NEXTVAL, #{expoTitle}, #{expoContent}, #{userId})
 </insert>
 
         <!--상세보기-->
 <select id="read" resultType="expoVO">
 SELECT EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE FROM T_EXPO
-WHERE EXPONUM = #{exponum}
+WHERE EXPONUM = #{expoNum}
 </select>
 
         <!--수정-->
 <update id="update">
 UPDATE T_EXPO
-SET EXPOTITLE = #{expotitle}, EXPOCONTENT = #{expocontent}, EXPOUPDATEDATE = SYSDATE
-WHERE EXPONUM = #{exponum}
+SET EXPOTITLE = #{expoTitle}, EXPOCONTENT = #{expoContent}, EXPOUPDATEDATE = SYSDATE
+WHERE EXPONUM = #{expoNum}
 </update>
 
         <!--삭제-->
 <delete id="delete">
-DELETE FROM T_EXPO WHERE EXPONUM = #{exponum}
+DELETE FROM T_EXPO WHERE EXPONUM = #{expoNum}
 </delete>
 
 <select id="getTotal" resultType="_int">
@@ -85,4 +85,6 @@ SELECT COUNT(EXPONUM) FROM T_EXPO
     </trim>
 </where>
 </select>
+
+
 </mapper>

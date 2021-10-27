@@ -45,13 +45,14 @@ public class BoardController {
     }
 
     /* 글 작성 */
+    //페이지 이동
     @GetMapping("write")
     public void write(BoardsVO vo,Criteria criteria, Model model){
         vo.setId("이렇게"); // 로그인 된 아이디
         model.addAttribute("vo", vo);
         model.addAttribute("criteria", criteria);
     }
-
+    //메소드
     @PostMapping("write")
     public RedirectView write(BoardsVO boardsVO, RedirectAttributes rttr){
         boardsVO.setId("이렇게");

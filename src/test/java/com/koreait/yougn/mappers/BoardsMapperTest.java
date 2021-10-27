@@ -79,5 +79,5 @@ public class BoardsMapperTest {
         cri.setBoardType(4);
         mapper.getTotal(cri);
     }
-    
+
 }

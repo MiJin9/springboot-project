@@ -14,4 +14,9 @@ public class ExpoVO {
     private String userId;
     private String expoRegDate;
     private String expoUpdateDate;
+    private String farmName;
+    private String farmerName;
+    private String farmAddress;
+    private String farmPhone;
+    private String farmProduct;
 }

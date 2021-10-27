@@ -28,3 +28,12 @@ span > h1{
     background: #c36839;
 
 }
+
+.itemDetail>p{
+    display: inline-flex;
+}
+
+.listNum{
+    margin-left: 700px;
+    display: flex;
+}
