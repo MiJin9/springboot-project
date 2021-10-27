@@ -38,35 +38,38 @@
                     <img src="/img/pageBanner_write.png" style="padding-top: 53px;">
                 </div>
             <form id="writeForm" name="postForm" method="POST" action="/expo/writeExpo">
-            <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
+            <input type="text" name="expoTitle" placeholder ="제목을 입력해주세요." id="title" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
                 <hr>
                 <div class="thumbWrapper" style="display: flex">
                     <div class="thumbPhoto" style="margin-left: 20px">썸네일 미리보기 사진</div>
                     <div style="margin-top: 30px">
                         <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
                         <div>
+                            <input name="userId" th:field="${vo.userId}" type="hidden">
+                        </div>
+                        <div>
                             <h4 style="margin-left: 50px">농장이름 *</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 이름">
+                            <input name="farmName" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 이름">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장주 *</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
+                            <input name="farmerName" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 주소 *</h4>
-                            <input style="height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
+                            <input name="farmAddress" style="height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 전화번호</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
+                            <input name="farmPhone" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 주요 품목</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
+                            <input name="farmProduct" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
                         </div>
                     </div>
                 </div>
@@ -74,7 +77,7 @@
 
                 <!-- summernote와 관련된 영역 -->
 
-                <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                <textarea id="summernote" name="expoContent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                 <!-- 버튼과 관련된 영역 -->
 
@@ -139,7 +142,7 @@
 
         $("input[type='submit']").on("click", function(e){
             e.preventDefault();
-            let form = $("form#registForm");
+            let form = $("form#postForm");
             let str = "";
             $(".uploadResult ul li").each(function(i, obj){
                 str += "<input type='hidden' name='fileList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"

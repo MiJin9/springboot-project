@@ -36,8 +36,19 @@ public class ExpoControllerTest {
                 .param("keyword", "딸기 스마트팜에 놀러오세요~!")
                )
                 .andReturn().getModelAndView().getModelMap().toString());
+    }
 
-
+    @Test
+    public void testDetail() throws Exception{
+        log.info(
+                mockMvc.perform(MockMvcRequestBuilders.get("/expo/readDetail")
+                        .param("expoNum", "1")
+                        .param("pageNum", "1")
+                        .param("amount", "10")
+                        .param("type", "T")
+                        .param("keyword", "딸기 스마트팜에 놀러오세요~!")
+                )
+                        .andReturn().getModelAndView().getModelMap().toString());
     }
 
 

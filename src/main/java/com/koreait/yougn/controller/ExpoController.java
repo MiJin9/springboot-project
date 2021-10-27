@@ -83,7 +83,7 @@ public class ExpoController {
     //상세보기
     @GetMapping({"readDetail", "modify"})
     public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model) {
-        model.addAttribute("expoNum", expoService.get(expoNum));
+        model.addAttribute("expo", expoService.get(expoNum));
         model.addAttribute("criteria", criteria);
     }
 

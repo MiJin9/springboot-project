@@ -144,22 +144,22 @@
                                 <div class="itemInfo">
                                     <!--제목-->
                                     <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" th:text="*{expoTitle}"></a></h4>
+                                        <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" name="expoTitle" th:text="*{expoTitle}"></a></h4>
                                     </div>
                                     <!--작성자-->
                                     <div>
-                                        작성자 : <p style="color: black;margin-bottom: 10px;font-size: 13px; " th:text="*{userId}"></p>
+                                        작성자 : <p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userId}"></p>
 
                                     </div>
                                     <!--내용-->
                                     <div class="itemDetail">
-                                        농장 이름 : <p th:text="*{farmName}"></p><br>
-                                        주소 : <p th:text="*{farmAddress}"></p><br>
-                                        주요 품목 : <p th:text="*{farmProduct}"></p><br>
-                                        전화번호 : <p th:text="*{farmPhone}"></p><br>
+                                        농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
+                                        주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
+                                        주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
+                                        전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
                                     </div>
                                     <div class="listNum">
-                                        No.<p id="expoNumber" th:text="*{expoNum}"></p>
+                                        No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
 
     $(document).ready(function(){
         (function(){
-            $.getJSON("/expo/getThumbList", {thumbNum : thumbNum},
+            $.getJSON("/expo/getThumbList", {expoNum : expoNum},
                 function(attach){  // 썸네일 1개 가져오기
                     let str = "";
                         if (!attach.image) {   // 썸네일을 올리지 않았다면  attach.png

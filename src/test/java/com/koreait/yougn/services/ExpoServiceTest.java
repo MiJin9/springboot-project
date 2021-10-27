@@ -55,4 +55,7 @@ public class ExpoServiceTest {
         Criteria criteria = new Criteria();
         expoService.getTotal(criteria);
     }
+
+    @Test
+    public void get(){expoService.get(68L); }
 }

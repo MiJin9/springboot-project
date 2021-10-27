@@ -4,7 +4,7 @@
 <mapper namespace="com.koreait.yougn.mappers.ThumbMapper">
     <insert id="insert">
         INSERT INTO T_THUMB(UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE)
-        VALUES (#{uuid}, #{uploadPath}, #{thumbName}, #{thumbNum}, #{image})
+        VALUES (#{uuid}, #{uploadPath}, #{thumbNum}, #{thumbName}, #{image})
     </insert>
 
     <delete id="delete">
