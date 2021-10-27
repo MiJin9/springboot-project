@@ -36,11 +36,10 @@
                             <label class="labelName">비밀번호<span style="color: red">*</span></label>
                             <input type="password" class="box" id="pw" name="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)"
                                    minlength="8" maxlength="20" style="margin-bottom: 5px">
+                            <span><p id="checkPw_text1" style="font-size: 14px"></p></span>
                             <input type="password" class="box" id="pwCheck" placeholder="비밀번호 확인" minlength="8"
                                    maxlength="20">
-                            <span>
-                                <p id="checkPw_text" style="font-size: 14px"></p>
-                            </span>
+                            <span><p id="checkPw_text2" style="font-size: 14px"></p></span>
                         </div>
                         <div class="input2">
                             <label class="labelName">이름<span style="color: red">*</span></label>
@@ -421,11 +420,11 @@
     // 비밀번호 확인
     $("#pwCheck").focusout(function() {
         if ($("#pw").val() != $("#pwCheck").val()) {
-            $("#checkPw_text").css("color","red");
-            $("#checkPw_text").text("비밀번호가 일치하지 않습니다.");
+            $("#checkPw_text2").css("color","red");
+            $("#checkPw_text2").text("비밀번호가 일치하지 않습니다.");
         }else{
-            $("#checkPw_text").css("color","green");
-            $("#checkPw_text").text("비밀번호가 일치합니다.");
+            $("#checkPw_text2").css("color","green");
+            $("#checkPw_text2").text("비밀번호가 일치합니다.");
             $("#pwCheck").attr("readonly",true);
             $("#pw").attr("readonly",true);
 
@@ -436,11 +435,11 @@
         var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
         var pw = $("#pw").val();
         if (!reg.test(pw)) {
-            $("#checkPw_text").css("color","red");
-            $("#checkPw_text").text("숫자와 영문을 포함해서 입력해주세요");
+            $("#checkPw_text1").css("color","red");
+            $("#checkPw_text1").text("숫자와 영문을 포함해서 입력해주세요");
         }else{
-            $("#checkPw_text").css("color","green");
-            $("#checkPw_text").text("사용가능한 비밀번호입니다.");
+            $("#checkPw_text1").css("color","green");
+            $("#checkPw_text1").text("사용가능한 비밀번호입니다.");
         }
     });
 
@@ -455,34 +454,40 @@
 
     $("#joinButton").on("click", function(){
         if(!$("#id").attr("readonly")){
-            alert("아이디를 입력해주세요.")
+            alert("아이디를 입력해주세요.");
             return;
         }
         if(!$("#pw").attr("readonly")){
-            alert("비밀번호를 입력해주세요.")
+            alert("비밀번호를 입력해주세요.");
             return;
         }
         if(!$("#pwCheck").attr("readonly")){
-            alert("비밀번호를 확인해주세요.")
+            alert("비밀번호를 확인해주세요.");
             return;
         }
         if(!$("#name").val()){
-            alert("이름을 입력해주세요.")
+            alert("이름을 입력해주세요.");
             return;
         }
         if(!$("#email").val()){
-            alert("이메일을 입력해주세요.")
+            alert("이메일을 입력해주세요.");
             return;
         }else if($("#email").val().indexOf("@") == -1 || $("#email").val().indexOf(".") == -1){
-            alert("이메일을 확인해주세요.")
+            alert("이메일을 확인해주세요.");
             return;
         }
         if(!$("#phoneCheck").attr("readonly")){
-            alert("핸드폰 인증을 해주세요.")
+            alert("핸드폰 인증을 해주세요.");
             return;
         }
         if(!$("#term").is(":checked") == true){
-            alert("약관 동의를 해주세요.")
+            alert("약관 동의를 해주세요.");
+            return;
+        }
+        var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        var pw = $("#pw").val();
+        if (!reg.test(pw)) {
+            alert("비밀번호에 숫자와 영문을 포함해서 입력해주세요");
             return;
         }
 

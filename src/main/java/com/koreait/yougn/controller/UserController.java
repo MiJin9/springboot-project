@@ -70,10 +70,24 @@ public class UserController {
         return "/user/userModify";
     }
 
-    @GetMapping("changePw")
-    public String changePw(@RequestParam("pin") String pin, UserVO userVO, Model model) {
+    @PostMapping("changePw")
+    public String changePw(UserVO userVO, Model model) {
         model.addAttribute("userVO", userVO);
         return "/user/changePw";
+    }
+
+    //비밀번호 수정
+    @PostMapping("changePwOk")
+    public String changePw(String newPw, String id, HttpServletRequest r, Model model) {
+        UserVO user = userService.getUser(id);
+
+        user.setPw(newPw);
+        if (userService.modifyPw(user)) {
+            r.getSession().invalidate();
+            return "index";
+        }
+        model.addAttribute("result", "비밀번호 변경에 실패하였습니다.");
+        return "user/changePw";
     }
 
     @GetMapping("inquiry")
@@ -86,18 +100,17 @@ public class UserController {
         return "/user/checkPw";
     }
 
-    @PostMapping(value = "checkPw", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "checkPw", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public HashMap<String, String> checkPw(String pw, HttpServletRequest r) {
-        String id = (String) r.getSession().getAttribute("sessionId");
-        HashMap<String, String> map = new HashMap<>();
-        map.put("id", id);
+    public HashMap<String, String> checkPw(@RequestBody UserVO userVO, HttpServletRequest r) {
 
-        if (userService.getUser(id).getPw().equals(pw)) {
-            map.put("result", "변경 페이지로 이동합니다.");
+        HashMap<String, String> map = new HashMap<>();
+
+        if (userService.getUser(userVO.getId()).getPw().equals(userVO.getPw())) {
+            map.put("result", "성공");
             return map;
         }
-        log.info("id는" + id);
+
         map.put("result", "비밀번호가 일치하지 않습니다.");
         return map;
     }
@@ -147,23 +160,7 @@ public class UserController {
         return "user/userModify";
     }
 
-    //비밀번호 수정
-    @PostMapping("changePw")
-    public String changePw(String pw, String newpPw, HttpServletRequest r, Model model) {
-        String id = (String) r.getSession().getAttribute("sessionId");
-        UserVO user = userService.getUser(id);
-        if (!user.getPw().equals(pw)) {
-            model.addAttribute("result", "현재 비밀번호가 일치하지 않습니다.");
-            return "user/changePw";
-        }
-        user.setPw(newpPw);
-        if (userService.modifyPw(user)) {
-            r.getSession().invalidate();
-            return "index";
-        }
-        model.addAttribute("result", "비밀번호 변경에 실패하였습니다.");
-        return "user/changePw";
-    }
+
 
     //회원 탈퇴
     @PostMapping("bye")
@@ -178,7 +175,7 @@ public class UserController {
 //아이디 찾기(인증번호 보내기)
 //    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<String> findUser(UserVO userVO) throws UnsupportedEncodingException{
-//        List<String> idList = userService.fintId(userVO);
+//        List<String> idList = userService.findId(userVO);
 //        MailSenderRunner msr = new MailSenderRunner();
 //        if (idList.size() == 0 || idList == null){
 //            return new ResponseEntity<>("result", "일치하는 정보가 없습니다.");

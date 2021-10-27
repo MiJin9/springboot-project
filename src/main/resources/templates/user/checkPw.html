@@ -21,14 +21,14 @@
 
     <!--Main-->
     <div class="main">
-        <form>
+        <form id="checkPwForm" action="/user/changePw" method="post">
             <div id="all">
                 <div class="group">
                     <h3 style="text-align: center">비밀번호 확인</h3>
                     <hr>
                     <div id="input">
-                        <div class="input1" th:object="${map}">
-                            <input type="hidden" id="id" th:name="*{id}">
+                        <div class="input1" >
+                            <input type="hidden" id="id" name="id" th:value="${session.sessionId}">
                             <input type="password" class="box" id="checkPw" name="checkPw" placeholder="비밀번호" minlength="8" maxlength="20">
                         </div>
                     </div>
@@ -54,8 +54,36 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script>
-let id = [[${map.id}]];
-console.log("id : " + id);
+
+
+    $("#checkPwBtn").on("click", function(e){
+        e.preventDefault();
+        //  이벤트발생 막기
+        let id = $("#id").val();
+        let pw = $("#checkPw").val();
+        let form = $("#checkPwForm");
+    //    ajax로 요청을 보내서 백단에서 pw검사
+        $.ajax({
+            url: "/user/checkPw",
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({"id": id, "pw": pw}),
+            //    결과를 s or f
+            success: function (map) {
+                //    결과에 따라 s 서브밋 페이지 이동
+                if(map.result == "성공"){
+                    form.submit();
+                //    f 알럿
+                }else{
+                    alert(map.result);
+                    return;
+                }
+
+
+            }
+        })
+
+    })
 </script>
 </body>
 </html>
