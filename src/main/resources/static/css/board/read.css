@@ -1,24 +1,20 @@
 .view {
     width: 1000px;
-    padding-left: 66px;
     margin: 0 auto;
     margin-top: 90px;
 }
 
 .vContent{
     min-height: 400px;
-    width: 888px!important;
+    width: 1000px!important;
     margin-top: 12px;
     background: white;
 }
-.vContent * {
-    max-width: 300px!important;
-    max-height: 300px!important;
-}
+
 
 .vTitle {
     background: white;
-    width: 888px;
+    width: 1000px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -36,24 +32,24 @@
 
 ul.reply {
     margin-left: -12px;
-    width: 888px;
+    width: 1000px;
     list-style: none;
 }
 
 .horizon {
-    width: 888px;
+    width: 1000px;
     height: 49px;
     border-bottom: double;
     border-top: double;
     margin-top: 10px;
 }
 .register-form{
-    width: 888px;
+    width: 1000px;
 }
 
 .reContent {
     min-height: 75px;
-    width: 888px;
+    width: 1000px;
     border-bottom: 1px solid #7a8186;
     background: white;
 }
@@ -69,7 +65,7 @@ p.p-writer{
 textarea {
     resize: none;
     border: 1px solid #7a8186;
-    width: 888px;
+    width: 1000px;
 }
 
 .smallTitle{
@@ -79,7 +75,7 @@ textarea {
     border-bottom: double;
 }
 #horizon {
-    width: 888px;
+    width: 1000px;
     border-bottom: double;
     margin-top: 10px;
     margin-left: 55px;
@@ -90,7 +86,7 @@ div.Btn{
 div.listBtn{
     margin-top: -20px;
     margin-bottom: 20px;
-    width: 888px;
+    width: 1000px;
     display: flex;
     justify-content: space-between;
 }
@@ -108,8 +104,13 @@ div.listBtn{
     padding-bottom: 26px;
 }
 
-p img {
+.vContent p img {
     max-height: 300px;
     max-width: 300px;
+}
+
+div.replyDiv>ul.reply>li{
+    border-bottom: solid 0.2px #ddd;
+    margin-top: 10px;
 }
 
