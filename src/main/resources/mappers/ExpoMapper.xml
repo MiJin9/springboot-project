@@ -17,7 +17,7 @@
                             (EXPOCONTENT LIKE '%'||#{keyword}||'%')
                         </when>
                         <when test="keyType == 'W'.toString()">
-                            (ID LIKE '%'||#{keyword}||'%')
+                            (USERID LIKE '%'||#{keyword}||'%')
                         </when>
                     </choose>
                 </trim>

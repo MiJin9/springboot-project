@@ -29,6 +29,7 @@ public class ExpoControllerTest {
     public void testList() throws Exception{
         log.info(
                 mockMvc.perform(MockMvcRequestBuilders.get("/expo/list")
+                        .param("expoNum", "1")
                 .param("pageNum", "1")
                 .param("amount", "10")
                 .param("type", "T")

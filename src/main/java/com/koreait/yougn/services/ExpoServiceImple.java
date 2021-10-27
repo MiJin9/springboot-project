@@ -1,8 +1,10 @@
 package com.koreait.yougn.services;
 
 import com.koreait.yougn.beans.dao.ExpoDAO;
+import com.koreait.yougn.beans.dao.ThumbDAO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
+import com.koreait.yougn.beans.vo.ThumbVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class ExpoServiceImple implements ExpoService{
 
     private final ExpoDAO expoDAO;
+    private final ThumbDAO thumbDAO;
 
     @Override
     public void register(ExpoVO expoVO) {expoDAO.register(expoVO); }
@@ -40,4 +43,9 @@ public class ExpoServiceImple implements ExpoService{
 
     @Override
     public int getTotal(Criteria criteria) { return expoDAO.getTotal(criteria); }
+
+    @Override
+    public List<ThumbVO> getAttachList(Long expoNum) {
+        return thumbDAO.findByNum(expoNum);
+    }
 }

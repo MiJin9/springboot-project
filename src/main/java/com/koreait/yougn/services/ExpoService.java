@@ -2,7 +2,7 @@ package com.koreait.yougn.services;
 
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
-import org.springframework.stereotype.Service;
+import com.koreait.yougn.beans.vo.ThumbVO;
 
 import java.util.List;
 
@@ -20,4 +20,6 @@ public interface ExpoService {
     public List<ExpoVO> getList(Criteria criteria);
 
     public int getTotal(Criteria criteria);
+
+    public List<ThumbVO> getAttachList(Long bno);
 }

@@ -1,8 +1,9 @@
 package com.koreait.yougn.beans.vo;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Data
@@ -19,4 +20,8 @@ public class ExpoVO {
     private String farmAddress;
     private String farmPhone;
     private String farmProduct;
+    //input 태그의 name에
+    //attachList[i].fileName...
+    //방식으로 submit하면 자동으로 List에 add할 수 있게 된다.
+    private List<ThumbVO> attachList;
 }

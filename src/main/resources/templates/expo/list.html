@@ -104,6 +104,15 @@
             width: 80%; margin: 0 auto; padding: 0 0; border: solid 1px black;height: 37px;border-radius: 0%;color: #000000;padding-left: 10px;}
         form[name='searchForm']{overflow: hidden;}
 
+        .thumbImg {
+            position: relative;
+            display: table-cell;
+            margin-top: 10px;
+            vertical-align: top;
+            width:200px;
+            height:200px;
+            margin-left:30px;>
+        }
 
     </style>
 </head>
@@ -128,10 +137,8 @@
                             <div class="expoItemInner">
                                 <!--썸네일 나중에-->
                                 <div class="expoImgThumbnail">
-                                    <a target="_blank" class="thumbnail" href="/expo/readDetail"></a>
                                     <ul>
-                                    <img src="/img/smartFarm_sample.jpg"
-                                         style="position: relative; display: table-cell;margin-top: 10px;vertical-align: top; width:200px; height:200px; margin-left:30px; ">
+                                    <img class="thumbImg" src="/img/smartFarm_sample.jpg">
                                     </ul>
                                 </div>
                                 <div class="itemInfo">
@@ -217,124 +224,50 @@
 </body>
 <script th:inline="javascript">
 
-    let pageForm = $(document.pageForm);
-    let paging = [[${pageMaker.criteria.listLink}]];
-    let searchForm = $(document.searchForm);
-    let thumbNum = [[${list.getThumbNum()}]];
-    let uploadResult = $(".uploadResult ul")
+    let pageForm = $(document.pageForm); // 페이징 Form 태그
+    let paging = [[${pageMaker.criteria.listLink}]]; // 페이징
+    let searchForm = $(document.searchForm); // 검색기능 Form 태그
+    let expoNum = $("#expoNumber").text(); // 엑스포 넘버
 
-    let showCheck = false;
-    function showImage(fileCallPath){
-        if(showCheck) {return;}
-        $(".expoImgThumbnail").css("display", "flex").show();
-        $(".thumbnail").html("<img src='/upload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
-            .animate({width:"100%", height:"100%"}, 1000);
-        showCheck = true;
-    }
-
-    $(".expoImgThumbnail").on("click", function(){
-        if(!showCheck){return;}
-        $(".thumbnail").animate({width: "0%", height: "0%"}, 1000);
-        setTimeout(function(){
-            showCheck = false;
-            $(".expoImgThumbnail").hide();
-        }, 1000)
-    })
-
-
+    let uploadResult = $(".expoImgThumbnail ul") // 썸네일 들어갈 태그
 
     $(document).ready(function(){
         (function(){
-            $.getJSON("/board/getThumbList", {thumbNum : thumbNum},
-                function(arr){
+            $.getJSON("/expo/getThumbList", {thumbNum : thumbNum},
+                function(attach){  // 썸네일 1개 가져오기
                     let str = "";
-
-                    $(arr).each(function(i, attach){
-                        if(!attach.image){
+                        if (!attach.image) {   // 썸네일을 올리지 않았다면  attach.png
                             let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-                            str += "<li>";
-                            str += "<div>";
-                            str += "<a href='/upload/download?fileName=" + fileCallPath + "'>";
+                            str += "<li>"
                             str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                            str += "</a>"
-                            str += "</div>";
                             str += "</li>";
-                        }else{
+                        } else { // 등록한 썸네일 넣기
                             let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
                             let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
 
-                            str += "<li>";
-                            str += "<div>";
-                            str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
+                            str += "<li>"
                             str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                            str += "</a>";
-                            str += "</div>";
                             str += "</li>";
+
                         }
-                    });
                     uploadResult.html(str);
                 });//getJSON
         })();
 
-
     showList(pageNum);
 
         function goUpdate(){
-            location.href = "/board/modify" + paging + "&bno=" + bno;
+            location.href = "/board/modify" + paging + "&expoNum=" + expoNum;
         }
 
         $("a#goList").on("click", function(){
             location.href = "/board/list" + paging;
         });
 
-        function showReplyPage(replyCnt){
-            let endNum = Math.ceil(pageNum / 10.0) * 10;
-            let startNum = endNum - 9;
-            let realEnd = Math.ceil(replyCnt / 10.0);
-            let divTag = $(".paging");
-            let str = "";
 
-            if(endNum > realEnd){
-                endNum = realEnd;
-            }
-
-            let prev = startNum != 1;
-            let next = endNum * 10 < replyCnt;
-
-            //917px 까지
-            if(matchMedia("screen and (max-width:918px)").matches){
-                if(pageNum > 1){
-                    str += "<a class='changePage' href='" + (pageNum - 1) + "'><code>&lt;</code></a>"
-                }
-                str += "<code>" + pageNum + "</code>";
-                if(pageNum < realEnd){
-                    str += "<a class='changePage' href='" + (pageNum + 1) + "'><code>&gt;</code></a>"
-                }
-
-            }else{//918px 이상
-                if(prev){
-                    str += "<a class='changePage' href='" + (startNum - 1) + "'><code>&lt;</code></a>"
-                }
-                for(let i=startNum; i<=endNum; i++){
-                    if(i == pageNum){
-                        str += "<code>" + i + "</code>";
-                        continue;
-                    }
-                    str += "<a class='changePage' href='" + i + "'><code>" + i + "</code></a>";
-                }
-                if(next){
-                    str += "<a class='changePage' href='" + (endNum + 1) + "'><code>&gt;</code></a>"
-                }
-            }
-            divTag.html(str);
-        }
-
-        let expoNum = [[${expoNum}]];
         if(expoNum == null || history.state){
             return;
         }
-
-
         alert("게시글 " + expoNum + "번이 등록되었습니다.");
         history.replaceState({}, null, null);
     });
@@ -352,7 +285,8 @@
     //제목 눌렀을 때
     $("a#goRead").on("click", function(e){
         e.preventDefault();
-        location.href = "/expo/readDetail" + paging  + "&expoNum=" + $("#expoNumber").text();
+        console.log(expoNum);
+        location.href = "/expo/readDetail" + paging  + "&expoNum=" + expoNum;
     })
 
     //검색할 때
