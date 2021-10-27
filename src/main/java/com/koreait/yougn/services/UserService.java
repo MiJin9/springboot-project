@@ -36,7 +36,7 @@ public interface UserService {
     public HashSet<String> getEmailList(UserVO userVO);
 
     //이메일 보내기
-    public void sendEmail(HashSet<String> emailList, String title, String content);
+    public boolean sendEmail(HashSet<String> emailList, String title, String content);
 
     //비밀번호 찾기
     public boolean findPw(UserVO userVO);

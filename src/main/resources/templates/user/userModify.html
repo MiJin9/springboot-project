@@ -119,13 +119,21 @@
 
     $('#pinButton').click(function () {
         let phoneNumber = $('#phone').val();
-        alert("인증번호 발송 완료")
-
+        //인증번호 일치 여부
+        if($("#phone").val().indexOf("-") != -1){
+            alert("- 를 제외하고 핸드폰번호를 입력해주세요.");
+            return;
+        }
+        if(isNaN($("#phone").val())){
+            alert("핸드폰번호를 확인해주세요.");
+            return;
+        }
         $.ajax({
             type: "POST",
             url: "/user/sendSMS",
             data: {"phoneNumber": phoneNumber},
             success: function (map) {
+                alert("인증번호 발송 완료");
                 console.log(map);
                 console.log(map.result);
                 $("#checkPin_text").text(map.result);
@@ -134,7 +142,6 @@
 
         })
     });
-    //인증번호 일치 여부
     $('#checkButton').click(function () {
         if ($("#phoneCheck").val() == null) {
             $("#checkPin_text").text("인증번호를 입력해주세요.");
@@ -144,6 +151,7 @@
             $("#phoneCheck").attr("readonly", true);
             $("#phone").attr("readonly", true);
             $("#pinButton").off("click");
+            phone = $("#phoneCheck").val();
         } else {
             $("#checkPin_text").text("인증번호가 일치하지 않습니다.");
         }

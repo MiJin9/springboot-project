@@ -64,20 +64,28 @@ public class UserServiceImple implements UserService {
     @Override
     public HashSet<String> getEmailList(UserVO userVO) {
         HashSet<String> emailList = new HashSet<>();
-        List<String> idList = userDAO.findId(userVO);
-        for (int i = 0; i < idList.size(); i++) {
-            emailList.add(userDAO.getUser(idList.get(i)).getEmail());
+        if(userVO.getId() == null){
+            List<String> idList = userDAO.findId(userVO);
+            for (int i = 0; i < idList.size(); i++) {
+                emailList.add(userDAO.getUser(idList.get(i)).getEmail());
+            }
+        }else{
+            emailList.add(userDAO.getUser(userVO.getId()).getEmail());
         }
         return emailList;
     }
 
     @Override
-    public void sendEmail(HashSet<String> emailList, String title, String content) {
+    public boolean sendEmail(HashSet<String> emailList, String title, String content) {
         for (String email:emailList) {
-            try {msr.send(email,title,content);} catch (Exception e) {
+            try {
+                msr.send(email,title,content);
+                return true;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
     @Override

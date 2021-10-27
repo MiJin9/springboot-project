@@ -476,6 +476,14 @@
             alert("이메일을 확인해주세요.");
             return;
         }
+        if($("#phone").val().indexOf("-") != -1){
+            alert("- 를 제외하고 핸드폰번호를 입력해주세요.");
+            return;
+        }
+        if(isNaN($("#phone").val())){
+            alert("핸드폰번호를 확인해주세요.");
+            return;
+        }
         if(!$("#phoneCheck").attr("readonly")){
             alert("핸드폰 인증을 해주세요.");
             return;

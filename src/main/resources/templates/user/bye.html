@@ -43,8 +43,8 @@
                     </div>
 
                     <div style="margin-bottom: 20px; margin-left: 185px">
-                        <input type="button" id="signOut" class="button" value="탈퇴">
-                        <a href="" id="cancel" class="button" style="margin-left: 8px; background: #888787;">취소</a>
+                        <a id="signOut" class="button">탈퇴</a>
+                        <a id="cancel" class="button" style="margin-left: 8px; background: #888787;">취소</a>
                     </div>
                 </form>
             </div>
@@ -67,7 +67,9 @@
 <script>
     $("#signOut").on("click", function(e) {
         e.preventDefault();
-        $(document.form).submit();
+        if(confirm("정말 탈퇴하시겠습니까?")){
+            $(document.form).submit();
+        }
     })
     $("#cancel").on("click", function(e){
         e.preventDefault();
