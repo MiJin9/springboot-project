@@ -38,6 +38,17 @@ public class UserController {
         return "/user/login";
     }
 
+    //로그인
+    @PostMapping("login")
+    public String login(UserVO userVO, HttpServletRequest r, Model model) {
+        if (userService.login(userVO)) {
+            r.getSession().setAttribute("sessionId", userVO.getId());
+            return "index";
+        }
+        model.addAttribute("result", false);
+        return "user/login";
+    }
+
     @RequestMapping(value = "logout", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView logout(HttpServletRequest r) {
         r.getSession().invalidate();
@@ -57,9 +68,19 @@ public class UserController {
         return "/user/writeCollection";
     }
 
-    @GetMapping("bye")
+    @PostMapping("bye")
     public String bye() {
         return "/user/bye";
+    }
+
+    //회원 탈퇴
+    @PostMapping("byeOk")
+    public String bye(HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        UserVO user = userService.getUser(id);
+        userService.singOut(user);
+        r.getSession().invalidate();
+        return "index";
     }
 
     @GetMapping("userModify")
@@ -96,7 +117,8 @@ public class UserController {
     }
 
     @GetMapping("checkPw")
-    public String checkPw() {
+    public String checkPw(int num, Model m) {
+        m.addAttribute("num",num);
         return "/user/checkPw";
     }
 
@@ -127,16 +149,7 @@ public class UserController {
         return "index";
     }
 
-    //로그인
-    @PostMapping("login")
-    public String login(UserVO userVO, HttpServletRequest r, Model model) {
-        if (userService.login(userVO)) {
-            r.getSession().setAttribute("sessionId", userVO.getId());
-            return "index";
-        }
-        model.addAttribute("result", false);
-        return "user/login";
-    }
+
 
     //아이디 중복확인
     @PostMapping(value = "{id}", consumes = "application/json", produces = "text/plain; charset=utf-8")
@@ -162,15 +175,7 @@ public class UserController {
 
 
 
-    //회원 탈퇴
-    @PostMapping("bye")
-    public String bye(HttpServletRequest r) {
-        String id = (String) r.getSession().getAttribute("sessionId");
-        UserVO user = userService.getUser(id);
-        userService.singOut(user);
-        r.getSession().invalidate();
-        return "index";
-    }
+
 
 //아이디 찾기(인증번호 보내기)
 //    @PostMapping(value = "findUser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)

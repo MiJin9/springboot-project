@@ -52,6 +52,7 @@ public class UserServiceImple implements UserService {
 
     @Override
     public boolean singOut(UserVO userVO) {
+        userVO.setStatus(1);
         return userDAO.signOut(userVO);
     }
 
