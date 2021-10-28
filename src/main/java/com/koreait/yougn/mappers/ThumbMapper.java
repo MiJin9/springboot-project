@@ -10,7 +10,7 @@ public interface ThumbMapper {
 
     public void insert(ThumbVO thumbVO);
     public void delete(String uuid);
-    public List<ThumbVO> findByNum(Long thumbNum);
+    public List<ThumbVO> findByNum(Long expoNum);
     public void deleteAll(Long thumbNum);
     public List<ThumbVO> getOldFiles();
 }

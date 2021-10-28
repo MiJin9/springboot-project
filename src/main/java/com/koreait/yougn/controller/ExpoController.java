@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -96,7 +97,14 @@ public class ExpoController {
 
     //상세보기
     @GetMapping({"readDetail", "modify"})
-    public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model) {
+    public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model,  HttpServletRequest request) {
+        String reqURI = request.getRequestURI();
+        String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
+        //read 요청 시 read 출력
+        //modify 요청 시 modify 출력
+        log.info("-------------------------------");
+        log.info(reqType + " : " + expoNum);
+        log.info("-------------------------------");
         model.addAttribute("expo", expoService.get(expoNum));
         model.addAttribute("criteria", criteria);
     }

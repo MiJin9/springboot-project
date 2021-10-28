@@ -40,7 +40,11 @@ public class ExpoServiceImple implements ExpoService{
     }
 
     @Override
-    public ExpoVO get(Long expoNum) {return expoDAO.get(expoNum); }
+    public ExpoVO get(Long expoNum) {
+
+
+        return expoDAO.get(expoNum);
+    }
 
     @Override
     public boolean modify(ExpoVO expoVO) {return expoDAO.modify(expoVO); }

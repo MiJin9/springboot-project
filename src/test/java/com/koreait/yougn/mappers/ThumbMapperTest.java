@@ -26,4 +26,9 @@ public class ThumbMapperTest {
         t.setImage(true);
         thumbMapper.insert(t);
     }
+
+    @Test
+    public void testFindBy(){
+        thumbMapper.findByNum(6513508L);
+    }
 }
