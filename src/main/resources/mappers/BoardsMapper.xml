@@ -67,7 +67,7 @@
             SELECT SEQ_BOARDS.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO T_BOARDS (BNO, TITLE, CONTENT, ID, "TYPE")
-        VALUES(SEQ_BOARDS.NEXTVAL, #{title}, #{content}, #{id}, #{type})
+        VALUES(#{bno}, #{title}, #{content}, #{id}, #{type})
     </insert>
 
     <!--상세보기-->
