@@ -10,14 +10,78 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/market.css" />
+    <link rel="stylesheet" href="/css/expo.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 <style>
-    .sct_li{
-        text-overflow:ellipsis;
-        max-width: 188px;
+
+
+    h1, h2, h3, h4, a, p, li, div, input{
     }
+
+    li>a {
+        font-size: 20px;
+    }
+    .headermenu{
+        width:1000px !important;
+    }
+    .twelve{
+        width: 200px;
+    }
+    table {
+        width: 112%;
+    }
+    li{
+        margin-right: 20px !important;
+    }
+    #subheader a{
+        color: black;
+    }
+
+    .marketItem{
+        background-color: #fafcff;
+        padding : 20px 0;
+        border-bottom: 1px solid #3c3c3c;
+        margin-top: 25px;
+    }
+
+    .marketItemInner{
+        width: 970px;
+        display: flex;
+    }
+
+    .itemTitle{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 40px;
+        margin-bottom: 5px;
+        line-height: 20px;
+        display: block;
+    }
+
+    .itemInfo{
+        margin-left: 50px;
+    }
+
+    div#searchWrap{display: flex;}
+    select[name='type']{width: 10%;border: solid 1px black;height: 37px;border-radius: 0%; font-weight: bold;text-align: center;font-size: 16px;color: black; }
+    input[name='keyword']{
+        width: 80%; margin: 0 auto; padding: 0 0; border: solid 1px black;height: 37px;border-radius: 0%;color: #000000;padding-left: 10px;}
+    form[name='searchForm']{overflow: hidden;}
+
+    .thumbImg {
+        position: relative;
+        display: table-cell;
+        margin-top: 10px;
+        vertical-align: top;
+        width:200px;
+        height:200px;
+        margin-left:30px;>
+    }
+    .itemList{
+        list-style: none;
+    }
+
 </style>
 </head>
 <body class="homepage is-preload">
@@ -35,261 +99,92 @@
                 <section class="sct_wrap" style="width: 1100px;">
                     <br>
                     <div style="height: 40px">
-                        <input style="width: 100px; height: 35px; float: right; line-height: 20px; margin-right: 55px" class="primary" type="button" value="등록">
+                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">등록</a></h3>
                     </div>
                     <br>
-                    <!-- 상품진열 10 시작 { -->
-                    <ul class="sct sct_5">
-                        <li class="sct_li sct_clear">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131001.gif" width="180" height="180" alt="미니사과 루비에스">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_name">
-                                    미니사과 루비에스
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,800원</strike>
-                                </div>
+                    <ul class="itemList">
+                        <th:block th:each="item : ${list}">
+                            <div>
+                                <li class="marketItem" th:object="${item}">
+                                    <div class="marketItemInner">
+                                        <!--썸네일 나중에-->
+                                        <div class="marketImgThumbnail">
+                                            <ul>
+                                                <img class="thumbImg" src="/img/smartFarm_sample.jpg">
+                                            </ul>
+                                        </div>
+                                        <div class="itemInfo">
+                                            <!--제목-->
+                                            <div class="itemTitle">
+                                                <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" name="itemname" th:text="*{itemname}"></a></h4>
+                                            </div>
+                                            <!--작성자-->
+                                            <div>
+                                                작성자 : <p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userid}"></p>
 
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131002.gif" width="180" height="180" alt="달콤한 벌집꿀(허니콤)" title="">
-                                </a>
+                                            </div>
+                                            <!--내용-->
+                                            <div class="itemDetail">
+                                                가격 : <p th:text="*{itemprice}" name="itemprice"></p><br>
+                                                원산지 : <p th:text="*{itemhome}" name="itemhome"></p><br>
+                                                제고 : <p th:text="*{itemtotalcount}" name="itemtotalcount"></p><br>
+                                                배송비 : <p th:text="*{itemdeliverprice}" name="itemdeliverprice"></p><br>
+                                            </div>
+                                            <div class="listNum">
+                                                No.<p id="itemnumber" name="itemnum" th:text="*{itemnum}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
                             </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_name">
-                                    달콤한 벌집꿀(허니콤)
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,900원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/thumb-2109131004_200x200.jpg" width="180" height="180" alt="흑임자인절미&amp;콩쑥개떡" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_name">
-                                    흑임자인절미&amp;콩쑥개떡
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,900원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/thumb-2109131005_200x200.jpg" width="180" height="180" alt="스테비아 방울토망고" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_name">
-                                    스테비아 방울토망고
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>21,500원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li sct_last">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131005.gif" width="180" height="180" alt="해남 무농약 자색고구마 3kg">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_name">
-                                    해남 무농약 자색고구마 3kg
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>24,900원</strike>
-                                </div>
-
-                            </div></li>
-                        </li>
+                        </th:block>
                     </ul>
-                    <!-- } 상품진열 10 끝 -->
 
-                    <!-- 상품진열 10 시작 { -->
-                    <ul class="sct sct_5">
-                        <li class="sct_li sct_clear">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131001.gif" width="180" height="180" alt="미니사과 루비에스">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_name">
-                                    미니사과 루비에스
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,800원</strike>
+                    <form action="/expo/list" name="searchForm">
+                        <div class="fields">
+                            <div class="field"></div>
+                            <div style="margin-bottom: 50px; margin-top: 50px; ">
+                                <div id="searchWrap" th:object="${pageMaker}" style="display: flex;">
+                                    <select name="keyType" th:object="${criteria}" style="padding: 0; width: 100px; font-weight: bold;">
+                                        <option value="">전체 ▼</option>
+                                        <option value="T" th:selected="*{keyType} == 'T'">제목</option>
+                                        <option value="C" th:selected="*{keyType} == 'C'">내용</option>
+                                        <option value="W" th:selected="*{keyType} == 'W'">작성자</option>
+                                    </select>
+                                    <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}" >
+                                    <!--버튼-->
+                                    <a href="javascript:void(0)" class="search button primary icon solid fa-search" style="height: 37px;font-size: 14px;font-weight: 500;border: solid 1px green;">
+                                        검색
+                                    </a>
                                 </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131002.gif" width="180" height="180" alt="달콤한 벌집꿀(허니콤)" title="">
-                                </a>
                             </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_name">
-                                    달콤한 벌집꿀(허니콤)
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,900원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/thumb-2109131004_200x200.jpg" width="180" height="180" alt="흑임자인절미&amp;콩쑥개떡" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_name">
-                                    흑임자인절미&amp;콩쑥개떡
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,900원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/thumb-2109131005_200x200.jpg" width="180" height="180" alt="스테비아 방울토망고" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_name">
-                                    스테비아 방울토망고
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>21,500원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li sct_last">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131005.gif" width="180" height="180" alt="해남 무농약 자색고구마 3kg">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_name">
-                                    해남 무농약 자색고구마 3kg
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>24,900원</strike>
-                                </div>
-
-                            </div></li>
-                        </li>
-                    </ul>
-                    <!-- } 상품진열 10 끝 -->                    <!-- 상품진열 10 시작 { -->
-                    <ul class="sct sct_5">
-                        <li class="sct_li sct_clear">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131001.gif" width="180" height="180" alt="미니사과 루비에스">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131001" class="sct_name">
-                                    미니사과 루비에스
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,800원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131002.gif" width="180" height="180" alt="달콤한 벌집꿀(허니콤)" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131003" class="sct_name">
-                                    달콤한 벌집꿀(허니콤)
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,900원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/thumb-2109131004_200x200.jpg" width="180" height="180" alt="흑임자인절미&amp;콩쑥개떡" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131004" class="sct_name">
-                                    흑임자인절미&amp;콩쑥개떡
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>22,900원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li ">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/thumb-2109131005_200x200.jpg" width="180" height="180" alt="스테비아 방울토망고" title="">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131005" class="sct_name">
-                                    스테비아 방울토망고
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>21,500원</strike>
-                                </div>
-
-                            </div></li>
-                        <li class="sct_li sct_last">
-                            <div class="sct_img">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_a">
-                                    <img src="http://dmshop.kr/data/item/210913/2109131005.gif" width="180" height="180" alt="해남 무농약 자색고구마 3kg">
-                                </a>
-                            </div>
-                            <div class="sct_txt">
-                                <a href="http://dmshop.kr/shop/item.php?it_id=2109131006" class="sct_name">
-                                    해남 무농약 자색고구마 3kg
-                                </a>
-                                <div class="sct_cost">
-                                    <strike>24,900원</strike>
-                                </div>
-
-                            </div></li>
-                        </li>
-                    </ul>
-                    <!-- } 상품진열 10 끝 -->
-
+                        </div>
+                    </form>
+                    <div th:object="${pageMaker}">
+                        <div class="big-width" style="text-align: center">
+                            <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                            <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                                <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                                <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                            </th:block>
+                            <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                        </div>
+                        <form action="/expo/list" th:object="${criteria}" name="pageForm">
+                            <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                            <input type="hidden" name="amount" th:field="*{amount}">
+                            <input type="hidden" name="keyType" th:field="*{keyType}">
+                            <input type="hidden" name="keyword" th:field="*{keyword}">
+                        </form>
+                    </div>
                 </section>
             </div>
         </div>
-        <br>
-        <p style="text-align: center">< <a>1</a><a>2</a><a>3</a><a>4</a><a>5</a><a>6</a> ></p>
-    </div>
+        </section>
 
     <!--footer-->
     <th:block th:include="footer.html"></th:block>
 </div>
-
+</div>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery.dropotron.min.js"></script>
@@ -298,6 +193,104 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+
+<script th:inline="javascript">
+
+    let pageForm = $(document.pageForm); // 페이징 Form 태그
+    let paging = [[${pageMaker.criteria.listLink}]]; // 페이징
+    let searchForm = $(document.searchForm); // 검색기능 Form 태그
+    let itemnum = $("#itemnumber").text(); // 엑스포 넘버
+
+    let uploadResult = $(".marketImgThumbnail ul") // 썸네일 들어갈 태그
+
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/market/getThumbList", {itemnum : itemnum},
+                function(attach){  // 썸네일 1개 가져오기
+                    let str = "";
+                    if (!attach.image) {   // 썸네일을 올리지 않았다면  attach.png
+                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                        str += "<li>"
+                        str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                        str += "</li>";
+                    } else { // 등록한 썸네일 넣기
+                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                        let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                        str += "<li>"
+                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                        str += "</li>";
+
+                    }
+                    uploadResult.html(str);
+                });//getJSON
+        })();
+
+        showList(pageNum);
+
+        function goUpdate(){
+            location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
+        }
+
+        $("a#goList").on("click", function(){
+            location.href = "/market/marketList" + paging;
+        });
+
+
+        if(itemnum == null || history.state){
+            return;
+        }
+        alert("게시글 " + itemnum + "번이 등록되었습니다.");
+        history.replaceState({}, null, null);
+    });
+
+
+    // 페이징 양쪽 부등호
+    $("a.changePage").click(function(e){
+        e.preventDefault();
+        pageForm.attr("action", "/expo/list")
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+
+    //제목 눌렀을 때
+    $("a#goRead").on("click", function(e){
+        e.preventDefault();
+        console.log(itemnum);
+        location.href = "/market/marketView" + paging  + "&itemnum=" + itemnum;
+    })
+
+    //검색할 때
+    $("a.search").on("click", function(e){
+        e.preventDefault();
+        if(!searchForm.find("option:selected").val()){
+            alert("검색 종류를 선택하세요");
+            return;
+        }
+
+        if(!searchForm.find("input#keyword").val()){
+            alert("키워드를 입력하세요");
+            return;
+        }
+        searchForm.submit();
+    });
+
+    $("input#keyword").on("keydown", function(e){
+        if(e.keyCode == 13){
+            e.preventDefault();
+        }
+    })
+
+    $("a.writeButton").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/market/marketWrite";
+    })
+
+
+
+</script>
+
 
 </body>
 </html>
