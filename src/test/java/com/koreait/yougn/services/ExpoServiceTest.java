@@ -27,11 +27,16 @@ public class ExpoServiceTest {
 
     @Test
     public void register(){
-        ExpoVO expoVO = new ExpoVO();
-        expoVO.setExpoTitle("제목");
-        expoVO.setExpoContent("내용");
-        expoVO.setUserId("아이디");
-        expoService.register(expoVO);
+        ExpoVO expovo =  new ExpoVO();
+        expovo.setUserId("1");
+        expovo.setExpoContent("2");
+        expovo.setExpoTitle("3");
+        expovo.setFarmName("5");
+        expovo.setFarmerName("6");
+        expovo.setFarmAddress("7");
+        expovo.setFarmPhone("8");
+        expovo.setFarmProduct("9");
+        expoService.register(expovo);
     }
 
     @Test
