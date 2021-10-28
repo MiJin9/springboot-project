@@ -37,15 +37,26 @@
                 <div class="category">
                     <img src="/img/pageBanner_write.png" style="padding-top: 53px;">
                 </div>
-            <form id="writeForm" name="postForm" method="POST" action="/expo/writeExpo">
+            <form th:object="${expo}" id="writeForm" name="postForm" method="POST" action="/expo/writeExpo">
             <input type="text" name="expoTitle" placeholder ="제목을 입력해주세요." id="title" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
                 <hr>
                 <div class="thumbWrapper" style="display: flex">
-                    <div class="thumbPhoto" style="margin-left: 20px">썸네일 미리보기 사진</div>
+                    <div class="thumbButton">
+                        <p style="text-align: center; font-size: 18px; font-weight: 600;">대표사진</p>
+                        <input type="file" class="uploadFiles" multiple>
+                    </div>
+                    <div class="field">
+                        <div class="uploadResult">
+                            <ul></ul>
+                        </div>
+                    </div>
+                    <div class="bigPictureWrapper">
+                        <div class="bigPicture"></div>
+                    </div>
                     <div style="margin-top: 30px">
                         <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
                         <div>
-                            <input name="userId" th:field="${vo.userId}" type="hidden">
+                            <input name="userId" th:field="*{userId}" type="hidden">
                         </div>
                         <div>
                             <h4 style="margin-left: 50px">농장이름 *</h4>
@@ -73,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+                <hr style="margin-top: 50px;">
 
                 <!-- summernote와 관련된 영역 -->
 
@@ -83,7 +94,7 @@
 
                 <div align="center" class="btn-box">
 
-                    <input type="button" id="sendSummer" class="button" value="작성" >
+                    <input type="submit" id="sendSummer" class="button" value="작성" >
 
                     <a class="button" onclick="history.back()" >취소</a>
 
@@ -115,12 +126,12 @@
 <script src="/js/board/expowrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script>
+<script th:inline="javascript">
     let check = false;
     function showImage(fileCallPath){
         if(check) {return;}
-        $(".thumbWrapper").css("display", "flex").show();
-        $(".thumbPhoto").html("<img src='/upload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
+        $(".bigPictureWrapper").css("display", "flex").show();
+        $(".bigPicture").html("<img src='/upload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
             .animate({width:"100%", height:"100%"}, 1000);
         check = true;
     }
@@ -239,5 +250,6 @@
         });
     })
 </script>
+<
 </body>
 </html>
