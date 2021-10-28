@@ -4,7 +4,7 @@
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 -->
-<html xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>Untitled</title>
     <meta charset="utf-8" />
@@ -50,24 +50,26 @@
                 </a>
             </div>
             <div class="searchBox">
-                <div class="searchMenu">
-                    <div class="bigCate">
-                        <select name="sido">
-                        </select>
+                <form action="/support/returnList" method="get">
+                    <div class="searchMenu">
+                        <div class="bigCate">
+                            <select name="local">
+                            </select>
+                        </div>
+                        <div class="midCate">
+                            <select name="item">
+                                <option value="">작물</option>
+                            </select>
+                        </div>
+                        <input type="search" name="keyword">
+                        <input type="submit" class="button large" id="searchButton" value="검색">
                     </div>
-                    <div class="midCate">
-                        <select name="goods">
-                            <option value="">작물</option>
-                        </select>
-                    </div>
-                    <input type="search">
-                    <input type="button" class="button large" value="검색">
-                </div>
+                </form>
             </div>
             <div class="listWrapper">
                 <div class="list">
-                    <table>
-                        <caption style="text-align: right">(단위:연, 천원)</caption>
+                    <table id="table">
+                        <caption style="text-align: right">(단위:m<sup>2</sup>, 연, 천원)</caption>
                         <tr>
                             <th>지역</th>
                             <th>작물</th>
@@ -75,18 +77,36 @@
                             <th>평균 투자비</th>
                             <th>운영비</th>
                             <th>평균 수입</th>
-                            <th>수익률</th>
+                        </tr>
+                        <th:block th:each="vo:${list}">
+                            <tr th:object="${vo}">
+                                <td th:text="*{local}"></td>
+                                <td th:text="*{item}"></td>
+                                <td th:text="*{size}"></td>
+                                <td th:text="*{input}"></td>
+                                <td th:text="*{operate}"></td>
+                                <td th:text="*{income}"></td>
+                            </tr>
+                        </th:block>
+                        <tr th:if="${list.size() == 0}">
+                            <td colspan="6">등록된 정보가 없습니다.</td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="paging">
-                <table>
+                <table th:object="${pageMaker}">
                     <tr>
-                        <td>&lt;</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>&gt;</td>
+                        <td th:if="*{prev}"><a th:href="@{returnList(pageNum=*{criteria.pageNum -1},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.keyword})}">&lt;</a></td>
+                        <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <td th:if="${pageMaker.criteria.getPageNum() != num}">
+                                <a th:href="@{returnList(pageNum=${num},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.keyword})}">
+                                    <span th:text="${num}"></span>
+                                </a>
+                            </td>
+                            <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
+                        </th:block>
+                        <td th:if="*{next}"><a th:href="@{returnList(pageNum=*{criteria.pageNum +1},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.keyword})}">&gt;</a></td>
                     </tr>
                 </table>
             </div>
@@ -120,21 +140,21 @@
         var area8 = ["전체","고구마","곶감","노지시금치","단감","당근","대붕감","딸기","마늘","매실","부추","블루베리","수박","시금치","호박","알로에","약초","양파","오미자","참다래","파프리카","한라봉"];//경남
         var area9 = ["전체","감귤","당근","무","브로콜리"];//제주
 
-        $("select[name=sido]").each(function() {
+        $("select[name=local]").each(function() {
             $selsido = $(this);
             $.each(eval(area0), function() {
                 $selsido.append("<option value='"+this+"'>"+this+"</option>");
             });
-            $selsido.next().append("<option value=''>구/군 선택</option>");
+            $selsido.next().append("<option value=''>작물 선택</option>");
         });
 
-        $("select[name=sido]").change(function() {
+        $("select[name=local]").change(function() {
             var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
-            var $gugun = $("select[name=goods]"); // 선택영역 군구 객체
+            var $gugun = $("select[name=item]"); // 선택영역 군구 객체
             $("option",$gugun).remove(); // 구군 초기화
 
             if(area == "area0")
-                $gugun.append("<option value=''>구/군 선택</option>");
+                $gugun.append("<option value=''>작물 선택</option>");
             else {
                 $.each(eval(area), function() {
                     $gugun.append("<option value='"+this+"'>"+this+"</option>");

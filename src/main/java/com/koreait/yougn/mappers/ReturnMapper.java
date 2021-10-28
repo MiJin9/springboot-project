@@ -10,4 +10,5 @@ import java.util.List;
 public interface ReturnMapper {
     public List<ReturnVO> selectAll(ReturnCri returnCri);
     public List<ReturnVO> selectList(ReturnCri returnCri);
+    public int getTotal(ReturnCri returnCri);
 }

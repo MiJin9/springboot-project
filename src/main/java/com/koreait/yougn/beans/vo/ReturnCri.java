@@ -6,7 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 @Data
-public class ReturnCri {
+public class ReturnCri extends Criteria{
     private int pageNum;
     private int amount;
     private String keyword;
@@ -22,6 +22,7 @@ public class ReturnCri {
         this.amount = amount;
     }
 
+    @Override
     public String getListLink(){
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
                 .queryParam("pageNum", pageNum)

@@ -117,11 +117,13 @@ div.bigCate select, div.midCate select {
 .tle table {
     margin: 0 auto;
     width: 900px;
+    margin-bottom: 30px;
 }
 
 .paging {
     margin: 0 auto;
     width: 900px;
+    padding-bottom: 30px;
 }
 
 .paging table {
@@ -158,6 +160,6 @@ table input[type=button] {
     font-size: 35px;
 }
 
-.button{
+.button {
     font-family: "Jeju Gothic";
 }
