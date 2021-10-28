@@ -20,11 +20,6 @@ img.contentPicture {
     color: black;
 }
 
-.content{
-    padding-left: 1.25em;
-    padding-right: 1.25em;
-    padding-bottom: 1.25em;
-}
 
 .bottom{
     padding: 45px 0 40px 0px;
@@ -35,9 +30,6 @@ img.bottomPicture{
     height: 100px;
 }
 
-.ddaompyo2{
-    text-align: right;
-}
 
 .contentInner{
     font-size: 16px;
@@ -58,4 +50,23 @@ img.bottomPicture{
 .button{
     font-weight: 100;
     border: solid 1px green;
+}
+
+.thumbWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.readTitle{
+    margin-top: 55px;
+    text-align: center;
+}
+
+.bodyText{
+    width: 400px;
+
+}
+
+.thumbButton{
+    height: 75px;
 }

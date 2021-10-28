@@ -13,81 +13,79 @@
     <link rel="stylesheet" href="/css/expoDetail.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
-<style>
-    .photo{
-        width: 500px;
-        height: 500px;
-        line-height: 450px;
-        border-right: solid 0.5px;
-        background: ivory;
-        text-align: center;
-    }
-</style>
+
 <body class="homepage is-preload">
 <div id="page-wrapper">
     <th:block th:include="header.html"></th:block>
-
-<section>
-    <div class="tle" style="height: auto;">
-        <div class="main" style="height: auto;">
-            <div class="category">
-                <img src="/img/pageBanner_detail.png">
-            </div>
-            <div style="display: flex; float: right">
-                <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="수정">
-                <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="삭제">
-                <input style=" margin-right: 10px; height: 35px; width: 125px; line-height: normal;" class="primary" type="button" value="목록보기">
-            </div>
-            <br>
-            <br>
-            <form method="post" action="/expo/remove">
-            <div class="fields" th:object="${expo}">
-                <div class="field">
-                    <h3 name="expoName" style="font-size: 30px; height: 50px; text-align: center"></h3>
+    <section>
+        <div class="tle" style="height: auto;">
+            <div class="main" th:object="${expo}" style="height: auto;">
+                <div class="category">
+                    <img src="/img/pageBanner_detail.png">
+                </div>
+                <div style="display: flex; float: right">
+                    <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="수정">
+                    <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="삭제">
+                    <input style=" margin-right: 10px; height: 35px; width: 125px; line-height: normal;" class="primary" type="button" value="목록보기">
+                </div>
+                <div class="readTitle">
+                    <input name="readTitle" style="height: 30px; width: 500px; margin-left: 50px" type="text">
+                </div>
+                <div class="thumbWrapper" style="display: flex">
+                    <div class="thumbButton">
+                        <p style="text-align: left; font-size: 18px; font-weight: 600; margin-left: 50px">대표사진</p>
+                    </div>
+                    <div class="field">
+                        <div class="uploadResult">
+                            <ul></ul>
+                        </div>
+                </div>
+                <div class="bigPictureWrapper">
+                    <div class="bigPicture"></div>
                 </div>
             <!--내용 시작-->
-            <div style="display: flex">
-                <div class="photo" style="margin-left: 20px">썸네일 미리보기 사진</div>
-                <div style="margin-top: 30px">
                     <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
+                <div class="bodyText">
+                    <div>
+                        <input name="userId" th:field="*{userId}" type="hidden">
+                    </div>
                     <div class="field">
                         <h4 style="margin-left: 50px">농장이름</h4>
-                        <p th:text="*{farmName}" name="farmName" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                        <p th:text="*{farmName}" name="farmName" style="height: 30px;"></p>
                     </div>
                     <br>
                     <div class="field">
                         <h4 style="margin-left: 50px">농장주</h4>
-                        <p th:text="*{farmerName}" name="farmerName" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                        <p th:text="*{farmerName}" name="farmerName" style="height: 30px;"></p>
                     </div>
                     <br>
                     <div>
                         <h4 style="margin-left: 50px">주소</h4>
-                        <p th:text="*{farmAddress}" name="farmAddress" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                        <p th:text="*{farmAddress}" name="farmAddress" style="height: 30px;"></p>
                     </div>
                     <br>
                     <div>
                         <h4 style="margin-left: 50px">전화번호</h4>
-                        <p th:text="*{farmPhone}" name="farmPhone" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                        <p th:text="*{farmPhone}" name="farmPhone" style="height: 30px;"></p>
                     </div>
                     <br>
                     <div>
                         <h4 style="margin-left: 50px">주요품목</h4>
-                        <p th:text="*{farmProduct}" name="farmProduct" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                        <p th:text="*{farmProduct}" name="farmProduct" style="height: 30px;"></p>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="contentOutLine"><!--본문-->
-                <div class="expoContent" name="expoContent" rows="6" style="resize:none" readonly></div>
-            </div><!--outline-->
-            </div>
-            <div class="BottomLike" style="text-align: center;">
-                <!--자바스크립트로 좋아요 효과 주기-->
-                <img class="likeStar" src="/img/like_sample.png">
-            </div>
-            </form>
         </div>
+        <hr>
+        <div class="contentOutLine"><!--본문-->
+            <div class="expoContent" name="expoContent" rows="6" style="resize:none" readonly></div>
+        </div><!--outline-->
     </div>
+    <div class="BottomLike" style="text-align: center;">
+        <!--자바스크립트로 좋아요 효과 주기-->
+        <img class="likeStar" src="/img/like_sample.png">
+    </div>
+</form>
     <br>
     <a href="/expo/list" class="primary button"
        style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px; margin-left: 895px; margin-top: 8px;">목록 보기
@@ -111,6 +109,54 @@
     let expoContent = [[${expo.expoContent}]];
 
     $(".expoContent").html(expoContent);
+
+    let showCheck = false;
+    function showImage(fileCallPath){
+        if(showCheck) {return;}
+        $(".bigPictureWrapper").css("display", "flex").show();
+        $(".bigPicture").html("<img src='/upload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
+            .animate({width:"100%", height:"100%"}, 1000);
+        showCheck = true;
+    }
+
+    $(document).ready(function(){
+        (function(){
+            console.log(bno);
+            $.getJSON("/board/getAttachList", {bno: bno},
+                function(arr){
+                    console.log(arr);
+                    let str = "";
+
+                    $(arr).each(function(i, attach){
+                        if(!attach.image){
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<li>";
+                            str += "<div>";
+                            str += "<a href='/upload/download?fileName=" + fileCallPath + "'>";
+                            str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                            str += "</a>"
+                            str += "</div>";
+                            str += "</li>";
+                        }else{
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                            str += "<li>";
+                            str += "<div>";
+                            str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
+                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                            str += "</a>";
+                            str += "</div>";
+                            str += "</li>";
+                        }
+                    });
+                    uploadResult.html(str);
+                });//getJSON
+        })();
+    });
+
+    showList(pageNum);
+
 
 
 </script>

@@ -24,6 +24,21 @@ public class ExpoMapperTest {
         expoMapper.getList(cri).forEach(expoMapper -> log.info(expoMapper.toString()));
     }
 
+    @Test
+    public void testRegister(){
+        //#{userId}, #{expoContent}, #{expoTitle}, #{farmName}, #{farmerName}, #{farmAddress}, #{farmPhone}, #{farmProduct}
+        ExpoVO expovo =  new ExpoVO();
+        expovo.setUserId("1");
+        expovo.setExpoContent("2");
+        expovo.setExpoTitle("3");
+        expovo.setFarmName("5");
+        expovo.setFarmerName("6");
+        expovo.setFarmAddress("7");
+        expovo.setFarmPhone("8");
+        expovo.setFarmProduct("9");
+        expoMapper.insertSelectKey_expoNum(expovo);
+    }
+
 
 
 }

@@ -29,6 +29,11 @@ public class ExpoController {
 
     private final ExpoService expoService;
 
+    @GetMapping("detailfuck")
+    public void detailfuck(){
+
+    }
+
     /*리스트*/
     @GetMapping("list")
     public String list(Criteria criteria, Model model) {

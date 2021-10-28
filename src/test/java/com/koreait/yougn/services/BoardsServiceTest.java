@@ -23,4 +23,5 @@ public class BoardsServiceTest {
     public void testGet(){
         boardsService.get(3L);
     }
+
 }
