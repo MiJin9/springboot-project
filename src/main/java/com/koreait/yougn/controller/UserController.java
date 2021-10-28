@@ -290,4 +290,9 @@ public class UserController {
         return "user/inquiryWrite";
     }
 
+    @GetMapping("inquiryRead")
+    public String inquiryRead() {
+        return "user/inquiryRead";
+    }
+
 }

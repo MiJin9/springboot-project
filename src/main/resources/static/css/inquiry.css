@@ -17,11 +17,6 @@
     margin-bottom: 1px;
 }
 
-.content div {
-    float: left;
-    height: 500px;
-}
-
 .contentLeft {
     width: 30%;
     padding: 40px 0px 20px 30px;
@@ -88,11 +83,10 @@ a {
     font-size: 15px;
 }
 
-#contentt {
+#content2 {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: -15px;
 }
 
 #inquiryBtn {

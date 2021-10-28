@@ -1,0 +1,73 @@
+#all {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.group {
+    margin-bottom: 80px;
+    width: 80%;
+}
+
+.group > h3 {
+    text-align: center;
+    margin-top: 110px;
+    color: #000000;
+}
+
+::placeholder {
+    font-size: 16px;
+}
+
+#all .button {
+    height: 40px;
+    font-size: 16px;
+    width: 85px;
+    font-family: 'Jeju Gothic';
+    line-height: 1.5;
+    font-weight: 500;
+    background: #c97b1f;
+    color: white;
+    text-align: center;
+}
+
+#inquiryTitle {
+    float: left;
+    width: 85%;
+    height: 45px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #999;
+}
+
+#inquiryDate {
+    float: right;
+    width: 15%;
+    border: none;
+    text-align: right;
+    height: 45px;
+    font-size: 18px;
+    border-bottom: 1px solid #999;
+}
+
+#inquiryContent {
+    resize: none;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+}
+
+.input:focus{
+    outline: none;
+}
+
+.input2:focus{
+    outline: 1px solid #7a8186;
+}
+
+.input2{
+    resize: none;
+    width: 100%;
+    margin-top: 12px;
+}

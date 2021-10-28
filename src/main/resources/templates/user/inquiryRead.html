@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/inquiryRead.css"/>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <style>
+
+
+    </style>
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <section class="main">
+        <div id="all" style="padding-top: 80px">
+            <div class="group" style="width: 80%;">
+                <h3 style="text-align: center; margin-bottom: 25px; margin-top: 30px">1:1 문의글</h3>
+                <hr style="width: 89%">
+                <div style="width: 89%; margin-left: 48px">
+                    <div style="margin-top: 20px">
+                        <input value="제목입니다" readonly id="inquiryTitle" class="input">
+                        <input value="2021-10-28" readonly id="inquiryDate" class="input">
+                    </div>
+                    <div>
+                        <textarea rows="6" id="inquiryContent" class="input" style="margin-top: 10px" readonly>내용입니다</textarea>
+                    </div>
+                    <div>
+                        <hr>
+                        <ul style="padding-left: 0px">
+                            <li style="display: block">
+                                <img src="/img/reply2.png" style="width:25px; margin-right: 7px">
+                                <strong>댓글</strong>
+                            </li>
+                        </ul>
+                        <div class="register-form">
+                            <div style="padding-top: 15px">
+                                <h3 style="color: black; font-size: 16px">Admin : </h3>
+                                <textarea rows="3" name="reply" placeholder="댓글을 입력해주세요." class="input2"></textarea>
+                            </div>
+                            <div style="text-align: right">
+                                <a id="register" class="button">등록</a>
+                                <a id="cancel" class="button" style="margin-left: 3px; background: #888787;">취소</a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="replies"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
