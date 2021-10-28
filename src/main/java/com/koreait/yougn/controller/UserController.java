@@ -285,6 +285,14 @@ public class UserController {
         return map;
     }
 
+    @GetMapping("inquiryWrite")
+    public String inquiryWrite() {
+        return "user/inquiryWrite";
+    }
 
-//비밀번호 찾기
+    @GetMapping("inquiryRead")
+    public String inquiryRead() {
+        return "user/inquiryRead";
+    }
+
 }
