@@ -18,6 +18,16 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 
 </head>
+<style>
+    .photo{
+       width: 500px;
+        height: 500px;
+        line-height: 450px;
+        border-right: solid 0.5px;
+        background: ivory;
+        text-align: center;
+    }
+</style>
 <body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
@@ -27,13 +37,47 @@
                 <div class="category">
                     <img src="/img/pageBanner_write.png" style="padding-top: 53px;">
                 </div>
-            <form id="postForm" name="postForm" method="POST">
-
+            <form id="writeForm" name="postForm" method="POST" action="/expo/writeExpo">
+            <input type="text" name="expoTitle" placeholder ="제목을 입력해주세요." id="title" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
+                <hr>
+                <div class="thumbWrapper" style="display: flex">
+                    <div class="thumbPhoto" style="margin-left: 20px">썸네일 미리보기 사진</div>
+                    <div style="margin-top: 30px">
+                        <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
+                        <div>
+                            <input name="userId" th:field="${vo.userId}" type="hidden">
+                        </div>
+                        <div>
+                            <h4 style="margin-left: 50px">농장이름 *</h4>
+                            <input name="farmName" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 이름">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장주 *</h4>
+                            <input name="farmerName" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장 주소 *</h4>
+                            <input name="farmAddress" style="height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장 전화번호</h4>
+                            <input name="farmPhone" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="margin-left: 50px">농장 주요 품목</h4>
+                            <input name="farmProduct" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
+                        </div>
+                    </div>
+                </div>
+                <hr>
 
                 <!-- summernote와 관련된 영역 -->
-                <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" style="background:white;  width: 100%; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 60px;font-size: 20px; padding-left: 10px;">
 
-                <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                <textarea id="summernote" name="expoContent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                 <!-- 버튼과 관련된 영역 -->
 
@@ -71,6 +115,129 @@
 <script src="/js/board/expowrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script>
+    let check = false;
+    function showImage(fileCallPath){
+        if(check) {return;}
+        $(".thumbWrapper").css("display", "flex").show();
+        $(".thumbPhoto").html("<img src='/upload/display?fileName=" + encodeURIComponent(fileCallPath) + "'>")
+            .animate({width:"100%", height:"100%"}, 1000);
+        check = true;
+    }
 
+    // $(".thumbWrapper").on("click", function(){
+    //     if(!check){return;}
+    //     $(".thumbPhoto").animate({width: "0%", height: "0%"}, 1000);
+    //     setTimeout(function(){
+    //         check = false;
+    //         $(".thumbWrapper").hide();
+    //     }, 1000)
+    // })
+
+    $(document).ready(function(){
+        let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".uploadResult ul");
+
+        $("input[type='submit']").on("click", function(e){
+            e.preventDefault();
+            let form = $("form#postForm");
+            let str = "";
+            $(".uploadResult ul li").each(function(i, obj){
+                str += "<input type='hidden' name='fileList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='hidden' name='fileList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='hidden' name='fileList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='hidden' name='fileList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            form.append(str).submit();
+        })
+
+        function showUploadFile(uploadFiles){
+            let str = "";
+            $(uploadFiles).each(function(i, obj){
+                if(!obj.image){
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<a href='/upload/download?fileName=" + fileCallPath + "'>";
+                    str += "<img src='/img/attach.png' width='100px'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "</a>"
+                    str += "<span data-file='" + fileCallPath + "' data-type='file'>x</span>";
+                    str += "</div>";
+                    str += "</li>";
+                }else{
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                    let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<a href=\"javascript:showImage(\'" + originPath + "\')\">";
+                    str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + obj.fileName.substring(obj.fileName.indexOf("_") + 1);
+                    str += "</a>";
+                    str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                    str += "</div>";
+                    str += "</li>";
+                }
+            });
+            uploadResult.append(str);
+        }
+
+        $(".uploadResult").on("click", "span", function(){
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            $.ajax({
+                url: "/upload/deleteFile",
+                type: "POST",
+                data: {fileName:targetFile, type:type},
+                dataType: "text",
+                success: function(result){
+                    alert(result);
+                    li.remove();
+                }
+            });
+
+        });
+
+        //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
+        function checkExtension(fileName, fileSize){
+            if(regex.test(fileName)){
+                alert("업로드 할 수 없는 파일의 형식입니다.");
+                return false;
+            }
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+
+        $("input[type='file']").change(function(){
+            let formData = new FormData();
+            let inputFile = $("input[name='uploadFiles']");
+            let files = inputFile[0].files;
+
+            for(let i=0; i<files.length; i++){
+                if(!checkExtension(files[i].name, files[i].size)){ return; }
+                formData.append("uploadFiles", files[i]);
+            }
+
+            $.ajax({
+                url: "/upload/uploadAjaxAction",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(fileList){
+                    showUploadFile(fileList);
+                    inputFile.val("");
+                }
+            });
+        });
+    })
+</script>
 </body>
 </html>

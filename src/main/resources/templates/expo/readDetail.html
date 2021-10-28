@@ -13,6 +13,16 @@
     <link rel="stylesheet" href="/css/expoDetail.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
+<style>
+    .photo{
+        width: 500px;
+        height: 500px;
+        line-height: 450px;
+        border-right: solid 0.5px;
+        background: ivory;
+        text-align: center;
+    }
+</style>
 <body class="homepage is-preload">
 <div id="page-wrapper">
     <th:block th:include="header.html"></th:block>
@@ -22,101 +32,67 @@
         <div class="main" style="height: auto;">
             <div class="category">
                 <img src="/img/pageBanner_detail.png">
-<!--                <h1 style="font-size: 44px; font-weight: 100; background:#7ebf5b; padding-top: 60px;color: white;padding-bottom: 46px;padding-left: 15px; ">EXPO 상세보기</h1>-->
             </div>
-<!--            <hr style="border-top: solid 1px green; margin-top: 0px;">-->
-            <a href="/expo/list" class="primary button" style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px;margin: 17px 0 30px 960px;">
-                목록 보기
-            </a>
+            <div style="display: flex; float: right">
+                <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="수정">
+                <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="삭제">
+                <input style=" margin-right: 10px; height: 35px; width: 125px; line-height: normal;" class="primary" type="button" value="목록보기">
+            </div>
+            <br>
+            <br>
+            <form method="post" action="/expo/remove">
+            <div class="fields" th:object="${expo}">
+                <div class="field">
+                    <h3 name="expoName" style="font-size: 30px; height: 50px; text-align: center"></h3>
+                </div>
             <!--내용 시작-->
-            <div class="contentOutLine" >
-                <div class="content">
-                    <div class="frontContent">
-                        <div class="ddaompyo1"><!--따옴표 이미지-->
-                            <img src="/img/quot_1.jpg">
-                        </div>
-                        <div class="frontText">
-                            <p class="frontText" style="font-size: 18px; text-align: center;">
-                                "나의 하늘감상은 장소나 때를 불문한다.<br>
-                                도시에 사는 친구들에게  하늘사진을 전송하면
-                                역시 공기 좋은 곳이라 하늘도 다르다며 부러워 한다.<br>
-                                시골생활의 여유로움과 낭만을 선물하며 시골행을 권하고 있다.<br>
-                                엄두도 못내던 친구들도 이제는 어디서 살지를 고민하며 물어온다."
-                            </p>
-                        </div>
-                        <div class="ddaompyo2">
-                            <img src="/img/quot_2.jpg">
-                        </div>
-                        <br>
-
-                        <div class="frontNameCard">
-                            <img class="nameCardFace" src="/img/skin1_info_b.png">
-                            <br>
-                            <strong class="companyName">(주)코지크루 이멜론 대표</strong>
-                            <div class="companyMail">cozy@Kroo.com</div>
-                            <div class="companyAddress">서울특별시 강남구 역삼동 12-123</div>
-                            <div class="companyPhone">02-123-1234</div>
-                            <br>
-                        </div>
-                    </div><!--/frontContent-->
-                    <!--내용 시작-->
-                    <div class="contentInner">
-                        <div class="contentPicture">
-                            <img class="contentPicture" src="/img/expo_img_sample1.jpg">
-                        </div>
-                        <p class="contentInner">
-                            한국사회적기업진흥원에서 오는 10월 13일, 14일 양일간 ‘연대와 협력으로 세상을 바꾸다 – 전환의 시대와 사회적경제의 미래’를 주제로 공공, 민간기업, 시민사회 등 다양한 영역과 사회적경제의 파트너십을 통한 사회문제의 해결 사례들과, 사회적경제의 역할을 강화하기 위한 방안들에 대해 논의하고자 합니다.
-
-                            이번 포럼은 온•오프라인으로 진행되며, 포럼 홈페이지를 통해 사전등록과 실시간으로 시청 하실 수 있습니다.
-                            참가자 분들을 위한 다양한 이벤트도 준비했으니, 많은 관심과 참여 부탁드립니다.
-                        </p>
-                        <div class="contentPicture">
-                            <img class="contentPicture" src="/img/detailStrawberry_sample.jpg">
-                        </div>
-                        <p class="contentInner">
-                            - 콘텐츠 기업의 신시장 개척 및 투자유치 지원
-
-                            - B2C 행사를 위한 다양한 부대행사 개최
-
-                            - 지역 공공 캐릭터축제 개최
-
-                            - 유저들의 수요 중심 행사 구성
-                        </p>
-                    </div><!--content-->
-                </div><!--content-->
-            </div><!--outline-->
-        </div><!--main-->
-    </div><!--tle-->
-    <div class="main">
-        <div class="bottom">
-            <div class="bottomPicture" style="text-align: center;">
-                <img class="bottomPicture" src="/img/strawberry_sample.jpg">
+            <div style="display: flex">
+                <div class="photo" style="margin-left: 20px">썸네일 미리보기 사진</div>
+                <div style="margin-top: 30px">
+                    <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
+                    <div class="field">
+                        <h4 style="margin-left: 50px">농장이름</h4>
+                        <p th:text="*{farmName}" name="farmName" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                    </div>
+                    <br>
+                    <div class="field">
+                        <h4 style="margin-left: 50px">농장주</h4>
+                        <p th:text="*{farmerName}" name="farmerName" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">주소</h4>
+                        <p th:text="*{farmAddress}" name="farmAddress" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">전화번호</h4>
+                        <p th:text="*{farmPhone}" name="farmPhone" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 style="margin-left: 50px">주요품목</h4>
+                        <p th:text="*{farmProduct}" name="farmProduct" style="height: 30px; width: 500px; margin-left: 50px"></p>
+                    </div>
+                </div>
             </div>
-            <div class="bottomComment" style="text-align: center;">
-                <p>
-                    <strong class="companyName">(주)코지크루 이멜론 대표</strong>
-                    <div class="companyMail">cozy@Kroo.com</div>
-                    <div class="companyAddress">서울특별시 강남구 역삼동 12-123</div>
-                    <div class="companyPhone">02-123-1234</div>
-                </p>
+            <hr>
+            <div class="contentOutLine"><!--본문-->
+                <div class="expoContent" name="expoContent" rows="6" style="resize:none" readonly></div>
+            </div><!--outline-->
             </div>
             <div class="BottomLike" style="text-align: center;">
                 <!--자바스크립트로 좋아요 효과 주기-->
                 <img class="likeStar" src="/img/like_sample.png">
             </div>
+            </form>
         </div>
     </div>
     <br>
     <a href="/expo/list" class="primary button"
-       style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px; margin-left: 895px; margin-top: 8px;">
-        목록 보기
+       style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px; margin-left: 895px; margin-top: 8px;">목록 보기
     </a>
 </section>
-
-
-
-
-
     <th:block th:include="footer.html"></th:block>
 </div>
 
@@ -129,5 +105,13 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 
+
 </body>
+<script th:inline="javascript">
+    let expoContent = [[${expo.expoContent}]];
+
+    $(".expoContent").html(expoContent);
+
+
+</script>
 </html>
