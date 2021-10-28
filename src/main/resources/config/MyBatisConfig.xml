@@ -9,5 +9,6 @@
         <typeAlias type="com.koreait.yougn.beans.vo.ExpoVO" alias="expoVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.ThumbVO" alias="thumbVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.HallVO" alias="hallVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.FaqVO" alias="faqVO"/>
     </typeAliases>
 </configuration>
