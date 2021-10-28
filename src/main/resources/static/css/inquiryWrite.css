@@ -1,0 +1,77 @@
+select {
+    width: 190px;
+    border: 1px solid #999;
+    font-family: inherit;
+    background: url('/img/arrow.jpg') no-repeat 95% 50%;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 15px;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+#all {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.group {
+    margin-bottom: 80px;
+    width: 80%;
+}
+
+.group > h3{
+    text-align: center;
+    margin-top: 110px;
+    color: #000000;
+}
+
+::placeholder {
+    font-size: 16px;
+}
+
+input[type="button"]{
+    height: 45px;
+    font-size: 16px;
+    width: 140px;
+    font-family: 'Jeju Gothic';
+    line-height: 2;
+    font-weight: 500;
+    background: #c97b1f;
+    color: white;
+    text-align: center;
+}
+
+.input:focus{
+    outline: 1px solid #7a8186;
+}
+
+.input{
+    border: 1px solid #999;
+    width: 80%;
+}
+
+#table{
+    color: black; margin-top: 35px; margin-left: 78px;
+}
+
+#table tr{
+    height: 50px;
+}
+
+#table th{
+    text-align: left;
+    width: 75px;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+#table td{
+    padding-left: 50px
+}
