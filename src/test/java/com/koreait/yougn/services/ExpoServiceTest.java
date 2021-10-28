@@ -1,6 +1,5 @@
 package com.koreait.yougn.services;
 
-import com.koreait.yougn.beans.vo.BoardsVO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +17,45 @@ public class ExpoServiceTest {
     private ExpoService expoService;
 
     @Test
-    public void testGetList(){
+    public void getList(){
         Criteria criteria = new Criteria();
-        expoService.getList(criteria).forEach(expoService -> log.info(expoService.toString()));
+        criteria.setPageNum(2);
+        criteria.setAmount(10);
+        expoService.getList(criteria);
+
     }
+
     @Test
-    public void testGet(){
-        expoService.get(3L);
+    public void register(){
+        ExpoVO expoVO = new ExpoVO();
+        expoVO.setExpoTitle("제목");
+        expoVO.setExpoContent("내용");
+        expoVO.setUserId("아이디");
+        expoService.register(expoVO);
     }
+
+    @Test
+    public void modify() {
+        ExpoVO expoVO = new ExpoVO();
+        expoVO.setExpoNum(5L);
+        expoVO.setExpoTitle("제목123");
+        expoVO.setExpoContent("내용123");
+        expoVO.setUserId("아이디123");
+        expoService.modify(expoVO);
+
+    }
+
+    @Test
+    public void remove(){
+        expoService.remove(26L);
+    }
+
+    @Test
+    public void getTotal(){
+        Criteria criteria = new Criteria();
+        expoService.getTotal(criteria);
+    }
+
+    @Test
+    public void get(){expoService.get(68L); }
 }

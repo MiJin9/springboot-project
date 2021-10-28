@@ -1,6 +1,5 @@
 package com.koreait.yougn.mappers;
 
-import com.koreait.yougn.beans.vo.BoardsVO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
 import org.apache.ibatis.annotations.Mapper;

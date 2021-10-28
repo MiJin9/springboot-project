@@ -104,6 +104,15 @@
             width: 80%; margin: 0 auto; padding: 0 0; border: solid 1px black;height: 37px;border-radius: 0%;color: #000000;padding-left: 10px;}
         form[name='searchForm']{overflow: hidden;}
 
+        .thumbImg {
+            position: relative;
+            display: table-cell;
+            margin-top: 10px;
+            vertical-align: top;
+            width:200px;
+            height:200px;
+            margin-left:30px;>
+        }
 
     </style>
 </head>
@@ -120,186 +129,83 @@
                 <img src="/img/pageBanner_dark3.png">
             </div>
 <!--            <hr style="border-top: solid 1px green; margin-top: 0px;">-->
-                <a href="/expo/writeExpo" class="primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">EXPO 참가 등록</a></h3>
-            <!--**목록 하나만 만들어서 나머지 3개는 그거 복붙한 것임. 그래서 페이지 이동 설정도 맨 위에 첫번째 꺼만 들어가 있음-->
+                <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">EXPO 참가 등록</a></h3>
             <ul class="expoList">
-                <div>   <!--목록 전체-->
-                    <div>   <!--목록 중 한개-->
-                        <li class="expoItem">
+                <th:block th:each="expo : ${list}">
+                    <div>
+                        <li class="expoItem" th:object="${expo}">
                             <div class="expoItemInner">
+                                <!--썸네일 나중에-->
                                 <div class="expoImgThumbnail">
-                                    <a target="_blank" class="thumbnail" href="/expo/readDetail"></a>
-                                    <img src="/img/smartFarm_sample.jpg"
-                                         style="position: relative; display: table-cell;margin-top: 10px;vertical-align: top; width:200px; height:200px; margin-left:30px; ">
+                                    <ul>
+                                    <img class="thumbImg" src="/img/smartFarm_sample.jpg">
+                                    </ul>
                                 </div>
                                 <div class="itemInfo">
                                     <!--제목-->
                                     <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" href="/expo/readDetail">딸기 스마트팜 놀러오세요!</a></h4>
+                                        <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" name="expoTitle" th:text="*{expoTitle}"></a></h4>
                                     </div>
                                     <!--작성자-->
                                     <div>
-                                        <p style="color: black;margin-bottom: 10px;font-size: 13px; ">작성자 : 이멜론</p>
+                                        작성자 : <p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userId}"></p>
+
                                     </div>
                                     <!--내용-->
                                     <div class="itemDetail">
-                                        <p>농장 이름 : 딸기 스마트팜</p>
-                                        <p>주소 : 경기도 용인시 처인구 ...</p>
-                                        <p>주요품목 : 딸기</p>
-                                        <p>연락처 : 010-0000-0000</p>
+                                        농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
+                                        주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
+                                        주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
+                                        전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
+                                    </div>
+                                    <div class="listNum">
+                                        No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                    </div>
-                    <div>   <!--목록 중 한개-->
-                        <li class="expoItem">
-                            <div class="expoItemInner">
-                                <div class="expoImgThumbnail">
-                                    <a target="_blank" class="thumbnail" href="/expo/readDetail"></a>
-                                    <img src="/img/smartFarm_sample.jpg"
-                                         style="position: relative; display: table-cell;margin-top: 10px;vertical-align: top; width:200px; height:200px; margin-left:30px; ">
-                                </div>
-                                <div class="itemInfo">
-                                    <!--제목-->
-                                    <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" href="/expo/readDetail">딸기 스마트팜 놀러오세요!</a></h4>
-                                    </div>
-                                    <!--작성자-->
-                                    <div>
-                                        <p style="color: black;margin-bottom: 10px;font-size: 13px; ">작성자 : 이멜론</p>
-                                    </div>
-                                    <!--내용-->
-                                    <div class="itemDetail">
-                                        <p>농장이름 : 딸기 스마트팜</p>
-                                        <p>농장주소 : 경기도 용인시 처인구 ...</p>
-                                        <p>농장 주요품목 : 딸기</p>
-                                        <p>농장 연락처 : 010-0000-0000</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </div>       <div>   <!--목록 중 한개-->
-                        <li class="expoItem">
-                            <div class="expoItemInner">
-                                <div class="expoImgThumbnail">
-                                    <a target="_blank" class="thumbnail" href="/expo/readDetail"></a>
-                                    <img src="/img/smartFarm_sample.jpg"
-                                         style="position: relative; display: table-cell;margin-top: 10px;vertical-align: top; width:200px; height:200px; margin-left:30px; ">
-                                </div>
-                                <div class="itemInfo">
-                                    <!--제목-->
-                                    <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" href="/expo/readDetail">딸기 스마트팜 놀러오세요!</a></h4>
-                                    </div>
-                                    <!--작성자-->
-                                    <div>
-                                        <p style="color: black;margin-bottom: 10px;font-size: 13px; ">작성자 : 이멜론</p>
-                                    </div>
-                                    <!--내용-->
-                                    <div class="itemDetail">
-                                        <p>농장이름 : 딸기 스마트팜</p>
-                                        <p>농장주소 : 경기도 용인시 처인구 ...</p>
-                                        <p>농장 주요품목 : 딸기</p>
-                                        <p>농장 연락처 : 010-0000-0000</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </div>       <div>   <!--목록 중 한개-->
-                        <li class="expoItem">
-                            <div class="expoItemInner">
-                                <div class="expoImgThumbnail">
-                                    <a target="_blank" class="thumbnail" href="/expo/readDetail"></a>
-                                    <img src="/img/smartFarm_sample.jpg"
-                                         style="position: relative; display: table-cell;margin-top: 10px;vertical-align: top; width:200px; height:200px; margin-left:30px; ">
-                                </div>
-                                <div class="itemInfo">
-                                    <!--제목-->
-                                    <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" href="/expo/readDetail">딸기 스마트팜 놀러오세요!</a></h4>
-                                    </div>
-                                    <!--작성자-->
-                                    <div>
-                                        <p style="color: black;margin-bottom: 10px;font-size: 13px; ">작성자 : 이멜론</p>
-                                    </div>
-                                    <!--내용-->
-                                    <div class="itemDetail">
-                                        <p>농장이름 : 딸기 스마트팜</p>
-                                        <p>농장주소 : 서울특별시 강남구 역삼동 12-123</p>
-                                        <p>농장 주요품목 : 딸기</p>
-                                        <p>농장 연락처 : 02-123-1234</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </div>       <div>   <!--목록 중 한개-->
-                        <li class="expoItem">
-                            <div class="expoItemInner">
-                                <div class="expoImgThumbnail">
-                                    <a target="_blank" class="thumbnail" href="/expo/readDetail"></a>
-                                    <img src="/img/smartFarm_sample.jpg"
-                                         style="position: relative; display: table-cell;margin-top: 10px;vertical-align: top; width:200px; height:200px; margin-left:30px; ">
-                                </div>
-                                <div class="itemInfo">
-                                    <!--제목-->
-                                    <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" href="/expo/readDetail">딸기 스마트팜 놀러오세요!</a></h4>
-                                    </div>
-                                    <!--작성자-->
-                                    <div>
-                                        <p style="color: black;margin-bottom: 10px;font-size: 13px; ">작성자 : 이멜론</p>
-                                    </div>
-                                    <!--내용-->
-                                    <div class="itemDetail">
-                                        <p>농장이름 : 딸기 스마트팜</p>
-                                        <p>농장주소 : 경기도 용인시 처인구 ...</p>
-                                        <p>농장 주요품목 : 딸기</p>
-                                        <p>농장 연락처 : 010-0000-0000</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </div>
-                </div>
+                     </div>
+                </th:block>
             </ul>
+            <form action="/expo/list" name="searchForm">
 
-<!--                <div th:object="${pageMaker}">-->
-                <div class="big-width" style="text-align: center">
-                    <!-- <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}">--><code>&lt;</code></a>
-
-                    <!--이전 버튼-->
-                    <!--<th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
-                        <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>-->
-
-
-                    <!--<a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
-                </th:block>-->
-                    <!--<a class="changePage" th:if="*{next}" th:href="*{endPage + 1}">--><code>&gt;</code></a>
+                <div class="fields">
+                    <div class="field"></div>
+                    <div style="margin-bottom: 50px; margin-top: 50px; ">
+                        <div id="searchWrap" th:object="${pageMaker}" style="display: flex;">
+                            <select name="keyType" th:object="${criteria}" style="padding: 0; width: 100px; font-weight: bold;">
+                                <option value="">전체 ▼</option>
+                                <option value="T" th:selected="*{keyType} == 'T'">제목</option>
+                                <option value="C" th:selected="*{keyType} == 'C'">내용</option>
+                                <option value="W" th:selected="*{keyType} == 'W'">작성자</option>
+                            </select>
+                            <input id="keyword" type="text" name="keyword" th:value="*{criteria.keyword}" >
+                            <!--버튼-->
+                            <a href="javascript:void(0)" class="search button primary icon solid fa-search" style="height: 37px;font-size: 14px;font-weight: 500;border: solid 1px green;">
+                                검색
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <!--<form action="/board/list" th:object="${criteria}" name="pageForm">
+            </form>
+            <div th:object="${pageMaker}">
+                <div class="big-width" style="text-align: center">
+                    <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                    <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                        <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                        <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                    </th:block>
+                    <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                </div>
+                <form action="/expo/list" th:object="${criteria}" name="pageForm">
                     <input type="hidden" name="pageNum" th:field="*{pageNum}">
                     <input type="hidden" name="amount" th:field="*{amount}">
-                    <input type="hidden" name="type" th:field="*{type}">
+                    <input type="hidden" name="keyType" th:field="*{keyType}">
                     <input type="hidden" name="keyword" th:field="*{keyword}">
-                </form>-->
-            </div>
-            <div style="margin-bottom: 50px; margin-top: 50px; ">
-                <div id="searchWrap" style="display: flex;">
-                    <select name="type">
-                        <option value>전체 ▼</option>
-                        <option value="T">제목</option>
-                        <option value="C">내용</option>
-                        <option value="W">작성자</option>
-                    </select>
-                    <input id="keyword" type="text" name="keyword" value="" >
-                    <!--버튼-->
-                    <a href="javascript:void(0)" class="search button primary icon solid fa-search" style="height: 37px;font-size: 14px;font-weight: 500;border: solid 1px green;">
-                        검색
-                    </a>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
 </section>
 
 
@@ -316,4 +222,100 @@
 <script src="/js/main.js"></script>
 
 </body>
+<script th:inline="javascript">
+
+    let pageForm = $(document.pageForm); // 페이징 Form 태그
+    let paging = [[${pageMaker.criteria.listLink}]]; // 페이징
+    let searchForm = $(document.searchForm); // 검색기능 Form 태그
+    let expoNum = $("#expoNumber").text(); // 엑스포 넘버
+
+    let uploadResult = $(".expoImgThumbnail ul") // 썸네일 들어갈 태그
+
+    $(document).ready(function(){
+        (function(){
+            $.getJSON("/expo/getThumbList", {expoNum : expoNum},
+                function(attach){  // 썸네일 1개 가져오기
+                    let str = "";
+                        if (!attach.image) {   // 썸네일을 올리지 않았다면  attach.png
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<li>"
+                            str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                            str += "</li>";
+                        } else { // 등록한 썸네일 넣기
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                            str += "<li>"
+                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                            str += "</li>";
+
+                        }
+                    uploadResult.html(str);
+                });//getJSON
+        })();
+
+    showList(pageNum);
+
+        function goUpdate(){
+            location.href = "/board/modify" + paging + "&expoNum=" + expoNum;
+        }
+
+        $("a#goList").on("click", function(){
+            location.href = "/board/list" + paging;
+        });
+
+
+        if(expoNum == null || history.state){
+            return;
+        }
+        alert("게시글 " + expoNum + "번이 등록되었습니다.");
+        history.replaceState({}, null, null);
+    });
+
+
+    // 페이징 양쪽 부등호
+    $("a.changePage").click(function(e){
+        e.preventDefault();
+        pageForm.attr("action", "/expo/list")
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+
+    //제목 눌렀을 때
+    $("a#goRead").on("click", function(e){
+        e.preventDefault();
+        console.log(expoNum);
+        location.href = "/expo/readDetail" + paging  + "&expoNum=" + expoNum;
+    })
+
+    //검색할 때
+    $("a.search").on("click", function(e){
+        e.preventDefault();
+        if(!searchForm.find("option:selected").val()){
+            alert("검색 종류를 선택하세요");
+            return;
+        }
+
+        if(!searchForm.find("input#keyword").val()){
+            alert("키워드를 입력하세요");
+            return;
+        }
+        searchForm.submit();
+    });
+
+    $("input#keyword").on("keydown", function(e){
+        if(e.keyCode == 13){
+            e.preventDefault();
+        }
+    })
+
+    $("a.writeButton").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/expo/writeExpo";
+    })
+
+
+
+</script>
 </html>

@@ -1,9 +1,7 @@
 package com.koreait.yougn.beans.dao;
 
-import com.koreait.yougn.beans.vo.BoardsVO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
-import com.koreait.yougn.mappers.BoardsMapper;
 import com.koreait.yougn.mappers.ExpoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
