@@ -32,4 +32,10 @@ public class MarketController {
     public String marketKart() {
         return "/market/marketKart";
     }
+    @GetMapping("marketMyorder")
+    public String marketMyorder() { return "/market/marketMyorder"; }
+    @GetMapping("marketOrderList")
+    public String marketOrderList() {
+        return "/market/marketOrderList";
+    }
 }

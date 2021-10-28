@@ -15,7 +15,7 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
 </head>
-<body class="homepage is-preload">
+<body class="homepage is-preload" onload="init()">
     <div id="page-wrapper">
 
         <th:block th:include="header.html"></th:block>
@@ -69,19 +69,23 @@
                             <div class="con_w">
                                 <span class="ttl">배송비결제&nbsp;&nbsp;-&nbsp;&nbsp; </span>
                                 <span class="con">무료</span></div>
-                            <!-- 선택옵션 시작 { -->
+                            <br>
+                            <div class="con_w">
+                                <span class="ttl">잔여수량&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                                <span class="con">120개</span></div>
+
                             <hr>
                             <br>
-                            <section>
-                                <form>
-                                   <select class="option">
-                                        <option value="선택옵션">선택옵션</option>
-                                        <option value="딱딱이 복숭아 2.5kg,0,9997">딱딱이 복숭아 2.5kg  + 0원</option>
-                                        <option value="딱딱이 복숭아 5kg,18800,9999">딱딱이 복숭아 5kg  + 18,800원</option>
-                                   </select>
+                            <section style="display: flex">
+                                <form name="form" method="get" style="font-size: 20px">
+                                    수량 : <input type=hidden name="sell_price" value="33000">
+                                    <input type="text" name="amount" value="1" size="3" style="font-size: 18px" onchange="change();">
+                                    <input style="padding-left: 19px;height: 29px;line-height: 0px;width: 62px;padding-top: 10px" type="button" value=" + " onclick="add();">
+                                    <input style="padding-left: 19px;height: 29px;line-height: 0px;width: 62px;padding-top: 10px" type="button" value=" - " onclick="del();"><br>
+
+                                    금액 : <input type="text" name="sum" size="11" style="width: 190px;font-size: 18px; margin-top: 3px" readonly> 원
                                 </form>
                             </section>
-                            <!-- } 선택옵션 끝 -->
                             <!--버튼-->
                             <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
                             <!--버튼 끝-->
@@ -138,6 +142,44 @@
 
             });
         });
+
+        var sell_price;
+        var amount;
+
+        function init () {
+            sell_price = document.form.sell_price.value;
+            amount = document.form.amount.value;
+            document.form.sum.value = sell_price;
+            change();
+        }
+
+        function add () {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            hm.value ++ ;
+
+            sum.value = parseInt(hm.value) * sell_price;
+        }
+
+        function del () {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            if (hm.value > 1) {
+                hm.value -- ;
+                sum.value = parseInt(hm.value) * sell_price;
+            }
+        }
+
+        function change () {
+            hm = document.form.amount;
+            sum = document.form.sum;
+
+            if (hm.value < 0) {
+                hm.value = 0;
+            }
+            sum.value = parseInt(hm.value) * sell_price;
+        }
+
     </script>
 </body>
 </html>
