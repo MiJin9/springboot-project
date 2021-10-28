@@ -7,5 +7,7 @@
         <typeAlias type="com.koreait.yougn.beans.vo.UserVO" alias="userVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.ExpoVO" alias="expoVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.ThumbVO" alias="thumbVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.ItemVO" alias="itemVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.OrderVO" alias="orderVO"/>
     </typeAliases>
 </configuration>
