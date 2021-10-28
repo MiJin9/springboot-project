@@ -56,3 +56,17 @@ img.bottomPicture{
     display: flex;
     flex-direction: column;
 }
+
+.readTitle{
+    margin-top: 55px;
+    text-align: center;
+}
+
+.bodyText{
+    width: 400px;
+
+}
+
+.thumbButton{
+    height: 75px;
+}
