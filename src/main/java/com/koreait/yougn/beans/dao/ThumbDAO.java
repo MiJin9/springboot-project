@@ -17,7 +17,7 @@ public class ThumbDAO {
 
     public void delete(String uuid){thumbMapper.delete(uuid);}
 
-    public List<ThumbVO> findByNum(Long thumbNum){return thumbMapper.findByNum(thumbNum);}
+    public List<ThumbVO> findByNum(Long expoNum){return thumbMapper.findByNum(expoNum);}
 
     public void deleteAll(Long thumbNum){thumbMapper.deleteAll(thumbNum);}
 

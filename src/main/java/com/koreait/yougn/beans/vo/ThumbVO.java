@@ -15,9 +15,8 @@ public class ThumbVO {
 
     private String uuid;
     private String uploadPath;
-    private Long thumbNum;
-    private int thumbType;
-    private String thumbName;
+    private Long expoNum;
+    private String fileName;
     private boolean image;
 
 }

@@ -43,7 +43,7 @@
                 <div class="thumbWrapper" style="display: flex">
                     <div class="field" style="height: 390px; width: 371px;margin-top: 68px; margin-left: -371px;">
                         <p style="text-align: center; font-size: 18px; font-weight: 600;">대표사진</p>
-                        <input type="file" class="uploadFiles" multiple>
+                        <input type="file" name="uploadFiles" multiple>
                     </div>
                         <div class="uploadResult">
                             <ul></ul>
@@ -126,6 +126,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </body>
 <script th:inline="javascript">
+
+
     let check = false;
     function showImage(fileCallPath){
         if(check) {return;}
@@ -135,14 +137,14 @@
         check = true;
     }
 
-    // $(".thumbWrapper").on("click", function(){
-    //     if(!check){return;}
-    //     $(".thumbPhoto").animate({width: "0%", height: "0%"}, 1000);
-    //     setTimeout(function(){
-    //         check = false;
-    //         $(".thumbWrapper").hide();
-    //     }, 1000)
-    // })
+    $(".bigPictureWrapper").on("click", function(){
+        if(!check){return;}
+        $(".bigPicture").animate({width: "0%", height: "0%"}, 1000);
+        setTimeout(function(){
+            check = false;
+            $(".bigPictureWrapper").hide();
+        }, 1000)
+    })
 
     $(document).ready(function(){
         let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -150,15 +152,22 @@
         let inputFile = $(".uploadDiv input");
         let uploadResult = $(".uploadResult ul");
 
+        //form태그에 input hidden 생성 실습
+        //서버 쪽으로 전달할 첨부파일의 데이터를 input type hidden으로 추가하기
+        //추가된 li태그를 모두 가져와서 data속성을 통해 알맞는 값을 설정한다.
+        //form.append("추가할 HTML") : HTML 추가
+        //submit을 눌렀을 때 click 이벤트를 발생하고, 기존 submit이벤트는 막아줘야 한다.
+        //input태그가 모두 추가된 후 submit()해준다.
+
         $("input[type='submit']").on("click", function(e){
             e.preventDefault();
-            let form = $("form#postForm");
+            let form = $("form#writeForm");
             let str = "";
             $(".uploadResult ul li").each(function(i, obj){
-                str += "<input type='hidden' name='fileList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
-                str += "<input type='hidden' name='fileList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
-                str += "<input type='hidden' name='fileList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
-                str += "<input type='hidden' name='fileList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
             });
             form.append(str).submit();
         })
@@ -228,6 +237,7 @@
         $("input[type='file']").change(function(){
             let formData = new FormData();
             let inputFile = $("input[name='uploadFiles']");
+            console.log(inputFile);
             let files = inputFile[0].files;
 
             for(let i=0; i<files.length; i++){
@@ -243,6 +253,7 @@
                 processData: false,
                 success: function(fileList){
                     showUploadFile(fileList);
+                    console.log(fileList);
                     inputFile.val("");
                 }
             });

@@ -22,5 +22,5 @@ public interface ExpoService {
 
     public int getTotal(Criteria criteria);
 
-    public List<ThumbVO> getAttachList(Long bno);
+    public List<ThumbVO> getAttachList(Long expoNum);
 }
