@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.ThumbMapper">
+    <insert id="insert">
+        INSERT INTO T_THUMB(UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE)
+        VALUES (#{uuid}, #{uploadPath}, #{thumbNum}, #{thumbName}, #{image})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM T_THUMB WHERE UUID = #{uuid}
+    </delete>
+
+    <select id="findByNum" resultType="thumbVO">
+        SELECT UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE
+        FROM T_THUMB
+        WHERE THUMBNUM = #{thumbNum}
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM T_THUMB WHERE THUMBNUM = #{thumbNum}
+    </delete>
+
+    <select id="getOldFiles" resultType="thumbVO">
+        SELECT UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE
+        FROM T_THUMB
+        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
+</mapper>

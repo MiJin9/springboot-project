@@ -2,7 +2,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <typeAlias type="com.koreait.yougn.beans.vo.BoardsVO" alias="boardsVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.ReplyVO" alias="replyVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.UserVO" alias="userVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.ReturnVO" alias="returnVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.ExpoVO" alias="expoVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.ThumbVO" alias="thumbVO"/>
     </typeAliases>
 </configuration>

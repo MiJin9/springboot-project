@@ -1,79 +1,98 @@
 package com.koreait.yougn.controller;
 
+import com.koreait.yougn.beans.vo.BoardsVO;
+import com.koreait.yougn.beans.vo.Criteria;
+import com.koreait.yougn.beans.vo.PageDTO;
+import com.koreait.yougn.services.BoardsService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+import org.thymeleaf.model.IModel;
+
+import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @Slf4j
 @RequestMapping("/board/*")
+@RequiredArgsConstructor
 public class BoardController {
-                                                                    
-    /*공지*/
-    @GetMapping("notice")     // 공지사항 리스트
-    public String notice(){return "/board/notice/notice";}
+    private final BoardsService boardsService;
 
-    @GetMapping("noticeRead")     // 공지사항 리스트
-    public String noticeRead(){return "/board/notice/noticeRead";}
-
-    /*수매*/
-    @GetMapping("buyAndSell")   // 수매 리스트
-    public String buyAndSell(){
-        return "/board/buyAndSell/buyAndSell";
+    /*리스트*/
+    @GetMapping("list")
+    public String list(@RequestParam("boardType") int boardType, Criteria criteria, Model model){
+        criteria.setBoardType(boardType);
+        model.addAttribute("list", boardsService.getList(criteria));    // 목록
+        model.addAttribute("pageMaker", new PageDTO(boardsService.getTotal(criteria), 10, criteria));   //페이징
+        return "/board/list";
     }
 
-    @GetMapping("buyRead")     // 삽니다 상세 보기
-    public String buyRead(){return "/board/buyAndSell/buyRead";}
+    /*상세보기*/
+    @GetMapping("read")
+    public void read(@RequestParam("bno") Long bno,  Criteria criteria, Model model, HttpServletRequest request){
+        String reqURI = request.getRequestURI();
+        String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
 
-    @GetMapping("sellRead")     // 팝니다 상세 보기
-    public String sellRead(){return "/board/buyAndSell/sellRead";}
+        model.addAttribute("board", boardsService.get(bno));
+        model.addAttribute("criteria", criteria);
+    }
 
-    @GetMapping("buyWrite")    // 삽니다 글 작성
-    public String buyWrite(){return "/board/buyAndSell/buyWrite";}
+    /* 글 작성 */
+    //페이지 이동
+    @GetMapping("write")
+    public void write(BoardsVO vo,Criteria criteria, Model model){
+        vo.setId("이렇게"); // 로그인 된 아이디
+        model.addAttribute("vo", vo);
+        model.addAttribute("criteria", criteria);
+    }
+    //메소드
+    @PostMapping("write")
+    public RedirectView write(BoardsVO boardsVO, RedirectAttributes rttr){
+        boardsVO.setId("이렇게");
+        boardsService.register(boardsVO);
+        rttr.addFlashAttribute("bno",boardsVO.getBno());
+        return new RedirectView("list?boardType=" + boardsVO.getType());
+    }
 
-    @GetMapping("sellWrite")    // 팝니다 글 작성
-    public String sellWrite(){return "/board/buyAndSell/sellWrite";}
+    //글 수정
+    @GetMapping("modify")
+    public void modify(@RequestParam("bno") Long bno, Criteria criteria, Model model){
+        model.addAttribute("vo", boardsService.get(bno));
+        model.addAttribute("cri", criteria);
+    }
 
-    @GetMapping("buyModify")    // 삽니다 글 수정
-    public String buyModify(){return "/board/buyAndSell/buyModify";}
+    @PostMapping("modify")
+    public RedirectView modify(Criteria criteria, BoardsVO boardsVO, RedirectAttributes rttr){
+        log.info("-------------------------------");
+        log.info("modify-------------------------------------------------------------------------- : " + boardsVO.toString());
+        log.info("-------------------------------");
 
-    @GetMapping("sellModify")    // 팝니다 글 수정
-    public String sellModify(){return "/board/buyAndSell/sellModify";}
+        if(boardsService.modify(boardsVO)){
+            rttr.addAttribute("result", "success");
+            rttr.addAttribute("bno", boardsVO.getBno());
+        }
+        return new RedirectView("read" + criteria.getListLink());
+    }
 
-    /*임대 매매*/
-    @GetMapping("rentalAndSale") // 임대 매매 리스트
-    public String rentalAndSale(){return "/board/rentalAndSale/rentalAndSale";}
+    @PostMapping("remove")
+    public RedirectView remove(@RequestParam("bno") Long bno, @RequestParam("boardType") int boardType, RedirectAttributes rttr) {
+        log.info("-------------------------------");
+        log.info("remove : " + bno);
+        log.info("-------------------------------");
+        if (boardsService.remove(bno)) {
 
-    @GetMapping("rentalRead")     // 임대 상세 보기
-    public String rentalRead(){return "/board/rentalAndSale/rentalRead";}
-
-    @GetMapping("saleRead")     // 매매 상세 보기
-    public String saleRead(){return "/board/rentalAndSale/saleRead";}
-
-    @GetMapping("rentalWrite")    // 임대 글 작성
-    public String rentalWrite(){return "/board/rentalAndSale/rentalWrite";}
-
-    @GetMapping("saleWrite")    // 매매 글 작성
-    public String saleWrite(){return "/board/rentalAndSale/saleWrite";}
-
-    @GetMapping("rentalModify")    // 임대 글 수정
-    public String rentalModify(){return "/board/rentalAndSale/rentalModify";}
-
-    @GetMapping("saleModify")    // 매매 글 수정
-    public String saleModify(){return "/board/rentalAndSale/saleModify";}
-
-    /*고인물*/
-    @GetMapping("qnaList") // 지식인 리스트
-    public String qnaList(){return "/board/goinmool/qnaList";}
-
-    @GetMapping("qnaRead")     // 지식인 상세 보기
-    public String qnaView(){return "/board/goinmool/qnaRead";}
-
-    @GetMapping("qnaRegister")    // 지식인 글 작성
-    public String qnaRegister(){return "/board/goinmool/qnaRegister";}
-
-    @GetMapping("qnaModify")    // 지식인 글 작성
-    public String qnaModify(){return "/board/goinmool/qnaModify";}
+            rttr.addFlashAttribute("result", "success");
+        } else {
+            rttr.addFlashAttribute("result", "fail");
+        }
+        return new RedirectView("list?boardType=" + boardType );
+    }
 
 }

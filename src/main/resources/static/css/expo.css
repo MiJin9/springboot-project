@@ -24,7 +24,25 @@ a.itemName:hover{
     color: black;
 }
 
+
 span > h1{
     background: #c36839;
 
+}
+
+.itemDetail>p{
+    display: inline-flex;
+}
+
+.listNum{
+    margin-left: 700px;
+    display: flex;
+}
+
+
+form[name="searchForm"]{
+    width: 1000px;
+    display: inline-block;
+    justify-content: space-evenly;
+    margin-left: 50px;
 }

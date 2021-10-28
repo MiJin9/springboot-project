@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.ExpoMapper">
+
+<!--검색-->
+<sql id="search">
+    <if test="keyType != null and keyword != null">
+        <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+            <foreach item="keyType" collection="typeArr">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="keyType == 'T'.toString()">
+                            (EXPOTITLE LIKE '%'||#{keyword}||'%')
+                        </when>
+                        <when test="keyType == 'C'.toString()">
+                            (EXPOCONTENT LIKE '%'||#{keyword}||'%')
+                        </when>
+                        <when test="keyType == 'W'.toString()">
+                            (USERID LIKE '%'||#{keyword}||'%')
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </if>
+</sql>
+
+<select id="getList" resultType="expoVO">
+    <![CDATA[
+        SELECT EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT
+        FROM
+        (
+            /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
+            SELECT /*+ INDEX_DESC(T_EXPO PK_EXPO) */
+            ROWNUM R, EXPONUM, EXPOTITLE, EXPOCONTENT, USERID, EXPOREGDATE, EXPOUPDATEDATE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT
+            FROM T_EXPO
+            WHERE
+        ]]>
+    <include refid="search"></include>
+    <![CDATA[
+        ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+</select>
+
+        <!--게시글 작성-->
+<insert id="insert">
+INSERT INTO T_EXPO (EXPONUM, USERID, EXPOCONTENT, EXPOTITLE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT)
+VALUES(SEQ_EXPO.NEXTVAL,#{userId}, #{expoContent}, #{expoTitle}, #{farmName}, #{farmerName}, #{farmAddress}, #{farmPhone},#{farmProduct})
+</insert>
+
+<insert id="insertSelectKey_expoNum">
+<selectKey keyProperty="expoNum" order="BEFORE" resultType="long">
+    SELECT SEQ_EXPO.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO T_EXPO (EXPONUM, USERID, EXPOCONTENT, EXPOTITLE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT)
+VALUES(SEQ_EXPO.NEXTVAL, #{userId}, #{expoContent}, #{expoTitle}, #{farmName}, #{farmerName}, #{farmAddress}, #{farmPhone}, #{farmProduct})
+</insert>
+
+        <!--상세보기-->
+<select id="read" resultType="expoVO">
+SELECT EXPONUM, EXPOTITLE, USERID, EXPOCONTENT, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT FROM T_EXPO
+WHERE EXPONUM = #{expoNum}
+</select>
+
+        <!--수정-->
+<update id="update">
+UPDATE T_EXPO
+SET EXPOTITLE = #{expoTitle}, EXPOCONTENT = #{expoContent}, EXPOUPDATEDATE = SYSDATE
+WHERE EXPONUM = #{expoNum}
+</update>
+
+        <!--삭제-->
+<delete id="delete">
+DELETE FROM T_EXPO WHERE EXPONUM = #{expoNum}
+</delete>
+
+<select id="getTotal" resultType="_int">
+SELECT COUNT(EXPONUM) FROM T_EXPO
+<where>
+    <trim suffixOverrides="AND">
+        <include refid="search"></include>
+    </trim>
+</where>
+</select>
+
+
+</mapper>

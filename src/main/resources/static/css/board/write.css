@@ -2,7 +2,7 @@
     display: none;
 }
 input[id="title"]{
-    width: 888px;
+    width: 1060px;
     margin: 0 auto;
     margin-bottom: 15px;
     margin-top: 82px;
@@ -11,15 +11,25 @@ input[id="title"]{
 }
 
 .note-editor{
-    width: 888px;
+    width: 1060px;
     margin: 0 auto;
 }
 
+.titleDiv{
+    margin-left: -1010px;
+    margin-top: 70px;
+    margin-bottom: -121px;
+}
 
 .smallTitle{
     font-size: 30px;
-    margin-left: 48px;
+    margin-left: 55px;
     font-weight: 900;
+    border-bottom: 3px solid green;
+    width: 86px;
+    text-align: center;
+    color: #80b763;
+    margin-bottom: -30px;
 }
 
 .horizon {
@@ -37,15 +47,14 @@ input[id="title"]{
 }
 
 .btn-box a{
-    height: 32.78px;
+    height: 33px;
+    top: -1px;
 }
 
 .container {
     width: 100%!important;
 }
-#footer{
-    margin-left: -40px!important;
-}
+
 
 #logo div img{
     vertical-align: inherit!important;
@@ -67,4 +76,20 @@ div.four h1, div.four p{
 }
 .info a {
     color: #80B763;
+}
+
+body{
+    background: #fbf9f4!important;
+}
+.main{
+    background: #FFFFFF;
+}
+
+.note-editable p img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.row {
+    margin-right: 0!important;
 }
