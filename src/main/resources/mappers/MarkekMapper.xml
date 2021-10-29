@@ -56,7 +56,7 @@ VALUES(SEQ_ITEM.NEXTVAL,#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverpri
     SELECT SEQ_ITEM.NEXTVAL FROM DUAL
 </selectKey>
 INSERT INTO T_ITEM (ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT)
-VALUES(SEQ_ITEM.NEXTVAL,#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
+VALUES(#{itemnum},#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
 </insert>
 
         <!--상세보기-->

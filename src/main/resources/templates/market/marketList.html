@@ -104,7 +104,7 @@
                                         <div class="itemInfo">
                                             <!--제목-->
                                             <div class="itemTitle">
-                                                <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" name="itemname" th:text="*{itemname}"></a></h4>
+                                                <h4><a target="_self" class="itemName" id="goRead" th:href="*{itemnum}" name="itemname" th:text="*{itemname}"></a></h4>
                                             </div>
                                             <!--내용-->
                                             <div class="itemDetail" style="height: 165px">
@@ -115,7 +115,7 @@
                                                 배송비 : <p th:text="*{itemdeliverprice}" name="itemdeliverprice"></p>원<br>
                                             </div>
                                             <div class="listNum">
-                                                No.<p id="itemnumber" name="itemnum" th:text="*{itemnum}"></p>
+                                                No.<p id="itemnum" name="itemnum" th:text="*{itemnum}"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@
     let pageForm = $(document.pageForm); // 페이징 Form 태그
     let paging = [[${pageMaker.criteria.listLink}]]; // 페이징
     let searchForm = $(document.searchForm); // 검색기능 Form 태그
-    let itemnum = $("#itemnumber").text(); // 엑스포 넘버
+    let itemnum = $("#itemnum").text(); // 엑스포 넘버
 
     let uploadResult = $(".marketImgThumbnail ul") // 썸네일 들어갈 태그
 
@@ -240,8 +240,7 @@
     //제목 눌렀을 때
     $("a#goRead").on("click", function(e){
         e.preventDefault();
-        console.log(itemnum);
-        location.href = "/market/marketView" + paging  + "&itemnum=" + itemnum;
+        location.href = "/market/marketView" + paging  + "&itemnum=" + $(this).attr("href");
     })
 
     //검색할 때
