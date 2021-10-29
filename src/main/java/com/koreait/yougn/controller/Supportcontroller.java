@@ -1,8 +1,7 @@
 package com.koreait.yougn.controller;
 
-import com.koreait.yougn.beans.vo.HallCri;
-import com.koreait.yougn.beans.vo.PageDTO;
-import com.koreait.yougn.beans.vo.ReturnCri;
+import com.koreait.yougn.beans.vo.*;
+import com.koreait.yougn.services.ClassService;
 import com.koreait.yougn.services.HallService;
 import com.koreait.yougn.services.ReturnService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -20,6 +24,7 @@ public class Supportcontroller {
 
     private final ReturnService returnService;
     private final HallService hallService;
+    private final ClassService classService;
 
     @GetMapping("hallList")
     public String hallList(HallCri hallCri, Model model){
@@ -62,13 +67,39 @@ public class Supportcontroller {
     }
 
     @GetMapping("classList")
-    public String classList(){return "support/classList";}
+    public String classList(ClassCri classCri, Model model){
+        if(classCri.getKeyword() != null){
+            String temp = classCri.getKeyword();
+            classCri.setKeyword(temp.replace(" ","").length() == 0? null : classCri.getKeyword());
+        }
+        List<ClassVO> list = classService.getList(classCri);
+        ArrayList<Boolean> checkList = new ArrayList<>();
+        String today = getToday();
+        for (ClassVO vo : list) {
+            checkList.add(vo.getRecruitCloseDate().compareTo(today) != -1);
+        }
+
+        model.addAttribute("list", list);
+        model.addAttribute("checkList",checkList);
+        model.addAttribute("pageMaker",new PageDTO(classService.getTotal(classCri),10,classCri));
+        return "support/classList";
+    }
+
+    private String getToday(){
+        Calendar c =Calendar.getInstance();
+        String today = "" + c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.DAY_OF_MONTH);
+        return today;
+    }
+
+    @GetMapping("classView")
+    public void classView(Long num, Model model){
+        ClassVO classVO = classService.getClass(num);
+        model.addAttribute("check" , classVO.getRecruitDate().compareTo(getToday()) <= 0);
+        model.addAttribute("class",classVO);
+    }
 
     @GetMapping("infoList")
     public String infoList(){return "support/infoList";}
-
-    @GetMapping("classView")
-    public void classView(){}
 
     @GetMapping("home")
     public String home(){ return "home";}

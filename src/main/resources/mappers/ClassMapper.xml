@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.yougn.mappers.ClassMapper">
+    <select id="selectList" resultType="classVO">
+        SELECT NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+        ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+        FROM
+        (
+            SELECT NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+                ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+            FROM T_CLASS
+            <where>
+                <if test="keyword != null">
+                    TITLE LIKE '%'||#{keyword}||'%'
+                    OR
+                    "NAME" LIKE '%'||#{keyword}||'%'
+                    OR
+                    CONTENT  LIKE '%'||#{keyword}||'%'
+                </if>
+            </where>
+            <![CDATA[
+            ORDER BY OPENDATE DESC ,CLOSEDATE
+             ]]>
+        ) T
+        <![CDATA[
+        WHERE  ROWNUM <= #{pageNum} * #{amount} AND ROWNUM > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="select" resultType="classVO">
+        SELECT  NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+        ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+        FROM T_CLASS
+        WHERE NUM = #{num}
+    </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="num" order="BEFORE" resultType="long">
+            SELECT SEQ_CLASS.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO T_CLASS (NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, OPENDATE, CLOSEDATE, STARTTIME,
+            ENDTIME, RECRUITDATE, RECRUITCLOSEDATE )
+        VALUES(#{num}, #{name},#{title},#{content},#{price}, #{place}, #{address},#{headNum},#{openDate},#{closeDate},#{startTime},
+            #{endTime},#{recruitDate},#{recruitCloseDate})
+    </insert>
+
+    <update id="update">
+        UPDATE T_CLASS
+        SET "NAME" = #{name}, TITLE = #{title}, CONTENT = #{content}, PRICE = #{price}, HEADNUM = #{headNum}, OPENDATE = #{openDate}, CLOSEDATE = #{closeDate}, STARTTIME = #{startTime},
+            ENDTIME = #{endTime}, RECRUITDATE = #{recruitDate}, RECRUITCLOSEDATE = #{recruitCloseDate}, UPDATEDATE = SYSDATE, PLACE = #{place}, ADDRESS = #{address}
+        WHERE NUM = #{num}
+    </update>
+
+    <update id="updateCount">
+        UPDATE T_CLASS
+        SET HEADCOUNT = HEADCOUNT + 1
+        WHERE NUM = #{num}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM T_CLASS WHERE NUM = #{num}
+    </delete>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM (SELECT NUM FROM T_CLASS
+        <where>
+            <if test="keyword != null">
+                TITLE LIKE '%'||#{keyword}||'%'
+                OR
+                "NAME" LIKE '%'||#{keyword}||'%'
+                OR
+                CONTENT LIKE '%'||#{keyword}||'%'
+            </if>
+        </where>
+        )
+    </select>
+</mapper>

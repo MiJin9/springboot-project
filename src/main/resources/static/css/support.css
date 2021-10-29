@@ -135,7 +135,7 @@ div.bigCate select, div.midCate select {
     padding: 5px;
 }
 
-table input[type=button] {
+table a.button {
     width: 100px;
     height: 35px;
     padding: 0;
@@ -143,12 +143,22 @@ table input[type=button] {
     border-radius: 20px;
 }
 
+table a.button.stop {
+    width: 100px;
+    height: 35px;
+    padding: 0;
+    font-size: 13px;
+    border-radius: 20px;
+    background: #4a514f;
+    cursor: default;
+}
+
 .list table td {
     text-align: center;
     border-bottom: 1px solid lightgrey;
     border-top: 1px solid lightgrey;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 10px;
+    line-height: 34px;
 }
 
 .item {
@@ -162,4 +172,11 @@ table input[type=button] {
 
 .button {
     font-family: "Jeju Gothic";
+}
+
+.list .th {
+    width: 100px;
+}
+.con_w{
+    margin-bottom: 10px;
 }

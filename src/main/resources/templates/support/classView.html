@@ -47,45 +47,60 @@
                     <br>
                 </div>
                 <!-- } 상품이미지 미리보기 끝 -->
-                <section id="sit_ov" style="margin-left: -480px;">
-                    <h2 id="sit_title">장기적인 플랜을 세우자!</h2>
+                <section id="sit_ov" style="margin-left: -480px;" th:object="${class}">
+                    <h2 id="sit_title" th:text="*{title}"></h2>
                     <hr>
                     <div class="sit_ov_tbl">
-                        <div class="price">
+                        <div class="con_w">
                             <div class="price_innerwrap">
-                                <span id="ucItemPrice_hdivPrice" class="price_original"style="font-size: 17px">강사명 : <span>강사</span></span>
+                                <span id="ucItemPrice_hdivPrice" class="price_original"style="font-size: 17px">강사명 : <span th:text="*{name}"></span></span>
                             </div>
                         </div>
-                        <br>
                         <div class="con_w" style="font-size: 17px">
-                            <span class="ttl">인원&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                            <span class="con">인원 값</span>
+                            <span class="ttl">최대인원&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con" th:text="*{headNum}"></span>
                         </div>
-                        <br>
                         <div class="con_w" style="font-size: 17px">
-                            <span class="ttl">강의 장소&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                            <span class="con">강의 장소</span>
+                            <span class="ttl">강의장&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con" th:text="*{place}">강의 장소</span>
                         </div>
-                        <br>
+                        <div class="con_w" style="font-size: 17px">
+                            <div style="display: inline-block;vertical-align: top;">
+                                <span class="ttl">강의장 주소&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            </div>
+                            <div style="display: inline-block;width:310px;"><span class="con" th:text="*{address}"></span></div>
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">강의기간&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con" th:text="*{openDate}">시작 날짜</span><span>&nbsp;~&nbsp;</span><span th:text="*{closeDate}">마감 날짜</span>
+                        </div>
                         <div class="con_w" style="font-size: 17px">
                             <span class="ttl">강의시간&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                            <span class="con">시작 시간</span><span>&nbsp;~&nbsp;</span><span>종료 시간</span>
+                            <span class="con" th:text="*{startTime}">시작 시간</span><span>&nbsp;~&nbsp;</span><span th:text="*{endTime}">종료 시간</span>
                         </div>
-                        <br>
                         <div class="con_w" style="font-size: 17px">
                             <span class="ttl">신청기간&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                            <span class="con">시작 날짜</span><span>&nbsp;~&nbsp;</span><span>마감 날짜</span>
+                            <span class="con" th:text="*{recruitDate}">시작 날짜</span><span>&nbsp;~&nbsp;</span><span th:text="*{recruitCloseDate}">마감 날짜</span>
                         </div>
-                        <br>
                         <div class="con_w" style="font-size: 17px">
                             <span class="ttl">비용&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                            <span class="con">비용 값</span>
+                            <span class="con" th:text="*{price}">비용 값</span><span>원</span>
                         </div>
                         <!-- 선택옵션 시작 { -->
                         <hr>
 
                         <!--버튼-->
-                        <input type="button" class="button large primary" value="신청하기" style=" height: 40px; width: 150px;">
+                        <th:block th:if="${check}">
+                            <th:block th:if="*{headNum != headCount}">
+                                <input type="button" class="button large primary" value="신청하기" style=" height: 40px; width: 150px;">
+                            </th:block>
+                            <th:block th:if="*{headNum == headCount}">
+                                <input type="button" class="button large primary" value="마감" style=" height: 40px; width: 150px; background: #4a514f">
+                            </th:block>
+                        </th:block>
+                        <th:block th:unless="${check}">
+                            <input type="button" class="button large primary" value="신청 시간 전" style=" height: 40px; width: 150px; background: #4a514f">
+                        </th:block>
                         <!--버튼 끝-->
                     </div>
                 </section>
@@ -95,81 +110,8 @@
             <div id="bottom">
                 <!-- 상풍 상세설명 -->
                 <hr>
-                <div id="content" style="text-align:center;" align="center">
-                    <div align="center" style="text-align:center;">
-                        <span style="font-size:11pt;color:rgb(120,32,185);">
-                            <b>속이 꽉~ 옹골찬 새콤달콤 딱딱이복숭아!</b>
-                        </span>
-                    </div>
-                    <div align="center" style="text-align:center;">
-                        <br>
-                    </div>
-                    <div align="center" style="text-align:center;">
-                        <br>
-                    </div>
-                    <div align="center" style="text-align:center;">
-                        <span style="font-size:11pt;">아삭아삭 새콤달콤 딱딱이 복숭아!&nbsp;</span>
-                    </div>
-                    <div align="center" style="text-align:center;">
-                        <span style="font-size:11pt;"><br></span>
-                    </div>
-                    <div align="center" style="text-align:center;">
-                        <br>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">이맘때쯤 너~무 맛있는 딱딱이복숭아</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">안동에서 데려왔어요~</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">복숭아 딱~ 받아봤는데</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">한손에 꽉!! 차는 크기와</span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">향긋향 복숭아 향과 아삭한 식감!</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">새콤달콤한 맛에 반해버렸지 뭐에요~</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">한입 베어물면 과즙이 팡팡!!</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span
-                            style="font-size:11pt;">달콤한 과즙이 가득차서 정말 군침돌아요~</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">정말~ 맛있어서 가족분들이서 드시기에</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span
-                            style="font-size:11pt;">너무 좋아 ★★강.력.추.천★★드려요!!</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">✔ 속이 옹골차게 꽉꽉 찼구요</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">✔ 신선하고 좋은 복숭아만을 선별해</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">상품성이 특상 A+이에요~^^</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span
-                            style="font-size:11pt;">✔ 딱 요 시기에만 먹을 수 있는 딱딱이 복숭아!</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">넉넉한 양으로 하나씩 잘라드시고</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span
-                            style="font-size:11pt;">복숭아넣고~ 얼음넣고 물 조금 넣어 갈아주시면</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">넘 맛있고 시원한 복숭아 쥬스!</span>
-                    </div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;"><br></span></div>
-                    <div align="center" style="text-align:center;"><br></div>
-                    <div align="center" style="text-align:center;"><span
-                            style="font-size:11pt;">향과 맛에 반해버리는 옹골찬 딱딱이복숭아!</span></div>
-                    <div align="center" style="text-align:center;"><span style="font-size:11pt;">오늘 간식으로 어떠세요~?</span></div>
+                <div id="content" style="text-align:center;" align="center" th:text="${class.content}">
+
                 </div>
                 <!-- 상풍 상세설명 끝 -->
             </div>
