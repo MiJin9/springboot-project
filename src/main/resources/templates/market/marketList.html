@@ -211,15 +211,6 @@
 
         showList(pageNum);
 
-        function goUpdate(){
-            location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
-        }
-
-        $("a#goList").on("click", function(){
-            location.href = "/market/marketList" + paging;
-        });
-
-
         if(itemnum == null || history.state){
             return;
         }

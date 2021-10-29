@@ -27,7 +27,7 @@
                 <img src="/img/yougnMarketDetail.png" style="padding-top: 53px;">
             </div>
             <div class="Btn" style="float: right;margin-right: 10px;">
-            <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
+            <a href="javascript:void(0)" id="modify" class="button primary small" onclick="goUpdate()">수정</a>
             <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
             <a href="javascript:void(0)" id="goList" class="button primary small">목록보기</a>
             </div>
@@ -52,6 +52,7 @@
                                 <div class="con_w" style="display: flex">
                                     시중가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>
                                 </div>
+                        <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
                             <div class="con_w">
                                 <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
                                 <span class="con">상세페이지참조</span>
@@ -127,6 +128,9 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
     <script th:inline="javascript">
+        let itemnum = $("#itemnum").val();
+        let paging = [[${criteria.listLink}]]; // 페이징
+        console.log(itemnum);
 
         $(document).ready(function() {
             $("#sit_pvi_big").owlCarousel({
@@ -179,10 +183,24 @@
         }
 
         let content = [[${item.itemcontent}]]
-
-
         $(".itemcontent").html(content);
         console.log(content);
+
+
+
+        $("a#goList").on("click", function(){
+            location.href = "/market/marketList" + paging;
+        });
+
+        $("#delete").on("click", function (e) {
+            e.preventDefault();
+            if(!confirm("상품번호" + itemnum + "번 상품을 삭제하시겠습니까")){return;}
+            location.href = "/market/remove?itemnum=" + itemnum;
+        })
+
+        function goUpdate(){
+            location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
+        }
     </script>
 </body>
 </html>

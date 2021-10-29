@@ -76,7 +76,7 @@ public class MarketController {
 
 
     /*상세보기*/
-    @GetMapping({"marketView","marketModify"})
+    @GetMapping({"marketView"})
     public void marketView(@RequestParam("itemnum") Long itemnum, Criteria criteria, Model model) {
         model.addAttribute("item", marketService.get(itemnum));
         model.addAttribute("criteria",criteria);
@@ -84,13 +84,11 @@ public class MarketController {
 
 
     /*삭제*/
-    @PostMapping("remove")
+    @GetMapping("remove")
     public RedirectView remove(@RequestParam("itemnum") Long itemnum, RedirectAttributes rttr) {
         log.info("-------------------------------");
         log.info("remove + " + itemnum);
         log.info("-------------------------------");
-
-        List<ThumbVO> attachList = marketService.getAttachList(itemnum);
 
         if (marketService.remove(itemnum)) {
             rttr.addFlashAttribute("result", "success");
@@ -110,5 +108,9 @@ public class MarketController {
     @GetMapping("marketOrderList")
     public String marketOrderList() {
         return "/market/marketOrderList";
+    }
+    @GetMapping("marketPayment")
+    public String marketPayment() {
+        return "/market/marketPayment";
     }
 }

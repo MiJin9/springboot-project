@@ -25,7 +25,7 @@
 
     <!--Main-->
     <div class="main">
-        <form action="/market/marketModify" id="postForm" name="postForm" method="POST">
+        <form action="/market/marketModify" id="postForm" name="postForm" method="POST" th:object="${vo}">
             <div class="category">
                 <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
             </div>
@@ -45,18 +45,12 @@
 
                 <section class="detailView">
                     <div class="sit_ov_tbl" style="margin-top: 50px">
-                        <div>
-                            <input type="hidden" name="itemnum" id="itemnum" th:field="${vo.itemnum}">
-                            <input name="userid" th:field="${vo.userid}" type="hidden">
-                            <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
-                            <input type="hidden" name="amount" th:field="${criteria.amount}">
-                            <input type="hidden" name="keyType" th:field="${criteria.keyType}">
-                            <input type="hidden" name="keyword" th:field="${criteria.keyword}">
-                        </div>
-                        <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                        <input type="hidden" name="itemnum" id="itemnum" th:value="*{itemnum}">
+
+                        <input id="itemname" name="itemname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" th:value="*{itemname}">
                         <hr>
                         <div class="con_w">
-                            <input id="tagprice" style="width: 300px" type="text" placeholder="가격">
+                            <input id="itemprice" name="itemprice" style="width: 300px" type="text"th:value="*{itemprice}">
                         </div>
                         <br>
                         <div class="con_w">
@@ -70,15 +64,15 @@
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="taghometown" style="width: 300px" type="text" placeholder="원산지">
+                            <input id="itemhome" name="itemhome" style="width: 300px" type="text" th:value="*{itemhome}">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="tagdeltip" style="width: 300px" type="text" placeholder="배송비">
+                            <input id="itemdeliverprice" name="itemdeliverprice" style="width: 300px" type="text" th:value="*{itemdeliverprice}">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="tagcnt" style="width: 300px" type="text" placeholder="총수량">
+                            <input id="itemtotalcount" name="itemtotalcount" style="width: 300px" type="text" th:value="*{itemtotalcount}">
                         </div>
 
                     </div>
@@ -88,7 +82,7 @@
             <div id="bottom">
                     <!-- summernote와 관련된 영역 -->
 
-                    <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                    <textarea id="summernote" name="itemcontent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
 
 
@@ -125,7 +119,12 @@
 <script src="/js/board/marketwrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script>
+<script th:inline="javascript">
+    let content = [[${vo.itemcontent}]];
+    console.log(content);
+    $(document).ready(function () {
+        $("div.panel-body").html(content);
+    })
 </script>
 </body>
 </html>
