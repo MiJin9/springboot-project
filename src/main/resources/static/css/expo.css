@@ -154,3 +154,7 @@ form[name="searchForm"]{
     justify-content: space-evenly;
     margin-left: 50px;
 }
+
+div#text{
+    visibility: hidden;
+}
