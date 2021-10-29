@@ -1,7 +1,7 @@
 package com.koreait.yougn.controller;
 
-import com.koreait.yougn.beans.vo.MailSenderRunner;
-import com.koreait.yougn.beans.vo.UserVO;
+import com.koreait.yougn.beans.vo.*;
+import com.koreait.yougn.services.FaqService;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
+    private final FaqService faqService;
 
     @GetMapping("join")
     public String join() {
@@ -116,11 +118,6 @@ public class UserController {
         return "user/changePw";
     }
 
-    @GetMapping("inquiry")
-    public String inquiry() {
-        return "/user/inquiry";
-    }
-
     @GetMapping("checkPw")
     public String checkPw(int num, Model m) {
         m.addAttribute("num",num);
@@ -177,10 +174,6 @@ public class UserController {
         model.addAttribute("user", user);
         return "user/userModify";
     }
-
-
-
-
 
 //아이디 찾기(인증번호 보내기)
     @PostMapping(value = "idPin", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -285,10 +278,24 @@ public class UserController {
         return map;
     }
 
-    @GetMapping("inquiryWrite")
-    public String inquiryWrite() {
-        return "user/inquiryWrite";
+//    문의글 목록
+    @GetMapping("inquiry")
+    public String inquiry(Criteria criteria, Model model) {
+        model.addAttribute("list", faqService.getList(criteria));
+        model.addAttribute("pageMaker", new PageDTO(faqService.getTotal(criteria), 10, criteria));
+        return "/user/inquiry";
     }
+
+    @PostMapping("inquiryWrite")
+    public RedirectView inquiryWrite(FaqVO faqVO, RedirectAttributes rttr) {
+        faqService.register(faqVO);
+        rttr.addFlashAttribute("num", faqVO.getNum());
+        return new RedirectView("list");
+    }
+
+    @GetMapping("inquiryWrite")
+    public void inquiryWrite(){}
+
 
     @GetMapping("inquiryRead")
     public String inquiryRead() {

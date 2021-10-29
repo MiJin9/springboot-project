@@ -26,33 +26,53 @@
                     <div style="
     margin-right: 42px;
 ">
-                        <a href="/user/inquiry" class="button" id="inquiryBtn">문의하기</a>
+                        <a href="/user/inquiryWrite" class="button" id="inquiryBtn">문의하기</a>
                     </div>
                 </div>
 
                 <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
 
-                <table style="width: 95%; font-size: 18px">
+                <table style="width: 95%; font-size: 18px; margin-bottom: 30px">
                     <thead>
-                    <tr class="tHead">
-                        <th class="bno" style="width: 80px">번호</th>
+                    <tr class="tHead" style="height: 30px; line-height: 2;">
+                        <th class="num" style="width: 80px">번호</th>
                         <th class="title">제목</th>
-                        <th class="answerState" style="width: 130px">답변여부</th>
+                        <th class="answerState" style="width: 120px">답변여부</th>
                         <th class="regDate" style="width: 130px">작성일</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <th:block>
-                        <tr class="tBody">
-                            <td class="bno"></td>
-                            <td class="title"><a id=""></a></td>
-                            <td class="regDate"></td>
+                    <tbody style="text-align: center">
+                    <th:block th:each="faq : ${list}">
+                        <tr class="tBody" style="height: 30px; line-height: 2;" th:Object="${faq}">
+                            <td class="num" style="width: 80px" th:text="*{num}"></td>
+                            <td class="title"><a id="goRead2" th:href="*{num}" th:text="*{title}"></a></td>
+                            <td class="answerState" style="width: 120px"></td>
+                            <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
                         </tr>
                     </th:block>
                     </tbody>
                     <tfoot>
                     </tfoot>
                 </table>
+                <div th:object="${pageMaker}">
+                    <div class="big-width" style="text-align: center">
+                        <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                        <th:block
+                                th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                            <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}"
+                               th:href="${num}"><code th:text="${num}"></code></a>
+                        </th:block>
+                        <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                    </div>
+
+                    <form action="/user/inquiry" th:object="${criteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+<!--                        <input type="hidden" name="type" th:field="*{type}">-->
+<!--                        <input type="hidden" name="keyword" th:field="*{keyword}">-->
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +88,23 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-
 </body>
+<script th:inline="javascript">
+    // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
+    let pageForm = $(document.pageForm);
+    let paging = [[${pageMaker.criteria.listLink}]];
+    let searchForm = $(document.searchForm);
+
+
+    $("a.changePage").click(function (e) {
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+    $("a#goRead2").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/user/inquiryRead" + paging + "&bno=" + $(this).attr("href");
+    })
+</script>
 </html>
