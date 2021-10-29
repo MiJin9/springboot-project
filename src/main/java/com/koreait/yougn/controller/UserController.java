@@ -30,17 +30,25 @@ public class UserController {
     private final UserService userService;
     private final FaqService faqService;
 
+    //회원가입
     @GetMapping("join")
     public String join() {
         return "/user/join";
     }
 
+    @PostMapping("join")
+    public String join(UserVO userVO) {
+        userService.join(userVO);
+        return "index";
+    }
+
+
+    //로그인
     @GetMapping("login")
     public String login() {
         return "/user/login";
     }
 
-    //로그인
     @PostMapping(value = "login", consumes = "application/json; charset=utf-8",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public HashMap<String, Object> login(@RequestBody UserVO userVO, HttpServletRequest r) {
@@ -56,28 +64,20 @@ public class UserController {
         return map;
     }
 
+    //로그아웃
     @RequestMapping(value = "logout", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView logout(HttpServletRequest r) {
         r.getSession().invalidate();
         return new RedirectView("/");
     }
 
+    //마이페이지
     @GetMapping("myPage")
     public String myPage(Model model, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
         model.addAttribute("user", user);
         return "/user/myPage";
-    }
-
-    @GetMapping("writeCollection")
-    public String writeCollection() {
-        return "/user/writeCollection";
-    }
-
-    @PostMapping("bye")
-    public String bye() {
-        return "/user/bye";
     }
 
     //회원 탈퇴
@@ -90,18 +90,18 @@ public class UserController {
         return "index";
     }
 
+    @PostMapping("bye")
+    public String bye() {
+        return "/user/bye";
+    }
+
+    //회원정보 수정
     @GetMapping("userModify")
     public String userModify(Model model, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
         model.addAttribute("user", user);
         return "/user/userModify";
-    }
-
-    @PostMapping("changePw")
-    public String changePw(UserVO userVO, Model model) {
-        model.addAttribute("userVO", userVO);
-        return "/user/changePw";
     }
 
     //비밀번호 수정
@@ -118,6 +118,14 @@ public class UserController {
         return "user/changePw";
     }
 
+    @PostMapping("changePw")
+    public String changePw(UserVO userVO, Model model) {
+        model.addAttribute("userVO", userVO);
+        return "/user/changePw";
+    }
+
+
+    //비밀번호 확인
     @GetMapping("checkPw")
     public String checkPw(int num, Model m) {
         m.addAttribute("num",num);
@@ -139,18 +147,11 @@ public class UserController {
         return map;
     }
 
+    //ID/PW 찾기
     @GetMapping("findUser")
     public String findUser() {
         return "user/findUser";
     }
-
-    //회원 가입
-    @PostMapping("join")
-    public String join(UserVO userVO) {
-        userService.join(userVO);
-        return "index";
-    }
-
 
 
     //아이디 중복확인
@@ -175,7 +176,7 @@ public class UserController {
         return "user/userModify";
     }
 
-//아이디 찾기(인증번호 보내기)
+    //아이디 찾기(인증번호 보내기)
     @PostMapping(value = "idPin", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public HashMap<String,String> idPin(@RequestBody UserVO userVO) throws UnsupportedEncodingException{
@@ -197,6 +198,7 @@ public class UserController {
         map.put("result","이메일 전송에 실패하였습니다.");
         return map;
     }
+
     //아이디 보내기
     @PostMapping(value = "sendId", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -224,7 +226,7 @@ public class UserController {
         return map;
     }
 
-//비밀번호 찾기(인증번호 보내기)
+    //비밀번호 찾기(인증번호 보내기)
     @PostMapping(value = "pwPin", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public HashMap<String,String> pwPin(@RequestBody UserVO userVO) throws UnsupportedEncodingException{
@@ -258,12 +260,11 @@ public class UserController {
         return pin;
     }
 
-    //    인증문자 보내기
+    //인증문자 보내기
     @PostMapping("sendSMS")
     @ResponseBody
     public HashMap<String, String> sendSMS(String phoneNumber) {
 
-        log.info("들어옴1");
         Random rand = new Random();
         HashMap<String, String> map = new HashMap<>();
         String numStr = "";
@@ -278,28 +279,40 @@ public class UserController {
         return map;
     }
 
-//    문의글 목록
+    //문의글 목록
     @GetMapping("inquiry")
-    public String inquiry(Criteria criteria, Model model) {
-        model.addAttribute("list", faqService.getList(criteria));
-        model.addAttribute("pageMaker", new PageDTO(faqService.getTotal(criteria), 10, criteria));
+    public String inquiry(Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        UserVO user = userService.getUser(id);
+
+        model.addAttribute("list", faqService.getListId(criteria, user.getId()));
+        model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
         return "/user/inquiry";
     }
 
+    //문의글 작성
     @PostMapping("inquiryWrite")
     public RedirectView inquiryWrite(FaqVO faqVO, RedirectAttributes rttr) {
         faqService.register(faqVO);
+
         rttr.addFlashAttribute("num", faqVO.getNum());
-        return new RedirectView("list");
+        return new RedirectView("inquiry");
     }
 
     @GetMapping("inquiryWrite")
     public void inquiryWrite(){}
 
-
+    //문의글 보기
     @GetMapping("inquiryRead")
     public String inquiryRead() {
         return "user/inquiryRead";
+    }
+
+
+    //내 글 모아보기
+    @GetMapping("writeCollection")
+    public String writeCollection() {
+        return "/user/writeCollection";
     }
 
 }

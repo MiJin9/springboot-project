@@ -17,6 +17,10 @@
         ]]>
     </select>
 
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM T_FAQ
+    </select>
+
     <insert id="insertSelectKey_num">
         <selectKey keyProperty="num" order="BEFORE" resultType="long">
             SELECT SEQ_FAQ.NEXTVAL FROM DUAL
@@ -30,12 +34,26 @@
         WHERE NUM = #{num}
     </select>
 
-
     <delete id="delete">
         DELETE FROM T_FAQ WHERE NUM = #{num}
     </delete>
 
-    <select id="getTotal" resultType="_int">
+    <select id="getListId" resultType="faqVO">
+        <![CDATA[
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE
+            FROM T_FAQ
+            WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} AND ID = #{id}
+        )
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        ]]>
+    </select>
+
+    <select id="getTotalId" resultType="_int">
         SELECT COUNT(NUM) FROM T_FAQ
+        WHERE ID = #{id}
     </select>
 </mapper>

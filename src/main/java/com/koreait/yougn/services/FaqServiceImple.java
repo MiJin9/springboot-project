@@ -43,4 +43,18 @@ public class FaqServiceImple implements FaqService{
     public int getTotal(Criteria criteria) {
         return faq.getTotal(criteria);
     }
+
+    @Override
+    public List<FaqVO> getListId(Criteria criteria, String id) {
+        List<FaqVO> list = faq.getListId(criteria, id);
+        for (FaqVO vo:list) {
+            vo.setRegDate(vo.getRegDate().split(" ")[0]);
+        }
+        return list;
+    }
+
+    @Override
+    public int getTotalId(Criteria criteria, String id) {
+        return faq.getTotalId(criteria, id);
+    }
 }

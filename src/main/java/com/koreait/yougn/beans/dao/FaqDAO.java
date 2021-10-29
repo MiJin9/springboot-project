@@ -27,4 +27,8 @@ public class FaqDAO {
     public List<FaqVO> getList(Criteria criteria){return mapper.getList(criteria);}
 
     public int getTotal(Criteria criteria){return mapper.getTotal(criteria);}
+
+    public List<FaqVO> getListId(Criteria criteria, String id){return mapper.getListId(criteria, id);}
+
+    public int getTotalId(Criteria criteria, String id){return mapper.getTotalId(criteria, id);}
 }

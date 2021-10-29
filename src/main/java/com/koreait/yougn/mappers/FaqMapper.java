@@ -22,4 +22,8 @@ public interface FaqMapper {
 
     //    문의글 전체 개수
     public int getTotal(Criteria criteria);
+
+    public List<FaqVO> getListId(Criteria criteria, String id);
+
+    public int getTotalId(Criteria criteria, String id);
 }

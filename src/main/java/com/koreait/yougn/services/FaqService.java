@@ -13,4 +13,6 @@ public interface FaqService {
     public boolean remove(Long num);
     public List<FaqVO> getList(Criteria criteria);
     public int getTotal(Criteria criteria);
+    public List<FaqVO> getListId(Criteria criteria, String id);
+    public int getTotalId(Criteria criteria, String id);
 }

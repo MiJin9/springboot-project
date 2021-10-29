@@ -41,13 +41,14 @@
                         <tr>
                             <th>제목</th>
                             <td>
-                                <input type="text" class="input" placeholder="제목을 입력해주세요.">
+                                <input type="text" class="input" name="title" id="title" placeholder="제목을 입력해주세요.">
+                                <input type="hidden" id="id" name="id" th:value="${session.sessionId}">
                             </td>
                         </tr>
                         <tr>
                             <th style="vertical-align: middle;">문의 내용</th>
                             <td style="line-height: 3">
-                                <textarea rows="10" style="resize: none;" class="input"
+                                <textarea rows="10" style="resize: none;" name="content" class="input" id="content"
                                           placeholder="내용을 입력해주세요."></textarea>
                             </td>
                         </tr>
@@ -55,8 +56,8 @@
                     </form>
                 </table>
                 <div style="text-align: center; margin-left: 20px">
-                    <input type="button" value="보내기">
-                    <input type="button" value="취소" style="margin-left: 8px; background: #888787;">
+                    <input type="button" id="inquiryButton" value="보내기">
+                    <input type="button" id="cancelButton" value="취소" style="margin-left: 8px; background: #888787;">
                 </div>
             </div>
         </div>
@@ -72,6 +73,24 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script>
 
+    $("#inquiryButton").on("click", function () {
+        if (!$("#title").val()) {
+            alert("제목을 입력해주세요.")
+            return;
+        }
+        if (!$("#content").val()) {
+            alert("내용을 입력해주세요.")
+            return;
+        }
+
+        $("#writeForm").submit();
+    });
+
+    $("#cancelButton").on("click", function(){
+        location.href="/user/inquiry";
+    })
+</script>
 </body>
 </html>

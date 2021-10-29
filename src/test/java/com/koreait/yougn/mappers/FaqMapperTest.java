@@ -51,4 +51,19 @@ public class FaqMapperTest {
         Criteria criteria = new Criteria();
         mapper.getTotal(criteria);
     }
+
+    @Test
+    public void testGetTotalId(){
+        Criteria criteria = new Criteria();
+        mapper.getTotalId(criteria, "user02");
+    }
+
+    @Test
+    public void testGetListId(){
+        Criteria cri = new Criteria();
+        cri.setPageNum(2);
+        cri.setAmount(10);
+        mapper.getListId(cri, "user02").forEach(faqVO -> log.info(faqVO.toString()));
+    }
+
 }
