@@ -18,7 +18,6 @@
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
-
     <th:block th:include="header.html"></th:block>
 
     <!--Main-->
@@ -31,14 +30,16 @@
 <!--            <hr style="border-top: solid 1px green; margin-top: 0px;">-->
                 <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">EXPO 참가 등록</a></h3>
             <ul class="expoList">
-                <th:block th:each="expo : ${list}">
+                <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
                     <div>
-                        <li class="expoItem" th:object="${expo}">
+                        <li class="expoItem" th:object="${list.get(index)}">
                             <div class="expoItemInner">
                                 <div class="thumbWrapper" style="display: flex">
                                     <div class="field">
                                         <div class="uploadResult">
-                                            <ul></ul>
+                                            <ul th:id="${index}">
+<!--                                                <p id="hiddenNum" th:text='${index.index}'></p>-->
+                                            </ul>
                                         </div>
                                     </div>
                                     <div class="field">
@@ -124,7 +125,9 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </body>
 <script th:inline="javascript">
 
@@ -135,31 +138,23 @@
     let uploadResult = $(".uploadResult ul") // 썸네일 들어갈 태그
     let list = [[${list}]];
 
+
     $(document).ready(function(){
-        (function(){
-            for(let a=0; a<list.length-1; a++) {
-                console.log(expoNum);
+        history.replaceState({}, null, "/expo/list");
+        for(let a = 0; a < list.length; a++) {
+            (function () {
                 $.getJSON("/expo/getAttachList", {expoNum: list[a].expoNum},
                     function (arr) {
                         console.log(arr);
                         let str = "";
 
-                        // $(".uploadResult ul li").each(function (i, obj) {
-                        //     str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
-                        //     str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
-                        //     str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
-                        //     str += "<input type='hidden' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
-                        // });
-                        // uploadResult.html(str);
-
                         $(arr).each(function (i, attach) {
+                            console.log(attach.image);
                             if (!attach.image) {
                                 let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
                                 str += "<li>";
                                 str += "<div>";
-                                str += "<a href='/upload/download?fileName=" + fileCallPath + "'>";
-                                str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                                str += "</a>"
+                                str += "<img src='/img/attach.png' width='100px'>";
                                 str += "</div>";
                                 str += "</li>";
                             } else {
@@ -168,16 +163,15 @@
 
                                 str += "<li>";
                                 str += "<div>";
-                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
+                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
                                 str += "</div>";
                                 str += "</li>";
                             }
                         });
-                        uploadResult.html(str);
+                        $("#" + a).html(str);
                     });//getJSON
-            }
-        })();
-
+            })();
+        }
 
 
         if(expoNum != null || history.state){

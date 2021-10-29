@@ -39,6 +39,20 @@ public class ExpoMapperTest {
         expoMapper.insertSelectKey_expoNum(expovo);
     }
 
+    @Test
+    public void testModify(){
+        ExpoVO expovo =  new ExpoVO();
+        expovo.setExpoContent("2");
+        expovo.setExpoTitle("3");
+        expovo.setFarmName("5");
+        expovo.setFarmerName("6");
+        expovo.setFarmAddress("7");
+        expovo.setFarmPhone("8");
+        expovo.setFarmProduct("9");
+        expovo.setExpoNum(6513522L);
+        expoMapper.update(expovo);
+    }
+
 
 
 }

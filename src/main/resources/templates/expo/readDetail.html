@@ -18,6 +18,7 @@
 <div id="page-wrapper">
     <th:block th:include="header.html"></th:block>
     <section>
+        <form action="/expo/remove" method="post" name="postForm">
         <div class="tle" style="height: auto;">
             <div class="main" th:object="${expo}" style="height: auto;">
                 <div class="category">
@@ -25,12 +26,13 @@
                 </div>
                 <div style="display: flex; float: right">
                     <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="modify primary button" type="button" value="수정">
-                    <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="delete primary button" type="button" value="삭제">
+                    <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="delete primary button" type="submit" value="삭제">
                     <input style=" margin-right: 10px; height: 35px; width: 125px; line-height: normal;" class="goList primary button" type="button" value="목록보기">
                 </div>
                 <div class="readTitle">
-                    <input name="readTitle"
-                           style="height: 30px; width: 900px; margin-left: 50px; border:none; color: black; font-weight: bold; font-size: 30px;text-align: center; padding-top: 5px; margin-top: 30px;" type="text" th:field="*{expoTitle}" th:href="*{expoNum}" readonly>
+                    <input type="hidden" name="expoNum" th:field="*{expoNum}">
+                    <input name="expoTitle"
+                           style="height: 30px; width: 900px; margin-left: 50px; border:none; color: black; font-weight: bold; font-size: 30px;text-align: center; padding-top: 5px; margin-top: 30px;" type="text" th:field="*{expoTitle}" readonly>
                 </div>
                 <div class="thumbWrapper" style="display: flex">
                     <div class="thumbButton">
@@ -111,8 +113,10 @@
 <script src="/js/main.js"></script>
 </body>
 <script th:inline="javascript">
+
     let expoContent = [[${expo.expoContent}]];
-    let expoNum = [[${expo.expoNum}]];
+    let expoNum = $("input[name='expoNum']").val();
+    let paging = [[${criteria.getListLink()}]]
     console.log(expoNum);
     let uploadResult = $(".uploadResult ul");
 
@@ -121,7 +125,7 @@
     //목록보기 눌렀을 때
     $("input.goList").on("click", function (e) {
         e.preventDefault();
-        location.href = "/expo/list";
+        location.href = "/expo/list" + paging;
 
     })
 
@@ -154,6 +158,9 @@
     //     );
     // })
 
+    $(".modify").on("click", function () {
+        location.href = "/expo/modifyExpo" + paging + "&expoNum=" + expoNum;
+    })
 
 
     $(document).ready(function(){

@@ -68,7 +68,8 @@ WHERE EXPONUM = #{expoNum}
         <!--수정-->
 <update id="update">
 UPDATE T_EXPO
-SET EXPOTITLE = #{expoTitle}, EXPOCONTENT = #{expoContent}, EXPOUPDATEDATE = SYSDATE
+SET EXPOTITLE = #{expoTitle}, EXPOCONTENT = #{expoContent}, FARMNAME = #{farmName}, FARMERNAME = #{farmerName},
+ FARMADDRESS = #{farmAddress}, FARMPHONE = #{farmPhone}, FARMPRODUCT = #{farmProduct}, EXPOUPDATEDATE = SYSDATE
 WHERE EXPONUM = #{expoNum}
 </update>
 

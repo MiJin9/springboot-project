@@ -96,7 +96,7 @@ public class ExpoController {
 
 
     //상세보기
-    @GetMapping({"readDetail", "modify"})
+    @GetMapping({"readDetail"})
     public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model,  HttpServletRequest request) {
         String reqURI = request.getRequestURI();
         String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
