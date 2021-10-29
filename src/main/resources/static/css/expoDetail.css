@@ -70,3 +70,7 @@ img.bottomPicture{
 .thumbButton{
     height: 75px;
 }
+
+li{
+    list-style: none;
+}
