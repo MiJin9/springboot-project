@@ -70,7 +70,7 @@ public class MarketController {
         itemVO.setUserid("아이디123");
         marketService.register(itemVO);
         rttr.addFlashAttribute("itemnum", itemVO.getItemnum());
-        return new RedirectView("/market/marketWrite");
+        return new RedirectView("/market/marketList");
 
     }
 

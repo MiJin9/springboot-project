@@ -25,11 +25,12 @@
 
     <!--Main-->
     <div class="main">
-        <form>
+
             <div class="category">
                 <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
             </div>
             <br>
+        <form id="writeForm" name="postForm" method="POST" action="/market/marketWrite">
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
                 <!-- 상품이미지 미리보기 시작 { -->
                 <div id="sit_pvi_big" class="owl-carousel owl-theme">
@@ -42,13 +43,20 @@
 
                 <br>
                 <!-- } 상품이미지 미리보기 끝 -->
-
                 <section class="detailView">
                     <div class="sit_ov_tbl" style="margin-top: 50px">
-                        <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                        <div>
+                            <input type="hidden" name="itemnum" id="itemnum" th:field="${vo.itemnum}">
+                            <input name="userid" th:field="${vo.userid}" type="hidden">
+                            <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
+                            <input type="hidden" name="amount" th:field="${criteria.amount}">
+                            <input type="hidden" name="keyType" th:field="${criteria.keyType}">
+                            <input type="hidden" name="keyword" th:field="${criteria.keyword}">
+                        </div>
+                        <input id="tagname" name="itemname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
                         <hr>
                         <div class="con_w">
-                            <input id="tagprice" style="width: 300px" type="text" placeholder="가격">
+                            <input id="tagprice" name="itemprice" style="width: 300px" type="text" placeholder="가격">
                         </div>
                         <br>
                         <div class="con_w">
@@ -62,15 +70,15 @@
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="taghometown" style="width: 300px" type="text" placeholder="원산지">
+                            <input id="taghometown" name="itemhome" style="width: 300px" type="text" placeholder="원산지">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="tagdeltip" style="width: 300px" type="text" placeholder="배송비">
+                            <input id="tagdeltip" name="itemdeliverprice" style="width: 300px" type="text" placeholder="배송비">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="tagcnt" style="width: 300px" type="text" placeholder="총수량">
+                            <input id="tagcnt" name="itemtotalcount" style="width: 300px" type="text" placeholder="총수량">
                         </div>
 
                         <!--버튼-->
@@ -82,12 +90,9 @@
             <hr>
             <div id="bottom">
 
-                <form id="postForm" name="postForm" method="POST">
-
-
                     <!-- summernote와 관련된 영역 -->
 
-                    <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                    <textarea id="summernote" name="itemcontent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                     <!-- 버튼과 관련된 영역 -->
 
@@ -100,8 +105,6 @@
                     </div>
 
                     <br>
-
-                </form>
 
             </div>
 
@@ -125,18 +128,7 @@
 <script src="/js/board/marketwrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#sit_pvi_big").owlCarousel({
-            autoPlay : true,
-            navigation : true, // Show next and prev buttons
-            slideSpeed : 1000,
-            pagination:false,
-            singleItem:true,
-
-        });
-    });
-
+<script th:inline="javascript">
 </script>
 </body>
 </html>

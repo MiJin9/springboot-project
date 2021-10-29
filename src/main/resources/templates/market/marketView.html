@@ -15,20 +15,22 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
 </head>
+
 <body class="homepage is-preload" onload="init()">
     <div id="page-wrapper">
 
         <th:block th:include="header.html"></th:block>
 
         <!--Main-->
-        <div class="main">
+        <div class="main" th:object="${item}">
             <div class="category">
                 <img src="/img/yougnMarketDetail.png" style="padding-top: 53px;">
             </div>
-            <input style="float: right; margin-right: 55px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="글수정">
-            <input style="float: right; margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="글삭제">
-            <input style="float: right; margin-right: 10px; height: 35px; width: 115px; line-height: normal;" class="primary" type="button" value="목록보기">
-            <br>
+            <div class="Btn" style="float: right;margin-right: 10px;">
+            <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
+            <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
+            <a href="javascript:void(0)" id="goList" class="button primary small">목록보기</a>
+            </div>
             <br>
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
                 <!-- 상품이미지 미리보기 시작 { -->
@@ -45,12 +47,11 @@
 
                 <section class="detailView">
                     <div class="sit_ov_tbl">
-                        <div id="sit_title" style="color: #4a514f; font-size: 22px" >아삭한 식감에 반하는 딱딱이 복숭아</div>
+                        <div id="sit_title" style="color: #4a514f; font-size: 22px" th:text="*{itemname}" ></div>
                             <hr>
-                                <div class="con_w">
-                                    <span>시중가격 : 33,000원</span>
+                                <div class="con_w" style="display: flex">
+                                    시중가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>
                                 </div>
-                            <br>
                             <div class="con_w">
                                 <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
                                 <span class="con">상세페이지참조</span>
@@ -61,24 +62,21 @@
                                 <span class="con">상세페이지참조</span>
                             </div>
                             <br>
-                            <div class="con_w">
-                                <span class="ttl">원산지&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">대한민국</span>
+                            <div class="con_w" style="display: flex">
+                                원산지&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<p th:text="*{itemhome}"></p>
                             </div>
-                            <br>
-                            <div class="con_w">
-                                <span class="ttl">배송비결제&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">무료</span></div>
-                            <br>
-                            <div class="con_w">
-                                <span class="ttl">잔여수량&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">120개</span></div>
+                            <div class="con_w" style="display: flex">
+                                배송비결제&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemdeliverprice}"></p>
+                            </div>
 
+                            <div class="con_w" style="display: flex">
+                                잔여수량&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemtotalcount}"></p>
+                            </div>
                             <hr>
                             <br>
                             <section style="display: flex">
                                 <form name="form" method="get" style="font-size: 20px">
-                                    수량 : <input type=hidden name="sell_price" value="33000">
+                                    수량 : <input type=hidden name="sell_price" th:value="*{itemprice}">
                                     <input type="text" name="amount" value="1" size="3" style="font-size: 18px" onchange="change();">
                                     <input style="padding-left: 19px;height: 29px;line-height: 0px;width: 62px;padding-top: 10px" type="button" value=" + " onclick="add();">
                                     <input style="padding-left: 19px;height: 29px;line-height: 0px;width: 62px;padding-top: 10px" type="button" value=" - " onclick="del();"><br>
@@ -111,10 +109,7 @@
 
                 <!-- 상풍 상세설명 -->
                 <hr>
-                <div style="text-align:center;" align="center">
-                    <p>상품 상세 설명</p>
-                    <!--상품 상세설명 끝-->
-                </div>
+                <div class="itemcontent" style="text-align:center;"></div>
             </div>
 
 
@@ -131,7 +126,8 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-    <script>
+    <script th:inline="javascript">
+
         $(document).ready(function() {
             $("#sit_pvi_big").owlCarousel({
                 autoPlay : true,
@@ -153,12 +149,14 @@
             change();
         }
 
+        console.log(sell_price);
+
         function add () {
             hm = document.form.amount;
             sum = document.form.sum;
             hm.value ++ ;
 
-            sum.value = parseInt(hm.value) * sell_price;
+            sum.value = parseInt(hm.value) * parseInt(sell_price);
         }
 
         function del () {
@@ -166,7 +164,7 @@
             sum = document.form.sum;
             if (hm.value > 1) {
                 hm.value -- ;
-                sum.value = parseInt(hm.value) * sell_price;
+                sum.value = parseInt(hm.value) * parseInt(sell_price);
             }
         }
 
@@ -177,9 +175,12 @@
             if (hm.value < 0) {
                 hm.value = 0;
             }
-            sum.value = parseInt(hm.value) * sell_price;
+            sum.value = parseInt(hm.value) * parseInt(sell_price);
         }
 
+        let content = [[${item.itemcontent}]]
+        $(".itemcontent").html(content);
+        console.log(content);
     </script>
 </body>
 </html>

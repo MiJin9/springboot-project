@@ -25,7 +25,7 @@
 
     <!--Main-->
     <div class="main">
-        <form>
+        <form action="/market/marketModify" id="postForm" name="postForm" method="POST">
             <div class="category">
                 <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
             </div>
@@ -45,6 +45,14 @@
 
                 <section class="detailView">
                     <div class="sit_ov_tbl" style="margin-top: 50px">
+                        <div>
+                            <input type="hidden" name="itemnum" id="itemnum" th:field="${vo.itemnum}">
+                            <input name="userid" th:field="${vo.userid}" type="hidden">
+                            <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
+                            <input type="hidden" name="amount" th:field="${criteria.amount}">
+                            <input type="hidden" name="keyType" th:field="${criteria.keyType}">
+                            <input type="hidden" name="keyword" th:field="${criteria.keyword}">
+                        </div>
                         <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
                         <hr>
                         <div class="con_w">
@@ -78,10 +86,6 @@
             </div>
             <hr>
             <div id="bottom">
-
-                <form id="postForm" name="postForm" method="POST">
-
-
                     <!-- summernote와 관련된 영역 -->
 
                     <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
@@ -99,9 +103,6 @@
                     </div>
 
                     <br>
-
-                </form>
-
             </div>
 
         </form>
@@ -125,17 +126,6 @@
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script>
-    $(document).ready(function() {
-        $("#sit_pvi_big").owlCarousel({
-            autoPlay : true,
-            navigation : true, // Show next and prev buttons
-            slideSpeed : 1000,
-            pagination:false,
-            singleItem:true,
-
-        });
-    });
-
 </script>
 </body>
 </html>

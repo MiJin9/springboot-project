@@ -14,24 +14,14 @@
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 <style>
-
-
-    h1, h2, h3, h4, a, p, li, div, input{
-    }
-
     li>a {
         font-size: 20px;
     }
-    .headermenu{
-        width:1000px !important;
-    }
-    .twelve{
-        width: 200px;
-    }
+
     table {
         width: 112%;
     }
-    li{
+    li.marketItem{
         margin-right: 20px !important;
     }
     #subheader a{
@@ -42,7 +32,7 @@
         background-color: #fafcff;
         padding : 20px 0;
         border-bottom: 1px solid #3c3c3c;
-        margin-top: 25px;
+        height: 260px;
     }
 
     .marketItemInner{
@@ -97,11 +87,9 @@
         <div id="wrapper">
             <div id="container">
                 <section class="sct_wrap" style="width: 1100px;">
-                    <br>
                     <div style="height: 40px">
                         <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">등록</a></h3>
                     </div>
-                    <br>
                     <ul class="itemList">
                         <th:block th:each="item : ${list}">
                             <div>
@@ -118,17 +106,13 @@
                                             <div class="itemTitle">
                                                 <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" name="itemname" th:text="*{itemname}"></a></h4>
                                             </div>
-                                            <!--작성자-->
-                                            <div>
-                                                작성자 : <p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userid}"></p>
-
-                                            </div>
                                             <!--내용-->
-                                            <div class="itemDetail">
-                                                가격 : <p th:text="*{itemprice}" name="itemprice"></p><br>
+                                            <div class="itemDetail" style="height: 165px">
+                                                작성자 :<p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userid}"></p><br>
+                                                가격 : <p th:text="*{itemprice}" name="itemprice"></p>원<br>
                                                 원산지 : <p th:text="*{itemhome}" name="itemhome"></p><br>
                                                 제고 : <p th:text="*{itemtotalcount}" name="itemtotalcount"></p><br>
-                                                배송비 : <p th:text="*{itemdeliverprice}" name="itemdeliverprice"></p><br>
+                                                배송비 : <p th:text="*{itemdeliverprice}" name="itemdeliverprice"></p>원<br>
                                             </div>
                                             <div class="listNum">
                                                 No.<p id="itemnumber" name="itemnum" th:text="*{itemnum}"></p>
@@ -180,10 +164,9 @@
             </div>
         </div>
         </section>
-
+    </div>
     <!--footer-->
     <th:block th:include="footer.html"></th:block>
-</div>
 </div>
 <!-- Scripts -->
 <script src="/js/jquery.min.js"></script>
