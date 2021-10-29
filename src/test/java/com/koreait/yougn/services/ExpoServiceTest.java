@@ -1,13 +1,18 @@
 package com.koreait.yougn.services;
 
+import com.koreait.yougn.beans.vo.BoardsVO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
+import com.koreait.yougn.beans.vo.ThumbVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 @SpringBootTest
 @Slf4j
@@ -36,6 +41,7 @@ public class ExpoServiceTest {
         expovo.setFarmAddress("7");
         expovo.setFarmPhone("8");
         expovo.setFarmProduct("9");
+
         expoService.register(expovo);
     }
 
@@ -63,4 +69,5 @@ public class ExpoServiceTest {
 
     @Test
     public void get(){expoService.get(68L); }
+
 }

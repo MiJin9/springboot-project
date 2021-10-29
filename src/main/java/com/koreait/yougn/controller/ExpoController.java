@@ -7,15 +7,14 @@ import com.koreait.yougn.beans.vo.ThumbVO;
 import com.koreait.yougn.services.ExpoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,12 +53,23 @@ public class ExpoController {
 
     //메소드
     @PostMapping("writeExpo")
-    public RedirectView writeExpo(ExpoVO expoVO, RedirectAttributes rttr) {
-        expoVO.setUserId("아이디123");
-        expoService.register(expoVO);
-        rttr.addFlashAttribute("expoNum", expoVO.getExpoNum());
-        return new RedirectView("/expo/list");
+    public RedirectView register(ExpoVO vo, RedirectAttributes rttr){
+        log.info("-------------------------------");
+        log.info("writeExpo : " + vo.toString());
+        log.info("-------------------------------");
 
+        if(vo.getAttachList() != null){
+            vo.getAttachList().forEach(attach -> log.info(attach.toString()));
+        }
+
+        expoService.register(vo);
+
+//        쿼리 스트링으로 전달
+//        rttr.addAttribute("bno", boardVO.getBno());
+//        세션의 flash영역을 이용하여 전달
+        rttr.addFlashAttribute("expoNum", vo.getExpoNum());
+//        RedirectView를 사용하면 redirect방식으로 전송이 가능하다.
+        return new RedirectView("list");
     }
 
     //글 수정
@@ -86,8 +96,15 @@ public class ExpoController {
 
 
     //상세보기
-    @GetMapping({"readDetail", "modify"})
-    public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model) {
+    @GetMapping({"readDetail"})
+    public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model,  HttpServletRequest request) {
+        String reqURI = request.getRequestURI();
+        String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
+        //read 요청 시 read 출력
+        //modify 요청 시 modify 출력
+        log.info("-------------------------------");
+        log.info(reqType + " : " + expoNum);
+        log.info("-------------------------------");
         model.addAttribute("expo", expoService.get(expoNum));
         model.addAttribute("criteria", criteria);
     }
@@ -120,11 +137,11 @@ public class ExpoController {
 
         attachList.forEach(attach -> {
             try {
-                Path file = Paths.get("C:/upload/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getThumbName());
+                Path file = Paths.get("C:/upload/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getFileName());
                 Files.delete(file);
 
                 if (Files.probeContentType(file).startsWith("image")) {
-                    Path thumbnail = Paths.get("C:/upload/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getThumbName());
+                    Path thumbnail = Paths.get("C:/upload/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getFileName());
                     Files.delete(thumbnail);
                 }
             } catch (Exception e) {
@@ -132,5 +149,12 @@ public class ExpoController {
             }
         });
 
+    }
+
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<ThumbVO> getAttachList(Long expoNum){
+        log.info("getAttachList " + expoNum);
+        return expoService.getAttachList(expoNum);
     }
 }

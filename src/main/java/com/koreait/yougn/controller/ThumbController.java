@@ -28,69 +28,78 @@ import java.util.UUID;
 
 @Controller
 @Slf4j
-@RequestMapping("/thumb/*")
+@RequestMapping("/upload/*")
 public class ThumbController {
 
     @PostMapping(value = "uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ThumbVO> uploadAjaxAction(MultipartFile[] thumbFiles){
+    public List<ThumbVO> uploadAjaxAction(MultipartFile[] uploadFiles){
         log.info("upload ajax action...........");
-        List<ThumbVO> thumbList = new ArrayList<>();
+        List<ThumbVO> fileList = new ArrayList<>();
 
         String uploadFolder = "C:/upload";
         String uploadFolderPath = getFolder();
 
-        //        년/월/일 폴더 생성
+//        년/월/일 폴더 생성
         File uploadPath = new File(uploadFolder, uploadFolderPath);
         if(!uploadPath.exists()) {uploadPath.mkdirs();}
         log.info("upload path : " + uploadPath);
 
-        for(MultipartFile multipartFile : thumbFiles){
+        for(MultipartFile multipartFile : uploadFiles) {
             log.info("-------------------------");
             log.info("Upload File Name : " + multipartFile.getOriginalFilename());
             log.info("Upload File Size : " + multipartFile.getSize());
 
             ThumbVO thumbVO = new ThumbVO();
-            String thumbFileName = multipartFile.getOriginalFilename();
 
-        UUID uuid = UUID.randomUUID();
-        thumbFileName = uuid.toString() + "_" + thumbFileName;
-        //IE에서는 파일 이름을 포함한 전체 경로가 나오기 때문에 잘라야한다.
-        thumbFileName = thumbFileName.substring(thumbFileName.lastIndexOf("\\") + 1);
-        log.info("file name : " + thumbFileName);
+            String uploadFileName = multipartFile.getOriginalFilename();
 
-        thumbVO.setThumbName(thumbFileName);
+//            UUID
+//            네트워크 상에서 각각의 개체들을 식별하기 위하여 사용되었다.
+//            중복될 가능성이 거의 없다고 인정되기 때문에 많이 사용된다.
 
-        try {
-            File saveFile = new File(uploadPath,thumbFileName);
-            multipartFile.transferTo(saveFile);
-            InputStream in = new FileInputStream(saveFile);
+//            UUID 개수
+//            340,282,366,920,938,463,463,374,607,431,768,211,456개
+//            10의 38승 : 만4, 억8, 조12, 경16, 해20, 자24, 양28, 구32, 간36
+//            340간
+            UUID uuid = UUID.randomUUID();
+            uploadFileName = uuid.toString() + "_" + uploadFileName;
+            //IE에서는 파일 이름을 포함한 전체 경로가 나오기 때문에 잘라야한다.
+            uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+            log.info("file name : " + uploadFileName);
 
-            thumbVO.setUuid(uuid.toString());
-            thumbVO.setUploadPath(uploadFolderPath);
+            thumbVO.setFileName(uploadFileName);
 
-            if(checkImageType(saveFile)) {
-                thumbVO.setImage(true);
-                FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + thumbFileName));
-                Thumbnailator.createThumbnail(in, thumbnail, 100, 100);
-                thumbnail.close();
+            try {
+                File saveFile = new File(uploadPath,uploadFileName);
+                multipartFile.transferTo(saveFile);
+                InputStream in = new FileInputStream(saveFile);
+
+                thumbVO.setUuid(uuid.toString());
+                thumbVO.setUploadPath(uploadFolderPath);
+
+                if(checkImageType(saveFile)) {
+                    thumbVO.setImage(true);
+                    FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+                    Thumbnailator.createThumbnail(in, thumbnail, 100, 100);
+                    thumbnail.close();
+                }
+                in.close();
+
+                //가비지 컬렉터 호출
+                System.gc();
+                //가비지 컬렉터가 포착한 해제 필드들을 모두 즉시 해제
+                System.runFinalization();
+
+                fileList.add(thumbVO);
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            } catch (ArrayIndexOutOfBoundsException e){
+                log.info("GIF 파일의 용량이 큽니다.");
             }
-            in.close();
-
-            //가비지 컬렉터 호출
-            System.gc();
-            //가비지 컬렉터가 포착한 해제 필드들을 모두 즉시 해제
-            System.runFinalization();
-
-            thumbList.add(thumbVO);
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException e){
-            log.info("GIF 파일의 용량이 큽니다.");
         }
+        return fileList;
     }
-        return thumbList;
-}
 
     private String getFolder(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -165,5 +174,6 @@ public class ThumbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("deleted", HttpStatus.OK);
-}
+    }
+
 }
