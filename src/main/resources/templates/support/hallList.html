@@ -51,17 +51,19 @@
             </div>
             <div class="searchBox">
                 <div class="searchMenu">
-                    <div class="bigCate">
-                        <select name="sido">
-                        </select>
-                    </div>
-                    <div class="midCate">
-                        <select name="gugun">
-                            <option value="">시군구</option>
-                        </select>
-                    </div>
-                    <input type="search" class="search">
-                    <input type="button" class="button large" value="검색">
+                    <form action="/support/hallList" method="get">
+                        <div class="bigCate">
+                            <select name="sido">
+                            </select>
+                        </div>
+                        <div class="midCate">
+                            <select name="gugun">
+                                <option value="">시군구</option>
+                            </select>
+                        </div>
+                        <input type="search" class="search">
+                        <input type="submit" class="button large" value="검색">
+                    </form>
                 </div>
             </div>
             <div class="listWrapper">
@@ -72,51 +74,32 @@
                         <th>기관명</th>
                         <th>연락처</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <th:block th:each="vo:${list}">
+                        <tr th:object="${vo}">
+                            <td th:text="*{sido}"></td>
+                            <td th:text="*{gugun}"></td>
+                            <td th:text="*{name}"></td>
+                            <td th:text="*{call}"></td>
+                        </tr>
+                    </th:block>
+                    <tr th:if="${list.size() == 0}">
+                        <td colspan="6">검색된 정보가 없습니다.</td>
                     </tr>
                 </table>
             </div>
             <div class="paging">
-                <table>
+                <table th:object="${pageMaker}">
                     <tr>
-                        <td>&lt;</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>&gt;</td>
+                        <td th:if="*{prev}"><a th:href="@{hallList(pageNum=*{criteria.pageNum -1},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.keyword})}">&lt;</a></td>
+                        <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <td th:if="${pageMaker.criteria.getPageNum() != num}">
+                                <a th:href="@{hallList(pageNum=${num},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.keyword})}">
+                                    <span th:text="${num}"></span>
+                                </a>
+                            </td>
+                            <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
+                        </th:block>
+                        <td th:if="*{next}"><a th:href="@{hallList(pageNum=*{criteria.pageNum +1},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.keyword})}">&gt;</a></td>
                     </tr>
                 </table>
             </div>
@@ -138,7 +121,7 @@
 <script src="/js/main.js"></script>
 <script>
     $('document').ready(function() {
-        var area0 = ["시/도 선택", "경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
+        var area0 = ["시/도 선택", "경기","강원","충북","충남","전북","전남","경북","경남","제주"];
         var area1 = ["전체","고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
         var area2 = ["전체","강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
         var area3 = ["전체","제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"];
