@@ -2,6 +2,7 @@ package com.koreait.yougn.mappers;
 
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ItemVO;
+import com.koreait.yougn.beans.vo.OrderVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,4 +23,14 @@ public interface MarketMapper {
     public int delete(Long itemnum);
     //    게시글 전체 개수
     public int getTotal(Criteria criteria);
+
+    //전체 주문 리스트
+    public int orderGetTotal(Criteria criteria);
+
+    // 페이지별 주문 리스트
+    public List<OrderVO> orderGetList(Criteria criteria);
+
+    public void orderInsert(OrderVO orderVO);
+
+
 }

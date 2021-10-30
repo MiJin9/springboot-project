@@ -1,9 +1,6 @@
 package com.koreait.yougn.services;
 
-import com.koreait.yougn.beans.vo.Criteria;
-import com.koreait.yougn.beans.vo.ItemVO;
-import com.koreait.yougn.beans.vo.MarketThumbVO;
-import com.koreait.yougn.beans.vo.ThumbVO;
+import com.koreait.yougn.beans.vo.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +21,11 @@ public interface MarketService {
     public int getTotal(Criteria criteria);
 
     public List<MarketThumbVO> getAttachList(Long itemnum);
+
+    // 주문
+    public void orderRegister(OrderVO orderVO);
+
+    public List<OrderVO> orderGetList(Criteria criteria);
+
+    public int orderGetTotal(Criteria criteria);
 }
