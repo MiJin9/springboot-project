@@ -1,12 +1,16 @@
 package com.koreait.yougn.services;
 
+import com.koreait.yougn.beans.dao.MarketThumbDAO;
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
 import com.koreait.yougn.beans.vo.ItemVO;
+import com.koreait.yougn.beans.vo.MarketThumbVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.UUID;
 
 @SpringBootTest
 @Slf4j
