@@ -180,3 +180,6 @@ table a.button.stop {
 .con_w{
     margin-bottom: 10px;
 }
+.note-icon-bar, .note-resizebar {
+    display: none;
+}

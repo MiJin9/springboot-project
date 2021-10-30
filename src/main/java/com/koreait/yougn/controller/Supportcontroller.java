@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -131,6 +132,10 @@ public class Supportcontroller {
         applyVO.setId(id);
         return classService.cancel(applyVO)? new ResponseEntity<>(new String("취소 완료".getBytes(),"UTF-8"), HttpStatus.OK):
                 new ResponseEntity<>(new String("취소 실패".getBytes(),"UTF-8"),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping("classRegister")
+    public void classRegister(){
     }
 
     @GetMapping("infoList")
