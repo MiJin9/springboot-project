@@ -141,12 +141,17 @@ public class MarketController {
     public String marketKart() {
         return "/market/marketKart";
     }
+
     @GetMapping("marketMyorder")
     public String marketMyorder() { return "/market/marketMyorder"; }
+
     @GetMapping("marketOrderList")
-    public String marketOrderList() {
+    public String marketOrderList(Criteria criteria, Model model) {
+        model.addAttribute("list", marketService.orderGetTotal(criteria));
+        model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketOrderList";
     }
+
     @GetMapping("marketPayment")
     public String marketPayment() {
         return "/market/marketPayment";

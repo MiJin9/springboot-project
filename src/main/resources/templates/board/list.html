@@ -125,12 +125,12 @@
     console.log(boardType);
     $(document).ready(function(){
 
+        history.replaceState({}, null, "/board/list?boardType=" + boardType);
         let bno = [[${bno}]];
         if(bno == null || history.state){
             return;
         }
         alert("게시글 " + bno + "번이 등록되었습니다.");
-        history.replaceState({}, null, null);
     });
 
     $("a.changePage").click(function(e){
