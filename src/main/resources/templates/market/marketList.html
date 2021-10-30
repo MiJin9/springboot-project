@@ -91,14 +91,14 @@
                         <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">등록</a></h3>
                     </div>
                     <ul class="itemList">
-                        <th:block th:each="item : ${list}">
+                        <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
                             <div>
-                                <li class="marketItem" th:object="${item}">
+                                <li class="marketItem" th:object="${list.get(index)}">
                                     <div class="marketItemInner">
                                         <!--썸네일 나중에-->
                                         <div class="marketImgThumbnail">
-                                            <ul>
-                                                <img class="thumbImg" src="/img/smartFarm_sample.jpg">
+                                            <ul th:id="${index}">
+
                                             </ul>
                                         </div>
                                         <div class="itemInfo">
@@ -183,31 +183,40 @@
     let paging = [[${pageMaker.criteria.listLink}]]; // 페이징
     let searchForm = $(document.searchForm); // 검색기능 Form 태그
     let itemnum = $("#itemnum").text(); // 엑스포 넘버
-
-    let uploadResult = $(".marketImgThumbnail ul") // 썸네일 들어갈 태그
+    let marketImgThumbnail = $(".marketImgThumbnail ul") // 썸네일 들어갈 태그
+    let list = [[${list}]];
 
     $(document).ready(function(){
-        (function(){
-            $.getJSON("/market/getThumbList", {itemnum : itemnum},
-                function(attach){  // 썸네일 1개 가져오기
-                    let str = "";
-                    if (!attach.image) {   // 썸네일을 올리지 않았다면  attach.png
-                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-                        str += "<li>"
-                        str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                        str += "</li>";
-                    } else { // 등록한 썸네일 넣기
-                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-                        let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+        for(let a = 0; a < list.length; a++) {
+            (function () {
+                $.getJSON("/market/getAttachList", {itemnum: list[a].itemnum},
+                    function (arr) {
+                        console.log(arr);
+                        let str = "";
 
-                        str += "<li>"
-                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                        str += "</li>";
+                        $(arr).each(function (i, attach) {
+                            console.log(attach.image);
+                            if (!attach.image) {
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/img/attach.png' width='100px'>";
+                                str += "</div>";
+                                str += "</li>";
+                            } else {
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
 
-                    }
-                    uploadResult.html(str);
-                });//getJSON
-        })();
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }
+                        });
+                        $("#" + a).html(str);
+                    });//getJSON
+            })();
+        }
 
         showList(pageNum);
 

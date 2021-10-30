@@ -36,8 +36,8 @@
                 <!-- 상품이미지 미리보기 시작 { -->
                     <div id="sit_pvi_big" class="owl-carousel owl-theme">
                             <div class="owl-item" style="width: 500px;">
-                                <div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image">
-                                    <img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a>
+                                <div class="uploadResult">
+                                    <ul></ul>
                                 </div>
                             </div>
                     </div>
@@ -131,6 +131,7 @@
         let itemnum = $("#itemnum").val();
         let paging = [[${criteria.listLink}]]; // 페이징
         console.log(itemnum);
+        let uploadResult = $(".uploadResult ul");
 
         $(document).ready(function() {
             $("#sit_pvi_big").owlCarousel({
@@ -151,6 +152,36 @@
             amount = document.form.amount.value;
             document.form.sum.value = sell_price;
             change();
+
+            (function(){
+                $.getJSON("/market/getAttachList", {itemnum: itemnum},
+                    function(arr){
+                        console.log(arr);
+                        let str = "";
+
+                        $(arr).each(function(i, attach){
+                            console.log(attach.image);
+                            if(!attach.image){
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/img/attach.png' width='100px'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }else{
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }
+                        });
+                        uploadResult.html(str);
+                    });//getJSON
+            })();
         }
 
         console.log(sell_price);
@@ -201,6 +232,10 @@
         function goUpdate(){
             location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
         }
+
+
+
+
     </script>
 </body>
 </html>

@@ -3,6 +3,8 @@ package com.koreait.yougn.beans.vo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 public class ItemVO {
@@ -16,4 +18,5 @@ public class ItemVO {
     private String itemtotalcount;
     private String itemregDate;
     private String itemupdateDate;
+    private List<MarketThumbVO> attachList;
 }

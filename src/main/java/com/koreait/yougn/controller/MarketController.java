@@ -4,12 +4,10 @@ import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.MarketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -68,6 +66,15 @@ public class MarketController {
     @PostMapping("marketWrite")
     public RedirectView marketWrite(ItemVO itemVO, RedirectAttributes rttr) {
         itemVO.setUserid("아이디123");
+
+        if(itemVO.getAttachList() != null){
+            itemVO.getAttachList().forEach(attach -> log.info(attach.toString()));
+        }
+
+        if(itemVO.getAttachList() == null){
+            log.info("마켓 컨트롤러 AttachListNUll");
+        }
+
         marketService.register(itemVO);
         rttr.addFlashAttribute("itemnum", itemVO.getItemnum());
         return new RedirectView("/market/marketList");
@@ -96,6 +103,37 @@ public class MarketController {
             rttr.addFlashAttribute("result", "fail");
         }
         return new RedirectView("/market/marketList");
+    }
+
+    private void deleteFiles(List<MarketThumbVO> attachList) {
+        if (attachList == null || attachList.size() == 0) {
+            return;
+        }
+
+        log.info("delete attach files...........");
+        log.info(attachList.toString());
+
+        attachList.forEach(attach -> {
+            try {
+                Path file = Paths.get("C:/upload/" + attach.getUploadPath() + "/" + attach.getUuid() + "_" + attach.getFileName());
+                Files.delete(file);
+
+                if (Files.probeContentType(file).startsWith("image")) {
+                    Path thumbnail = Paths.get("C:/upload/" + attach.getUploadPath() + "/s_" + attach.getUuid() + "_" + attach.getFileName());
+                    Files.delete(thumbnail);
+                }
+            } catch (Exception e) {
+                log.error("delete file error " + e.getMessage());
+            }
+        });
+
+    }
+
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<MarketThumbVO> getAttachList(Long itemnum){
+        log.info("getAttachList " + itemnum);
+        return marketService.getAttachList(itemnum);
     }
 
 
