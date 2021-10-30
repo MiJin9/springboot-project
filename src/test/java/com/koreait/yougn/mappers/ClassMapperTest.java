@@ -1,5 +1,6 @@
 package com.koreait.yougn.mappers;
 
+import com.koreait.yougn.beans.vo.ApplyVO;
 import com.koreait.yougn.beans.vo.ClassCri;
 import com.koreait.yougn.beans.vo.ClassVO;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class ClassMapperTest {
 
     @Test
     public void selectTest(){
-        log.info(classMapper.select(1L).toString());;
+        log.info(classMapper.select(2L).toString());;
     }
 
     @Test
@@ -88,5 +89,24 @@ public class ClassMapperTest {
             log.info(vo.getRecruitCloseDate().split(" ")[0].compareTo(today)+"");
             today = "2021-06-30";
         }
+    }
+
+    @Test
+    public void insertApplyTest(){
+        ApplyVO applyVO = new ApplyVO();
+        applyVO.setId("alswo12");
+        applyVO.setClassNum(3L);
+        applyVO.setMerchant_uid("테이스_uid2");
+        classMapper.applyInsert(applyVO);
+        log.info("insert Test - insert appluNum : " + applyVO.getNum());
+    }
+
+    @Test
+    public void getMerchant_uidTest(){
+        ApplyVO applyVO = new ApplyVO();
+        applyVO.setId("alswo12");
+        applyVO.setClassNum(7L);
+
+        log.info(classMapper.selectApply(applyVO).toString());
     }
 }

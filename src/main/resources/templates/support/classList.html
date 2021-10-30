@@ -56,7 +56,10 @@
                 </div>
             </div>
             <div class="linkWrapper">
-                <input id="linkButton" type="button" class="button large" value="정부지원 클래스" style="margin-left:30px; border: solid 0.5px green; padding: 5px 15px;font-weight: 400;" >
+                <input id="linkButton" type="button" class="button large" value="정부지원 클래스" style="margin-left:30px; border: solid 0.5px green; padding: 5px 15px;font-weight: 400;">
+                <th:block th:if="${id == 'yougnAdmin'}">
+                    <a href="/support/classRegister" id="register" class="button" style="float: right;margin-right: 100px;">글 등록</a>
+                </th:block>
             </div>
             <div class="listWrapper">
                 <div class="list">
@@ -77,7 +80,7 @@
                                 <th:block th:switch="${checkList.get(num)}">
                                     <th:block th:if="*{headNum != headCount} and ${checkList.get(num)}">
                                         <td th:text="신청가능"></td>
-                                        <td><a th:href="@{classView(num=*{num})}" class="button">자세히보기</a></td>
+                                        <td><a th:href="@{classView(num=*{num})}" class="button go">자세히보기</a></td>
                                     </th:block>
                                     <th:block th:unless="*{headNum != headCount} and ${checkList.get(num)}">
                                         <td th:text="마감"></td>
@@ -96,22 +99,26 @@
             <div class="paging">
                 <table th:object="${pageMaker}">
                     <tr>
-                        <td th:if="*{prev}"><a th:href="@{classList(pageNum=*{criteria.pageNum -1},keyword=*{criteria.keyword})}">&lt;</a></td>
+                        <td th:if="*{prev}"><a
+                                th:href="@{classList(pageNum=*{criteria.pageNum -1},keyword=*{criteria.id})}">&lt;</a>
+                        </td>
                         <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                             <td th:if="${pageMaker.criteria.getPageNum() != num}">
-                                <a th:href="@{classList(pageNum=${num},keyword=*{criteria.keyword})}">
+                                <a th:href="@{classList(pageNum=${num},keyword=*{criteria.id})}">
                                     <span th:text="${num}"></span>
                                 </a>
                             </td>
                             <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
                         </th:block>
-                        <td th:if="*{next}"><a th:href="@{classList(pageNum=*{criteria.pageNum +1},keyword=*{criteria.keyword})}">&gt;</a></td>
+                        <td th:if="*{next}"><a
+                                th:href="@{classList(pageNum=*{criteria.pageNum +1},keyword=*{criteria.id})}">&gt;</a>
+                        </td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-
+    <input type="hidden" th:value="${id}" id="sessionId">
 
     <th:block th:include="footer.html"></th:block>
 </div>
@@ -127,8 +134,18 @@
 </body>
 <script>
     let url = "https://www.returnfarm.com:444/cmn/returnFarm/module/eduAkademy/rfAkademyMain.do";
-    $("#linkButton").on("click",function(){
-        window.open(url,"_blank");
+
+    $("#linkButton").on("click", function () {
+        window.open(url, "_blank");
+    })
+    $("a.go").on("click", function (e) {
+        e.preventDefault();
+        if ($("#sessionId").val() == "") {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+        location.href = $(this).attr("href");
+
     })
 </script>
 </html>

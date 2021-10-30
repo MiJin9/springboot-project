@@ -90,16 +90,21 @@
                         <hr>
 
                         <!--버튼-->
-                        <th:block th:if="${check}">
-                            <th:block th:if="*{headNum != headCount}">
-                                <input type="button" class="button large primary" value="신청하기" style=" height: 40px; width: 150px;">
+                        <th:block th:if="${applyCheck}">
+                            <th:block th:if="${check}">
+                                <th:block th:if="*{headNum != headCount}">
+                                    <input type="button" class="button large primary" id="apply" value="신청하기" style=" height: 40px; width: 150px;">
+                                </th:block>
+                                <th:block th:if="*{headNum == headCount}">
+                                    <input type="button" class="button large primary" value="마감" style=" height: 40px; width: 150px; background: #4a514f">
+                                </th:block>
                             </th:block>
-                            <th:block th:if="*{headNum == headCount}">
-                                <input type="button" class="button large primary" value="마감" style=" height: 40px; width: 150px; background: #4a514f">
+                            <th:block th:unless="${check}">
+                                <input type="button" class="button large primary" value="신청 시간 전" style=" height:40px;width:150px;background:#4a514f">
                             </th:block>
                         </th:block>
-                        <th:block th:unless="${check}">
-                            <input type="button" class="button large primary" value="신청 시간 전" style=" height: 40px; width: 150px; background: #4a514f">
+                        <th:block th:unless="${applyCheck}">
+                            <input type="button" class="button large primary" id="cancel" value="신청취소" style=" height:40px;width:150px;background:#d1161678;">
                         </th:block>
                         <!--버튼 끝-->
                     </div>
@@ -134,4 +139,8 @@
 <script src="/js/main.js"></script>
 
 </body>
+<script>
+    let merchant_uid = [[${merchant_uid}]];
+    let classNum = [[${class.num}]];
+</script>
 </html>

@@ -6,12 +6,16 @@ import com.koreait.yougn.services.HallService;
 import com.koreait.yougn.services.ReturnService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -67,7 +71,8 @@ public class Supportcontroller {
     }
 
     @GetMapping("classList")
-    public String classList(ClassCri classCri, Model model){
+    public String classList(ClassCri classCri, HttpServletRequest r, Model model){
+        String id = (String)r.getSession().getAttribute("sessionId");
         if(classCri.getKeyword() != null){
             String temp = classCri.getKeyword();
             classCri.setKeyword(temp.replace(" ","").length() == 0? null : classCri.getKeyword());
@@ -78,7 +83,7 @@ public class Supportcontroller {
         for (ClassVO vo : list) {
             checkList.add(vo.getRecruitCloseDate().compareTo(today) != -1);
         }
-
+        model.addAttribute("id",id==null?"":id);
         model.addAttribute("list", list);
         model.addAttribute("checkList",checkList);
         model.addAttribute("pageMaker",new PageDTO(classService.getTotal(classCri),10,classCri));
@@ -92,10 +97,40 @@ public class Supportcontroller {
     }
 
     @GetMapping("classView")
-    public void classView(Long num, Model model){
+    public void classView(Long num, HttpServletRequest r,Model model){
+        String id = (String)r.getSession().getAttribute("sessionId");
+        log.info("id : " + id);
         ClassVO classVO = classService.getClass(num);
+
+        ApplyVO applyVO = new ApplyVO();
+        applyVO.setId(id);
+        applyVO.setClassNum(num);
+
+        model.addAttribute("merchant_uid",classService.getMerchant_uid(applyVO));
+        model.addAttribute("applyCheck",classService.checkApply(applyVO));
         model.addAttribute("check" , classVO.getRecruitDate().compareTo(getToday()) <= 0);
         model.addAttribute("class",classVO);
+    }
+
+    // 결제 완료 후 merchant_uid를 받아서 요청을 보냄
+    // 클래스 신청
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "apply",consumes = "application/json; charset=utf-8",produces = "text/plain; charset=utf-8")
+    public ResponseEntity<String> apply(@RequestBody ApplyVO applyVO, HttpServletRequest r) throws UnsupportedEncodingException {
+        String id = (String)r.getSession().getAttribute("sessionId");
+        applyVO.setId(id);
+        return classService.apply(applyVO)? new ResponseEntity<>(new String("신청 완료".getBytes(),"UTF-8"), HttpStatus.OK):
+                new ResponseEntity<>(new String("신청 실패".getBytes(),"UTF-8"),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // 클래스 취소
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "cancel",consumes = "application/json; charset=utf-8",produces = "text/plain; charset=utf-8")
+    public ResponseEntity<String> cancel(@RequestBody ApplyVO applyVO, HttpServletRequest r) throws UnsupportedEncodingException {
+        String id = (String)r.getSession().getAttribute("sessionId");
+        applyVO.setId(id);
+        return classService.cancel(applyVO)? new ResponseEntity<>(new String("취소 완료".getBytes(),"UTF-8"), HttpStatus.OK):
+                new ResponseEntity<>(new String("취소 실패".getBytes(),"UTF-8"),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping("infoList")

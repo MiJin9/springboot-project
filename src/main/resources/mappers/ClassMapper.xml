@@ -51,14 +51,20 @@
         WHERE NUM = #{num}
     </update>
 
-    <update id="updateCount">
+    <update id="updateCountUp">
         UPDATE T_CLASS
         SET HEADCOUNT = HEADCOUNT + 1
         WHERE NUM = #{num}
     </update>
 
+    <update id="updateCountDown">
+        UPDATE T_CLASS
+        SET HEADCOUNT = HEADCOUNT - 1
+        WHERE NUM = #{num}
+    </update>
+
     <delete id="delete">
-        DELETE FROM T_CLASS WHERE NUM = #{num}
+        DELETE FROM T_CLASS WHERE ID = #{id} AND CLASSNUM = #{classNum}
     </delete>
 
     <select id="getTotal" resultType="_int">
@@ -73,5 +79,42 @@
             </if>
         </where>
         )
+    </select>
+
+    <insert id="applyInsert">
+        <selectKey keyProperty="num" order="BEFORE" resultType="long">
+            SELECT SEQ_APPLY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO T_APPLY (NUM, CLASSNUM, ID, MERCHANT_UID)
+        VALUES (#{num}, #{classNum}, #{id}, #{merchant_uid})
+    </insert>
+
+    <delete id="applyDelete">
+        DELETE FROM T_APPLY WHERE NUM = #{num}
+    </delete>
+
+    <select id="selectApplyList" resultType="_int">
+        SELECT CLASSNUM FROM
+        (
+            SELECT CLASSNUM FROM T_APPLY WHERE ID = #{id} ORDER BY CLASSNUM DESC
+        ) T
+        <![CDATA[
+        WHERE ROWNUM R <= #{pageNum} * #{amount} AND ROWNUM R2 > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="selectApply" resultMap="applyResult">
+        SELECT NUM, CLASSNUM, ID, MERCHANT_UID FROM T_APPLY WHERE ID=#{id} AND CLASSNUM = #{classNum}
+    </select>
+
+    <resultMap id="applyResult" type="applyVO">
+        <result property="num" column="NUM"/>
+        <result property="classNum" column="CLASSNUM"/>
+        <result property="id" column="ID"/>
+        <result property="merchant_uid" column="MERCHANT_UID"/>
+    </resultMap>
+
+    <select id="getApplyTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM T_APPLY WHERE ID={id}
     </select>
 </mapper>

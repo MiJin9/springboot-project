@@ -1,6 +1,7 @@
 package com.koreait.yougn.services;
 
 import com.koreait.yougn.beans.dao.ClassDAO;
+import com.koreait.yougn.beans.vo.ApplyVO;
 import com.koreait.yougn.beans.vo.ClassCri;
 import com.koreait.yougn.beans.vo.ClassVO;
 import lombok.RequiredArgsConstructor;
@@ -48,9 +49,29 @@ public class ClassService {
         return classDAO.update(classVO);
     }
 
+
+
     //클래스 신청
-    public boolean apply(Long num){
-        return classDAO.updateCount(num);
+    public boolean apply(ApplyVO applyVO){
+        classDAO.applyInsert(applyVO);
+        return classDAO.updateCountUp(applyVO.getClassNum());
+    }
+
+    //클래스 취소
+    public boolean cancel(ApplyVO applyVO){
+        classDAO.applyDelete(applyVO);
+        return classDAO.updateCountDown(applyVO.getClassNum());
+    }
+
+    //클래스를 이미 신청했는지 확인 / true면 신청가능
+    public boolean checkApply(ApplyVO applyVO){
+        return classDAO.getApply(applyVO) == null;
+    }
+
+    //ApplyVO 가져오기
+    public String getMerchant_uid(ApplyVO applyVO){
+        ApplyVO vo = classDAO.getApply(applyVO);
+        return vo == null? "" :  vo.getMerchant_uid();
     }
 
     //삭제
