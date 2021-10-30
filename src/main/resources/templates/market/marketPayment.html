@@ -41,12 +41,12 @@
                     </thead>
                     <tbody>
                     <th:block th:each="market : ${list}">
-                        <tr class="tBody" th:object="${order}">
-                            <td class="ordernum" th:text="*{ordernum}"></td>
+                        <tr class="tBody" th:object="${vo}">
+                            <td class="itemnum" th:text="*{itemnum}"></td>
+                            <td class="userid" th:text="*{userid}"></td>
                             <td class="itemname" th:text="*{itemname}"></td>
-                            <td class="orderpament" th:text="*{orderpament}"></td>
-                            <td class="orderdate" th:text="*{orderdate}"></td>
-                            <td class="orderaddress" th:text="*{orderaddress}"></td>
+                            <td class="itemdeliverprice" th:text="*{itemdeliverprice}"></td>
+                            <td class="ordercount" th:text="*{ordercount}"></td>
                             <td class="ordercount" th:text="*{ordercount}"></td>
                         </tr>
                     </th:block>
