@@ -71,7 +71,7 @@ public class Supportcontroller {
         return "support/returnList";
     }
 
-    @GetMapping("classList")
+    @RequestMapping(value = "classList",method = {RequestMethod.GET,RequestMethod.POST})
     public String classList(ClassCri classCri, HttpServletRequest r, Model model){
         String id = (String)r.getSession().getAttribute("sessionId");
         if(classCri.getKeyword() != null){
@@ -86,6 +86,7 @@ public class Supportcontroller {
         }
         model.addAttribute("id",id==null?"":id);
         model.addAttribute("list", list);
+        model.addAttribute("srcList",classService.getSrcList(list));
         model.addAttribute("checkList",checkList);
         model.addAttribute("pageMaker",new PageDTO(classService.getTotal(classCri),10,classCri));
         return "support/classList";
@@ -111,6 +112,7 @@ public class Supportcontroller {
         model.addAttribute("applyCheck",classService.checkApply(applyVO));
         model.addAttribute("check" , classVO.getRecruitDate().compareTo(getToday()) <= 0);
         model.addAttribute("class",classVO);
+        model.addAttribute("src",classService.getSrc(classVO.getNum()));
     }
 
     // 결제 완료 후 merchant_uid를 받아서 요청을 보냄
@@ -135,7 +137,16 @@ public class Supportcontroller {
     }
 
     @GetMapping("classRegister")
-    public void classRegister(){
+    public void classRegister(){}
+
+    @PostMapping("classRegister")
+    public RedirectView classRegister(ClassVO classVO, @RequestParam("addressDetail") String addressDetail, Model model){
+        addressDetail = addressDetail == null? "" : addressDetail;
+        classVO.setAddress(classVO.getAddress() + " " + addressDetail);
+        classService.register(classVO);
+        model.addAttribute("pageNum", 1);
+        model.addAttribute("amount",10);
+        return new RedirectView("classList");
     }
 
     @GetMapping("infoList")

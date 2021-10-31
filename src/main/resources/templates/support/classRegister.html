@@ -23,7 +23,7 @@
 
     <!--Main-->
     <div class="main">
-        <form action="/support/">
+        <form action="/support/classRegister" method="post" name="postForm">
         <div class="tle" >
             <h1 class="h1">클래스 쓰기</h1>
             <h6>홈>귀농지원>농사수업>클래스 쓰기</h6>
@@ -34,8 +34,9 @@
                         <div class="owl-wrapper-outer">
                             <div class="owl-wrapper"style="width: 1000px; left: 0px; display: block; transition: all 1000ms ease 0s;">
                                 <div class="owl-item" style="width: 500px;">
-                                    <div class="item">
+                                    <div class="uploadResult">
                                         <input type="file" id="file" name="file">
+                                        <ul></ul>
                                     </div>
                                 </div>
                             </div>
@@ -117,6 +118,9 @@
                 <!-- 상풍 상세설명 끝 -->
             </div>
         </div>
+            <input type="submit" id="sendSummer" class="button" value="작성" >
+
+            <a class="button" onclick="history.back()" >취소</a>
         </form>
     </div>
 
@@ -152,7 +156,6 @@
     $(document).ready(function () {
         var fontList = ['맑은 고딕', '돋움', '궁서', '굴림', '굴림체', '궁서체', '나눔 고딕', '바탕', '바탕체', '새굴림', 'HY견고딕', 'HY견명조', 'HY궁서B', 'HY그래픽M', 'HY목각파임B', 'HY신명조', 'HY얕은샘물M', 'HY엽서L', 'HY엽서M', 'HY중고딕', 'HY헤드라인M', '휴먼매직체', '휴먼모음T', '휴먼아미체', '휴먼둥근헤드라인', '휴먼편지체', '휴먼옛체'];
         var setting = {
-
             placeholder: "" ,
             height: 500,
             tabsize: 2,
@@ -161,7 +164,6 @@
             lang: 'ko-KR', // 언어 세팅
             fontNames: fontList,
             fontNamesIgnoreCheck: fontList,
-
             toolbar: [
                 // [groupName, [list of button]]
                 ['Font Style', ['fontname']],
@@ -177,11 +179,166 @@
             ],
             //콜백 함수
             callbacks : {
-
             }
-
         };
         $('#summernote').summernote(setting);
+
+        $("#sendSummer").click(function(e){
+            e.preventDefault();
+            if(!$("input[name=title]").val()){
+                alert("제목을 입력해주세요.");
+                $("input[name=title]").focus();
+                return;
+            }
+            if(!$("input[name=name]").val()){
+                alert("강사명을 입력해주세요.");
+                $("input[name=name]").focus();
+                return;
+            }
+            if(!$("input[name=headNum]").val()){
+                alert("최대 수강인원 을 입력해주세요.");
+                $("input[name=headNum]").focus();
+                return;
+            }
+            if(!$("input[name=place]").val()){
+                alert("강의장을 입력해주세요.");
+                $("input[name=place]").focus();
+                return;
+            }
+            if(!$("input[name=openDate]").val()){
+                alert("개강날짜를 입력해주세요.");
+                $("input[name=openDate]").focus();
+                return;
+            }
+            if(!$("input[name=closeDate]").val()){
+                alert("종강날짜를 입력해주세요.");
+                $("input[name=closeDate]").focus();
+                return;
+            }
+            if(!$("input[name=startTime]").val()){
+                alert("강의 시작시간을 입력해주세요.");
+                $("input[name=startTime]").focus();
+                return;
+            }
+            if(!$("input[name=endTime]").val()){
+                alert("강의 종료시간을 입력해주세요.");
+                $("input[name=endTime]").focus();
+                return;
+            }
+            if(!$("input[name=recruitDate]").val()){
+                alert("모집 시작 날짜를 입력해주세요.");
+                $("input[name=recruitDate]").focus();
+                return;
+            }
+            if(!$("input[name=recruitCloseDate]").val()){
+                alert("모집 종료 날짜을 입력해주세요.");
+                $("input[name=recruitCloseDate]").focus();
+                return;
+            }
+            if(!$("input[name=price]").val()){
+                alert("비용을 입력해주세요.");
+                $("input[name=price]").focus();
+                return;
+            }
+            if(!$("#summernote").val()){
+                alert("내용을 입력해주세요.");
+                return;
+            }
+            let str = "";
+            $(".uploadResult ul li").each(function(i, obj){
+                str += "<input type='text' name='fileList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='text' name='fileList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='text' name='fileList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='text' name='fileList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            $(document.postForm).append(str).submit();
+        })
+
+
+
+        let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif)$");
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".uploadResult ul");
+
+        //form태그에 input hidden 생성 실습
+        //서버 쪽으로 전달할 첨부파일의 데이터를 input type hidden으로 추가하기
+        //추가된 li태그를 모두 가져와서 data속성을 통해 알맞는 값을 설정한다.
+        //form.append("추가할 HTML") : HTML 추가
+        //submit을 눌렀을 때 click 이벤트를 발생하고, 기존 submit이벤트는 막아줘야 한다.
+        //input태그가 모두 추가된 후 submit()해준다.
+
+        function showUploadFile(uploadFile){
+            let str = "";
+            $(uploadFile).each(function(i, obj){
+                console.log(obj.uploadPath);
+                let fileCallPath = encodeURIComponent("classThumb/" + obj.uploadPath + "/s_" + obj.fileName);
+                let originPath = encodeURIComponent("classThumb/" + obj.uploadPath + "/" + obj.fileName);
+
+                str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                str += "<div>";
+                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                str += "</div>";
+                str += "</li>";
+            });
+            uploadResult.append(str);
+        }
+
+        $(".uploadResult").on("click", "span", function(){
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            $.ajax({
+                url: "/upload/deleteFile",
+                type: "POST",
+                data: {fileName:targetFile, type:type},
+                dataType: "text",
+                success: function(result){
+                    alert(result);
+                    li.remove();
+                }
+            });
+
+        });
+
+        //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
+        function checkExtension(fileName, fileSize){
+            if(!regex.test(fileName)){
+                alert("jpg, jpeg, png, gif 파일만 가능합니다..");
+                return false;
+            }
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+
+        $("input[type='file']").change(function(){
+            let formData = new FormData();
+            let inputFile = $("input[name='file']");
+            let files = inputFile[0].files;
+
+            for(let i=0; i<files.length; i++){
+                if(!checkExtension(files[i].name, files[i].size)){ return; }
+                formData.append("uploadFiles", files[i]);
+            }
+            formData.append("middlePath","/classThumb")
+
+            $.ajax({
+                url: "/upload/uploadAjaxAction",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(fileList){
+                    showUploadFile(fileList);
+                    inputFile.val("");
+                }
+            });
+        });
     })
 </script>
 </html>

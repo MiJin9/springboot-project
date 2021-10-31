@@ -70,24 +70,26 @@
                             <th class="th">강사명</th>
                             <th>클래스명</th>
                             <th class="th">모집</th>
-                            <th style="width: 50px;">자세히보기</th>
+                            <th style="width: 70px;">자세히보기</th>
                         </tr>
-                        <th:block th:each="num:${#numbers.sequence(0,list.size()-1)}">
-                            <tr th:object="${list.get(num)}">
-                                <td></td>
-                                <td th:text="*{name}"></td>
-                                <td th:text="*{title}"></td>
-                                <th:block th:switch="${checkList.get(num)}">
-                                    <th:block th:if="*{headNum != headCount} and ${checkList.get(num)}">
-                                        <td th:text="신청가능"></td>
-                                        <td><a th:href="@{classView(num=*{num})}" class="button go">자세히보기</a></td>
+                        <th:block th:if="${list.size() != 0}">
+                            <th:block th:each="num:${#numbers.sequence(0,list.size() -1)}">
+                                <tr th:object="${list.get(num)}">
+                                    <td><img th:src="@{/upload/display(fileName=${srcList.get(num)})}"></td>
+                                    <td th:text="*{name}"></td>
+                                    <td th:text="*{title}"></td>
+                                    <th:block th:switch="${checkList.get(num)}">
+                                        <th:block th:if="*{headNum != headCount} and ${checkList.get(num)}">
+                                            <td th:text="신청가능"></td>
+                                            <td><a th:href="@{classView(num=*{num})}" class="button go">자세히보기</a></td>
+                                        </th:block>
+                                        <th:block th:unless="*{headNum != headCount} and ${checkList.get(num)}">
+                                            <td th:text="마감"></td>
+                                            <td><a class="button stop">마감</a></td>
+                                        </th:block>
                                     </th:block>
-                                    <th:block th:unless="*{headNum != headCount} and ${checkList.get(num)}">
-                                        <td th:text="마감"></td>
-                                        <td><a class="button stop">마감</a></td>
-                                    </th:block>
-                                </th:block>
-                            </tr>
+                                </tr>
+                            </th:block>
                         </th:block>
                         <tr th:if="${list.size() == 0}">
                             <td colspan="6">검색된 정보가 없습니다.</td>
@@ -100,18 +102,18 @@
                 <table th:object="${pageMaker}">
                     <tr>
                         <td th:if="*{prev}"><a
-                                th:href="@{classList(pageNum=*{criteria.pageNum -1},keyword=*{criteria.id})}">&lt;</a>
+                                th:href="@{classList(pageNum=*{criteria.pageNum -1},keyword=*{criteria.keyword})}">&lt;</a>
                         </td>
                         <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                             <td th:if="${pageMaker.criteria.getPageNum() != num}">
-                                <a th:href="@{classList(pageNum=${num},keyword=*{criteria.id})}">
+                                <a th:href="@{classList(pageNum=${num},keyword=*{criteria.keyword})}">
                                     <span th:text="${num}"></span>
                                 </a>
                             </td>
                             <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
                         </th:block>
                         <td th:if="*{next}"><a
-                                th:href="@{classList(pageNum=*{criteria.pageNum +1},keyword=*{criteria.id})}">&gt;</a>
+                                th:href="@{classList(pageNum=*{criteria.pageNum +1},keyword=*{criteria.keyword})}">&gt;</a>
                         </td>
                     </tr>
                 </table>

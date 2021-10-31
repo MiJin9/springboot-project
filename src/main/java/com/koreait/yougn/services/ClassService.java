@@ -1,19 +1,26 @@
 package com.koreait.yougn.services;
 
 import com.koreait.yougn.beans.dao.ClassDAO;
+import com.koreait.yougn.beans.dao.ClassThumbDAO;
 import com.koreait.yougn.beans.vo.ApplyVO;
 import com.koreait.yougn.beans.vo.ClassCri;
 import com.koreait.yougn.beans.vo.ClassVO;
+import com.koreait.yougn.beans.vo.ThumbVO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ClassService {
     private final ClassDAO classDAO;
+    private final ClassThumbDAO classThumbDAO;
 
     //리스트 가져오기
     public List<ClassVO> getList(ClassCri classCri){
@@ -21,7 +28,31 @@ public class ClassService {
         for (ClassVO classVO : list) {
             classVO = dateSet(classVO);
         }
+        list.forEach(vo -> log.info(vo.toString()));
         return list;
+    }
+
+    public ArrayList<String> getSrcList(List<ClassVO> list){
+        ArrayList<ThumbVO> thumbArr = new ArrayList<>();
+        ArrayList<String> srcArr = new ArrayList<>();
+        String temp = null;
+        for (ClassVO vo:list) {
+            thumbArr.add(classThumbDAO.findByNum(vo.getNum()));
+        }
+        for (ThumbVO vo:thumbArr) {
+            if(vo == null){
+             srcArr.add(null);
+             continue;
+            }
+            temp = "classThumb/" + vo.getUploadPath() + "/s_" + vo.getUuid() + "_" +vo.getFileName();
+            srcArr.add(temp);
+        }
+        return srcArr;
+    }
+
+    public String getSrc(Long classNum){
+        ThumbVO vo = classThumbDAO.findByNum(classNum);
+        return "classThumb/" + vo.getUploadPath() + "/" + vo.getUuid() + "_" +vo.getFileName();
     }
 
     //하나 가져오기
@@ -40,8 +71,17 @@ public class ClassService {
     }
 
     //등록
+    @Transactional(rollbackFor = Exception.class)
     public boolean register(ClassVO classVO){
-        return classDAO.insert(classVO);
+        try {
+            classDAO.insert(classVO);
+            classVO.getFileList().forEach( thumb -> thumb.setExpoNum(classVO.getNum()));
+            classThumbDAO.insert(classVO.getFileList().get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     //수정
@@ -82,5 +122,11 @@ public class ClassService {
     //전체 글 개수 가져오기
     public int getTotal(ClassCri classCri){
         return classDAO.getTotal(classCri);
+    }
+
+
+    //파일(썸네일) 가져오기
+    public ThumbVO getFile(Long classNum){
+        return classThumbDAO.findByNum(classNum);
     }
 }

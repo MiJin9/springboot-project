@@ -33,11 +33,11 @@ public class ThumbController {
 
     @PostMapping(value = "uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ThumbVO> uploadAjaxAction(MultipartFile[] uploadFiles){
+    public List<ThumbVO> uploadAjaxAction(MultipartFile[] uploadFiles, String middlePath){
         log.info("upload ajax action...........");
         List<ThumbVO> fileList = new ArrayList<>();
-
-        String uploadFolder = "C:/upload";
+        middlePath = middlePath == null ? "" : middlePath;
+        String uploadFolder = "C:/upload" + middlePath;
         String uploadFolderPath = getFolder();
 
 //        년/월/일 폴더 생성

@@ -6,24 +6,30 @@
         ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
         FROM
         (
-            SELECT NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
-                ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
-            FROM T_CLASS
-            <where>
-                <if test="keyword != null">
-                    TITLE LIKE '%'||#{keyword}||'%'
-                    OR
-                    "NAME" LIKE '%'||#{keyword}||'%'
-                    OR
-                    CONTENT  LIKE '%'||#{keyword}||'%'
-                </if>
-            </where>
+            SELECT ROWNUM R, NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+            ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+            FROM
+            (
+                SELECT NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+                    ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+                FROM T_CLASS
+                <where>
+                    <if test="keyword != null">
+                        TITLE LIKE '%'||#{keyword}||'%'
+                        OR
+                        "NAME" LIKE '%'||#{keyword}||'%'
+                        OR
+                        CONTENT  LIKE '%'||#{keyword}||'%'
+                    </if>
+                </where>
+                <![CDATA[
+                ORDER BY OPENDATE DESC ,CLOSEDATE
+                 ]]>
+            ) T
             <![CDATA[
-            ORDER BY OPENDATE DESC ,CLOSEDATE
-             ]]>
-        ) T
-        <![CDATA[
-        WHERE  ROWNUM <= #{pageNum} * #{amount} AND ROWNUM > (#{pageNum} - 1) * #{amount}
+            WHERE  ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
         ]]>
     </select>
 
