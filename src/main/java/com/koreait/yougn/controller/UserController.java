@@ -280,14 +280,33 @@ public class UserController {
     }
 
     //문의글 목록
+//    @RequestMapping(value = "inquiry", method={RequestMethod.GET, RequestMethod.POST})
+//    public String inquiry(@RequestParam("faqVO") FaqVO faqVO, Criteria criteria, HttpServletRequest r, RedirectAttributes rttr, Model model) {
+//        String id = (String) r.getSession().getAttribute("sessionId");
+//        UserVO user = userService.getUser(id);
+//        FaqVO faq = faqService.get(faqVO.getNum());
+//
+//        log.info(id);
+//        log.info(user.getId());
+//        if(faqService.updateReplyState(faq)){
+//            rttr.addFlashAttribute("result", "답변완료");
+//        }else{
+//            rttr.addFlashAttribute("result", "답변대기");
+//        }
+//
+//        model.addAttribute("list", faqService.getListId(criteria, user.getId()));
+//        model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
+//        return "redirect:/user/inquiry";
+//    }
+
     @GetMapping("inquiry")
-    public String inquiry(Criteria criteria, Model model, HttpServletRequest r) {
+    public String inquiry(FaqVO faqVO, Criteria criteria, Model model, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
 
         model.addAttribute("list", faqService.getListId(criteria, user.getId()));
         model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
-        return "/user/inquiry";
+        return "user/inquiry";
     }
 
     //문의글 작성
@@ -302,17 +321,34 @@ public class UserController {
     @GetMapping("inquiryWrite")
     public void inquiryWrite(){}
 
-    //문의글 보기
+    //문의글 상세보기
     @GetMapping("inquiryRead")
-    public String inquiryRead() {
-        return "user/inquiryRead";
+    public void inquiryRead(@RequestParam("num") Long num,  Criteria criteria, Model model) {
+        model.addAttribute("faq", faqService.get(num));
+        model.addAttribute("criteria", criteria);
     }
 
+    //문의글 삭제
+    @PostMapping("remove")
+    public RedirectView remove(@RequestParam("num") Long num, RedirectAttributes rttr){
+        if(faqService.remove(num)){
+            rttr.addFlashAttribute("result", "success");
+        } else{
+            rttr.addFlashAttribute("result", "fail");
+        }
+        return new RedirectView("inquiry");
+    }
 
     //내 글 모아보기
     @GetMapping("writeCollection")
     public String writeCollection() {
         return "/user/writeCollection";
     }
+
+    //댓글등록
+
+
+    //댓글보기
+
 
 }

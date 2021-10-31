@@ -56,4 +56,16 @@
         SELECT COUNT(NUM) FROM T_FAQ
         WHERE ID = #{id}
     </select>
+
+    <update id="insertReply">
+        UPDATE T_FAQ
+        SET REPLY = #{reply} AND STATUS = 1
+        WHERE NUM = #{num}
+    </update>
+
+    <select id="readReply" resultType="faqVO">
+        SELECT REPLY FROM T_FAQ
+        WHERE NUM = #{num}
+    </select>
+
 </mapper>

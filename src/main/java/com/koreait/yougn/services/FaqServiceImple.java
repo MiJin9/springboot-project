@@ -32,7 +32,7 @@ public class FaqServiceImple implements FaqService{
     @Override
     public List<FaqVO> getList(Criteria criteria) {
 //        날짜에서 시간제거
-         List<FaqVO> list = faq.getList(criteria);
+        List<FaqVO> list = faq.getList(criteria);
         for (FaqVO vo:list) {
             vo.setRegDate(vo.getRegDate().split(" ")[0]);
         }
@@ -56,5 +56,15 @@ public class FaqServiceImple implements FaqService{
     @Override
     public int getTotalId(Criteria criteria, String id) {
         return faq.getTotalId(criteria, id);
+    }
+
+
+    @Override
+    public boolean insertReply(FaqVO faqVO){
+        return faq.insertReply(faqVO);}
+
+    @Override
+    public FaqVO readReply(Long num) {
+        return faq.readReply(num);
     }
 }

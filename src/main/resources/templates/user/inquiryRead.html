@@ -25,33 +25,50 @@
                 <h3 style="text-align: center; margin-bottom: 25px; margin-top: 30px">1:1 문의글</h3>
                 <hr style="width: 89%">
                 <div style="width: 89%; margin-left: 48px">
-                    <div style="margin-top: 20px">
-                        <input value="제목입니다" readonly id="inquiryTitle" class="input">
-                        <input value="2021-10-28" readonly id="inquiryDate" class="input">
-                    </div>
-                    <div>
-                        <textarea rows="6" id="inquiryContent" class="input" style="margin-top: 10px" readonly>내용입니다</textarea>
-                    </div>
-                    <div>
-                        <hr>
-                        <ul style="padding-left: 0px">
-                            <li style="display: block">
-                                <img src="/img/reply2.png" style="width:25px; margin-right: 7px">
-                                <strong>댓글</strong>
-                            </li>
-                        </ul>
-                        <div class="register-form">
-                            <div style="padding-top: 15px">
-                                <h3 style="color: black; font-size: 16px">Admin : </h3>
-                                <textarea rows="3" name="reply" placeholder="댓글을 입력해주세요." class="input2"></textarea>
+                    <form method="post" action="/user/remove" name="removeForm">
+                        <div th:object="${faq}">
+                            <div style="margin-top: 20px">
+                                <input type="hidden" th:field="*{num}">
+                                <input readonly id="inquiryTitle" class="input" th:field="*{title}">
+                                <input readonly id="inquiryDate" class="input" th:field="*{regDate}">
                             </div>
+                            <div>
+                                <textarea rows="6" id="inquiryContent" class="input" style="margin-top: 10px; padding: 0px; padding-top: 10px;" readonly
+                                          th:text="*{content}"></textarea>
+                            </div>
+                            <hr>
                             <div style="text-align: right">
-                                <a id="register" class="button">등록</a>
-                                <a id="cancel" class="button" style="margin-left: 3px; background: #888787;">취소</a>
+                                <input type="button" class="button" id="listBtn" value="목록">
+                                <input type="submit" class="button" id="removeBtn" value="삭제"
+                                       style="background: #888787;">
                             </div>
                         </div>
-                    </div>
-                    <ul class="replies"></ul>
+
+
+                        <div>
+                            <hr>
+                            <ul style="padding-left: 0px">
+                                <li style="display: block">
+                                    <img src="/img/reply2.png" style="width:25px; margin-right: 7px">
+                                    <strong>댓글</strong>
+                                </li>
+                            </ul>
+                            <div class="register-form">
+                                <div style="padding-top: 15px">
+                                    <h3 style="color: black; font-size: 16px">Admin : </h3>
+                                    <textarea rows="3" name="reply" placeholder="댓글을 입력해주세요." class="input2"></textarea>
+                                </div>
+                                <div style="text-align: right">
+                                    <a id="register" class="button finish">등록</a>
+                                    <a id="cancel" class="button cancel" style="margin-left: 3px; background: #888787;">취소</a>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <input type="button" class="primary" id="modview" name="bbttnn" onclick="getList()" value="댓글보기" style="font-weight: bold; margin-top: 10px; margin-bottom: 20px;">-->
+                        <div class="replies">
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -67,6 +84,17 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script>
+    $("#listBtn").on("click", function(){
+        location.href="/user/inquiry";
+    });
 
+    $("#delete").on("click", function () {
+        document.removeForm.submit();
+    });
+
+
+
+</script>
 </body>
 </html>

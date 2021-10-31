@@ -15,4 +15,6 @@ public interface FaqService {
     public int getTotal(Criteria criteria);
     public List<FaqVO> getListId(Criteria criteria, String id);
     public int getTotalId(Criteria criteria, String id);
+    public boolean insertReply(FaqVO faq);
+    public FaqVO readReply(Long num);
 }

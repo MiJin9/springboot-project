@@ -23,7 +23,18 @@ public interface FaqMapper {
     //    문의글 전체 개수
     public int getTotal(Criteria criteria);
 
+    //내가 쓴 문의글 목록
     public List<FaqVO> getListId(Criteria criteria, String id);
 
+    //내가 쓴 문의글 전체 개수
     public int getTotalId(Criteria criteria, String id);
+
+    //댓글달기
+    public int insertReply(FaqVO faq);
+
+    //댓글보기
+    public FaqVO readReply(Long num);
+
+//    //댓글수정
+//    public int modifyReply(FaqVO faq);
 }

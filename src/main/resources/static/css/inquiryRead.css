@@ -33,8 +33,7 @@
 }
 
 #inquiryTitle {
-    float: left;
-    width: 85%;
+    width: 78%;
     height: 45px;
     font-size: 18px;
     border: none;
@@ -43,7 +42,7 @@
 
 #inquiryDate {
     float: right;
-    width: 15%;
+    width: 22%;
     border: none;
     text-align: right;
     height: 45px;

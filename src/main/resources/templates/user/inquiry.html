@@ -37,8 +37,8 @@
                     <tr class="tHead" style="height: 30px; line-height: 2;">
                         <th class="num" style="width: 80px">번호</th>
                         <th class="title">제목</th>
-                        <th class="answerState" style="width: 120px">답변여부</th>
                         <th class="regDate" style="width: 130px">작성일</th>
+                        <th class="answerState" style="width: 120px">답변여부</th>
                     </tr>
                     </thead>
                     <tbody style="text-align: center">
@@ -46,9 +46,8 @@
                         <tr class="tBody" style="height: 30px; line-height: 2;" th:Object="${faq}">
                             <td class="num" style="width: 80px" th:text="*{num}"></td>
                             <td class="title"><a id="goRead2" th:href="*{num}" th:text="*{title}"></a></td>
-                            <td class="answerState" style="width: 120px"></td>
                             <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
-                        </tr>
+                            <td id="answer" class="answerState" style="width: 120px"></td>
                     </th:block>
                     </tbody>
                     <tfoot>
@@ -69,8 +68,6 @@
                     <form action="/user/inquiry" th:object="${criteria}" name="pageForm">
                         <input type="hidden" name="pageNum" th:field="*{pageNum}">
                         <input type="hidden" name="amount" th:field="*{amount}">
-<!--                        <input type="hidden" name="type" th:field="*{type}">-->
-<!--                        <input type="hidden" name="keyword" th:field="*{keyword}">-->
                     </form>
                 </div>
             </div>
@@ -104,7 +101,21 @@
 
     $("a#goRead2").on("click", function (e) {
         e.preventDefault();
-        location.href = "/user/inquiryRead" + paging + "&bno=" + $(this).attr("href");
-    })
+        location.href = "/user/inquiryRead" + paging + "&num=" + $(this).attr("href");
+    });
+
+    let state = $("#answer").text();
+    console.log();
+    let answerstate = [[${list.getState()}]];
+    console.log(answerstate);
+
+    if(answerstate == "0"){
+        $("#answer").html("답변 대기 중");
+    }else{
+        $("#answer").html("답변 완료");
+    }
+
+
+
 </script>
 </html>
