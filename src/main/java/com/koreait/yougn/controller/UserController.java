@@ -362,10 +362,4 @@ public class UserController {
         return "/user/writeCollection";
     }
 
-    //댓글등록
-
-
-    //댓글보기
-
-
 }
