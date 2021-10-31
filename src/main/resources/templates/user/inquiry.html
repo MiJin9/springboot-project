@@ -42,12 +42,13 @@
                     </tr>
                     </thead>
                     <tbody style="text-align: center">
-                    <th:block th:each="faq : ${list}">
-                        <tr class="tBody" style="height: 30px; line-height: 2;" th:Object="${faq}">
+                    <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
+                        <tr class="tBody" style="height: 30px; line-height: 2;" th:object="${list.get(index)}">
                             <td class="num" style="width: 80px" th:text="*{num}"></td>
                             <td class="title"><a id="goRead2" th:href="*{num}" th:text="*{title}"></a></td>
                             <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
-                            <td id="answer" class="answerState" style="width: 120px"></td>
+                            <td th:id="${index}" class="answerState" style="width: 120px" th:text="*{status}" ></td>
+                        </tr>
                     </th:block>
                     </tbody>
                     <tfoot>
@@ -84,14 +85,25 @@
 <script src="/js/browser.min.js"></script>
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
-<script src="/js/main.js"></script>
-</body>
 <script th:inline="javascript">
     // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);
+    let list = [[${list}]];
+    let str="";
 
+    $(document).ready(function() {
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].status == 0) {
+                str = "답변 대기 중"
+            }
+            if (list[i].status == 1)  {
+                str = "답변 완료"
+            }
+            $("#" + i).text(str);
+        }
+    });
 
     $("a.changePage").click(function (e) {
         e.preventDefault();
@@ -104,18 +116,8 @@
         location.href = "/user/inquiryRead" + paging + "&num=" + $(this).attr("href");
     });
 
-    let state = $("#answer").text();
-    console.log();
-    let answerstate = [[${list.getState()}]];
-    console.log(answerstate);
-
-    if(answerstate == "0"){
-        $("#answer").html("답변 대기 중");
-    }else{
-        $("#answer").html("답변 완료");
-    }
-
-
 
 </script>
+<script src="/js/main.js"></script>
+</body>
 </html>

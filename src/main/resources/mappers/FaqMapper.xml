@@ -5,11 +5,11 @@
 
     <select id="getList" resultType="faqVO">
         <![CDATA[
-        SELECT NUM, TITLE, CONTENT, ID, REGDATE
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE, STATUS
         FROM
         (
             SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
-            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE, STATUS
             FROM T_FAQ
             WHERE ROWNUM <= #{pageNum} * #{amount}
         )
@@ -40,11 +40,11 @@
 
     <select id="getListId" resultType="faqVO">
         <![CDATA[
-        SELECT NUM, TITLE, CONTENT, ID, REGDATE
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE, STATUS
         FROM
         (
             SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
-            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE, STATUS
             FROM T_FAQ
             WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} AND ID = #{id}
         )
@@ -59,7 +59,7 @@
 
     <update id="insertReply">
         UPDATE T_FAQ
-        SET REPLY = #{reply} AND STATUS = 1
+        SET REPLY = #{reply}, STATUS = 1
         WHERE NUM = #{num}
     </update>
 

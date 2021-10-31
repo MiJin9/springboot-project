@@ -33,7 +33,7 @@ public class FaqDAO {
 
     public int getTotalId(Criteria criteria, String id){return mapper.getTotalId(criteria, id);}
 
-    public boolean insertReply(FaqVO faq){return mapper.insertReply(faq) == 1;}
+    public int insertReply(FaqVO faq){return mapper.insertReply(faq);}
 
     public FaqVO readReply(Long num){return mapper.readReply(num);}
 

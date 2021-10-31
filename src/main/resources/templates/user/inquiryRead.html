@@ -59,7 +59,7 @@
                                     <textarea rows="3" name="reply" placeholder="댓글을 입력해주세요." class="input2"></textarea>
                                 </div>
                                 <div style="text-align: right">
-                                    <a id="register" class="button finish">등록</a>
+                                    <a id="register" href="javascript:void(0)" class="button finish">등록</a>
                                     <a id="cancel" class="button cancel" style="margin-left: 3px; background: #888787;">취소</a>
                                 </div>
                             </div>
@@ -84,15 +84,57 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/user/reply.js"></script>
 <script>
-    $("#listBtn").on("click", function(){
+    $("#listBtn").on("click", function(){ //목록으로 가기
         location.href="/user/inquiry";
     });
 
-    $("#delete").on("click", function () {
+    $("#delete").on("click", function () { //삭제
         document.removeForm.submit();
     });
 
+
+    /*댓글 */
+    let num = [[${faq.getNum()}]];
+    let text = $(".input2").text();
+    let replies = $("div.replies");
+    console.log(num  + "넘");
+    console.log(text  + "텍스트");
+
+    $(document).ready(function () {
+        showList();
+    })
+
+
+    $(".finish").on("click", function(e){
+        e.preventDefault();
+        let reply = $("textarea[name='reply']").val();
+
+        replyService.add({num:num, reply:reply},
+            function(result){
+                alert(result);
+                $("textarea[name='reply']").val("");
+                showList();
+            }
+        )
+    });
+
+    function showList(){
+        replyService.get({num:num},
+            function(replyCnt, list){
+                if(list == null || list.length == 0){
+                    replyUL.html("댓글이 없습니다.");
+                    return;
+                }
+                let str = "";
+                for(let i=0, len=list.length; i<len; i++){
+                    str += "<p class='reply'>" + list[i].reply + "</p>"
+                }
+                replyUL.html(str);
+            }
+        );
+    }
 
 
 </script>

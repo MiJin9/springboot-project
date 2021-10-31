@@ -60,7 +60,7 @@ public class FaqServiceImple implements FaqService{
 
 
     @Override
-    public boolean insertReply(FaqVO faqVO){
+    public int insertReply(FaqVO faqVO){
         return faq.insertReply(faqVO);}
 
     @Override
