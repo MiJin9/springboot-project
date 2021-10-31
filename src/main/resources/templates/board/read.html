@@ -313,6 +313,7 @@
     //댓글 삭제
     $(".reply").on("click", "a.remove", function(e){
         e.preventDefault();
+        if(check){alert("댓글 수정 중에는 삭제하실 수 없습니다."); return;}
         let rnoValue = $(this).attr("href");
         replyService.remove(rnoValue,
             function(result){

@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
-public class ExpoControllerTest {
+public class MarketControllerTest {
 
     private MockMvc mockMvc;
 
@@ -28,12 +28,12 @@ public class ExpoControllerTest {
     @Test
     public void testList() throws Exception{
         log.info(
-                mockMvc.perform(MockMvcRequestBuilders.get("/expo/list")
-                        .param("expoNum", "1")
+                mockMvc.perform(MockMvcRequestBuilders.get("/market/marketList")
+                .param("itemnum", "1")
                 .param("pageNum", "1")
                 .param("amount", "10")
                 .param("type", "T")
-                .param("keyword", "딸기 스마트팜에 놀러오세요~!")
+                .param("keyword", "복숭아 팜")
                )
                 .andReturn().getModelAndView().getModelMap().toString());
     }
@@ -41,12 +41,12 @@ public class ExpoControllerTest {
     @Test
     public void testDetail() throws Exception{
         log.info(
-                mockMvc.perform(MockMvcRequestBuilders.get("/expo/readDetail")
-                        .param("expoNum", "1")
+                mockMvc.perform(MockMvcRequestBuilders.get("/market/marketView")
+                        .param("itemnum", "1")
                         .param("pageNum", "1")
                         .param("amount", "10")
                         .param("type", "T")
-                        .param("keyword", "딸기 스마트팜에 놀러오세요~!")
+                        .param("keyword", "복숭아 팜")
                 )
                         .andReturn().getModelAndView().getModelMap().toString());
     }
@@ -54,23 +54,14 @@ public class ExpoControllerTest {
     @Test
     public void testRegister() throws Exception{
         log.info(
-                mockMvc.perform(MockMvcRequestBuilders.get("/expo/writeExpo")
-//                        expovo.setUserId("1");
-//                        expovo.setExpoContent("2");
-//                        expovo.setExpoTitle("3");
-//                        expovo.setFarmName("5");
-//                        expovo.setFarmerName("6");
-//                        expovo.setFarmAddress("7");
-//                        expovo.setFarmPhone("8");
-//                        expovo.setFarmProduct("9");
-                        .param("userId", "1")
-                        .param("expoContent", "2")
-                        .param("expoTitle", "3")
-                        .param("farmName", "4")
-                        .param("farmerName", "5")
-                        .param("farmAddress", "6")
-                        .param("farmPhone", "7")
-                        .param("farmProduct", "8")
+                mockMvc.perform(MockMvcRequestBuilders.get("/market/marketWrite")
+                        .param("userid", "1")
+                        .param("itemcontent", "2")
+                        .param("itemname", "3")
+                        .param("itemprice", "4")
+                        .param("itemhome", "5")
+                        .param("itemdeliverprice", "6")
+                        .param("itemtotalcount", "7")
                 )
                         .andReturn().getModelAndView().getModelMap().toString());
     }

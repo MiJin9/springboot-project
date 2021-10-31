@@ -2,9 +2,11 @@ package com.koreait.yougn.services;
 
 import com.koreait.yougn.beans.vo.BoardsVO;
 import com.koreait.yougn.beans.vo.Criteria;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface BoardsService {
     public void register(BoardsVO board);
     public BoardsVO get(Long bno);

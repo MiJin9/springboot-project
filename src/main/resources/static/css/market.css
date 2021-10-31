@@ -84,3 +84,12 @@ div.four h1, div.four p{
     margin-top: -8px;
     margin-bottom: -40px;
 }
+
+
+.thumbTitle{
+    height:20px;
+}
+
+.thumbWrapper{
+    justify-content: space-evenly;
+}

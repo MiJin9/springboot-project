@@ -3,8 +3,8 @@
 
 <mapper namespace="com.koreait.yougn.mappers.ThumbMapper">
     <insert id="insert">
-        INSERT INTO T_THUMB(UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE)
-        VALUES (#{uuid}, #{uploadPath}, #{thumbNum}, #{thumbName}, #{image})
+        INSERT INTO T_THUMB(UUID, UPLOADPATH, EXPONUM, FILENAME, IMAGE, FILETYPE)
+        VALUES (#{uuid}, #{uploadPath}, #{expoNum}, #{fileName}, #{image}, 1)
     </insert>
 
     <delete id="delete">
@@ -12,18 +12,18 @@
     </delete>
 
     <select id="findByNum" resultType="thumbVO">
-        SELECT UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE
+        SELECT UUID, UPLOADPATH, EXPONUM, FILENAME, IMAGE,  FILETYPE
         FROM T_THUMB
-        WHERE THUMBNUM = #{thumbNum}
+        WHERE EXPONUM = #{expoNum} AND  FILETYPE = 1
     </select>
 
     <delete id="deleteAll">
-        DELETE FROM T_THUMB WHERE THUMBNUM = #{thumbNum}
+        DELETE FROM T_THUMB WHERE EXPONUM = #{expoNum} AND  FILETYPE = 1
     </delete>
 
     <select id="getOldFiles" resultType="thumbVO">
-        SELECT UUID, UPLOADPATH, THUMBNUM, THUMBNAME, IMAGE
+        SELECT UUID, UPLOADPATH, EXPONUM, FILENAME, IMAGE , FILETYPE
         FROM T_THUMB
-        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD') AND  FILETYPE = 1
     </select>
 </mapper>

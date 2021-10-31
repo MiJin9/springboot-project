@@ -15,27 +15,29 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
 </head>
-<body class="homepage is-preload">
+
+<body class="homepage is-preload" onload="init()">
     <div id="page-wrapper">
 
         <th:block th:include="header.html"></th:block>
 
         <!--Main-->
-        <div class="main">
+        <div class="main" th:object="${item}">
             <div class="category">
                 <img src="/img/yougnMarketDetail.png" style="padding-top: 53px;">
             </div>
-            <input style="float: right; margin-right: 55px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="글수정">
-            <input style="float: right; margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="primary" type="button" value="글삭제">
-            <input style="float: right; margin-right: 10px; height: 35px; width: 115px; line-height: normal;" class="primary" type="button" value="목록보기">
-            <br>
+            <div class="Btn" style="float: right;margin-right: 10px;">
+            <a href="javascript:void(0)" id="modify" class="button primary small" onclick="goUpdate()">수정</a>
+            <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
+            <a href="javascript:void(0)" id="goList" class="button primary small">목록보기</a>
+            </div>
             <br>
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
                 <!-- 상품이미지 미리보기 시작 { -->
                     <div id="sit_pvi_big" class="owl-carousel owl-theme">
                             <div class="owl-item" style="width: 500px;">
-                                <div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image">
-                                    <img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a>
+                                <div class="uploadResult">
+                                    <ul></ul>
                                 </div>
                             </div>
                     </div>
@@ -45,12 +47,12 @@
 
                 <section class="detailView">
                     <div class="sit_ov_tbl">
-                        <div id="sit_title" style="color: #4a514f; font-size: 22px" >아삭한 식감에 반하는 딱딱이 복숭아</div>
+                        <div id="sit_title" style="color: #4a514f; font-size: 22px" th:text="*{itemname}" ></div>
                             <hr>
-                                <div class="con_w">
-                                    <span>시중가격 : 33,000원</span>
+                                <div class="con_w" style="display: flex">
+                                    시중가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>
                                 </div>
-                            <br>
+                        <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
                             <div class="con_w">
                                 <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
                                 <span class="con">상세페이지참조</span>
@@ -61,27 +63,28 @@
                                 <span class="con">상세페이지참조</span>
                             </div>
                             <br>
-                            <div class="con_w">
-                                <span class="ttl">원산지&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">대한민국</span>
+                            <div class="con_w" style="display: flex">
+                                원산지&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<p th:text="*{itemhome}"></p>
                             </div>
-                            <br>
-                            <div class="con_w">
-                                <span class="ttl">배송비결제&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">무료</span></div>
-                            <!-- 선택옵션 시작 { -->
+                            <div class="con_w" style="display: flex">
+                                배송비결제&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemdeliverprice}"></p>
+                            </div>
+
+                            <div class="con_w" style="display: flex">
+                                잔여수량&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemtotalcount}"></p>
+                            </div>
                             <hr>
                             <br>
-                            <section>
-                                <form>
-                                   <select class="option">
-                                        <option value="선택옵션">선택옵션</option>
-                                        <option value="딱딱이 복숭아 2.5kg,0,9997">딱딱이 복숭아 2.5kg  + 0원</option>
-                                        <option value="딱딱이 복숭아 5kg,18800,9999">딱딱이 복숭아 5kg  + 18,800원</option>
-                                   </select>
+                            <section style="display: flex">
+                                <form name="form" method="get" style="font-size: 20px">
+                                    수량 : <input type=hidden name="sell_price" th:value="*{itemprice}">
+                                    <input type="text" name="amount" value="1" size="3" style="font-size: 18px" onchange="change();">
+                                    <input style="padding-left: 19px;height: 29px;line-height: 0px;width: 62px;padding-top: 10px" type="button" value=" + " onclick="add();">
+                                    <input style="padding-left: 19px;height: 29px;line-height: 0px;width: 62px;padding-top: 10px" type="button" value=" - " onclick="del();"><br>
+
+                                    금액 : <input type="text" name="sum" size="11" style="width: 190px;font-size: 18px; margin-top: 3px" readonly> 원
                                 </form>
                             </section>
-                            <!-- } 선택옵션 끝 -->
                             <!--버튼-->
                             <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
                             <!--버튼 끝-->
@@ -107,10 +110,7 @@
 
                 <!-- 상풍 상세설명 -->
                 <hr>
-                <div style="text-align:center;" align="center">
-                    <p>상품 상세 설명</p>
-                    <!--상품 상세설명 끝-->
-                </div>
+                <div class="itemcontent" style="text-align:center;"></div>
             </div>
 
 
@@ -127,7 +127,12 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-    <script>
+    <script th:inline="javascript">
+        let itemnum = $("#itemnum").val();
+        let paging = [[${criteria.listLink}]]; // 페이징
+        console.log(itemnum);
+        let uploadResult = $(".uploadResult ul");
+
         $(document).ready(function() {
             $("#sit_pvi_big").owlCarousel({
                 autoPlay : true,
@@ -138,6 +143,99 @@
 
             });
         });
+
+        var sell_price;
+        var amount;
+
+        function init () {
+            sell_price = document.form.sell_price.value;
+            amount = document.form.amount.value;
+            document.form.sum.value = sell_price;
+            change();
+
+            (function(){
+                $.getJSON("/market/getAttachList", {itemnum: itemnum},
+                    function(arr){
+                        console.log(arr);
+                        let str = "";
+
+                        $(arr).each(function(i, attach){
+                            console.log(attach.image);
+                            if(!attach.image){
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/img/attach.png' width='100px'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }else{
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }
+                        });
+                        uploadResult.html(str);
+                    });//getJSON
+            })();
+        }
+
+        console.log(sell_price);
+
+        function add () {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            hm.value ++ ;
+
+            sum.value = parseInt(hm.value) * parseInt(sell_price);
+        }
+
+        function del () {
+            hm = document.form.amount;
+            sum = document.form.sum;
+            if (hm.value > 1) {
+                hm.value -- ;
+                sum.value = parseInt(hm.value) * parseInt(sell_price);
+            }
+        }
+
+        function change () {
+            hm = document.form.amount;
+            sum = document.form.sum;
+
+            if (hm.value < 0) {
+                hm.value = 0;
+            }
+            sum.value = parseInt(hm.value) * parseInt(sell_price);
+        }
+
+        let content = [[${item.itemcontent}]]
+        $(".itemcontent").html(content);
+        console.log(content);
+
+
+
+        $("a#goList").on("click", function(){
+            location.href = "/market/marketList" + paging;
+        });
+
+        $("#delete").on("click", function (e) {
+            e.preventDefault();
+            if(!confirm("상품번호" + itemnum + "번 상품을 삭제하시겠습니까")){return;}
+            location.href = "/market/remove?itemnum=" + itemnum;
+        })
+
+        function goUpdate(){
+            location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
+        }
+
+
+
+
     </script>
 </body>
 </html>

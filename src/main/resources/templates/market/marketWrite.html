@@ -9,13 +9,13 @@
     <title>마켓상품등록</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/market.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <!--썸머노트-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" />
 
 </head>
 <body class="homepage is-preload"  style="background: #fbf9f4">
@@ -25,30 +25,39 @@
 
     <!--Main-->
     <div class="main">
-        <form>
+
             <div class="category">
                 <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
             </div>
             <br>
+        <form id="writeForm" name="postForm" method="POST" action="/market/marketWrite">
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
                 <!-- 상품이미지 미리보기 시작 { -->
                 <div id="sit_pvi_big" class="owl-carousel owl-theme">
                     <div class="owl-item" style="width: 500px;">
-                        <div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image">
-                            <img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a>
+                        <input type="file" id="fileBtn" name="uploadFiles" style="display: block">
+                        <div class="uploadResult">
+                            <ul></ul>
                         </div>
                     </div>
                 </div>
 
                 <br>
                 <!-- } 상품이미지 미리보기 끝 -->
-
                 <section class="detailView">
-                    <div class="sit_ov_tbl">
-                        <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                    <div class="sit_ov_tbl" style="margin-top: 50px">
+                        <div>
+                            <input type="hidden" name="itemnum" id="itemnum" th:field="${vo.itemnum}">
+                            <input name="userid" th:field="${vo.userid}" type="hidden">
+                            <input type="hidden" name="pageNum" th:field="${criteria.pageNum}">
+                            <input type="hidden" name="amount" th:field="${criteria.amount}">
+                            <input type="hidden" name="keyType" th:field="${criteria.keyType}">
+                            <input type="hidden" name="keyword" th:field="${criteria.keyword}">
+                        </div>
+                        <input id="itemname" name="itemname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
                         <hr>
                         <div class="con_w">
-                            <input id="tagprice" style="width: 300px" type="text" placeholder="가격">
+                            <input id="itemprice" name="itemprice" style="width: 300px" type="text" placeholder="가격">
                         </div>
                         <br>
                         <div class="con_w">
@@ -62,27 +71,17 @@
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="taghometown" style="width: 300px" type="text" placeholder="원산지">
+                            <input id="itemhome" name="itemhome" style="width: 300px" type="text" placeholder="원산지">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="tagdeltip" style="width: 300px" type="text" placeholder="배송비">
+                            <input id="itemdeliverprice" name="itemdeliverprice" style="width: 300px" type="text" placeholder="배송비">
                         </div>
-                        <!-- 선택옵션 시작 { -->
-                        <hr>
                         <br>
-                        <section>
-                            <form>
-                                <select class="option">
-                                    <option value="선택옵션">선택옵션</option>
-                                    <option value="옵션1">옵션1</option>
-                                    <option value="옵션2">옵션2</option>
-                                    <option value="옵션3">옵션3</option>
-                                    <option value="옵션4">옵션4</option>
-                                </select>
-                            </form>
-                        </section>
-                        <!-- } 선택옵션 끝 -->
+                        <div class="con_w">
+                            <input id="itemtotalcount" name="itemtotalcount" style="width: 300px" type="text" placeholder="총수량">
+                        </div>
+
                         <!--버튼-->
                        <!-- <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">-->
                         <!--버튼 끝-->
@@ -92,26 +91,21 @@
             <hr>
             <div id="bottom">
 
-                <form id="postForm" name="postForm" method="POST">
-
-
                     <!-- summernote와 관련된 영역 -->
 
-                    <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                    <textarea id="summernote" name="itemcontent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                     <!-- 버튼과 관련된 영역 -->
 
                     <div align="center" class="btn-box">
 
-                        <input type="button" id="sendSummer" class="button" value="작성">
+                        <input type="submit" id="sendSummer" class="button" value="작성">
 
                         <a class="button" onclick="history.back()">취소</a>
 
                     </div>
 
                     <br>
-
-                </form>
 
             </div>
 
@@ -135,17 +129,126 @@
 <script src="/js/board/marketwrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#sit_pvi_big").owlCarousel({
-            autoPlay : true,
-            navigation : true, // Show next and prev buttons
-            slideSpeed : 1000,
-            pagination:false,
-            singleItem:true,
+<script th:inline="javascript">
+    $(document).ready(function(){
+        let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+        let maxSize = 5242880;// 5MB
+        let uploadResult = $(".uploadResult ul");
+        //form태그에 input hidden 생성 실습
+        //서버 쪽으로 전달할 첨부파일의 데이터를 input type hidden으로 추가하기
+        //추가된 li태그를 모두 가져와서 data속성을 통해 알맞는 값을 설정한다.
+        //form.append("추가할 HTML") : HTML 추가
+        //submit을 눌렀을 때 click 이벤트를 발생하고, 기존 submit이벤트는 막아줘야 한다.
+        //input태그가 모두 추가된 후 submit()해준다.
+
+        $("input[type='submit']").on("click", function(e){
+            e.preventDefault();
+            let form = $("form#writeForm");
+            let str = "";
+            $(".uploadResult ul li").each(function(i, obj){
+                str += "<input type='text' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            form.append(str).submit();
+        })
+
+        function showUploadFile(uploadFiles){
+            let str = "";
+            $(uploadFiles).each(function(i, obj){
+                if(!obj.image){
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<img src='/img/attach.png' width='100px'>"
+                    str += "<span data-file='" + fileCallPath + "' data-type='file'>x</span>";
+                    str += "</div>";
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                }else{
+                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                    let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                    str += "<div>";
+                    str += "<img src='/upload/display?fileName=" + fileCallPath + "'>"
+                    str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                    str += "</div>";
+                    str += "</li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                }
+            });
+            uploadResult.html(str);
+        }
+
+        $(".uploadResult").on("click", "span", function(){
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            $.ajax({
+                url: "/marketUpload/deleteFile",
+                type: "POST",
+                data: {fileName:targetFile, type:type},
+                dataType: "text",
+                success: function(result){
+                    alert(result);
+                    li.remove();
+                    $("input[type='file']").show();
+                }
+            });
 
         });
-    });
+
+        //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
+        function checkExtension(fileName, fileSize){
+            if(regex.test(fileName)){
+                alert("업로드 할 수 없는 파일의 형식입니다.");
+                return false;
+            }
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+
+        $("input[type='file']").change(function(){
+            let formData = new FormData();
+            let inputFile = $("input[name='uploadFiles']");
+            let files = inputFile[0].files;
+
+            if(files.length > 1){
+                alert("대표사진은 한장만 등록이 가능합니다.")
+                return;
+            }
+
+            if(files != ""){
+                $("input[type='file']").hide();
+            }
+
+            for(let i=0; i<files.length; i++){
+                if(!checkExtension(files[i].name, files[i].size)){ return; }
+                formData.append("uploadFiles", files[i]);
+            }
+
+
+
+
+            $.ajax({
+                url: "/marketUpload/uploadAjaxAction",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(fileList){
+                    showUploadFile(fileList);
+                    console.log(fileList);
+                    inputFile.val("");
+                }
+            });
+        });
+    })
 
 </script>
 </body>

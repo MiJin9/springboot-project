@@ -16,15 +16,15 @@ img.contentPicture {
     width: 100%;
 }
 
-.tle h1, h2, h3, h4, h5, h6 {
+.tle h1, h2, h4, h5, h6 {
     color: black;
 }
 
-.content{
-    padding-left: 1.25em;
-    padding-right: 1.25em;
-    padding-bottom: 1.25em;
+h3{
+    color: black;
+    font-size: 15px;
 }
+
 
 .bottom{
     padding: 45px 0 40px 0px;
@@ -35,9 +35,6 @@ img.bottomPicture{
     height: 100px;
 }
 
-.ddaompyo2{
-    text-align: right;
-}
 
 .contentInner{
     font-size: 16px;
@@ -50,12 +47,71 @@ img.bottomPicture{
 
 .contentOutLine{
     margin: 0 auto;
+    margin-top: 100px;
     width: 992px;
     border: 1px solid #f4f4f4;
     padding: 40px 0px 20px 0px;
+
 }
 
 .button{
     font-weight: 100;
     border: solid 1px green;
+}
+
+.thumbWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 40px;
+}
+
+.readTitle{
+    margin-top: 55px;
+    text-align: center;
+}
+
+.bodyText{
+    width: 400px;
+    border-left: solid 0.5px;
+    padding-left: 70px;
+    margin-left: -200px;
+
+}
+
+.thumbButton{
+    height: 75px;
+}
+
+li{
+    list-style: none;
+}
+
+.uploadResult{
+    width: 400px;
+}
+
+li>div>img{
+    height: 400px;
+    width:400px;
+}
+
+.bodyText{
+    margin-top: 55px;
+    margin-bottom: 55px;
+
+}
+
+.BottomLike{
+    margin-top: 30px;
+}
+
+div>p{
+    text-align: center;
+}
+
+.expoContent>p{
+    color:black;
 }

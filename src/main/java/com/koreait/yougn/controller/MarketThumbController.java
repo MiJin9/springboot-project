@@ -1,5 +1,6 @@
 package com.koreait.yougn.controller;
 
+import com.koreait.yougn.beans.vo.MarketThumbVO;
 import com.koreait.yougn.beans.vo.ThumbVO;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -28,14 +29,14 @@ import java.util.UUID;
 
 @Controller
 @Slf4j
-@RequestMapping("/upload/*")
-public class ThumbController {
+@RequestMapping("/marketUpload/*")
+public class MarketThumbController {
 
     @PostMapping(value = "uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ThumbVO> uploadAjaxAction(MultipartFile[] uploadFiles){
+    public List<MarketThumbVO> uploadAjaxAction(MultipartFile[] uploadFiles){
         log.info("upload ajax action...........");
-        List<ThumbVO> fileList = new ArrayList<>();
+        List<MarketThumbVO> fileList = new ArrayList<>();
 
         String uploadFolder = "C:/upload";
         String uploadFolderPath = getFolder();
@@ -50,7 +51,7 @@ public class ThumbController {
             log.info("Upload File Name : " + multipartFile.getOriginalFilename());
             log.info("Upload File Size : " + multipartFile.getSize());
 
-            ThumbVO thumbVO = new ThumbVO();
+            MarketThumbVO marketThumbVO = new MarketThumbVO();
 
             String uploadFileName = multipartFile.getOriginalFilename();
 
@@ -68,18 +69,18 @@ public class ThumbController {
             uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
             log.info("file name : " + uploadFileName);
 
-            thumbVO.setFileName(uploadFileName);
+            marketThumbVO.setFileName(uploadFileName);
 
             try {
                 File saveFile = new File(uploadPath,uploadFileName);
                 multipartFile.transferTo(saveFile);
                 InputStream in = new FileInputStream(saveFile);
 
-                thumbVO.setUuid(uuid.toString());
-                thumbVO.setUploadPath(uploadFolderPath);
+                marketThumbVO.setUuid(uuid.toString());
+                marketThumbVO.setUploadPath(uploadFolderPath);
 
                 if(checkImageType(saveFile)) {
-                    thumbVO.setImage(true);
+                    marketThumbVO.setImage(true);
                     FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
                     Thumbnailator.createThumbnail(in, thumbnail, 100, 100);
                     thumbnail.close();
@@ -91,13 +92,14 @@ public class ThumbController {
                 //가비지 컬렉터가 포착한 해제 필드들을 모두 즉시 해제
                 System.runFinalization();
 
-                fileList.add(thumbVO);
+                fileList.add(marketThumbVO);
             } catch (IOException e) {
                 log.error(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e){
                 log.info("GIF 파일의 용량이 큽니다.");
             }
         }
+        log.info("fileList-------------------------------------- 들어옴" + fileList );
         return fileList;
     }
 
@@ -108,6 +110,7 @@ public class ThumbController {
 
 //        - 대신 각 디렉토리의 경로를 구분할 수 있도록 하기 위해서
 //        replace()를 사용한다.
+        log.info("now.replace-------------------------------------- 들어옴" );
         return now.replace("-", "/");
     }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.MarketThumbMapper">
+    <insert id="insert">
+        INSERT INTO T_MARKETTHUMB(UUID, UPLOADPATH, ITEMNUM, FILENAME, IMAGE)
+        VALUES (#{uuid}, #{uploadPath}, #{itemnum}, #{fileName}, #{image})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM T_MARKETTHUMB WHERE UUID = #{uuid}
+    </delete>
+
+    <select id="findByNum" resultType="marketThumbVO">
+        SELECT UUID, UPLOADPATH, ITEMNUM, FILENAME, IMAGE
+        FROM T_MARKETTHUMB
+        WHERE ITEMNUM = #{itemnum}
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM T_MARKETTHUMB WHERE EXPONUM = #{itemnum}
+    </delete>
+
+    <select id="getOldFiles" resultType="marketThumbVO">
+        SELECT UUID, UPLOADPATH, ITEMNUM, FILENAME, IMAGE
+        FROM T_MARKETTHUMB
+        WHERE UPLOADPATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
+</mapper>

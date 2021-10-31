@@ -5,11 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ThumbVO {
+public class MarketThumbVO {
     private String uuid;
     private String uploadPath;
-    private Long expoNum;
+    private Long itemnum;
     private String fileName;
-    private int fileType;
     private boolean image;
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.MarketMapper">
+
+<!--검색-->
+<sql id="search">
+    <if test="keyType != null and keyword != null">
+        <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+            <foreach item="keyType" collection="typeArr">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="keyType == 'N'.toString()">
+                            (ITEMNAME LIKE '%'||#{keyword}||'%')
+                        </when>
+                        <when test="keyType == 'C'.toString()">
+                            (ITEMCONTENT LIKE '%'||#{keyword}||'%')
+                        </when>
+                        <when test="keyType == 'W'.toString()">
+                            (USERID LIKE '%'||#{keyword}||'%')
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </if>
+</sql>
+
+<select id="getList" resultType="itemVO">
+    <![CDATA[
+        SELECT ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMREGDATE, ITEMUPDATEDATE, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT
+        FROM
+        (
+            /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
+            SELECT /*+ INDEX_DESC(T_ITEM PK_ITEM) */
+            ROWNUM R, ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMREGDATE, ITEMUPDATEDATE, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT
+            FROM T_ITEM
+            WHERE
+        ]]>
+    <include refid="search"></include>
+    <![CDATA[
+        ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+</select>
+
+        <!--게시글 작성-->
+<insert id="insert">
+INSERT INTO T_ITEM (ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT)
+VALUES(SEQ_ITEM.NEXTVAL,#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
+</insert>
+
+<insert id="insertSelectKey_itemnum">
+<selectKey keyProperty="itemnum" order="BEFORE" resultType="long">
+    SELECT SEQ_ITEM.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO T_ITEM (ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT)
+VALUES(#{itemnum},#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
+</insert>
+
+        <!--상세보기-->
+<select id="read" resultType="itemVO">
+SELECT ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT FROM T_ITEM
+WHERE ITEMNUM = #{itemnum}
+</select>
+
+        <!--수정-->
+<update id="update">
+UPDATE T_ITEM
+SET ITEMNAME = #{itemname},ITEMCONTENT = #{itemcontent}, ITEMDELIVERPRICE = #{itemdeliverprice}, ITEMHOME = #{itemhome}, ITEMPRICE = #{itemprice}, ITEMUPDATEDATE = SYSDATE
+WHERE ITEMNUM = #{itemnum}
+</update>
+
+        <!--삭제-->
+<delete id="delete">
+DELETE FROM T_ITEM WHERE ITEMNUM = #{itemNum}
+</delete>
+
+<select id="getTotal" resultType="_int">
+SELECT COUNT(ITEMNUM) FROM T_ITEM
+<where>
+    <trim suffixOverrides="AND">
+        <include refid="search"></include>
+    </trim>
+</where>
+</select>
+
+<!--===================================오더 테이블===================================-->
+<insert id="orderInsert">
+    <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">
+        SELECT SEQ_ORDER.NEXTVAL FROM DUAL
+    </selectKey>
+    INSERT INTO T_ORDER (ORDERNUM, ITEMNUM, ITEMNAME, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERCOUNT)
+    VALUES (#{orderNum}, #{itemNum}, #{itemName}, #{orderPayment}, #{orderAddress}, #{orderAddressdetail}, #{orderCount})
+</insert>
+
+<select id="orderTotal" resultType="_int">
+    SELECT ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERDATE, ORDERCOUNT FROM T_ORDER WHERE USERID = #{userId}
+</select>
+
+<select id="orderGetList" resultType="orderVO">
+    <![CDATA[
+    SELECT ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERDATE, ORDERCOUNT
+    FROM
+    (
+        /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
+        SELECT /*+ INDEX_DESC(T_EXPO PK_EXPO) */
+        ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERDATE, ORDERCOUNT
+        FROM T_ORDER
+        WHERE
+    ROWNUM <= #{pageNum} * #{amount}
+    )
+    WHERE R > (#{pageNum} - 1) * #{amount}
+    ]]>
+</select>
+
+
+</mapper>

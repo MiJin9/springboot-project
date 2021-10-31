@@ -14,111 +14,10 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
 
-        h1, h2, h3, h4, a, p, li, div, input{
-        }
-
-        li>a {
-            font-size: 20px;
-        }
-        .headermenu{
-            width:1000px !important;
-        }
-        .twelve{
-            width: 200px;
-        }
-        table {
-            width: 112%;
-        }
-        li{
-            margin-right: 20px !important;
-        }
-        #icon{
-            margin-left: -100px;
-            margin-bottom: -92px;
-            height: 100px;
-        }
-        .logo{
-            width: 1000px !important;
-            margin-bottom: 10px;
-            margin-top: 15px;
-        }
-        .headerlogo{
-            width: 900px !important;
-        }
-
-        #subheader a{
-            color: black;
-        }
-        .dropdown-menu{
-            background: #ffff;
-            color: black;
-            display: flex;
-            min-width: fit-content;
-            max-width: 1000px;
-            z-index: 10;
-            position: absolute;
-            top: 69px;
-        }
-        .dimmed{
-            display: block;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #000;
-            opacity: 0;
-            filter: alpha(opacity=80);
-            z-index: 1;
-        }
-
-        .expoItem{
-            background-color: #fafcff;
-            padding : 20px 0;
-            border-bottom: 1px solid #3c3c3c;
-            margin-top: 25px;
-        }
-
-        .expoItemInner{
-            width: 970px;
-            display: flex;
-        }
-
-        .itemTitle{
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-height: 40px;
-            margin-bottom: 5px;
-            line-height: 20px;
-            display: block;
-        }
-
-        .itemInfo{
-            margin-left: 50px;
-        }
-        .itemDetailInner{
-            font-size: 15px;
-        }
-        div#searchWrap{display: flex;}
-        select[name='type']{width: 10%;border: solid 1px black;height: 37px;border-radius: 0%; font-weight: bold;text-align: center;font-size: 16px;color: black; }
-        input[name='keyword']{
-            width: 80%; margin: 0 auto; padding: 0 0; border: solid 1px black;height: 37px;border-radius: 0%;color: #000000;padding-left: 10px;}
-        form[name='searchForm']{overflow: hidden;}
-
-        .thumbImg {
-            position: relative;
-            display: table-cell;
-            margin-top: 10px;
-            vertical-align: top;
-            width:200px;
-            height:200px;
-            margin-left:30px;>
-        }
-
     </style>
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
-
     <th:block th:include="header.html"></th:block>
 
     <!--Main-->
@@ -131,35 +30,41 @@
 <!--            <hr style="border-top: solid 1px green; margin-top: 0px;">-->
                 <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">EXPO 참가 등록</a></h3>
             <ul class="expoList">
-                <th:block th:each="expo : ${list}">
+                <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
                     <div>
-                        <li class="expoItem" th:object="${expo}">
+                        <li class="expoItem" th:object="${list.get(index)}">
                             <div class="expoItemInner">
-                                <!--썸네일 나중에-->
-                                <div class="expoImgThumbnail">
-                                    <ul>
-                                    <img class="thumbImg" src="/img/smartFarm_sample.jpg">
-                                    </ul>
-                                </div>
-                                <div class="itemInfo">
-                                    <!--제목-->
-                                    <div class="itemTitle">
-                                        <h4><a target="_self" class="itemName" id="goRead" href="javascript:void(0)" name="expoTitle" th:text="*{expoTitle}"></a></h4>
+                                <div class="thumbWrapper" style="display: flex">
+                                    <div class="field">
+                                        <div class="uploadResult">
+                                            <ul th:id="${index}">
+<!--                                                <p id="hiddenNum" th:text='${index.index}'></p>-->
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <!--작성자-->
-                                    <div>
-                                        작성자 : <p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userId}"></p>
+                                    <div class="field">
 
                                     </div>
-                                    <!--내용-->
-                                    <div class="itemDetail">
-                                        농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
-                                        주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
-                                        주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
-                                        전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
-                                    </div>
-                                    <div class="listNum">
-                                        No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
+                                    <div class="itemInfo">
+                                        <!--제목-->
+                                        <div class="itemTitle">
+                                            <h4><a target="_self" class="itemName" id="goRead" name="expoTitle" th:text="*{expoTitle}" th:href="*{expoNum}"></a></h4>
+                                        </div>
+                                        <!--작성자-->
+                                        <div class="userId">
+                                            작성자 : &nbsp;<p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userId}"></p>
+
+                                        </div>
+                                        <!--내용-->
+                                        <div class="itemDetail">
+                                            농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
+                                            주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
+                                            주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
+                                            전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
+                                        </div>
+                                        <div class="listNum">
+                                            No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +73,6 @@
                 </th:block>
             </ul>
             <form action="/expo/list" name="searchForm">
-
                 <div class="fields">
                     <div class="field"></div>
                     <div style="margin-bottom: 50px; margin-top: 50px; ">
@@ -220,7 +124,9 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </body>
 <script th:inline="javascript">
 
@@ -228,44 +134,46 @@
     let paging = [[${pageMaker.criteria.listLink}]]; // 페이징
     let searchForm = $(document.searchForm); // 검색기능 Form 태그
     let expoNum = $("#expoNumber").text(); // 엑스포 넘버
+    let uploadResult = $(".uploadResult ul") // 썸네일 들어갈 태그
+    let list = [[${list}]];
 
-    let uploadResult = $(".expoImgThumbnail ul") // 썸네일 들어갈 태그
 
     $(document).ready(function(){
-        (function(){
-            $.getJSON("/expo/getThumbList", {expoNum : expoNum},
-                function(attach){  // 썸네일 1개 가져오기
-                    let str = "";
-                        if (!attach.image) {   // 썸네일을 올리지 않았다면  attach.png
-                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-                            str += "<li>"
-                            str += "<img src='/img/attach.png' width='100px'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                            str += "</li>";
-                        } else { // 등록한 썸네일 넣기
-                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+        history.replaceState({}, null, "/expo/list");
+        for(let a = 0; a < list.length; a++) {
+            (function () {
+                $.getJSON("/expo/getAttachList", {expoNum: list[a].expoNum},
+                    function (arr) {
+                        console.log(arr);
+                        let str = "";
 
-                            str += "<li>"
-                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>" + attach.fileName.substring(attach.fileName.indexOf("_") + 1);
-                            str += "</li>";
+                        $(arr).each(function (i, attach) {
+                            console.log(attach.image);
+                            if (!attach.image) {
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/img/attach.png' width='100px'>";
+                                str += "</div>";
+                                str += "</li>";
+                            } else {
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
 
-                        }
-                    uploadResult.html(str);
-                });//getJSON
-        })();
-
-    showList(pageNum);
-
-        function goUpdate(){
-            location.href = "/board/modify" + paging + "&expoNum=" + expoNum;
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }
+                        });
+                        $("#" + a).html(str);
+                    });//getJSON
+            })();
         }
 
-        $("a#goList").on("click", function(){
-            location.href = "/board/list" + paging;
-        });
 
-
-        if(expoNum == null || history.state){
+        if(expoNum != null || history.state){
             return;
         }
         alert("게시글 " + expoNum + "번이 등록되었습니다.");
@@ -286,7 +194,8 @@
     $("a#goRead").on("click", function(e){
         e.preventDefault();
         console.log(expoNum);
-        location.href = "/expo/readDetail" + paging  + "&expoNum=" + expoNum;
+        location.href = "/expo/readDetail" + paging  + "&expoNum=" + $(this).attr("href");
+
     })
 
     //검색할 때
