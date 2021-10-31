@@ -3,6 +3,8 @@ package com.koreait.yougn.beans.vo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 public class ClassVO {
@@ -23,4 +25,6 @@ public class ClassVO {
     private String recruitCloseDate; // 모집 기간
     private String regDate;
     private String updateDate;
+
+    private List<ThumbVO> fileList;
 }

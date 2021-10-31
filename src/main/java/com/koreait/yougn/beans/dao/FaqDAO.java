@@ -2,6 +2,7 @@ package com.koreait.yougn.beans.dao;
 
 import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.FaqVO;
+import com.koreait.yougn.beans.vo.UserVO;
 import com.koreait.yougn.mappers.FaqMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -31,4 +32,9 @@ public class FaqDAO {
     public List<FaqVO> getListId(Criteria criteria, String id){return mapper.getListId(criteria, id);}
 
     public int getTotalId(Criteria criteria, String id){return mapper.getTotalId(criteria, id);}
+
+    public int insertReply(FaqVO faq){return mapper.insertReply(faq);}
+
+    public FaqVO readReply(Long num){return mapper.readReply(num);}
+
 }

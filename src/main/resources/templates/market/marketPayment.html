@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>마켓상세주문</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/market.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
+
+</head>
+<body class="homepage is-preload"  style="background: #fbf9f4">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <form action="/market/marketModify" id="postForm" name="postForm" method="POST">
+            <div class="category">
+                <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
+            </div>
+            <div class="ListTable">
+                <table>
+                    <thead>
+                    <tr class="tHead">
+                        <th class="itemnum">상품번호</th>
+                        <th class="userid">판매자</th>
+                        <th class="itemname">상품명</th>
+                        <th class="orderdate">배송비</th>
+                        <th class="ordercount">수량</th>
+                        <th class="totalprice">상품금액</th>
+                   </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="market : ${list}">
+                        <tr class="tBody" th:object="${vo}">
+                            <td class="itemnum" th:text="*{itemnum}"></td>
+                            <td class="userid" th:text="*{userid}"></td>
+                            <td class="itemname" th:text="*{itemname}"></td>
+                            <td class="itemdeliverprice" th:text="*{itemdeliverprice}"></td>
+                            <td class="ordercount" th:text="*{ordercount}"></td>
+                            <td class="ordercount" th:text="*{ordercount}"></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+
+
+        </form>
+    </div>
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</script>
+</body>
+</html>

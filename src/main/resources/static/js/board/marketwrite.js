@@ -1,18 +1,18 @@
 /*썸머노트*/
 $("#sendSummer").click(function(){
-    if(!$("#tagname").val()){
+    if(!$("#itemname").val()){
         alert("상품명을 입력해주세요.");
         return;
     }
-    if(!$("#tagprice").val()){
+    if(!$("#itemprice").val()){
         alert("가격을 입력해주세요.");
         return;
     }
-    if(!$("#taghometown").val()){
+    if(!$("#itemhome").val()){
         alert("원산지를 입력해주세요.");
         return;
     }
-    if(!$("#tagdeltip").val()){
+    if(!$("#itemdeliverprice").val()){
         alert("배달비를 입력해주세요.");
         return;
     }
@@ -51,14 +51,7 @@ $(document).ready(function () {
         ],
 
         //콜백 함수
-        callbacks : {
-            onImageUpload: function(files, editor, welEditable) {
-                for (var i = files.length - 1; i >= 0; i--) {
-                    sendFile(files[i], this);
-                }
-            }
-        }
-
+        callbacks : {}
     };
     $('#summernote').summernote(setting);
 })

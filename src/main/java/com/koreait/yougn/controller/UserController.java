@@ -5,9 +5,7 @@ import com.koreait.yougn.services.FaqService;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.maven.doxia.module.fml.model.Faq;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Controller
@@ -59,7 +59,11 @@ public class UserController {
             if(userVO1.getStatus() != 1){
                 r.getSession().setAttribute("sessionId", userVO.getId());
                 map.put("result","ok");
+            }else{
+                map.put("result","no");
             }
+        }else {
+            map.put("result","no");
         }
         return map;
     }
@@ -280,14 +284,33 @@ public class UserController {
     }
 
     //문의글 목록
+//    @RequestMapping(value = "inquiry", method={RequestMethod.GET, RequestMethod.POST})
+//    public String inquiry(@RequestParam("faqVO") FaqVO faqVO, Criteria criteria, HttpServletRequest r, RedirectAttributes rttr, Model model) {
+//        String id = (String) r.getSession().getAttribute("sessionId");
+//        UserVO user = userService.getUser(id);
+//        FaqVO faq = faqService.get(faqVO.getNum());
+//
+//        log.info(id);
+//        log.info(user.getId());
+//        if(faqService.updateReplyState(faq)){
+//            rttr.addFlashAttribute("result", "답변완료");
+//        }else{
+//            rttr.addFlashAttribute("result", "답변대기");
+//        }
+//
+//        model.addAttribute("list", faqService.getListId(criteria, user.getId()));
+//        model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
+//        return "redirect:/user/inquiry";
+//    }
+
     @GetMapping("inquiry")
-    public String inquiry(Criteria criteria, Model model, HttpServletRequest r) {
+    public String inquiry(FaqVO faqVO, Criteria criteria, Model model, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
 
         model.addAttribute("list", faqService.getListId(criteria, user.getId()));
         model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
-        return "/user/inquiry";
+        return "user/inquiry";
     }
 
     //문의글 작성
@@ -302,17 +325,51 @@ public class UserController {
     @GetMapping("inquiryWrite")
     public void inquiryWrite(){}
 
-    //문의글 보기
+    //문의글 상세보기
     @GetMapping("inquiryRead")
-    public String inquiryRead() {
-        return "user/inquiryRead";
+    public void inquiryRead(@RequestParam("num") Long num,  Criteria criteria, Model model) {
+        model.addAttribute("faq", faqService.get(num));
+        model.addAttribute("criteria", criteria);
     }
 
+    @PostMapping(value = "/new", consumes = "application/json", produces = "text/plain; charset=utf-8")
+    public ResponseEntity<String> create(@RequestBody FaqVO faqVO) throws UnsupportedEncodingException {
+        int replyCount = faqService.insertReply(faqVO);
+        log.info("faqVO : " + faqVO);
+        log.info("REPLY INSERT COUNT : " + replyCount);
+        return replyCount == 1 ?
+                new ResponseEntity<>(new String("댓글 등록 성공".getBytes(), "UTF-8"), HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //    게시글 댓글 전체 조회
+    @GetMapping("pages/{num}")
+    public FaqVO getList(@PathVariable("num") Long num){
+        return faqService.readReply(num);
+    }
+
+
+    //문의글 삭제
+    @PostMapping("remove")
+    public RedirectView remove(@RequestParam("num") Long num, RedirectAttributes rttr){
+        if(faqService.remove(num)){
+            rttr.addFlashAttribute("result", "success");
+        } else{
+            rttr.addFlashAttribute("result", "fail");
+        }
+        return new RedirectView("inquiry");
+    }
 
     //내 글 모아보기
     @GetMapping("writeCollection")
     public String writeCollection() {
         return "/user/writeCollection";
     }
+
+    //댓글등록
+
+
+    //댓글보기
+
 
 }

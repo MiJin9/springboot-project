@@ -97,16 +97,16 @@
             <div class="paging">
                 <table th:object="${pageMaker}">
                     <tr>
-                        <td th:if="*{prev}"><a th:href="@{returnList(pageNum=*{criteria.pageNum -1},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.keyword})}">&lt;</a></td>
+                        <td th:if="*{prev}"><a th:href="@{returnList(pageNum=*{criteria.pageNum -1},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.id})}">&lt;</a></td>
                         <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                             <td th:if="${pageMaker.criteria.getPageNum() != num}">
-                                <a th:href="@{returnList(pageNum=${num},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.keyword})}">
+                                <a th:href="@{returnList(pageNum=${num},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.id})}">
                                     <span th:text="${num}"></span>
                                 </a>
                             </td>
                             <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
                         </th:block>
-                        <td th:if="*{next}"><a th:href="@{returnList(pageNum=*{criteria.pageNum +1},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.keyword})}">&gt;</a></td>
+                        <td th:if="*{next}"><a th:href="@{returnList(pageNum=*{criteria.pageNum +1},local=*{criteria.local},item=*{criteria.item},keyword=*{criteria.id})}">&gt;</a></td>
                     </tr>
                 </table>
             </div>

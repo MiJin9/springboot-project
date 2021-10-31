@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/support.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <div class="tle" >
+            <h1 class="h1">농사수업</h1>
+            <h6>홈>귀농지원>농사수업</h6>
+            <hr>
+            <div id="sit_ov_wrap" style="display: flex;width: 1000px;margin: auto;">
+                <div id="sit_pvi">
+                    <div id="sit_pvi_big" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                        <div class="owl-wrapper-outer">
+                            <div class="owl-wrapper"style="width: 1000px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);">
+                                <div class="owl-item" style="width: 500px;">
+                                    <div class="item">
+                                        <label for="file"><img src="/img/plus.jpg" alt="" title=""></label>
+                                        <input type="file" id="file" name="file" multiple>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="owl-controls clickable" style="display: none;">
+                            <div class="owl-buttons">
+                                <div class="owl-prev">prev</div>
+                                <div class="owl-next">next</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <!-- } 상품이미지 미리보기 끝 -->
+                <section id="sit_ov" style="margin-left: -480px;" th:object="${class}">
+                    <h2 id="sit_title" th:text="*{title}"></h2>
+                    <hr>
+                    <div class="sit_ov_tbl">
+                        <div class="con_w">
+                            <div class="price_innerwrap">
+                                <span id="ucItemPrice_hdivPrice" class="price_original"style="font-size: 17px">강사명 : <span th:text="*{name}"></span></span>
+                            </div>
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">최대인원&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con" th:text="*{headNum}"></span>
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">강의장&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <span class="con" th:text="*{place}">강의 장소</span>
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <div style="display: inline-block;vertical-align: top;">
+                                <span class="ttl">강의장 주소&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            </div>
+                            <div style="display: inline-block;width:310px;"><span class="con" th:text="*{address}"></span></div>
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">강의기간&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <input type="date" name="openDate" class="con" th:value="*{openDate}">
+                            <span>&nbsp;~&nbsp;</span>
+                            <input type="date" name="closeDate" th:value="*{closeDate}">
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">강의시간&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <input type="time" class="con" name="startTime" th:value="*{startTime}">
+                            <span>&nbsp;~&nbsp;</span>
+                            <input type="time" name="endTime" th:value="*{endTime}">
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">신청기간&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <input type="date" class="con" name="recruitDate" th:value="*{recruitDate}">
+                            <span>&nbsp;~&nbsp;</span>
+                            <input type="date" name="recruitCloseDate" th:value="*{recruitCloseDate}">
+                        </div>
+                        <div class="con_w" style="font-size: 17px">
+                            <span class="ttl">비용&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                            <input type="text" class="con" name="price" th:value="*{price}"><span>원</span>
+                        </div>
+                        <hr>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="tle">
+            <div id="bottom">
+                <!-- 상풍 상세설명 -->
+                <hr>
+                <div id="content" style="text-align:center;" align="center" th:text="${class.content}">
+
+                </div>
+                <!-- 상풍 상세설명 끝 -->
+            </div>
+            <hr>
+        </div>
+    </div>
+
+
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

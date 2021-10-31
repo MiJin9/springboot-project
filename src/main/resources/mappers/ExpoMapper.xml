@@ -56,7 +56,7 @@ VALUES(SEQ_EXPO.NEXTVAL,#{userId}, #{expoContent}, #{expoTitle}, #{farmName}, #{
     SELECT SEQ_EXPO.NEXTVAL FROM DUAL
 </selectKey>
 INSERT INTO T_EXPO (EXPONUM, USERID, EXPOCONTENT, EXPOTITLE, FARMNAME, FARMERNAME, FARMADDRESS, FARMPHONE, FARMPRODUCT)
-VALUES(SEQ_EXPO.NEXTVAL, #{userId}, #{expoContent}, #{expoTitle}, #{farmName}, #{farmerName}, #{farmAddress}, #{farmPhone}, #{farmProduct})
+VALUES(#{expoNum}, #{userId}, #{expoContent}, #{expoTitle}, #{farmName}, #{farmerName}, #{farmAddress}, #{farmPhone}, #{farmProduct})
 </insert>
 
         <!--상세보기-->
@@ -68,7 +68,8 @@ WHERE EXPONUM = #{expoNum}
         <!--수정-->
 <update id="update">
 UPDATE T_EXPO
-SET EXPOTITLE = #{expoTitle}, EXPOCONTENT = #{expoContent}, EXPOUPDATEDATE = SYSDATE
+SET EXPOTITLE = #{expoTitle}, EXPOCONTENT = #{expoContent}, FARMNAME = #{farmName}, FARMERNAME = #{farmerName},
+ FARMADDRESS = #{farmAddress}, FARMPHONE = #{farmPhone}, FARMPRODUCT = #{farmProduct}, EXPOUPDATEDATE = SYSDATE
 WHERE EXPONUM = #{expoNum}
 </update>
 

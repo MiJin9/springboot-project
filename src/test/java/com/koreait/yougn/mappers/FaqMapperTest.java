@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
 public class FaqMapperTest {
@@ -15,7 +18,7 @@ public class FaqMapperTest {
     private FaqMapper mapper;
 
     @Test
-    public void testGetList(){
+    public void testGetList() {
         Criteria cri = new Criteria();
         cri.setPageNum(2);
         cri.setAmount(10);
@@ -23,7 +26,7 @@ public class FaqMapperTest {
     }
 
     @Test
-    public void testInsertSelectKey_num(){
+    public void testInsertSelectKey_num() {
         FaqVO faq = new FaqVO();
         faq.setTitle("문의글 작성 테스트 제목");
         faq.setContent("문의글 작성 테스트 내용");
@@ -32,34 +35,34 @@ public class FaqMapperTest {
     }
 
     @Test
-    public void testRead(){
+    public void testRead() {
         log.info(mapper.read(1L).toString());
     }
 
 
     @Test
-    public void testDelete(){
-        if(mapper.read(241L) == null){
+    public void testDelete() {
+        if (mapper.read(241L) == null) {
             log.info("***********NO SUCH BOARD***********");
-        }else{
+        } else {
             log.info("DELETE COUNT : " + mapper.delete(241L));
         }
     }
 
     @Test
-    public void testGetTotal(){
+    public void testGetTotal() {
         Criteria criteria = new Criteria();
         mapper.getTotal(criteria);
     }
 
     @Test
-    public void testGetTotalId(){
+    public void testGetTotalId() {
         Criteria criteria = new Criteria();
         mapper.getTotalId(criteria, "user02");
     }
 
     @Test
-    public void testGetListId(){
+    public void testGetListId() {
         Criteria cri = new Criteria();
         cri.setPageNum(2);
         cri.setAmount(10);
@@ -67,3 +70,4 @@ public class FaqMapperTest {
     }
 
 }
+

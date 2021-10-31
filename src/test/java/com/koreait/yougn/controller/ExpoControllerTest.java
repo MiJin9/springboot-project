@@ -51,5 +51,29 @@ public class ExpoControllerTest {
                         .andReturn().getModelAndView().getModelMap().toString());
     }
 
+    @Test
+    public void testRegister() throws Exception{
+        log.info(
+                mockMvc.perform(MockMvcRequestBuilders.get("/expo/writeExpo")
+//                        expovo.setUserId("1");
+//                        expovo.setExpoContent("2");
+//                        expovo.setExpoTitle("3");
+//                        expovo.setFarmName("5");
+//                        expovo.setFarmerName("6");
+//                        expovo.setFarmAddress("7");
+//                        expovo.setFarmPhone("8");
+//                        expovo.setFarmProduct("9");
+                        .param("userId", "1")
+                        .param("expoContent", "2")
+                        .param("expoTitle", "3")
+                        .param("farmName", "4")
+                        .param("farmerName", "5")
+                        .param("farmAddress", "6")
+                        .param("farmPhone", "7")
+                        .param("farmProduct", "8")
+                )
+                        .andReturn().getModelAndView().getModelMap().toString());
+    }
+
 
 }

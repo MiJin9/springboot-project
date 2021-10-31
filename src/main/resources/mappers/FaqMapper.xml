@@ -5,11 +5,11 @@
 
     <select id="getList" resultType="faqVO">
         <![CDATA[
-        SELECT NUM, TITLE, CONTENT, ID, REGDATE
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE, STATUS
         FROM
         (
             SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
-            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE, STATUS
             FROM T_FAQ
             WHERE ROWNUM <= #{pageNum} * #{amount}
         )
@@ -40,11 +40,11 @@
 
     <select id="getListId" resultType="faqVO">
         <![CDATA[
-        SELECT NUM, TITLE, CONTENT, ID, REGDATE
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE, STATUS
         FROM
         (
             SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
-            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE, STATUS
             FROM T_FAQ
             WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} AND ID = #{id}
         )
@@ -56,4 +56,16 @@
         SELECT COUNT(NUM) FROM T_FAQ
         WHERE ID = #{id}
     </select>
+
+    <update id="insertReply">
+        UPDATE T_FAQ
+        SET REPLY = #{reply}, STATUS = 1
+        WHERE NUM = #{num}
+    </update>
+
+    <select id="readReply" resultType="faqVO">
+        SELECT REPLY FROM T_FAQ
+        WHERE NUM = #{num}
+    </select>
+
 </mapper>

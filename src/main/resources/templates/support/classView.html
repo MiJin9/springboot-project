@@ -32,7 +32,7 @@
                             <div class="owl-wrapper"style="width: 1000px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);">
                                 <div class="owl-item" style="width: 500px;">
                                     <div class="item">
-                                        <img src="/img/classEx.png" alt="" title="">
+                                        <img th:src="@{/upload/display(fileName=${src})}" alt="" title="" style="max-height:320px;">
                                     </div>
                                 </div>
                             </div>
@@ -90,16 +90,21 @@
                         <hr>
 
                         <!--버튼-->
-                        <th:block th:if="${check}">
-                            <th:block th:if="*{headNum != headCount}">
-                                <input type="button" class="button large primary" value="신청하기" style=" height: 40px; width: 150px;">
+                        <th:block th:if="${applyCheck}">
+                            <th:block th:if="${check}">
+                                <th:block th:if="*{headNum != headCount}">
+                                    <input type="button" class="button large primary" id="apply" value="신청하기" style=" height: 40px; width: 150px;">
+                                </th:block>
+                                <th:block th:if="*{headNum == headCount}">
+                                    <input type="button" class="button large primary" value="마감" style=" height: 40px; width: 150px; background: #4a514f">
+                                </th:block>
                             </th:block>
-                            <th:block th:if="*{headNum == headCount}">
-                                <input type="button" class="button large primary" value="마감" style=" height: 40px; width: 150px; background: #4a514f">
+                            <th:block th:unless="${check}">
+                                <input type="button" class="button large primary" value="신청 시간 전" style=" height:40px;width:150px;background:#4a514f">
                             </th:block>
                         </th:block>
-                        <th:block th:unless="${check}">
-                            <input type="button" class="button large primary" value="신청 시간 전" style=" height: 40px; width: 150px; background: #4a514f">
+                        <th:block th:unless="${applyCheck}">
+                            <input type="button" class="button large primary" id="cancel" value="신청취소" style=" height:40px;width:150px;background:#d1161678;">
                         </th:block>
                         <!--버튼 끝-->
                     </div>
@@ -110,7 +115,7 @@
             <div id="bottom">
                 <!-- 상풍 상세설명 -->
                 <hr>
-                <div id="content" style="text-align:center;" align="center" th:text="${class.content}">
+                <div id="content" style="text-align:center;" align="center" th:utext="${class.content}">
 
                 </div>
                 <!-- 상풍 상세설명 끝 -->
@@ -134,4 +139,8 @@
 <script src="/js/main.js"></script>
 
 </body>
+<script>
+    let classNum = [[${class.num}]];
+    let merchant_uid = [[${merchant_uid}]];
+</script>
 </html>
