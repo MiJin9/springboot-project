@@ -30,7 +30,7 @@
     </insert>
 
     <select id="read" resultType="faqVO">
-        SELECT NUM, TITLE, CONTENT, ID, REGDATE FROM T_FAQ
+        SELECT NUM, TITLE, CONTENT, REPLY, ID, REGDATE FROM T_FAQ
         WHERE NUM = #{num}
     </select>
 

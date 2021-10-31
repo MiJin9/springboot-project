@@ -66,7 +66,8 @@
                         </div>
 <!--                        <input type="button" class="primary" id="modview" name="bbttnn" onclick="getList()" value="댓글보기" style="font-weight: bold; margin-top: 10px; margin-bottom: 20px;">-->
                         <div class="replies">
-
+                            <h3 style="color: black; font-size: 16px">Admin : </h3>
+                            <div name="faqReply"  class="faqReply" th:text="${faq.reply}"></div>
                         </div>
                     </form>
                 </div>
@@ -94,18 +95,14 @@
         document.removeForm.submit();
     });
 
+    $(document).ready(function () {
+        if($(".faqReply").text() == null || $(".faqReply").text() == "null"){
+            $(".replies").hide();
+        }
+    })
 
     /*댓글 */
     let num = [[${faq.getNum()}]];
-    let text = $(".input2").text();
-    let replies = $("div.replies");
-    console.log(num  + "넘");
-    console.log(text  + "텍스트");
-
-    $(document).ready(function () {
-        showList();
-    })
-
 
     $(".finish").on("click", function(e){
         e.preventDefault();
@@ -115,26 +112,11 @@
             function(result){
                 alert(result);
                 $("textarea[name='reply']").val("");
-                showList();
+                location.reload();
             }
         )
     });
 
-    function showList(){
-        replyService.get({num:num},
-            function(replyCnt, list){
-                if(list == null || list.length == 0){
-                    replyUL.html("댓글이 없습니다.");
-                    return;
-                }
-                let str = "";
-                for(let i=0, len=list.length; i<len; i++){
-                    str += "<p class='reply'>" + list[i].reply + "</p>"
-                }
-                replyUL.html(str);
-            }
-        );
-    }
 
 
 </script>
