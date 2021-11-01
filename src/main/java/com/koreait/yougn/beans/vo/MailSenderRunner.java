@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 @RequiredArgsConstructor
 public class MailSenderRunner implements ApplicationRunner {
 
-//    private final JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
     private String from;
@@ -24,12 +24,12 @@ public class MailSenderRunner implements ApplicationRunner {
     }
 
     public void send(String to, String title, String content) throws Exception{
-//        MimeMessage m = mailSender.createMimeMessage();
-//        MimeMessageHelper h = new MimeMessageHelper(m,"UTF-8");
-//        h.setFrom(from);
-//        h.setTo(to);
-//        h.setSubject(title);
-//        h.setText(content);
-//        mailSender.send(m);
+        MimeMessage m = mailSender.createMimeMessage();
+        MimeMessageHelper h = new MimeMessageHelper(m,"UTF-8");
+        h.setFrom(from);
+        h.setTo(to);
+        h.setSubject(title);
+        h.setText(content);
+        mailSender.send(m);
     }
 }
