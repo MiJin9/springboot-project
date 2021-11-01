@@ -88,7 +88,7 @@
             <div id="container">
                 <section class="sct_wrap" style="width: 1100px;">
                     <div style="height: 40px">
-                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">등록</a></h3>
+                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;font-weight: 100;padding:5px 12px;width: 100px;padding-left: 31px;font-size: 20px;">등록</a>
                     </div>
                     <ul class="itemList">
                         <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
@@ -145,7 +145,7 @@
                         </div>
                     </form>
                     <div th:object="${pageMaker}">
-                        <div class="big-width" style="text-align: center">
+                        <div class="big-width" style="font-size: 25px;text-align: center">
                             <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
                             <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                                 <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
