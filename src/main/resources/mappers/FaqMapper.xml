@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.yougn.mappers.FaqMapper">
+
+    <select id="getList" resultType="faqVO">
+        <![CDATA[
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE, STATUS
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE, STATUS
+            FROM T_FAQ
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM T_FAQ
+    </select>
+
+    <insert id="insertSelectKey_num">
+        <selectKey keyProperty="num" order="BEFORE" resultType="long">
+            SELECT SEQ_FAQ.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO T_FAQ (NUM, TITLE, CONTENT, ID)
+        VALUES(#{num}, #{title}, #{content}, #{id})
+    </insert>
+
+    <select id="read" resultType="faqVO">
+        SELECT NUM, TITLE, CONTENT, REPLY, ID, REGDATE FROM T_FAQ
+        WHERE NUM = #{num}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM T_FAQ WHERE NUM = #{num}
+    </delete>
+
+    <select id="getListId" resultType="faqVO">
+        <![CDATA[
+        SELECT NUM, TITLE, CONTENT, ID, REGDATE, STATUS
+        FROM
+        (
+            SELECT /*+ INDEX_DESC(T_FAQ PK_FAQ) */
+            ROWNUM R, NUM, TITLE, CONTENT, ID, REGDATE, STATUS
+            FROM T_FAQ
+            WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} AND ID = #{id}
+        )
+        WHERE R > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        ]]>
+    </select>
+
+    <select id="getTotalId" resultType="_int">
+        SELECT COUNT(NUM) FROM T_FAQ
+        WHERE ID = #{id}
+    </select>
+
+    <update id="insertReply">
+        UPDATE T_FAQ
+        SET REPLY = #{reply}, STATUS = 1
+        WHERE NUM = #{num}
+    </update>
+
+    <select id="readReply" resultType="faqVO">
+        SELECT REPLY FROM T_FAQ
+        WHERE NUM = #{num}
+    </select>
+
+</mapper>

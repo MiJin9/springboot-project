@@ -1,24 +1,25 @@
 package com.koreait.yougn.controller;
 
-import com.koreait.yougn.beans.vo.MailSenderRunner;
-import com.koreait.yougn.beans.vo.UserVO;
+import com.koreait.yougn.beans.vo.*;
+import com.koreait.yougn.services.FaqService;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.maven.doxia.module.fml.model.Faq;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Controller
@@ -27,18 +28,27 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
+    private final FaqService faqService;
 
+    //회원가입
     @GetMapping("join")
     public String join() {
         return "/user/join";
     }
 
+    @PostMapping("join")
+    public String join(UserVO userVO) {
+        userService.join(userVO);
+        return "index";
+    }
+
+
+    //로그인
     @GetMapping("login")
     public String login() {
         return "/user/login";
     }
 
-    //로그인
     @PostMapping(value = "login", consumes = "application/json; charset=utf-8",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public HashMap<String, Object> login(@RequestBody UserVO userVO, HttpServletRequest r) {
@@ -58,28 +68,21 @@ public class UserController {
         return map;
     }
 
+    //로그아웃
     @RequestMapping(value = "logout", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView logout(HttpServletRequest r) {
         r.getSession().invalidate();
         return new RedirectView("/");
     }
 
+    //마이페이지
     @GetMapping("myPage")
     public String myPage(Model model, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
+
         model.addAttribute("user", user);
         return "/user/myPage";
-    }
-
-    @GetMapping("writeCollection")
-    public String writeCollection() {
-        return "/user/writeCollection";
-    }
-
-    @PostMapping("bye")
-    public String bye() {
-        return "/user/bye";
     }
 
     //회원 탈퇴
@@ -92,18 +95,18 @@ public class UserController {
         return "index";
     }
 
+    @PostMapping("bye")
+    public String bye() {
+        return "/user/bye";
+    }
+
+    //회원정보 수정
     @GetMapping("userModify")
     public String userModify(Model model, HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
         model.addAttribute("user", user);
         return "/user/userModify";
-    }
-
-    @PostMapping("changePw")
-    public String changePw(UserVO userVO, Model model) {
-        model.addAttribute("userVO", userVO);
-        return "/user/changePw";
     }
 
     //비밀번호 수정
@@ -120,11 +123,14 @@ public class UserController {
         return "user/changePw";
     }
 
-    @GetMapping("inquiry")
-    public String inquiry() {
-        return "/user/inquiry";
+    @PostMapping("changePw")
+    public String changePw(UserVO userVO, Model model) {
+        model.addAttribute("userVO", userVO);
+        return "/user/changePw";
     }
 
+
+    //비밀번호 확인
     @GetMapping("checkPw")
     public String checkPw(int num, Model m) {
         m.addAttribute("num",num);
@@ -146,18 +152,11 @@ public class UserController {
         return map;
     }
 
+    //ID,PW 찾기
     @GetMapping("findUser")
     public String findUser() {
         return "user/findUser";
     }
-
-    //회원 가입
-    @PostMapping("join")
-    public String join(UserVO userVO) {
-        userService.join(userVO);
-        return "index";
-    }
-
 
 
     //아이디 중복확인
@@ -182,11 +181,7 @@ public class UserController {
         return "user/userModify";
     }
 
-
-
-
-
-//아이디 찾기(인증번호 보내기)
+    //아이디 찾기(인증번호 보내기)
     @PostMapping(value = "idPin", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public HashMap<String,String> idPin(@RequestBody UserVO userVO) throws UnsupportedEncodingException{
@@ -208,6 +203,7 @@ public class UserController {
         map.put("result","이메일 전송에 실패하였습니다.");
         return map;
     }
+
     //아이디 보내기
     @PostMapping(value = "sendId", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -235,7 +231,7 @@ public class UserController {
         return map;
     }
 
-//비밀번호 찾기(인증번호 보내기)
+    //비밀번호 찾기(인증번호 보내기)
     @PostMapping(value = "pwPin", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public HashMap<String,String> pwPin(@RequestBody UserVO userVO) throws UnsupportedEncodingException{
@@ -269,12 +265,11 @@ public class UserController {
         return pin;
     }
 
-    //    인증문자 보내기
+    //인증문자 보내기
     @PostMapping("sendSMS")
     @ResponseBody
     public HashMap<String, String> sendSMS(String phoneNumber) {
 
-        log.info("들어옴1");
         Random rand = new Random();
         HashMap<String, String> map = new HashMap<>();
         String numStr = "";
@@ -289,14 +284,89 @@ public class UserController {
         return map;
     }
 
-    @GetMapping("inquiryWrite")
-    public String inquiryWrite() {
-        return "user/inquiryWrite";
+    //문의글 목록
+    @GetMapping("inquiry")
+    public String inquiry(Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        UserVO user = userService.getUser(id);
+
+        model.addAttribute("list", faqService.getListId(criteria, user.getId()));
+        model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
+        return "user/inquiry";
     }
 
+    //문의글 작성
+    @PostMapping("inquiryWrite")
+    public RedirectView inquiryWrite(FaqVO faqVO, RedirectAttributes rttr) {
+        faqService.register(faqVO);
+
+        rttr.addFlashAttribute("num", faqVO.getNum());
+        return new RedirectView("inquiry");
+    }
+
+    @GetMapping("inquiryWrite")
+    public void inquiryWrite(){}
+
+    //문의글 상세보기
     @GetMapping("inquiryRead")
-    public String inquiryRead() {
-        return "user/inquiryRead";
+    public void inquiryRead(@RequestParam("num") Long num,  Criteria criteria, Model model) {
+        model.addAttribute("faq", faqService.get(num));
+        model.addAttribute("criteria", criteria);
+    }
+
+    @PostMapping(value = "/new", consumes = "application/json", produces = "text/plain; charset=utf-8")
+    public ResponseEntity<String> create(@RequestBody FaqVO faqVO) throws UnsupportedEncodingException {
+        int replyCount = faqService.insertReply(faqVO);
+        log.info("faqVO : " + faqVO);
+        log.info("REPLY INSERT COUNT : " + replyCount);
+        return replyCount == 1 ?
+                new ResponseEntity<>(new String("댓글 등록 성공".getBytes(), "UTF-8"), HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //게시글 댓글 전체 조회
+    @GetMapping("pages/{num}")
+    public FaqVO getList(@PathVariable("num") Long num){
+        return faqService.readReply(num);
+    }
+
+
+    //문의글 삭제
+    @PostMapping("remove")
+    public RedirectView remove(@RequestParam("num") Long num, RedirectAttributes rttr){
+        if(faqService.remove(num)){
+            rttr.addFlashAttribute("result", "success");
+        } else{
+            rttr.addFlashAttribute("result", "fail");
+        }
+        return new RedirectView("inquiry");
+    }
+
+    //내 글 모아보기
+    @GetMapping("writeCollection")
+    public String writeCollection() {
+        return "/user/writeCollection";
+    }
+
+
+    //관리자 페이지
+    @GetMapping("admin")
+    public String admin(Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        UserVO user = userService.getUser(id);
+
+        model.addAttribute("list", faqService.getListId(criteria, user.getId()));
+        model.addAttribute("pageMaker", new PageDTO(faqService.getTotalId(criteria, user.getId()), 10, criteria));
+        return "user/admin";
+    }
+
+    //1:1문의 목록 - 관리자
+    @GetMapping("inquiryAdmin")
+    public String inquiryAdmin(Criteria criteria, Model model) {
+
+        model.addAttribute("list", faqService.getList(criteria));
+        model.addAttribute("pageMaker", new PageDTO(faqService.getTotal(criteria), 10, criteria));
+        return "user/inquiryAdmin";
     }
 
 }
