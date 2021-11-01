@@ -47,7 +47,19 @@ public class ExpoServiceImple implements ExpoService{
     }
 
     @Override
-    public boolean modify(ExpoVO expoVO) {return expoDAO.modify(expoVO); }
+    public boolean modify(ExpoVO expoVO){
+        boolean modifyResult = false;
+
+        thumbDAO.deleteAll(expoVO.getExpoNum());
+        modifyResult = expoDAO.modify(expoVO);
+        if(modifyResult && expoVO.getAttachList() != null && expoVO.getAttachList().size() != 0){
+            expoVO.getAttachList().forEach( thumb -> {
+                thumb.setExpoNum(expoVO.getExpoNum());
+                thumbDAO.insert(thumb);
+            });
+        }
+        return modifyResult;
+    }
 
     @Override
     public boolean remove(Long expoNum) {return expoDAO.remove(expoNum); }

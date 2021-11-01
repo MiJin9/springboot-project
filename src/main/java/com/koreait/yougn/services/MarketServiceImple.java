@@ -48,8 +48,18 @@ public class MarketServiceImple implements MarketService {
     }
 
     @Override
-    public boolean modify(ItemVO itemVO) {
-        return marketDAO.modify(itemVO);
+    public boolean modify(ItemVO itemVO){
+        boolean modifyResult = false;
+
+        marketThumbDAO.deleteAll(itemVO.getItemnum());
+        modifyResult = marketDAO.modify(itemVO);
+        if(modifyResult && itemVO.getAttachList() != null && itemVO.getAttachList().size() != 0){
+            itemVO.getAttachList().forEach( thumb -> {
+                thumb.setItemnum(itemVO.getItemnum());
+                marketThumbDAO.insert(thumb);
+            });
+        }
+        return modifyResult;
     }
 
     @Override
