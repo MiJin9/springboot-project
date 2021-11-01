@@ -99,7 +99,7 @@
 
                 <!-- summernote와 관련된 영역 -->
 
-                <textarea id="summernote" name="expoContent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                <textarea th:utext="${vo.expoContent}" id="summernote" name="expoContent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                 <!-- 버튼과 관련된 영역 -->
 
@@ -143,6 +143,8 @@
     let content = [[${vo.expoContent}]];
     let expoNum = [[${vo.expoNum}]];
 
+
+
     $(document).ready(function(){
         let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
         let maxSize = 5242880;// 5MB
@@ -150,7 +152,6 @@
         let uploadResult = $(".uploadResult ul");
         $("#expoNum").val(expoNum);
         $(".note-placeholder").css("display","none");
-        $("div.panel-body").html(content);
 
 
         $("input[type='submit']").on("click", function(e){
@@ -170,14 +171,13 @@
         function showUploadFile(uploadFiles){
             let str = "";
             $(uploadFiles).each(function(i, obj){
-                    let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
-                    let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-                    str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
-                    str += "<div>";
-                    str += "<img src='/upload/display?fileName=" + originPath + "'>";
-                    str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
-                    str += "</div>";
-                    str += "</li>";
+                let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                str += "<div>";
+                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                str += "</div>";
+                str += "</li>";
 
             });
             uploadResult.append(str);
@@ -245,15 +245,15 @@
                     let str = "";
 
                     $(arr).each(function(i, attach){
-                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                        let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
 
-                            str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-name='" + attach.fileName.substring(attach.fileName.indexOf("_") + 1) + "' data-type='" + attach.image +"'>";
-                            str += "<div>";
-                            str += "<img src='/upload/display?fileName=" + originPath + "'>";
-                            str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
-                            str += "</div>";
-                            str += "</li>";
+                        str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-name='" + attach.fileName.substring(attach.fileName.indexOf("_") + 1) + "' data-type='" + attach.image +"'>";
+                        str += "<div>";
+                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                        str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                        str += "</div>";
+                        str += "</li>";
 
                     });
                     uploadResult.html(str);
