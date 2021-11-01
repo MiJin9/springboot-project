@@ -27,6 +27,23 @@
                 <input type="hidden" id="sessionId" th:value="${session.sessionId}">
                 <th:block th:include="user/subMenu.html"></th:block>
             </th:block>
+            <th:block th:if="${session.sessionId == null}">
+                <div class="contentLeft">
+                    <div>
+                        <h4><a></a></h4>
+                        <ul class="subMenu">
+                            <li style="font-size: 18px; margin: 25px 0px">
+                                <ul class="sub_depth1">
+                                </ul>
+                            </li>
+                            <li style="font-size: 18px; margin: 25px 0px">
+                                <ul class="sub_depth1">
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </th:block>
             <div class="contentCenter">
                 <form id="changePwForm" action="/user/changePwOk" method="post" >
                     <h3 style="margin-top: 40px">비밀번호 변경</h3>

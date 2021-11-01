@@ -148,7 +148,7 @@ public class UserController {
         return map;
     }
 
-    //ID/PW 찾기
+    //ID,PW 찾기
     @GetMapping("findUser")
     public String findUser() {
         return "user/findUser";
@@ -320,7 +320,7 @@ public class UserController {
                 new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    //    게시글 댓글 전체 조회
+    //게시글 댓글 전체 조회
     @GetMapping("pages/{num}")
     public FaqVO getList(@PathVariable("num") Long num){
         return faqService.readReply(num);
