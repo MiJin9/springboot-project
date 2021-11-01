@@ -18,7 +18,7 @@
     </select>
 
     <delete id="deleteAll">
-        DELETE FROM T_MARKETTHUMB WHERE EXPONUM = #{itemnum}
+        DELETE FROM T_MARKETTHUMB WHERE ITEMNUM = #{itemnum}
     </delete>
 
     <select id="getOldFiles" resultType="marketThumbVO">
