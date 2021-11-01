@@ -81,7 +81,10 @@
                                     <th:block th:switch="${checkList.get(num)}">
                                         <th:block th:if="*{headNum != headCount} and ${checkList.get(num)}">
                                             <td th:text="신청가능"></td>
-                                            <td><a th:href="@{classView(num=*{num})}" class="button go">자세히보기</a></td>
+                                            <td>
+                                                <a th:href="@{classView(num=*{num})}" class="button go">자세히보기</a>
+                                                <a th:if="${id=='yougnAdmin'}" th:href="@{classModify(num=*{num})}" class="button go">수정</a>
+                                            </td>
                                         </th:block>
                                         <th:block th:unless="*{headNum != headCount} and ${checkList.get(num)}">
                                             <td th:text="마감"></td>
