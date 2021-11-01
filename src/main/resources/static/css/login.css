@@ -56,5 +56,6 @@ input#login {
     margin-top: 20px;
     text-align: center;
     font-weight: bold;
-    line-height: 30px;
+    line-height: 1;
+    font-size: 23px;
 }
