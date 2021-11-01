@@ -13,6 +13,13 @@ public class OrderVO {
     private String orderPayment;
     private String orderDate;
     private String orderAddress;
-    private String orderAddressdetail;
+    private String orderAddressDetail;
+    private String orderReceiver;
+    private String orderPhoneNum;
+    private String orderMemo;
     private Long oderCount;
 }
+
+
+
+

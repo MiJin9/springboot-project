@@ -86,7 +86,8 @@ SELECT COUNT(ITEMNUM) FROM T_ITEM
 </where>
 </select>
 
-<!--===================================오더 테이블===================================-->
+    <!--=================오더테이블=================-->
+
 <insert id="orderInsert">
     <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">
         SELECT SEQ_ORDER.NEXTVAL FROM DUAL
@@ -106,7 +107,7 @@ SELECT COUNT(ITEMNUM) FROM T_ITEM
     (
         /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
         SELECT /*+ INDEX_DESC(T_EXPO PK_EXPO) */
-        ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERDATE, ORDERCOUNT
+        ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT
         FROM T_ORDER
         WHERE
     ROWNUM <= #{pageNum} * #{amount}
@@ -114,6 +115,7 @@ SELECT COUNT(ITEMNUM) FROM T_ITEM
     WHERE R > (#{pageNum} - 1) * #{amount}
     ]]>
 </select>
+
 
 
 </mapper>
