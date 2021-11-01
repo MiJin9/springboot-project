@@ -24,6 +24,7 @@ public interface MarketMapper {
     //    게시글 전체 개수
     public int getTotal(Criteria criteria);
 
+    /* 오더 */
     //전체 주문 리스트
     public int orderGetTotal(Criteria criteria);
 

@@ -79,6 +79,8 @@ public class MarketServiceImple implements MarketService {
         return marketThumbDAO.findByNum(itemnum);
     }
 
+
+    /*오더*/
     @Override
     public void orderRegister(OrderVO orderVO) {
         marketDAO.orderRegister(orderVO);

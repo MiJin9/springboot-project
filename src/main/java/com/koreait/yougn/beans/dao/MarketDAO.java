@@ -39,7 +39,7 @@ public class MarketDAO {
     public int getTotal(Criteria criteria){ return marketMapper.getTotal(criteria); }
 
 
-    // 주문
+    // 오더
     public void orderRegister(OrderVO orderVO){
         marketMapper.orderInsert(orderVO);
     }
