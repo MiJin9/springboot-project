@@ -138,10 +138,10 @@
             let form = $("form#postForm");
             let str = "";
             $(".item ul li").each(function(i, obj){
-                str += "<input type='text' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
             });
             form.append(str).submit();
         })
