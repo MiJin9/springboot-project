@@ -34,7 +34,9 @@
                 <!-- 상품이미지 미리보기 시작 { -->
                 <div id="sit_pvi_big" class="owl-carousel owl-theme">
                     <div class="owl-item" style="width: 500px;">
+                        <input type="file" id="fileBtn" name="uploadFiles" style="display: block">
                         <div class="item">
+                            <ul></ul>
                         </div>
                     </div>
                 </div>
@@ -121,30 +123,122 @@
 <script th:inline="javascript">
     let content = [[${vo.itemcontent}]];
     let itemnum = $("#itemnum").val();
-    console.log(content);
-    console.log(itemnum);
-    $(document).ready(function () {
+    $(document).ready(function(){
+        let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+        let maxSize = 5242880;// 5MB
+        let inputFile = $(".uploadDiv input");
+        let uploadResult = $(".item ul");
+
         $(".note-placeholder").css("display","none");
         $("div.panel-body").html(content);
-        (function(){
 
+
+        $("#sendSummer").on("click", function(e){
+            e.preventDefault();
+            let form = $("form#postForm");
+            let str = "";
+            $(".item ul li").each(function(i, obj){
+                str += "<input type='text' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='text' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+            });
+            form.append(str).submit();
+        })
+
+
+        function showUploadFile(uploadFiles){
+            let str = "";
+            $(uploadFiles).each(function(i, obj){
+                let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
+                str += "<div>";
+                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                str += "</div>";
+                str += "</li>";
+
+            });
+            uploadResult.append(str);
+        }
+        //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
+        function checkExtension(fileName, fileSize){
+            if(regex.test(fileName)){
+                alert("업로드 할 수 없는 파일의 형식입니다.");
+                return false;
+            }
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            }
+            return true;
+        }
+
+        $("input[type='file']").change(function(){
+            let formData = new FormData();
+            let inputFile = $("input[name='uploadFiles']");
+            let files = inputFile[0].files;
+
+            for(let i=0; i<files.length; i++){
+                if(!checkExtension(files[i].name, files[i].size)){ return; }
+                formData.append("uploadFiles", files[i]);
+            }
+
+            $.ajax({
+                url: "/upload/uploadAjaxAction",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(fileList){
+                    showUploadFile(fileList);
+                    inputFile.val("");
+                }
+            });
+        });
+
+        $(".item").on("click", "span", function(){
+            let targetFile = $(this).data("file");
+            let type = $(this).data("type");
+            let li = $(this).parents("li");
+
+            $.ajax({
+                url: "/upload/deleteFile",
+                type: "POST",
+                data: {fileName:targetFile, type:type},
+                dataType: "text",
+                success: function(result){
+                    alert(result);
+                    li.remove();
+                    $("input[type='file']").show();
+                }
+            });
+
+        });
+
+
+        (function(){
             $.getJSON("/market/getAttachList", {itemnum: itemnum},
                 function(arr){
                     console.log(arr);
                     let str = "";
+
                     $(arr).each(function(i, attach){
-                        console.log(attach.image);
-                        if(!attach.image){
-                            str += "<img src='/img/attach.png' width='100px'>";
-                        }else{
-                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                        }
+                        let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                        let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                        str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-name='" + attach.fileName.substring(attach.fileName.indexOf("_") + 1) + "' data-type='" + attach.image +"'>";
+                        str += "<div>";
+                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                        str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                        str += "</div>";
+                        str += "</li>";
+
                     });
-                    $(".item").html(str);
+                    uploadResult.html(str);
                 });//getJSON
         })();
-    })
+    });
 </script>
 </body>
 </html>
