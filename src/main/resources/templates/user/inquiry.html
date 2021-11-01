@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/inquiry.css">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <div id="all">
+            <th:block th:include="user/subMenu.html"></th:block>
+            <div class="contentCenter">
+                <div id="content2">
+                    <div style="">
+                        <h3 style="margin-top: 40px">1:1 문의 </h3>
+                    </div>
+                    <div style="
+    margin-right: 42px;
+">
+                        <a href="/user/inquiry" class="button" id="inquiryBtn">문의하기</a>
+                    </div>
+                </div>
+
+                <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
+
+                <table style="width: 95%; font-size: 18px">
+                    <thead>
+                    <tr class="tHead">
+                        <th class="bno" style="width: 80px">번호</th>
+                        <th class="title">제목</th>
+                        <th class="answerState" style="width: 130px">답변여부</th>
+                        <th class="regDate" style="width: 130px">작성일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block>
+                        <tr class="tBody">
+                            <td class="bno"></td>
+                            <td class="title"><a id=""></a></td>
+                            <td class="regDate"></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
