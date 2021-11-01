@@ -144,9 +144,9 @@
         if(inputPin != pin){
             alert("인증번호를 확인해주세요.");
             return;
-        }else if($("#findId").text() == "" || $("#pwPhoneNum").text() == ""){
-            alert("이름, 핸드폰 번호를 모두 입력해주세요.");
-            return;
+        // }else if($("#name").text() == "" || $("#idPhoneNum").text() == ""){
+        //     alert("이름, 핸드폰 번호를 모두 입력해주세요.");
+        //     return;
         }
         $.ajax({
             url:"/user/sendId",
