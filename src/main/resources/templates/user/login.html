@@ -79,8 +79,6 @@
             alert("비밀번호를 입력해주세요.");
             return;
         }
-        console.log(id);
-        console.log(pw);
         $.ajax({
                 url: "/user/login",
                 type:"post",
@@ -88,20 +86,16 @@
                 contentType: "application/json",
                 dataType:"json",
                 success:function(result){
+                    if(result.result != "ok"){
+                        alert("아이디 또는 비밀번호가 다릅니다.");
+                        return;
+                    }
                     if(result.user.status == 1){
                         alert("탈퇴된 회원입니다.");
                         return;
                     }
-                    let result1 = result.result;
-                    console.log(result1);
-
-                    if(result1 != "ok"){
-                        alert("아이디, 비밀번호가 다릅니다.");
-                        return;
-                    }
                     location.href="/";
                 }
-
             })
     })
 

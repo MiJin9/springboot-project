@@ -9,17 +9,17 @@
     <title>Expo 글 수정</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/market.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <!--썸머노트-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" />
 
 </head>
 <style>
-    .photo{
+    .uploadResult{
         width: 500px;
         height: 500px;
         line-height: 450px;
@@ -27,46 +27,52 @@
         background: ivory;
         text-align: center;
     }
+    .uploadResult img{
+        width: inherit;
+        height: inherit;
+    }
+
 </style>
 <body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
     <th:block th:include="header.html"></th:block>
     <!--Main-->
-        <div class="main" style="height: auto;">
+        <div class="main" style="height: auto;" th:object="${vo}">
             <div class="category">
                 <img src="/img/pageBanner_write.png" style="margin-top: 53px;">
             </div>
-            <form id="postForm" name="postForm" method="POST">
-                <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
+            <form action="/expo/modifyExpo" id="postForm" name="postForm" method="POST">
+                <input type="hidden" name="expoNum" id="expoNum">
+                <input type="text" placeholder ="제목을 입력해주세요." name="title" id="title" th:field="*{expoTitle}" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
                 <hr>
                 <div style="display: flex">
-                    <div class="photo" style="margin-left: 20px">썸네일 미리보기 사진</div>
+                    <div class="uploadResult" style="margin-left: 20px"></div>
                     <div style="margin-top: 30px">
                         <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
                         <div>
                             <h4 style="margin-left: 50px">농장이름 *</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 이름">
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" name="farmName" th:field="*{farmName}" placeholder="농장 이름">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장주 *</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" name="farmerName" th:field="*{farmerName}" placeholder="농장주">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 주소 *</h4>
-                            <input style="height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
+                            <input style="height:30px; width: 500px; margin-left: 50px" type="text" name="farmAddress" th:field="*{farmAddress}" placeholder="농장 주소">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 전화번호</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" name="farmPhone" th:field="*{farmPhone}" placeholder="농장 전화번호">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 주요 품목</h4>
-                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
+                            <input style="height: 30px; width: 500px; margin-left: 50px" type="text" name="farmProduct" th:field="*{farmProduct}" placeholder="농장 주요 품목">
                         </div>
                     </div>
                 </div>
@@ -74,13 +80,13 @@
 
                 <!-- summernote와 관련된 영역 -->
 
-                <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                <textarea id="summernote" name="expoContent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                 <!-- 버튼과 관련된 영역 -->
 
                 <div align="center" class="btn-box">
 
-                    <input type="button" id="sendSummer" class="button" value="수정" >
+                    <input type="submit" id="sendSummer" class="button" value="수정" >
 
                     <a class="button" onclick="history.back()" >취소</a>
 
@@ -114,4 +120,31 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 </body>
+<script th:inline="javascript">
+    let content = [[${vo.expoContent}]];
+    let expoNum = [[${vo.expoNum}]];
+    $(document).ready(function () {
+        $("#expoNum").val(expoNum);
+        $(".note-placeholder").css("display","none");
+        $("div.panel-body").html(content);
+        (function(){
+
+            $.getJSON("/expo/getAttachList", {expoNum: expoNum},
+                function(arr){
+                    console.log(arr);
+                    let str = "";
+                    $(arr).each(function(i, attach){
+                        console.log(attach.image);
+                        if(!attach.image){
+                            str += "<img src='/img/attach.png' width='100px'>";
+                        }else{
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                        }
+                    });
+                    $(".uploadResult").html(str);
+                });//getJSON
+        })();
+    })
+</script>
 </html>

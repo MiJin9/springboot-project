@@ -9,13 +9,13 @@
     <title>마켓상품수정</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/market.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <!--썸머노트-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" />
 
 </head>
 <body class="homepage is-preload"  style="background: #fbf9f4">
@@ -25,7 +25,7 @@
 
     <!--Main-->
     <div class="main">
-        <form>
+        <form action="/market/marketModify" id="postForm" name="postForm" method="POST" th:object="${vo}">
             <div class="category">
                 <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
             </div>
@@ -34,8 +34,7 @@
                 <!-- 상품이미지 미리보기 시작 { -->
                 <div id="sit_pvi_big" class="owl-carousel owl-theme">
                     <div class="owl-item" style="width: 500px;">
-                        <div class="item"><a href="http://dmshop.kr/shop/largeimage.php?it_id=2106307004&amp;no=1" target="_blank" class="popup_item_image">
-                            <img src="http://dmshop.kr/data/item/210630/2106307004.gif" width="500" height="520" alt="" title=""></a>
+                        <div class="item">
                         </div>
                     </div>
                 </div>
@@ -44,11 +43,13 @@
                 <!-- } 상품이미지 미리보기 끝 -->
 
                 <section class="detailView">
-                    <div class="sit_ov_tbl">
-                        <input id="tagname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                    <div class="sit_ov_tbl" style="margin-top: 50px">
+                        <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
+
+                        <input id="itemname" name="itemname" style="color: #4a514f; font-size: 22px; width: 400px" type="text" th:value="*{itemname}">
                         <hr>
                         <div class="con_w">
-                            <input id="tagprice" style="width: 300px" type="text" placeholder="가격">
+                            <input id="itemprice" name="itemprice" style="width: 300px" type="text"th:value="*{itemprice}">
                         </div>
                         <br>
                         <div class="con_w">
@@ -62,42 +63,25 @@
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="taghometown" style="width: 300px" type="text" placeholder="원산지">
+                            <input id="itemhome" name="itemhome" style="width: 300px" type="text" th:value="*{itemhome}">
                         </div>
                         <br>
                         <div class="con_w">
-                            <input id="tagdeltip" style="width: 300px" type="text" placeholder="배송비">
+                            <input id="itemdeliverprice" name="itemdeliverprice" style="width: 300px" type="text" th:value="*{itemdeliverprice}">
                         </div>
-                        <!-- 선택옵션 시작 { -->
-                        <hr>
                         <br>
-                        <section>
-                            <form>
-                                <select class="option">
-                                    <option value="선택옵션">선택옵션</option>
-                                    <option value="옵션1">옵션1</option>
-                                    <option value="옵션2">옵션2</option>
-                                    <option value="옵션3">옵션3</option>
-                                    <option value="옵션4">옵션4</option>
-                                </select>
-                            </form>
-                        </section>
-                        <!-- } 선택옵션 끝 -->
-                        <!--버튼-->
-                        <!-- <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">-->
-                        <!--버튼 끝-->
+                        <div class="con_w">
+                            <input id="itemtotalcount" name="itemtotalcount" style="width: 300px" type="text" th:value="*{itemtotalcount}">
+                        </div>
+
                     </div>
                 </section>
             </div>
             <hr>
             <div id="bottom">
-
-                <form id="postForm" name="postForm" method="POST">
-
-
                     <!-- summernote와 관련된 영역 -->
 
-                    <textarea id="summernote" name="contents" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                    <textarea id="summernote" name="itemcontent" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
 
 
@@ -112,9 +96,6 @@
                     </div>
 
                     <br>
-
-                </form>
-
             </div>
 
         </form>
@@ -137,18 +118,33 @@
 <script src="/js/board/marketwrite.js"></script>
 <!-- include summernote css/js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#sit_pvi_big").owlCarousel({
-            autoPlay : true,
-            navigation : true, // Show next and prev buttons
-            slideSpeed : 1000,
-            pagination:false,
-            singleItem:true,
+<script th:inline="javascript">
+    let content = [[${vo.itemcontent}]];
+    let itemnum = $("#itemnum").val();
+    console.log(content);
+    console.log(itemnum);
+    $(document).ready(function () {
+        $(".note-placeholder").css("display","none");
+        $("div.panel-body").html(content);
+        (function(){
 
-        });
-    });
-
+            $.getJSON("/market/getAttachList", {itemnum: itemnum},
+                function(arr){
+                    console.log(arr);
+                    let str = "";
+                    $(arr).each(function(i, attach){
+                        console.log(attach.image);
+                        if(!attach.image){
+                            str += "<img src='/img/attach.png' width='100px'>";
+                        }else{
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                        }
+                    });
+                    $(".item").html(str);
+                });//getJSON
+        })();
+    })
 </script>
 </body>
 </html>

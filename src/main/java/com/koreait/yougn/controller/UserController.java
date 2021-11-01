@@ -59,7 +59,11 @@ public class UserController {
             if(userVO1.getStatus() != 1){
                 r.getSession().setAttribute("sessionId", userVO.getId());
                 map.put("result","ok");
+            }else{
+                map.put("result","no");
             }
+        }else {
+            map.put("result","no");
         }
         return map;
     }

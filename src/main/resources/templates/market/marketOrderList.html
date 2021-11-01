@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<!--
+	Axiom by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>마켓장바구니</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/market.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
+</head>
+<body class="homepage is-preload"  style="background: #fbf9f4">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+<section>
+    <div class="main" style="height: auto;">
+        <div class="category">
+            <img src="/img/yougnMarketKart.png" style="padding-top: 53px;">
+        </div>
+        <div class="ListTable">
+            <table>
+                <thead>
+                <tr class="tHead">
+                    <th class="ordernum">주문번호</th>
+                    <th class="itemnum">상품번호</th>
+                    <th class="itemname">상품명</th>
+                    <th class="orderpament">결제방법</th>
+                    <th class="orderdate">구매날짜</th>
+                    <th class="orderaddress">주소</th>
+                    <th class="ordercount">수량</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="board : ${list}">
+                    <tr class="tBody" th:object="${order}">
+                        <td class="ordernum" th:text="*{ordernum}"></td>
+                        <td class="itemnum" th:text="*{itemnum}"></td>
+                        <td class="itemname" th:text="*{itemname}"></td>
+                        <td class="orderpament" th:text="*{orderpament}"></td>
+                        <td class="orderdate" th:text="*{orderdate}"></td>
+                        <td class="orderaddress" th:text="*{orderaddress}"></td>
+                        <td class="ordercount" th:text="*{ordercount}"></td>
+                    </tr>
+                </th:block>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</section>
+    <br>
+    <p style="text-align: center">< <a>1</a><a>2</a><a>3</a><a>4</a><a>5</a><a>6</a> ></p>
+</div>
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
