@@ -90,16 +90,16 @@
             <div class="paging">
                 <table th:object="${pageMaker}">
                     <tr>
-                        <td th:if="*{prev}"><a th:href="@{hallList(pageNum=*{criteria.pageNum -1},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.id})}">&lt;</a></td>
+                        <td th:if="*{prev}"><a th:href="@{hallList(pageNum=*{criteria.pageNum -1},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.keyword})}">&lt;</a></td>
                         <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                             <td th:if="${pageMaker.criteria.getPageNum() != num}">
-                                <a th:href="@{hallList(pageNum=${num},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.id})}">
+                                <a th:href="@{hallList(pageNum=${num},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.keyword})}">
                                     <span th:text="${num}"></span>
                                 </a>
                             </td>
                             <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
                         </th:block>
-                        <td th:if="*{next}"><a th:href="@{hallList(pageNum=*{criteria.pageNum +1},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.id})}">&gt;</a></td>
+                        <td th:if="*{next}"><a th:href="@{hallList(pageNum=*{criteria.pageNum +1},sido=*{criteria.sido},gugun=*{criteria.gugun},keyword=*{criteria.keyword})}">&gt;</a></td>
                     </tr>
                 </table>
             </div>
