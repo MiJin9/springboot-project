@@ -153,12 +153,22 @@ public class MarketController {
     }
 
     @GetMapping("marketPayment")
-    public String marketPayment() {
+    public String marketPayment(@RequestParam("count") String count, ItemVO itemVO, Model model) {
+
+        model.addAttribute("count", count);
+        model.addAttribute("order", itemVO);
         return "/market/marketPayment";
     }
 
     @GetMapping("marketPayDone")
     public String marketPayDone() {
         return "/market/marketPayDone";
+    }
+
+    @PostMapping("marketPayment")
+    public String marketPayment(OrderVO orderVO){
+        orderVO.setItemNum(36904L);
+        marketService.orderRegister(orderVO);
+        return "/market/결제완료";
     }
 }

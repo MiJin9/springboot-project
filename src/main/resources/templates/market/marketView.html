@@ -22,107 +22,117 @@
     }
 </style>
 <body class="homepage is-preload" onload="init()">
-    <div id="page-wrapper">
+<div id="page-wrapper">
 
-        <th:block th:include="header.html"></th:block>
+    <th:block th:include="header.html"></th:block>
 
-        <!--Main-->
-        <div class="main" th:object="${item}">
-            <div class="category">
-                <img src="/img/yougnMarketDetail.png" style="padding-top: 53px;">
-            </div>
-            <div class="Btn" style="float: right;margin-right: 10px;">
+    <!--Main-->
+    <div class="main" th:object="${item}">
+        <div class="category">
+            <img src="/img/yougnMarketDetail.png" style="padding-top: 53px;">
+        </div>
+        <div class="Btn" style="float: right;margin-right: 10px;">
             <a href="javascript:void(0)" id="modify" class="button primary small" onclick="goUpdate()">수정</a>
             <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
             <a href="javascript:void(0)" id="goList" class="button primary small">목록보기</a>
-            </div>
-            <br>
-            <br>
-            <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
-                <!-- 상품이미지 미리보기 시작 { -->
-                    <div id="sit_pvi_big" class="owl-carousel owl-theme">
-                            <div class="owl-item" style="width: 500px;">
-                                <div class="uploadResult">
-                                    <ul style="list-style: none;"></ul>
-                                </div>
-                            </div>
-                    </div>
-
-                <br>
-                <!-- } 상품이미지 미리보기 끝 -->
-
-                <section class="detailView">
-                    <div class="sit_ov_tbl" style="margin-top: -50px">
-                        <div id="sit_title" style="color: #4a514f; font-size: 22px" th:text="*{itemname}" ></div>
-                            <hr>
-                                <div class="con_w" style="display: flex">
-                                    시중가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>
-                                </div>
-                        <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
-                            <div class="con_w">
-                                <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">상세페이지참조</span>
-                            </div>
-                            <br>
-                            <div class="con_w">
-                                <span class="ttl">브랜드&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                                <span class="con">상세페이지참조</span>
-                            </div>
-                            <br>
-                            <div class="con_w" style="display: flex">
-                                원산지&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<p th:text="*{itemhome}"></p>
-                            </div>
-                            <div class="con_w" style="display: flex">
-                                배송비결제&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemdeliverprice}"></p>
-                            </div>
-
-                            <div class="con_w" style="display: flex">
-                                잔여수량&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemtotalcount}"></p>
-                            </div>
-                            <hr>
-                            <br>
-                            <section style="display: flex">
-                                <form name="form" method="get" style="font-size: 20px">
-                                    수량 : <input type=hidden name="sell_price" th:value="*{itemprice}">
-                                    <input type="text" name="amount" value="1" size="3" style="font-size: 18px" onchange="change();">
-                                    <input style="height: 29px;line-height: 0px;width: 62px;padding: 10px" type="button" value=" + " onclick="add();">
-                                    <input style="height: 29px;line-height: 0px;width: 62px;padding: 10px" type="button" value=" - " onclick="del();"><br>
-
-                                    금액 : <input type="text" name="sum" size="11" style="width: 190px;font-size: 18px; margin-top: 3px" readonly> 원
-                                </form>
-                            </section>
-                            <!--버튼-->
-                            <input href="javascript:void(0)" type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
-                            <!--버튼 끝-->
-                    </div>
-                </section>
-            </div>
-            <hr>
-            <div id="bottom">
-                <!-- 필독 -->
-                <div id="sit_hhtml">
-                    <div style="text-align:center;" align="center">
-                        <br>
-                    </div>
-                    <div style="text-align:center;" align="center">
-                        <img src="http://dmshop.kr/data/editor/2110/a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" title="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" alt="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg">
-                        <br style="clear:both;">
-                        <br style="clear:both;">
-                    </div>
-                </div>
-                <!-- 필독끝 -->
-
-                <!-- 상풍 상세설명 -->
-                <hr>
-                <br>
-                <div class="itemcontent" style="text-align:center;"></div>
-            </div>
-            <br>
         </div>
         <br>
         <br>
-        <th:block th:include="footer.html"></th:block>
+        <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
+            <!-- 상품이미지 미리보기 시작 { -->
+            <div id="sit_pvi_big" class="owl-carousel owl-theme">
+                <div class="owl-item" style="width: 500px;">
+                    <div class="uploadResult">
+                        <ul style="list-style: none;"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <!-- } 상품이미지 미리보기 끝 -->
+
+            <section class="detailView">
+                <div class="sit_ov_tbl" style="margin-top: -50px">
+                    <div id="sit_title" style="color: #4a514f; font-size: 22px" th:text="*{itemname}" ></div>
+                    <hr>
+                    <div class="con_w" style="display: flex">
+                        시중가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>
+                    </div>
+                    <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
+                    <div class="con_w">
+                        <span class="ttl">제조사&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                        <span class="con">상세페이지참조</span>
+                    </div>
+                    <br>
+                    <div class="con_w">
+                        <span class="ttl">브랜드&nbsp;&nbsp;-&nbsp;&nbsp; </span>
+                        <span class="con">상세페이지참조</span>
+                    </div>
+                    <br>
+                    <div class="con_w" style="display: flex">
+                        원산지&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<p th:text="*{itemhome}"></p>
+                    </div>
+                    <div class="con_w" style="display: flex">
+                        배송비결제&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemdeliverprice}"></p>
+                    </div>
+
+                    <div class="con_w" style="display: flex">
+                        잔여수량&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemtotalcount}"></p>
+                    </div>
+                    <hr>
+                    <br>
+                    <section style="display: flex">
+                        <form name="form" method="get" style="font-size: 20px">
+                            수량 : <input type=hidden name="sell_price" th:value="*{itemprice}">
+                            <input type="text" name="amount" size="3" style="font-size: 18px" onchange="change();">
+                            <input style="height: 29px;line-height: 0px;width: 62px;padding: 10px" type="button" value=" + " onclick="add();">
+                            <input style="height: 29px;line-height: 0px;width: 62px;padding: 10px" type="button" value=" - " onclick="del();"><br>
+
+                            금액 : <input type="text" name="sum" size="11" style="width: 190px;font-size: 18px; margin-top: 3px" readonly> 원
+                        </form>
+                    </section>
+                    <!--버튼-->
+                    <input href="javascript:void(0)" type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
+                    <!--버튼 끝-->
+                </div>
+            </section>
+        </div>
+        <hr>
+        <div id="bottom">
+            <!-- 필독 -->
+            <div id="sit_hhtml">
+                <div style="text-align:center;" align="center">
+                    <br>
+                </div>
+                <div style="text-align:center;" align="center">
+                    <img src="http://dmshop.kr/data/editor/2110/a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" title="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg" alt="a68586d145c5b5e78d1eb96d2481a08e_1634614358_79.jpg">
+                    <br style="clear:both;">
+                    <br style="clear:both;">
+                </div>
+            </div>
+            <!-- 필독끝 -->
+    <input type="text" name="input" class="input111">
+            <!-- 상풍 상세설명 -->
+            <hr>
+            <br>
+            <div class="itemcontent" style="text-align:center;"></div>
+        </div>
+        <br>
     </div>
+    <br>
+    <br>
+
+    <form action="/market/marketPayment" method="get" name="getForm" style="display: none" th:object="${item}">
+        <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
+        <input type="hidden" name="itemname" id="itemname" th:field="*{itemname}">
+        <input type="hidden" name="itemprice" id="itemprice" th:field="*{itemprice}">
+        <input type="hidden" name="userId" id="userId" th:field="*{userid}">
+        <input type="hidden" name="itemdeliverprice" id="itemdeliverprice" th:field="*{itemdeliverprice}">
+        <input type='text' name='count' class='count'>
+    </form>
+
+    <th:block th:include="footer.html"></th:block>
+</div>
 
 
 <!-- Scripts -->
@@ -133,118 +143,134 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-    <script th:inline="javascript">
-        let itemnum = $("#itemnum").val();
-        let paging = [[${criteria.listLink}]]; // 페이징
-        console.log(itemnum);
-        let uploadResult = $(".uploadResult ul");
+<script th:inline="javascript">
+    let itemnum = $("#itemnum").val();
+    let paging = [[${criteria.listLink}]]; // 페이징
+    console.log(itemnum);
+    let uploadResult = $(".uploadResult ul");
 
-        $(document).ready(function() {
-            $("#sit_pvi_big").owlCarousel({
-                autoPlay : true,
-                navigation : true, // Show next and prev buttons
-                slideSpeed : 1000,
-                pagination:false,
-                singleItem:true,
+    $(document).ready(function() {
+        $("#sit_pvi_big").owlCarousel({
+            autoPlay : true,
+            navigation : true, // Show next and prev buttons
+            slideSpeed : 1000,
+            pagination:false,
+            singleItem:true,
 
-            });
         });
+    });
 
-        var sell_price;
-        var amount;
+    var sell_price;
+    var amount;
 
-        function init () {
-            sell_price = document.form.sell_price.value;
-            amount = document.form.amount.value;
-            document.form.sum.value = sell_price;
-            change();
+    function init () {
+        sell_price = document.form.sell_price.value;
+        amount = document.form.amount.value;
+        document.form.sum.value = sell_price;
+        change();
 
-            (function(){
-                $.getJSON("/market/getAttachList", {itemnum: itemnum},
-                    function(arr){
-                        console.log(arr);
-                        let str = "";
+        (function(){
+            $.getJSON("/market/getAttachList", {itemnum: itemnum},
+                function(arr){
+                    console.log(arr);
+                    let str = "";
 
-                        $(arr).each(function(i, attach){
-                            console.log(attach.image);
-                            if(!attach.image){
-                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
-                                str += "<li>";
-                                str += "<div>";
-                                str += "<img src='/img/attach.png' width='100px'>";
-                                str += "</div>";
-                                str += "</li>";
-                            }else{
-                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                    $(arr).each(function(i, attach){
+                        console.log(attach.image);
+                        if(!attach.image){
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                            str += "<li>";
+                            str += "<div>";
+                            str += "<img src='/img/attach.png' width='100px'>";
+                            str += "</div>";
+                            str += "</li>";
+                        }else{
+                            let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                            let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
 
-                                str += "<li>";
-                                str += "<div>";
-                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                                str += "</div>";
-                                str += "</li>";
-                            }
-                        });
-                        uploadResult.html(str);
-                    });//getJSON
-            })();
-        }
+                            str += "<li>";
+                            str += "<div>";
+                            str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                            str += "</div>";
+                            str += "</li>";
+                        }
+                    });
+                    uploadResult.html(str);
+                });//getJSON
+        })();
+    }
 
-        console.log(sell_price);
 
-        function add () {
-            hm = document.form.amount;
-            sum = document.form.sum;
-            hm.value ++ ;
 
+
+     let count = 1; /*기본값 1*/
+    console.log(count);
+    $(".count").val(count);
+    function add () {
+        count ++; /* 플러스 누르때 마다 1 증가 */
+        $(".count").val(count);
+        hm = document.form.amount;
+        sum = document.form.sum;
+        hm.value ++ ;
+
+        sum.value = parseInt(hm.value) * parseInt(sell_price);
+    }
+
+    function del () {
+        count -- ; /* 마이너스 누를때마다 1 감소*/
+        $(".count").val(count);
+        hm = document.form.amount;
+        sum = document.form.sum;
+        if (hm.value > 1) {
+            hm.value -- ;
             sum.value = parseInt(hm.value) * parseInt(sell_price);
         }
+    }
 
-        function del () {
-            hm = document.form.amount;
-            sum = document.form.sum;
-            if (hm.value > 1) {
-                hm.value -- ;
-                sum.value = parseInt(hm.value) * parseInt(sell_price);
-            }
+    function change () {
+        hm = document.form.amount;
+        sum = document.form.sum;
+
+        if (hm.value < 0) {
+            hm.value = 0;
         }
+        sum.value = parseInt(hm.value) * parseInt(sell_price);
+    }
 
-        function change () {
-            hm = document.form.amount;
-            sum = document.form.sum;
-
-            if (hm.value < 0) {
-                hm.value = 0;
-            }
-            sum.value = parseInt(hm.value) * parseInt(sell_price);
-        }
-
-        let content = [[${item.itemcontent}]]
-        $(".itemcontent").html(content);
-        console.log(content);
+    let content = [[${item.itemcontent}]]
+    $(".itemcontent").html(content);
+    console.log(content);
 
 
 
-        $("a#goList").on("click", function(){
-            location.href = "/market/marketList" + paging;
-        });
+    $("a#goList").on("click", function(){
+        location.href = "/market/marketList" + paging;
+    });
 
-        $("#delete").on("click", function (e) {
-            e.preventDefault();
-            if(!confirm("상품번호" + itemnum + "번 상품을 삭제하시겠습니까")){return;}
-            location.href = "/market/remove?itemnum=" + itemnum;
-        })
+    $("#delete").on("click", function (e) {
+        e.preventDefault();
+        if(!confirm("상품번호" + itemnum + "번 상품을 삭제하시겠습니까")){return;}
+        location.href = "/market/remove?itemnum=" + itemnum;
+    })
 
-        function goUpdate(){
-            location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
-        }
-
-        $("input.button").on("click", function (e) {
-            e.preventDefault();
-            location.href = "/market/marketPayment";
-        })
+    function goUpdate(){
+        location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
+    }
 
 
-    </script>
+    $("input.button").on("click", function () {
+        $(".count").val(count);
+       document.getForm.submit();
+    })
+
+    // let count = $("input[name='amount']").val(1);
+    // console.log($(".count").val(count()));
+
+    if($("input[name='amount']").val() == "" || $("input[name='amount']").val() == null){
+        $("input[name='amount']").val(1);
+    }
+
+
+</script>
 </body>
 </html>

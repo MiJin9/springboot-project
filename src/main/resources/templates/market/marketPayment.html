@@ -63,13 +63,13 @@
                     </th:block> -->
                     </tbody>
                      <th:block>
-                         <tr class="tBody" style="text-align: center;height: 70px;font-size: 20px;line-height: 70px;border-bottom: solid 0.5px">
-                             <td class="itemnum">1</td>
-                             <td class="userid">woojisi</td>
-                             <td class="itemname">감자</td>
-                             <td class="itemdeliverprice">2500</td>
-                             <td class="ordercount">3</td>
-                             <td class="totalprice">22500</td>
+                         <tr class="tBody"  th:object="${order}" style="text-align: center;height: 70px;font-size: 20px;line-height: 70px;border-bottom: solid 0.5px">
+                             <td class="itemnum" th:text="*{itemnum}"></td>
+                             <td class="userid" th:text="*{userid}"></td>
+                             <td class="itemname" th:text="*{itemname}"></td>
+                             <td class="itemdeliverprice" th:text="*{itemdeliverprice}"></td>
+                             <td class="ordercount" th:text="${count}"></td>
+                             <td class="totalprice" th:text="*{itemprice}"></td>
                          </tr>
                      </th:block>
                 </table>
@@ -98,7 +98,7 @@
                     연락처*<input type="text" class="orderinput" id="orderPhonenum" name="orderPhonenum" placeholder="' ㅡ ' 를 제외하고 입력해주세요"><br>
                     <br>
                     우편번호*<input type="text" class="postcodify_postcode5 orderinput" id="address"
-                           placeholder="우편번호" style="width:200px ;margin-left: 59px" value="">
+                                placeholder="우편번호" style="width:200px ;margin-left: 59px" value="">
                     <input type="button" id="postcodify_search_button" style="width: 146px;font-size: 16px;padding: 16px;line-height: 14px;font-family: 'Jeju Gothic';font-weight: 500;" value="우편번호 검색"><br>
                     <br>
                     <input type="text" class="postcodify_address orderinput" style="margin-left: 127px" name="address" placeholder="도로명주소" value=""><br>
@@ -156,6 +156,8 @@
     $(function () {
         $("#postcodify_search_button").postcodifyPopUp();
     });
+
+    console.log([[${count}]]);
 
 </script>
 </body>

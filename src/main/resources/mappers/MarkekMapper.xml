@@ -133,11 +133,15 @@ DELETE FROM T_ITEM WHERE ITEMNUM = #{itemNum}
 
     <!--결제 했을때 구매자 정보 추가-->
 <insert id="orderInsert">
-<!--    <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">-->
-<!--        SELECT SEQ_ORDER.NEXTVAL FROM DUAL-->
-<!--    </selectKey>-->
+    <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">
+        SELECT SEQ_ORDER.NEXTVAL FROM DUAL
+    </selectKey>
     INSERT INTO T_ORDER (ORDERNUM, ITEMNUM, ITEMNAME, BUYERID, USERID, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO, ORDERCOUNT)
     VALUES (SEQ_ORDER.NEXTVAL, #{itemNum}, #{itemName}, #{buyerId}, #{userId}, #{orderAddress}, #{orderAddressDetail}, #{orderReceiver}, #{orderPhoneNum}, #{orderMemo}, #{orderCount})
 </insert>
+
+<!--    <select id="select" resultType="orderVO">-->
+<!--        SELECT    FROM T_ORDER WHERE -->
+<!--    </select>-->
 
 </mapper>

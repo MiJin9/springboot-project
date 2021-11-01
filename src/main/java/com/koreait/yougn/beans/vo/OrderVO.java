@@ -18,6 +18,6 @@ public class OrderVO {
     private String orderReceiver;
     private String orderPhoneNum;
     private String orderMemo;
-    private Long orderCount;
+    private int orderCount;
     private int status;
 }
