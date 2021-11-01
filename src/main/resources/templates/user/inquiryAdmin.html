@@ -5,9 +5,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/myPage.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/inquiry.css">
+
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
@@ -16,16 +17,27 @@
 
     <!--Main-->
     <div class="main">
-        <div id="all">
-            <th:block th:include="user/subMenu.html"></th:block>
+        <div id="all" style="padding-bottom: 50px">
+            <div class="contentLeft">
+                <div>
+                    <h4><a href="/user/admin">관리자 페이지</a></h4>
+                    <hr style="margin: 20px 0 0 -1px; width: 120px">
+                    <ul class="subMenu">
+                        <li style="font-size: 18px; margin: 25px 0px">회원관리
+                            <ul class="sub_depth1">
+                                <li><a href="/user/inquiryAdmin">1:1 문의</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="contentCenter">
                 <div id="content2">
                     <div style="">
                         <h3 style="margin-top: 40px">1:1 문의 </h3>
                     </div>
-                    <div style="
-    margin-right: 42px;
-">
+                    <div style="margin-right: 42px;">
                         <a href="/user/inquiryWrite" class="button" id="inquiryBtn">문의하기</a>
                     </div>
                 </div>
@@ -43,27 +55,18 @@
                     </thead>
                     <tbody style="text-align: center">
                     <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
-                        <th:block th:if="${index} == null">
                         <tr class="tBody" style="height: 30px; line-height: 2;" th:object="${list.get(index)}">
                             <td class="num" style="width: 80px" th:text="*{num}"></td>
                             <td class="title"><a id="goRead2" th:href="*{num}" th:text="*{title}"></a></td>
                             <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
-                            <td th:id="${index}" class="answerState" style="width: 120px" th:text="*{status}" ></td>
+                            <td th:id="${index}" class="answerState" style="width: 120px" th:text="*{status}"></td>
                         </tr>
-                    </th:block>
-                    <th:block th:unless="${index} == null">
-                        <tr class="tBody" style="height: 30px; line-height: 2;">
-                            <td class="num" style="width: 80px"></td>
-                            <td class="title"><a></a></td>
-                            <td class="regDate" style="width: 130px"></td>
-                            <td class="answerState" style="width: 120px"></td>
-                        </tr>
-                    </th:block>
                     </th:block>
                     </tbody>
                     <tfoot>
                     </tfoot>
                 </table>
+                <input type="hidden" id="id" name="id" th:value="${session.sessionId}">
                 <div th:object="${pageMaker}">
                     <div class="big-width" style="text-align: center">
                         <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
@@ -76,7 +79,7 @@
                         <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                     </div>
 
-                    <form action="/user/inquiry" th:object="${criteria}" name="pageForm">
+                    <form action="/user/inquiryAdmin" th:object="${criteria}" name="pageForm">
                         <input type="hidden" name="pageNum" th:field="*{pageNum}">
                         <input type="hidden" name="amount" th:field="*{amount}">
                     </form>
@@ -101,14 +104,14 @@
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);
     let list = [[${list}]];
-    let str="";
+    let str = "";
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         for (let i = 0; i < list.length; i++) {
             if (list[i].status == 0) {
                 str = "답변 대기 중"
             }
-            if (list[i].status == 1)  {
+            if (list[i].status == 1) {
                 str = "답변 완료"
             }
             $("#" + i).text(str);
@@ -126,8 +129,11 @@
         location.href = "/user/inquiryRead" + paging + "&num=" + $(this).attr("href");
     });
 
+    if ($("#id").val() == "yougnAdmin") {
+        $("#inquiryBtn").hide();
+    };
+
 
 </script>
-<script src="/js/main.js"></script>
 </body>
 </html>

@@ -55,6 +55,12 @@ public class ClassService {
         return "classThumb/" + vo.getUploadPath() + "/" + vo.getUuid() + "_" +vo.getFileName();
     }
 
+    public ArrayList<ThumbVO> getThumbList(Long classNum){
+        ArrayList<ThumbVO> thumbList = new ArrayList<>();
+        thumbList.add(classThumbDAO.findByNum(classNum));
+        return  thumbList;
+    }
+
     //하나 가져오기
     public ClassVO getClass(Long num){
         ClassVO classVO = classDAO.getClass(num);
@@ -85,8 +91,19 @@ public class ClassService {
     }
 
     //수정
+    @Transactional(rollbackFor = Exception.class)
     public boolean modify(ClassVO classVO){
-        return classDAO.update(classVO);
+        boolean modifyResult = false;
+
+        classThumbDAO.deleteAll(classVO.getNum());
+        modifyResult = classDAO.update(classVO);
+        if(modifyResult && classVO.getFileList() != null && classVO.getFileList().size() != 0){
+            classVO.getFileList().forEach( thumb -> {
+                thumb.setExpoNum(classVO.getNum());
+                classThumbDAO.insert(thumb);
+            });
+        }
+        return modifyResult;
     }
 
 

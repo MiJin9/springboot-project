@@ -103,9 +103,14 @@
         })
     })
     $("#findPwBtn").on("click",function(e){
+        console.log($("#findId").val())
+        console.log($("#pwPhoneNum").val())
         e.preventDefault();
         if(pwPin != $("#pwPinNum").val()){
             alert("인증번호를 확인해주세요.");
+            return;
+        } else if($("#findId").text() == "" || $("#pwPhoneNum").text() == ""){
+            alert("아이디, 핸드폰 번호를 모두 입력해주세요.");
             return;
         }
         $(document.form).submit();
@@ -128,6 +133,8 @@
             }
         })
     })
+
+
     let pin ="";
 
     $("#findIdBtn").on("click",function(){
@@ -137,6 +144,9 @@
         if(inputPin != pin){
             alert("인증번호를 확인해주세요.");
             return;
+        // }else if($("#name").text() == "" || $("#idPhoneNum").text() == ""){
+        //     alert("이름, 핸드폰 번호를 모두 입력해주세요.");
+        //     return;
         }
         $.ajax({
             url:"/user/sendId",

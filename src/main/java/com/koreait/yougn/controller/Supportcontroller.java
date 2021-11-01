@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -155,6 +156,27 @@ public class Supportcontroller {
         model.addAttribute("pageNum", 1);
         model.addAttribute("amount",10);
         return new RedirectView("classList");
+    }
+
+    @GetMapping("classModify")
+    public void classModify(Long num, Model model){
+        ClassVO classVO = classService.getClass(num);
+        model.addAttribute("class",classVO);
+        model.addAttribute("thumbList",classService.getThumbList(classVO.getNum()));
+    }
+
+    @PostMapping("classModify")
+    public RedirectView classModify(ClassVO classVO, RedirectAttributes rttr){
+        if(classService.modify(classVO)){
+            rttr.addAttribute("num",classVO.getNum());
+        }
+        return new RedirectView("classView");
+    }
+
+    @GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ArrayList<ThumbVO> getAttachList(Long classNum){
+        return classService.getThumbList(classNum);
     }
 
     @GetMapping("infoList")
