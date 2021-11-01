@@ -33,7 +33,7 @@
     <div class="main">
         <form action="/market/marketModify" id="postForm" name="postForm" method="POST">
             <div class="category">
-                <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
+                <img src="/img/yougnMarketpayment.png" style="padding-top: 53px;">
             </div>
             <br>
             <br>
@@ -97,9 +97,13 @@
                     <br>
                     연락처*<input type="text" class="orderinput" id="orderPhonenum" name="orderPhonenum" placeholder="' ㅡ ' 를 제외하고 입력해주세요"><br>
                     <br>
-                    배송지 주소*<input type="text" class="orderinput" style="margin-left: 40px"><input class="button" type="button" value="우편 번호" style="margin-left: 15px"><br>
+                    우편번호*<input type="text" class="postcodify_postcode5 orderinput" id="address"
+                           placeholder="우편번호" style="width:200px ;margin-left: 59px" value="">
+                    <input type="button" id="postcodify_search_button" style="width: 146px;font-size: 16px;padding: 16px;line-height: 14px;font-family: 'Jeju Gothic';font-weight: 500;" value="우편번호 검색"><br>
                     <br>
-                    <input type="text" class="orderinput" style="margin-left: 127px"><br>
+                    <input type="text" class="postcodify_address orderinput" style="margin-left: 127px" name="address" placeholder="도로명주소" value=""><br>
+                    <br>
+                    <input type="text" class="postcodify_details orderinput" style="margin-left: 127px" name="addressDetail" placeholder="상세주소" value=""><br>
                     <br>
                     베송메모<input type="text" class="orderinput" id="orderMemo" name="orderMemo" style="margin-left: 68px" placeholder="배송 요청사항을 직접 입력해주세요"><br>
                     <br>
@@ -127,7 +131,7 @@
             </div>
             <br>
             <hr style="width: 1000px;margin-right: 50px;margin-left: 50px;">
-            <input class="button" type="button" style="width: 350px;height: 45px;margin: 50px auto;display: flex;padding-left: 140px;"  value="결제하기">
+            <input class="button" type="button" style="font-family: 'Jeju Gothic'; font-weight: 500; font-size: 24px; width: 350px;height: 45px;margin: 50px auto;display: flex;padding-left: 130px;"  value="결제하기">
             <br>
             <br>
             <br>
@@ -145,6 +149,14 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script th:inline="javascript">
+    // 주소검색 API
+    $(function () {
+        $("#postcodify_search_button").postcodifyPopUp();
+    });
 
+</script>
 </body>
 </html>
