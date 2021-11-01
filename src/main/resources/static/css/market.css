@@ -93,3 +93,8 @@ div.four h1, div.four p{
 .thumbWrapper{
     justify-content: space-evenly;
 }
+
+ul>div>img{
+    width: 300px;
+    height: 300px;
+}

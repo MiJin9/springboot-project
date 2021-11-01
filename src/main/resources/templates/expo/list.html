@@ -12,9 +12,18 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/expo.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
-    <style>
+<style>
 
-    </style>
+    ul>li>div>img{
+        width: 250px;
+        height: 215px;
+        margin-top: 15px;
+    }
+
+    h1, h2, h3, h4,h5,h6{
+        color: black;
+    }
+</style>
 </head>
 <body class="homepage is-preload">
 <div id="page-wrapper">
@@ -50,6 +59,7 @@
                                         <div class="itemTitle">
                                             <h4><a target="_self" class="itemName" id="goRead" name="expoTitle" th:text="*{expoTitle}" th:href="*{expoNum}"></a></h4>
                                         </div>
+                                        <br>
                                         <!--작성자-->
                                         <div class="userId">
                                             작성자 : &nbsp;<p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userId}"></p>
@@ -162,7 +172,7 @@
 
                                 str += "<li>";
                                 str += "<div>";
-                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                                str += "<img src='/upload/display?fileName=" + originPath + "'>";
                                 str += "</div>";
                                 str += "</li>";
                             }
