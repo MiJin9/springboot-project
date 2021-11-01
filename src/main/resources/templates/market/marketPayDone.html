@@ -25,13 +25,25 @@
     <div class="main">
             <br>
             <br>
-            <div>
-                <h1>주문완료</h1>
+            <div style="text-align: center; color: black">
                 <br>
                 <br>
-                <h2>상품 주문이 완료 되었습니다.</h2>
                 <br>
-                <h2>주문내역에서 확인 가능합니다.</h2>
+                <br>
+                <h1 style="text-align: center; color: #3c763d;font-size: 55px">주문완료</h1>
+                <br>
+                <div class="category">
+                    <img src="/img/paydone.png" style="width: 450px; height: 450px">
+                </div>
+                <br>
+                <h2 style="text-align: center; color: #3c763d; font-size: 28px">상품 주문이 완료 되었습니다.</h2>
+                <br>
+                <h2 style="text-align: center; color: #3c763d; font-size: 28px">주문내역에서 확인 가능합니다.</h2>
+                <br>
+                <br>
+                <a href="javascript:void(0)" type="button" class="MyorderButton button">주문내역 보러가기</a>
+                <a href="javascript:void(0)" type="button" class="MainButton button">메인으로</a>
+                <br>
             </div>
             <br>
             <br>
@@ -48,5 +60,17 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script th:inline="javascript">
+    $("a.MyorderButton").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/market/marketMyorder";
+    })
+
+    $("a.MainButton").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/";
+    })
+
+</script>
 </body>
 </html>
