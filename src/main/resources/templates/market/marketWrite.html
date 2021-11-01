@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="/css/main.css" />
 
 </head>
+<style>
+    li div img{
+        width: 450px;
+        height: 450px;
+    }
+</style>
 <body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
@@ -35,9 +41,9 @@
                 <!-- 상품이미지 미리보기 시작 { -->
                 <div id="sit_pvi_big" class="owl-carousel owl-theme">
                     <div class="owl-item" style="width: 500px;">
-                        <input type="file" id="fileBtn" name="uploadFiles" style="display: block">
+                        <input type="file" id="fileBtn" name="uploadFiles" style="display: block; margin: auto; margin-top: 190px">
                         <div class="uploadResult">
-                            <ul></ul>
+                            <ul style="list-style: none"></ul>
                         </div>
                     </div>
                 </div>
@@ -45,7 +51,7 @@
                 <br>
                 <!-- } 상품이미지 미리보기 끝 -->
                 <section class="detailView">
-                    <div class="sit_ov_tbl" style="margin-top: 50px">
+                    <div class="sit_ov_tbl" style="font-size: 20px">
                         <div>
                             <input type="hidden" name="itemnum" id="itemnum" th:field="${vo.itemnum}">
                             <input name="userid" th:field="${vo.userid}" type="hidden">
@@ -54,10 +60,10 @@
                             <input type="hidden" name="keyType" th:field="${criteria.keyType}">
                             <input type="hidden" name="keyword" th:field="${criteria.keyword}">
                         </div>
-                        상품명*<input id="itemname" name="itemname" style="margin-left: 20px;color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
+                        상품명*<input id="itemname" name="itemname" style="margin-left: 3px;color: #4a514f; font-size: 22px; width: 400px" type="text" placeholder="상품명">
                         <hr>
                         <div class="con_w">
-                        가격*<input id="itemprice" name="itemprice" style="height: 35px;margin-left: 23px;width: 300px" type="text" placeholder="숫자만 입력해주세요 ex)50000">원
+                        가격*<input id="itemprice" name="itemprice" style="height: 35px;margin-left: 28px;width: 300px" type="text" placeholder="숫자만 입력해주세요 ex)50000">원
                         </div>
                         <br>
                         <div class="con_w">
@@ -99,7 +105,7 @@
 
                     <div align="center" class="btn-box">
 
-                        <input type="submit" id="sendSummer" class="button" value="작성">
+                        <input type="submit" id="sendSummer" class="button" style="height: 33px;width: 81.5px;font-family: 'Jeju Gothic';" value="작성">
 
                         <a class="button" onclick="history.back()">취소</a>
 

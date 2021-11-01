@@ -156,4 +156,9 @@ public class MarketController {
     public String marketPayment() {
         return "/market/marketPayment";
     }
+
+    @GetMapping("marketPayDone")
+    public String marketPayDone() {
+        return "/market/marketPayDone";
+    }
 }

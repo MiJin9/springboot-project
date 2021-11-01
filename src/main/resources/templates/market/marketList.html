@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 <style>
+    li img{
+        width: 200px;
+        height: 200px;
+    }
     li>a {
         font-size: 20px;
     }
@@ -101,7 +105,7 @@
 
                                             </ul>
                                         </div>
-                                        <div class="itemInfo">
+                                        <div class="itemInfo" style="margin-top: -15px">
                                             <!--제목-->
                                             <div class="itemTitle">
                                                 <h4><a target="_self" class="itemName" id="goRead" th:href="*{itemnum}" name="itemname" th:text="*{itemname}"></a></h4>
