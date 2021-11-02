@@ -13,26 +13,26 @@
     <title>Error</title>
 </head>
 <body>
-<div id="notfound">
-    <div class="notfound">
-        <div class="notfound-404">
-            <div class="sorry">
-                <h1>Sorry</h1>
+    <div class="notfound-404">
+        <img src="/img/404page.png" style="width: 1200px; position: relative; left: 20%; top: 230px;">
+    </div>
+    <div id="notfound">
+        <div class="notfound">
+
+            <div class="buttons" style="position: relative;top: -230px;">
+                <a href="javascript:history.go(-1)" class="goBack primary button" style="color:black; background:#fff">뒤로가기</a>
+                <a href="javascript:void(0)" class="backMain primary button">메인으로 돌아가기</a>
             </div>
-            <br>
-            <div class="cannotGoPage">
-                <h2>죄송합니다. 요청하신 페이지를 찾을 수 없습니다.</h2>
-            </div>
-        </div>
-        <div class="buttons">
-            <a href="javascript:history.go(-1)" class="goBack primary button" style="color:black; background:#fff">뒤로가기</a>
-            <a href="javascript:void(0)" class="backMain primary button">메인으로 돌아가기</a>
         </div>
     </div>
-</div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </body>
 <script>
+
+    $("a.backMain").on("click", function(e){
+        e.preventDefault();
+        location.href = "/";
+    })
 
 </script>
 </html>

@@ -37,7 +37,7 @@ body {
 }
 
 .notfound .notfound-404 h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Jeju Gothic";
     font-size: 236px;
     font-weight: 200;
     margin: 0px;
@@ -52,7 +52,7 @@ body {
 }
 
 .notfound .notfound-404 h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Jeju Gothic";
     font-size: 28px;
     font-weight: 400;
     text-transform: uppercase;
@@ -68,14 +68,14 @@ body {
 }
 
 .notfound a {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Jeju Gothic";
     display: inline-block;
     font-weight: 700;
     text-decoration: none;
     color: #fff;
     text-transform: uppercase;
     padding: 13px 23px;
-    background: #c97b1f;
+    background: #ff6300;
     font-size: 18px;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
@@ -83,7 +83,11 @@ body {
 
 .notfound a:hover {
     color: #fff;
-    background: #ff6300;
+    background: #ff9849;
+}
+
+.img{
+
 }
 
 @media only screen and (max-width: 767px) {

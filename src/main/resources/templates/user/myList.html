@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/writeCollection.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <div id="all">
+            <th:block th:include="user/subMenu.html"></th:block>
+                <div class="contentCenter">
+                    <h3 style="margin-top: 40px">내 글 모아보기</h3>
+                    <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
+                    <table id="table">
+                        <tr class="tHead">
+                            <th class="boardType">게시판 분류</th>
+                            <th class="bno" width="90px">번호</th>
+                            <th class="title">제목</th>
+                            <th class="regDate" width="150px">작성일</th>
+                            <th class="updateDate" width="150px">수정일</th>
+                        </tr>
+                        <th:block th:each="board : ${myList}">
+                            <tr class="tBody" th:object="${board}">
+                                <th:block th:switch="*{type}">
+                                    <td th:case="0">공지사항</td>
+                                    <td th:case="1">수매요청(팝니다)</td>
+                                    <td th:case="2">수매요청(삽니다)</td>
+                                    <td th:case="3">임대</td>
+                                    <td th:case="4">매매</td>
+                                    <td th:case="5">지식IN</td>
+                                </th:block>
+                                <td class="bno" th:text="*{bno}"></td>
+                                <td class="title"><a id="goRead" th:href="@{/board/read(bno=*{bno})}" th:text="*{title}"></a></td>
+                                <td class="regDate" th:text="*{regDate}"></td>
+                                <td class="updateDate" th:text="*{updateDate}"></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                    <div th:object="${pageMaker}">
+                        <div class="big-width" style="text-align: center; margin-top: 10px;">
+                            <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                            <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                                <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                                <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                            </th:block>
+                            <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                        </div>
+                        <form action="/user/myList" th:object="${criteria}" name="pageForm">
+                            <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                            <input type="hidden" name="amount" th:field="*{amount}">
+                            <input type="hidden" name="keyType" th:field="*{keyType}">
+                            <input type="hidden" name="keyword" th:field="*{keyword}">
+                            <input type="hidden" name="boardType" th:field="*{boardType}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -9,6 +9,7 @@ public class OrderVO {
     private Long orderNum;
     private Long itemNum;
     private String itemName;
+    private String buyerId;
     private String userId;
     private String orderPayment;
     private String orderDate;
@@ -17,9 +18,6 @@ public class OrderVO {
     private String orderReceiver;
     private String orderPhoneNum;
     private String orderMemo;
-    private Long oderCount;
+    private int orderCount;
+    private int status;
 }
-
-
-
-
