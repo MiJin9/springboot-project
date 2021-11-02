@@ -80,6 +80,7 @@
                 <h2 style="color: black; font-size: 20px">주문자 정보</h2>
                 <br>
                 <div style="margin-left: 120px; font-size: 16px">
+                <p id="5" th:text="${user.getId()}"></p>
                 <p th:text="${user.getName()}"></p>
                 <p th:text="${user.getPhone()}"></p>
                 <p th:text="${user.getEmail()}"></p>
@@ -138,7 +139,7 @@
             <input type="hidden" name="itemNum">
             <input type="hidden" name="itemName">
             <input type="hidden" name="userId">
-            <input type="hidden" name="buyerId" value="우정인">
+            <input type="hidden" name="buyerId">
             <input type="hidden" name="itemdeliverprice">
             <input type="hidden" name="orderPayment">
             <input type="hidden" name="orderCount">
@@ -170,6 +171,7 @@
     $("input[name='itemName']").val(상품명)
     $("input[name='itemNum']").val($("#1").text())
     $("input[name='orderCount']").val($("#4").text())
+    $("input[name='buyerId']").val($("#5").text())
 
     // $("input[type='button']").on("click",function () {
     //     iamport()

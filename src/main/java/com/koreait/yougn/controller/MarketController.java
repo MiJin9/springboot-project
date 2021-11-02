@@ -150,16 +150,21 @@ public class MarketController {
     }
 
     @GetMapping("marketMyorder")
-    public String marketMyorder(Criteria criteria, Model model) {
-        criteria.setBuyerId("우정인");
+    public String marketMyorder(Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        criteria.setBuyerId(id);
         model.addAttribute("list", marketService.orderMyList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketMyorder";
     }
 
     @GetMapping("marketOrderList")
-    public String marketOrderList(Criteria criteria, Model model){
-        criteria.setUserId("장태순");
+    public String marketOrderList(Criteria criteria, Model model, HttpServletRequest r){
+        String id = (String) r.getSession().getAttribute("sessionId");
+        log.info("-----------------------------------------------");
+        log.info(id);
+        log.info("-----------------------------------------------");
+        criteria.setUserId(id);
         model.addAttribute("list", marketService.orderGetList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketOrderList";
