@@ -86,36 +86,68 @@ SELECT COUNT(ITEMNUM) FROM T_ITEM
 </where>
 </select>
 
+
+
     <!--=================오더테이블=================-->
+    <!--전체-->
+    <select id="orderGetTotal" resultType="_int">
+        SELECT COUNT(ORDERNUM) FROM T_ORDER
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="search"></include>
+            </trim>
+        </where>
+    </select>
 
-<insert id="orderInsert">
-    <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">
-        SELECT SEQ_ORDER.NEXTVAL FROM DUAL
-    </selectKey>
-    INSERT INTO T_ORDER (ORDERNUM, ITEMNUM, ITEMNAME, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERCOUNT)
-    VALUES (#{orderNum}, #{itemNum}, #{itemName}, #{orderPayment}, #{orderAddress}, #{orderAddressdetail}, #{orderCount})
-</insert>
-
-<select id="orderTotal" resultType="_int">
-    SELECT ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERDATE, ORDERCOUNT FROM T_ORDER WHERE USERID = #{userId}
-</select>
-
+    <!--페이지 별 구매자 리스트-->
 <select id="orderGetList" resultType="orderVO">
     <![CDATA[
-    SELECT ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERDATE, ORDERCOUNT
-    FROM
+    SELECT ORDERNUM, ITEMNUM, ITEMNAME, BUYERID, ORDERPAYMENT, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT FROM
     (
         /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
-        SELECT /*+ INDEX_DESC(T_EXPO PK_EXPO) */
-        ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT
+        SELECT /*+ INDEX_DESC(T_ORDER FK_ORDER) */
+        ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, BUYERID, ORDERPAYMENT, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT
         FROM T_ORDER
         WHERE
-    ROWNUM <= #{pageNum} * #{amount}
+    ROWNUM <= #{pageNum} * #{amount} AND USERID = #{userId}
     )
     WHERE R > (#{pageNum} - 1) * #{amount}
     ]]>
 </select>
 
+    <!-- 자기가 구매한 구매 리스트 -->
+<select id="orderMyList" resultType="orderVO">
+    <![CDATA[
+    SELECT ORDERNUM, ITEMNUM, ITEMNAME, BUYERID,USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT, STATUS FROM
+    (
+        /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
+        SELECT /*+ INDEX_DESC(T_ORDER FK_ORDER) */
+        ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, BUYERID,USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT, STATUS
+        FROM T_ORDER
+        WHERE
+    ROWNUM <= #{pageNum} * #{amount} AND BUYERID = #{buyerId}
+    )
+    WHERE R > (#{pageNum} - 1) * #{amount}
+    ]]>
+</select>
 
+    <!--결제 했을때 구매자 정보 추가-->
+<insert id="orderInsert">
+    <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">
+        SELECT SEQ_ORDER.NEXTVAL FROM DUAL
+    </selectKey>
+    INSERT INTO T_ORDER (ORDERNUM, ITEMNUM, ITEMNAME, BUYERID, USERID, ORDERPAYMENT,ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO, ORDERCOUNT)
+    VALUES (SEQ_ORDER.NEXTVAL, #{itemNum}, #{itemName}, #{buyerId}, #{userId}, #{orderPayment},#{orderAddress}, #{orderAddressDetail}, #{orderReceiver}, #{orderPhoneNum}, #{orderMemo}, #{orderCount})
+</insert>
+
+<!--    <select id="select" resultType="orderVO">-->
+<!--        SELECT    FROM T_ORDER WHERE -->
+<!--    </select>-->
+
+    <update id="status">
+        UPDATE T_ORDER
+        SET STATUS = 1
+        WHERE ORDERNUM = #{orderNum}
+    </update>
 
 </mapper>

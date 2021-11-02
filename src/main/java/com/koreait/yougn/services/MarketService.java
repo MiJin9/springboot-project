@@ -28,4 +28,9 @@ public interface MarketService {
     public List<OrderVO> orderGetList(Criteria criteria);
 
     public int orderGetTotal(Criteria criteria);
+
+    public List<OrderVO> orderMyList(Criteria criteria);
+
+
+    public boolean status(Long orderNum);
 }

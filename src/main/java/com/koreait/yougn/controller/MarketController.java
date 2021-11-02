@@ -4,13 +4,16 @@ import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.MarketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -143,24 +146,43 @@ public class MarketController {
     }
 
     @GetMapping("marketMyorder")
-    public String marketMyorder() { return "/market/marketMyorder"; }
+    public String marketMyorder(Criteria criteria, Model model) {
+        criteria.setBuyerId("우정인");
+        model.addAttribute("list", marketService.orderMyList(criteria));
+        model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
+        return "/market/marketMyorder";
+    }
 
     @GetMapping("marketOrderList")
-    public String marketOrderList(Criteria criteria, Model model) {
-        model.addAttribute("list", marketService.orderGetTotal(criteria));
+    public String marketOrderList(Criteria criteria, Model model){
+        criteria.setUserId("장태순");
+        model.addAttribute("list", marketService.orderGetList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketOrderList";
     }
 
     @GetMapping("marketPayment")
-    public String marketPayment() {
+    public String marketPayment(@RequestParam("count") String count, ItemVO itemVO, Model model) {
+
+        model.addAttribute("count", count);
+        model.addAttribute("order", itemVO);
         return "/market/marketPayment";
     }
 
-    @PostMapping("marketPayment")
-    public String marketPayment(OrderVO orderVO) {
-        marketService.orderRegister(orderVO);
-        return "/market/결제완료";
+    @GetMapping("marketPayDone")
+    public String marketPayDone() {
+        return "/market/marketPayDone";
     }
 
+    @PostMapping("marketPayment")
+    public String marketPayment(OrderVO orderVO){
+        marketService.orderRegister(orderVO);
+        return "/market/marketPayDone";
+    }
+
+    @GetMapping("marketStatus")
+    public RedirectView status(@RequestParam("orderNum") Long orderNum){
+        marketService.status(orderNum);
+        return new RedirectView("marketMyorder");
+    }
 }

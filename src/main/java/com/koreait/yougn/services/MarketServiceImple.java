@@ -89,6 +89,8 @@ public class MarketServiceImple implements MarketService {
         return marketThumbDAO.findByNum(itemnum);
     }
 
+
+    /*오더*/
     @Override
     public void orderRegister(OrderVO orderVO) {
         marketDAO.orderRegister(orderVO);
@@ -108,5 +110,13 @@ public class MarketServiceImple implements MarketService {
     @Override
     public int orderGetTotal(Criteria criteria) {
         return marketDAO.orderGetTotal(criteria);
+    }
+
+    @Override
+    public List<OrderVO> orderMyList(Criteria criteria) { return marketDAO.orderMyList(criteria); }
+
+    @Override
+    public boolean status(Long orderNum) {
+        return marketDAO.status(orderNum);
     }
 }
