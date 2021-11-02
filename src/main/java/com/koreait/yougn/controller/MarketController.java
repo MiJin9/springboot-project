@@ -2,6 +2,7 @@ package com.koreait.yougn.controller;
 
 import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.MarketService;
+import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MarketController {
     private final MarketService marketService;
+    private final UserService userService;
 
     /*리스트*/
     @GetMapping("marketList")
@@ -162,8 +165,11 @@ public class MarketController {
     }
 
     @GetMapping("marketPayment")
-    public String marketPayment(@RequestParam("count") String count, ItemVO itemVO, Model model) {
+    public String marketPayment(@RequestParam("count") String count, ItemVO itemVO, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        UserVO user = userService.getUser(id);
 
+        model.addAttribute("user", user);
         model.addAttribute("count", count);
         model.addAttribute("order", itemVO);
         return "/market/marketPayment";
