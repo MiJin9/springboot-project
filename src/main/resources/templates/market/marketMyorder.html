@@ -28,7 +28,7 @@
             <img src="/img/yougnMarketKart.png" style="padding-top: 53px;">
         </div>
         <div class="ListTable">
-            <table>
+            <table style="height: 500px;font-size: 18px;text-align: center;">
                 <thead>
                 <tr class="tHead">
                     <th class="ordernum">주문번호</th>
@@ -54,7 +54,7 @@
                         <td class="orderdetailaddress" th:text="*{orderPayment}"></td>
                         <td class="ordercount" th:text="*{orderCount}"></td>
                         <td class="orderstate" th:id="${index}" th:text="*{status}"></td>
-                        <td><a th:href="*{orderNum}" class="button tag" value="배송확인"></a></td>
+                        <td><a style="height: 47px" th:href="*{orderNum}" class="button tag">배송확인</a></td>
                     </tr>
                 </th:block>
                 </tbody>

@@ -150,4 +150,11 @@ SELECT COUNT(ITEMNUM) FROM T_ITEM
         WHERE ORDERNUM = #{orderNum}
     </update>
 
+    <!-- 결제완료시 총수량 빼주기 -->
+    <update id="orderCountupdate" parameterType="orderVO">
+UPDATE T_ITEM
+SET ITEMTOTALCOUNT - #{orderCount}
+WHERE ITEMNUM = #{itemnum}
+</update>
+
 </mapper>

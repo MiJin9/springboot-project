@@ -36,6 +36,8 @@ public interface MarketMapper {
 
     public void orderInsert(OrderVO orderVO);
 
+    public int orderCountupdate(ItemVO itemVO);
+
     public int status(Long orderNum);
 
 }
