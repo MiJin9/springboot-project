@@ -80,10 +80,10 @@
                 <h2 style="color: black; font-size: 20px">주문자 정보</h2>
                 <br>
                 <div style="margin-left: 120px; font-size: 16px">
-                <p id="5" th:text="${user.getId()}"></p>
-                <p th:text="${user.getName()}"></p>
-                <p th:text="${user.getPhone()}"></p>
-                <p th:text="${user.getEmail()}"></p>
+                <span style="display: flex">아이디&nbsp; : &nbsp;<p id="5" th:text="${user.getId()}"></p></span>
+                <span style="display: flex">이름&nbsp; : &nbsp;<p th:text="${user.getName()}"></p></span>
+                <span style="display: flex">연락처&nbsp; : &nbsp;<p th:text="${user.getPhone()}"></p></span>
+                <span style="display: flex">이메일&nbsp; : &nbsp;<p th:text="${user.getEmail()}"></p></span>
                 </div>
                 <br>
             </div>
@@ -122,11 +122,10 @@
                 <br>
                 <div style="margin-left: 120px; font-size: 16px" th:object="${order}">
                     <span style="display: flex">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p>&nbsp;원</span>
-                    <br>
+                    <p style="margin-left: 16px; font-size: 22px">+</p>
                     <span style="display: flex">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p>&nbsp;원</span>
-                    <br>
+                    <p style="margin-left: 16px; font-size: 22px">=</p>
                     <hr style="width: 600px; margin-left: -3px">
-                    <br>
                     <span style="display: flex">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p>&nbsp;원</span>
                 </div>
             </div>
