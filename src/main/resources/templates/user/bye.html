@@ -18,53 +18,35 @@
     <!--Main-->
     <div class="main">
         <div id="all">
-            <div class="contentLeft">
-                <div>
-                    <h4>마이페이지</h4>
-                    <hr style="margin: 20px 0 0 -1px; width: 120px">
-                    <ul class="subMenu">
-                        <li style="font-size: 18px; margin: 25px 0px">회원정보
-                            <ul class="sub_depth1">
-                                <li><a href="">회원 정보 수정</a></li>
-                                <li><a href="">비밀번호 변경</a></li>
-                                <li><a href="">회원 탈퇴</a></li>
-                                <li><a href="">1:1 문의</a></li>
-                            </ul>
-                        </li>
-
-                        <li style="font-size: 18px; margin: 25px 0px">게시판
-                            <ul class="sub_depth1">
-                                <li><a href="">내 글 모아보기</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <th:block th:include="user/subMenu.html"></th:block>
+            <input type="hidden" id="sessionId" th:value="${session.sessionId}">
             <div class="contentCenter">
-                <h3 style="margin-top: 40px">회원 탈퇴</h3>
-                <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
+                <form id="byeOkForm" name="form" action="/user/byeOk" method="post">
+                    <h3 style="margin-top: 40px">회원 탈퇴</h3>
+                    <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
 
-                <div style="margin-top: 23px">
-                    <p style="font-size: 20px; margin-bottom: 4px; color: black">탈퇴 사유를 선택해주세요.</p>
-                </div>
-                <div style="font-size: 17px">
-                    <input type="checkbox" style="zoom:1.5;">서비스 기능 불편<br>
-                    <input type="checkbox" style="zoom:1.5;">개인정보 및 보안 우려<br>
-                    <input type="checkbox" style="zoom:1.5;">고객서비스 불만<br>
-                    <input type="checkbox" style="zoom:1.5;">방문 빈도가 낮음<br>
-                    <input type="checkbox" style="zoom:1.5;">기타
-                </div>
+                    <div style="margin-top: 23px">
+                        <p style="font-size: 20px; margin-bottom: 4px; color: black">탈퇴 사유를 선택해주세요.</p>
+                    </div>
+                    <div style="font-size: 17px">
+                        <input type="checkbox" style="zoom:1.5;">서비스 기능 불편<br>
+                        <input type="checkbox" style="zoom:1.5;">개인정보 및 보안 우려<br>
+                        <input type="checkbox" style="zoom:1.5;">고객서비스 불만<br>
+                        <input type="checkbox" style="zoom:1.5;">방문 빈도가 낮음<br>
+                        <input type="checkbox" style="zoom:1.5;">기타
+                    </div>
 
-                <div style="margin-top: 30px">
-                    <p style="font-size: 18px">※탈퇴 사유에 대한 상세의견을 빈칸에 작성 부탁드립니다.</p>
-                    <textarea rows="5" style="resize: none; margin-top: -10px; margin-bottom: 10px; width: 88%"
-                              placeholder="고객님의 소중한 의견으로 더 나은 서비스를 제공할 수 있도록 노력하겠습니다."></textarea>
-                </div>
+                    <div style="margin-top: 30px">
+                        <p style="font-size: 18px">※탈퇴 사유에 대한 상세의견을 빈칸에 작성 부탁드립니다.</p>
+                        <textarea rows="5" style="resize: none; margin-top: -10px; margin-bottom: 10px; width: 88%"
+                                  placeholder="고객님의 소중한 의견으로 더 나은 서비스를 제공할 수 있도록 노력하겠습니다."></textarea>
+                    </div>
 
-                <div style="margin-bottom: 20px; margin-left: 185px">
-                    <a href="" id="modify" class="button">탈퇴</a>
-                    <a href="" id="cancel" class="button"style="margin-left: 8px; background: #888787;">취소</a>
-                </div>
+                    <div style="margin-bottom: 20px; margin-left: 185px">
+                        <a id="signOut" class="button">탈퇴</a>
+                        <a id="cancel" class="button" style="margin-left: 8px; background: #888787;">취소</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -82,4 +64,20 @@
 <script src="/js/main.js"></script>
 
 </body>
+<script>
+    $("#signOut").on("click", function(e) {
+        e.preventDefault();
+        if(confirm("정말 탈퇴하시겠습니까?")){
+            $(document.form).submit();
+        }
+    })
+    $("#cancel").on("click", function(e){
+        e.preventDefault();
+        if(!$("#sessionId").length){
+            location.replace("/user/findUser");
+        }else {
+            location.replace("/user/myPage");
+        }
+    })
+</script>
 </html>

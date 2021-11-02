@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.yougn.mappers.ReturnMapper">
+    <select id="selectAll" resultType="returnVO">
+        SELECT NUM, ITEM, "LOCAL", "SIZE", "INPUT", OPERATE, INCOME
+        FROM
+        (
+        SELECT ROWNUM R, NUM, ITEM, "LOCAL", "SIZE", "INPUT", OPERATE, INCOME
+        FROM T_RETURN
+        <![CDATA[
+        WHERE ROWNUM <= #{pageNum} * #{amount}
+        ]]>
+        ) T
+        <![CDATA[
+        WHERE T.R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <sql id="search">
+        <trim prefix="(" prefixOverrides="AND" suffix=")AND">
+            <trim prefix="AND">
+                <if test="keyword != null">
+                    (ITEM LIKE '%'||#{keyword}||'%')
+                </if>
+            </trim>
+            <trim prefix="AND">
+                <if test="local != null">
+                    ("LOCAL" LIKE '%'||#{local}||'%')
+                </if>
+            </trim>
+            <trim prefix="AND">
+                <if test="item != null">
+                    (ITEM LIKE '%'||#{item}||'%')
+                </if>
+            </trim>
+        </trim>
+    </sql>
+
+    <select id="selectList" resultType="returnVO">
+        SELECT NUM, ITEM, "LOCAL", "SIZE", "INPUT", OPERATE, INCOME
+        FROM
+        (
+        SELECT ROWNUM R, NUM, ITEM, "LOCAL", "SIZE", "INPUT", OPERATE, INCOME
+        FROM T_RETURN
+        WHERE
+        <if test="keyword != null || local != null || item != null">
+            <include refid="search"></include>
+        </if>
+        <![CDATA[
+        ROWNUM <= #{pageNum} * #{amount}
+        ]]>
+        ) T
+        WHERE R > (#{pageNum} - 1) * #{amount}
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM (SELECT NUM, ITEM, "LOCAL", "SIZE", "INPUT", OPERATE, INCOME FROM T_RETURN
+        <where>
+            <trim suffixOverrides="AND">
+                <include refid="search"></include>
+            </trim>
+        </where>
+        )
+    </select>
+</mapper>

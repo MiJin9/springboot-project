@@ -21,35 +21,35 @@
 
     <!--Main-->
     <div class="main">
-        <form>
+<!--        <form name="loginForm" action="/user/login" method="post">-->
             <div id="all">
                 <div class="group">
                     <h3 style="text-align: center">로그인</h3>
                     <hr>
                     <div id="input">
                         <div class="input2">
-                            <input type="text" class="box" id="id" placeholder="아이디" minlength="5" maxlength="11">
+                            <input type="text" class="box" id="id" name="id" placeholder="아이디" minlength="5" maxlength="11">
                         </div>
                         <div class="input2">
-                            <input type="password" class="box" id="pw" placeholder="비밀번호" minlength="8" maxlength="20">
+                            <input type="password" class="box" id="pw" name="pw" placeholder="비밀번호" minlength="8" maxlength="20">
                         </div>
                     </div>
                     <div>
-                        <a class="button" id="login">로그인</a>
+                        <input type="button" class="button" id="login" value="로그인">
                     </div>
                     <div style="margin-top: 18px;">
                         <div style="float: left">
-                            <a href="" class="other" id="join">회원가입</a>
+                            <a href="/user/join" class="other" id="join">회원가입</a>
                         </div>
                         <div style="float:right;">
-                            <a href="" class="other" id="findId">아이디 찾기</a>
+                            <a href="/user/findUser" class="other" id="findId">아이디 찾기</a>
                             <span></span>
-                            <a href="" class="other" id="findPw">비밀번호 찾기</a>
+                            <a href="/user/findUser" class="other" id="findPw">비밀번호 찾기</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+<!--        </form>-->
     </div>
 
 
@@ -67,4 +67,41 @@
 <script src="/js/main.js"></script>
 
 </body>
+<script>
+    $("#login").on("click",function(){
+        let id = $("#id").val();
+        let pw = $("#pw").val();
+        if(!$("#id").val()){
+            alert("아이디를 입력해주세요.");
+            return;
+        }
+        if(!$("#pw").val()){
+            alert("비밀번호를 입력해주세요.");
+            return;
+        }
+        $.ajax({
+                url: "/user/login",
+                type:"post",
+                data:JSON.stringify({"id":id,"pw":pw}),
+                contentType: "application/json",
+                dataType:"json",
+                success:function(result){
+                    if(result.result != "ok"){
+                        alert("아이디 또는 비밀번호가 다릅니다.");
+                        return;
+                    }
+                    if(result.user.status == 1){
+                        alert("탈퇴된 회원입니다.");
+                        return;
+                    }
+                    location.href="/";
+                }
+            })
+    })
+
+    let result = [[${result == false? true: false}]];
+    if(result){
+        alert("정보를 다시 확인해주세요");
+    }
+</script>
 </html>

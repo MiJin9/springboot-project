@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.yougn.mappers.ClassMapper">
+    <select id="selectList" resultType="classVO">
+        SELECT NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+        ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+        FROM
+        (
+            SELECT ROWNUM R, NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+            ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+            FROM
+            (
+                SELECT NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+                    ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+                FROM T_CLASS
+                <where>
+                    <if test="keyword != null">
+                        TITLE LIKE '%'||#{keyword}||'%'
+                        OR
+                        "NAME" LIKE '%'||#{keyword}||'%'
+                        OR
+                        CONTENT  LIKE '%'||#{keyword}||'%'
+                    </if>
+                </where>
+                <![CDATA[
+                ORDER BY OPENDATE DESC ,CLOSEDATE
+                 ]]>
+            ) T
+            <![CDATA[
+            WHERE  ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="select" resultType="classVO">
+        SELECT  NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, HEADCOUNT, OPENDATE, CLOSEDATE, STARTTIME,
+        ENDTIME, RECRUITDATE, RECRUITCLOSEDATE, REGDATE, UPDATEDATE
+        FROM T_CLASS
+        WHERE NUM = #{num}
+    </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="num" order="BEFORE" resultType="long">
+            SELECT SEQ_CLASS.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO T_CLASS (NUM, "NAME", TITLE, CONTENT, PRICE, PLACE, ADDRESS, HEADNUM, OPENDATE, CLOSEDATE, STARTTIME,
+            ENDTIME, RECRUITDATE, RECRUITCLOSEDATE )
+        VALUES(#{num}, #{name},#{title},#{content},#{price}, #{place}, #{address},#{headNum},#{openDate},#{closeDate},#{startTime},
+            #{endTime},#{recruitDate},#{recruitCloseDate})
+    </insert>
+
+    <update id="update">
+        UPDATE T_CLASS
+        SET "NAME" = #{name}, TITLE = #{title}, CONTENT = #{content}, PRICE = #{price}, HEADNUM = #{headNum}, OPENDATE = #{openDate}, CLOSEDATE = #{closeDate}, STARTTIME = #{startTime},
+            ENDTIME = #{endTime}, RECRUITDATE = #{recruitDate}, RECRUITCLOSEDATE = #{recruitCloseDate}, UPDATEDATE = SYSDATE, PLACE = #{place}, ADDRESS = #{address}
+        WHERE NUM = #{num}
+    </update>
+
+    <update id="updateCountUp">
+        UPDATE T_CLASS
+        SET HEADCOUNT = HEADCOUNT + 1
+        WHERE NUM = #{num}
+    </update>
+
+    <update id="updateCountDown">
+        UPDATE T_CLASS
+        SET HEADCOUNT = HEADCOUNT - 1
+        WHERE NUM = #{num}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM T_CLASS WHERE ID = #{id} AND CLASSNUM = #{classNum}
+    </delete>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM (SELECT NUM FROM T_CLASS
+        <where>
+            <if test="keyword != null">
+                TITLE LIKE '%'||#{keyword}||'%'
+                OR
+                "NAME" LIKE '%'||#{keyword}||'%'
+                OR
+                CONTENT LIKE '%'||#{keyword}||'%'
+            </if>
+        </where>
+        )
+    </select>
+
+    <insert id="applyInsert">
+        <selectKey keyProperty="num" order="BEFORE" resultType="long">
+            SELECT SEQ_APPLY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO T_APPLY (NUM, CLASSNUM, ID, MERCHANT_UID)
+        VALUES (#{num}, #{classNum}, #{id}, #{merchant_uid})
+    </insert>
+
+    <delete id="applyDelete">
+        DELETE FROM T_APPLY WHERE NUM = #{num}
+    </delete>
+
+    <select id="selectApplyList" resultType="_int">
+        SELECT CLASSNUM FROM
+        (
+            SELECT CLASSNUM FROM T_APPLY WHERE ID = #{id} ORDER BY CLASSNUM DESC
+        ) T
+        <![CDATA[
+        WHERE ROWNUM R <= #{pageNum} * #{amount} AND ROWNUM R2 > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="selectApply" resultMap="applyResult">
+        SELECT NUM, CLASSNUM, ID, MERCHANT_UID FROM T_APPLY WHERE ID=#{id} AND CLASSNUM = #{classNum}
+    </select>
+
+    <resultMap id="applyResult" type="applyVO">
+        <result property="num" column="NUM"/>
+        <result property="classNum" column="CLASSNUM"/>
+        <result property="id" column="ID"/>
+        <result property="merchant_uid" column="MERCHANT_UID"/>
+    </resultMap>
+
+    <select id="getApplyTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM T_APPLY WHERE ID={id}
+    </select>
+</mapper>
