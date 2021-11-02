@@ -271,5 +271,34 @@
     $(".etc2").mouseleave(function () {
         $(".etc2 img").css("filter", "");
     })
+
+    /*$("div.etc1").on("click",function () {
+        location.href=""
+    })*/
+    $("div.tableWrap table").on("click","td",function(){
+        let gugun = $(this).text();
+        let sido = $pined.text();
+        switch (sido) {
+            case "경기도":sido = "경기";
+                break;
+            case "강원도":sido = "강원";
+                break;
+            case "충청북도":sido = "충북";
+                break;
+            case "충청남도":sido = "충남";
+                break;
+            case "전라북도":sido = "전북";
+                break;
+            case "전라남도":sido = "전남";
+                break;
+            case "경상북도":sido = "경북";
+                break;
+            case "경상남도":sido = "경남";
+                break;
+            case "제주도":sido = "제주";
+                break;
+        }
+        location.href = "/support/hallList?sido="+sido+"&gugun="+gugun;
+    })
 </script>
 </html>
