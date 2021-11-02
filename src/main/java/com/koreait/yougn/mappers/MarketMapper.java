@@ -31,6 +31,9 @@ public interface MarketMapper {
     // 페이지별 주문 리스트
     public List<OrderVO> orderGetList(Criteria criteria);
 
+    // 내 주문 리스트
+    public List<OrderVO> orderMyList(Criteria criteria);
+
     public void orderInsert(OrderVO orderVO);
 
 

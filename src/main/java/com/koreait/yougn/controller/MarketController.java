@@ -143,7 +143,12 @@ public class MarketController {
     }
 
     @GetMapping("marketMyorder")
-    public String marketMyorder() { return "/market/marketMyorder"; }
+    public String marketMyorder(Criteria criteria, Model model) {
+        criteria.setBuyerId("우정인");
+        model.addAttribute("list", marketService.orderMyList(criteria));
+        model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
+        return "/market/marketMyorder";
+    }
 
     @GetMapping("marketOrderList")
     public String marketOrderList(Criteria criteria, Model model){

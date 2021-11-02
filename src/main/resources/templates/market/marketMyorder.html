@@ -34,22 +34,25 @@
                     <th class="ordernum">주문번호</th>
                     <th class="itemnum">상품번호</th>
                     <th class="itemname">상품명</th>
-                    <th class="orderpament">결제방법</th>
                     <th class="orderdate">구매날짜</th>
                     <th class="orderaddress">주소</th>
+                    <th class="orderdetailaddress">상세주소</th>
+                    <th class="orderpayment">결제가격</th>
                     <th class="ordercount">수량</th>
+                    <th class="orderstate">상태</th>
                 </tr>
                 </thead>
                 <tbody>
-                <th:block th:each="board : ${list}">
-                    <tr class="tBody" th:object="${order}">
-                        <td class="ordernum" th:text="*{ordernum}"></td>
-                        <td class="itemnum" th:text="*{itemnum}"></td>
-                        <td class="itemname" th:text="*{itemname}"></td>
-                        <td class="orderpament" th:text="*{orderpament}"></td>
-                        <td class="orderdate" th:text="*{orderdate}"></td>
-                        <td class="orderaddress" th:text="*{orderaddress}"></td>
-                        <td class="ordercount" th:text="*{ordercount}"></td>
+                <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
+                    <tr class="tBody" th:object="${list.get(index)}">
+                        <td class="ordernum" th:text="*{orderNum}"></td>
+                        <td class="itemnum" th:text="*{itemNum}"></td>
+                        <td class="itemname" th:text="*{itemName}"></td>
+                        <td class="orderdate" th:text="*{orderDate}"></td>
+                        <td class="orderaddress" th:text="*{orderAddress}"></td>
+                        <td class="orderdetailaddress" th:text="*{orderAddressDetail}"></td>
+                        <td class="ordercount" th:text="*{orderCount}"></td>
+                        <td class="orderstate" th:id="${index}"></td>
                     </tr>
                 </th:block>
                 </tbody>
@@ -60,7 +63,6 @@
     </div>
 </section>
     <br>
-    <p style="text-align: center">< <a>1</a><a>2</a><a>3</a><a>4</a><a>5</a><a>6</a> ></p>
 </div>
     <th:block th:include="footer.html"></th:block>
 </div>
@@ -74,6 +76,23 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script th:inline="javascript">
 
+    let statelist = [[${list}]];
+    //let status = [[${list.status}]];
+    let ss = [[${list.getStatus()}]];
+    console.log(ss);
+    for(let i=0;i < statelist.length; i++){
+        let str = "";
+        if (status == 0){
+            str="배송중"
+        }else{
+            str="배송완료"
+        }
+        $("#"+i).html(str)
+    }
+  //  console.log(status);
+
+</script>
 </body>
 </html>

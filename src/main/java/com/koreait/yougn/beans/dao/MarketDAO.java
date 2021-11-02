@@ -47,7 +47,8 @@ public class MarketDAO {
     public List<OrderVO> orderGetList(Criteria criteria){
         return marketMapper.orderGetList(criteria);
     }
-
+    public List<OrderVO> orderMyList(Criteria criteria){
+        return marketMapper.orderMyList(criteria);
+    }
     public int orderGetTotal(Criteria criteria){ return marketMapper.orderGetTotal(criteria); }
-
 }

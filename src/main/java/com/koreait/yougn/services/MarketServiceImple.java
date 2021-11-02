@@ -111,4 +111,7 @@ public class MarketServiceImple implements MarketService {
     public int orderGetTotal(Criteria criteria) {
         return marketDAO.orderGetTotal(criteria);
     }
+
+    @Override
+    public List<OrderVO> orderMyList(Criteria criteria) { return marketDAO.orderMyList(criteria); }
 }
