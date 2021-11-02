@@ -4,6 +4,7 @@ import com.koreait.yougn.beans.vo.Criteria;
 import com.koreait.yougn.beans.vo.ExpoVO;
 import com.koreait.yougn.mappers.ExpoMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExpoDAO {
 
-    private final ExpoMapper mapper;
+    @Autowired
+    private ExpoMapper mapper;
 
     public void register(ExpoVO expoVO){
         mapper.insertSelectKey_expoNum(expoVO);

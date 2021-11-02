@@ -16,6 +16,14 @@
 
 
 </head>
+<style>
+    .orderinput{
+        margin-left: 75px;
+        width: 350px;
+        height: 45px;
+    }
+
+</style>
 <body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
@@ -25,38 +33,108 @@
     <div class="main">
         <form action="/market/marketModify" id="postForm" name="postForm" method="POST">
             <div class="category">
-                <img src="/img/yougnMarketWrite.png" style="padding-top: 53px;">
+                <img src="/img/yougnMarketpayment.png" style="padding-top: 53px;">
             </div>
+            <br>
+            <br>
             <div class="ListTable">
-                <table>
+                <h2 style="color: black; font-size: 20px; margin-left: 70px">상품 정보</h2>
+                <table style="margin: 50px; width: 1000px">
                     <thead>
-                    <tr class="tHead">
+                    <tr class="tHead" style="text-align: center; background: #eee;height: 50px;line-height: 50px; font-size: 18px;">
                         <th class="itemnum">상품번호</th>
                         <th class="userid">판매자</th>
                         <th class="itemname">상품명</th>
                         <th class="orderdate">배송비</th>
                         <th class="ordercount">수량</th>
                         <th class="totalprice">상품금액</th>
-                   </tr>
+                    </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="market : ${list}">
-                        <tr class="tBody" th:object="${vo}">
+                   <!-- <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
+                        <tr class="tBody" th:object="${list.get(index)}">
                             <td class="itemnum" th:text="*{itemnum}"></td>
                             <td class="userid" th:text="*{userid}"></td>
                             <td class="itemname" th:text="*{itemname}"></td>
                             <td class="itemdeliverprice" th:text="*{itemdeliverprice}"></td>
-                            <td class="ordercount" th:text="*{ordercount}"></td>
-                            <td class="ordercount" th:text="*{ordercount}"></td>
+                            <td class="ordercount" th:text="${orderlist.get(index)}"></td>
+                            <td class="totalprice" th:text="${orderlist.get(index)}**{itemprice}"></td>
                         </tr>
-                    </th:block>
+                    </th:block> -->
                     </tbody>
-                    <tfoot>
-                    </tfoot>
+                     <th:block>
+                         <tr class="tBody" style="text-align: center;height: 70px;font-size: 20px;line-height: 70px;border-bottom: solid 0.5px">
+                             <td class="itemnum">1</td>
+                             <td class="userid">woojisi</td>
+                             <td class="itemname">감자</td>
+                             <td class="itemdeliverprice">2500</td>
+                             <td class="ordercount">3</td>
+                             <td class="totalprice">22500</td>
+                         </tr>
+                     </th:block>
                 </table>
             </div>
-
-
+            <br>
+            <br>
+            <div style="margin-left: 70px;">
+                <h2 style="color: black; font-size: 20px">주문자 정보</h2>
+                <br>
+                <div style="margin-left: 120px; font-size: 16px">
+                <p>우정인</p>
+                <p>010-2395-5096</p>
+                <p>woojisi@naver.com</p>
+                </div>
+                <br>
+            </div>
+            <hr style="width: 1000px;margin-right: 50px;margin-left: 50px;">
+            <br>
+            <br>
+            <div style="margin-left: 70px;">
+                <h2 style="color: black; font-size: 20px">배송지 정보</h2>
+                <br>
+                <div style="margin-left: 120px; font-size: 16px">
+                    수령인*<input type="text" class="orderinput" id="orderReceiver" name="orderReceiver" placeholder="50자 이내로 입력해주세요"><br>
+                    <br>
+                    연락처*<input type="text" class="orderinput" id="orderPhonenum" name="orderPhonenum" placeholder="' ㅡ ' 를 제외하고 입력해주세요"><br>
+                    <br>
+                    우편번호*<input type="text" class="postcodify_postcode5 orderinput" id="address"
+                           placeholder="우편번호" style="width:200px ;margin-left: 59px" value="">
+                    <input type="button" id="postcodify_search_button" style="width: 146px;font-size: 16px;padding: 16px;line-height: 14px;font-family: 'Jeju Gothic';font-weight: 500;" value="우편번호 검색"><br>
+                    <br>
+                    <input type="text" class="postcodify_address orderinput" style="margin-left: 127px" name="address" placeholder="도로명주소" value=""><br>
+                    <br>
+                    <input type="text" class="postcodify_details orderinput" style="margin-left: 127px" name="addressDetail" placeholder="상세주소" value=""><br>
+                    <br>
+                    베송메모<input type="text" class="orderinput" id="orderMemo" name="orderMemo" style="margin-left: 68px" placeholder="배송 요청사항을 직접 입력해주세요"><br>
+                    <br>
+                    <p style="font-size: 13px; color: #3c763d">※도서산간 지역의 경우 추후 수령 시 추가 배송비가 과금될 수 있습니다.</p>
+                </div>
+                <br>
+            </div>
+            <br>
+            <br>
+            <hr style="width: 1000px;margin-right: 50px;margin-left: 50px;">
+            <br>
+            <br>
+            <div style="margin-left: 70px;">
+                <h2 style="color: black; font-size: 20px">결제 상세</h2>
+                <br>
+                <div style="margin-left: 120px; font-size: 16px">
+                    <span style="display: flex">주문 금액<p style="margin-left: 100px">수량 * 상품가격</p></span>
+                    <br>
+                    <span style="display: flex">배송비<p style="margin-left: 120px">배송비</p></span>
+                    <br>
+                    <hr style="width: 600px; margin-left: -3px">
+                    <br>
+                    <span style="display: flex">총 결제금액<p style="margin-left: 80px">주문 금액 + 배송비</p></span>
+                </div>
+            </div>
+            <br>
+            <hr style="width: 1000px;margin-right: 50px;margin-left: 50px;">
+            <input class="button" type="button" style="font-family: 'Jeju Gothic'; font-weight: 500; font-size: 24px; width: 350px;height: 45px;margin: 50px auto;display: flex;padding-left: 130px;"  value="결제하기">
+            <br>
+            <br>
+            <br>
         </form>
     </div>
     <th:block th:include="footer.html"></th:block>
@@ -71,6 +149,13 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script th:inline="javascript">
+    // 주소검색 API
+    $(function () {
+        $("#postcodify_search_button").postcodifyPopUp();
+    });
 
 </script>
 </body>

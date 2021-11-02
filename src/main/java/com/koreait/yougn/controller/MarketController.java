@@ -156,4 +156,11 @@ public class MarketController {
     public String marketPayment() {
         return "/market/marketPayment";
     }
+
+    @PostMapping("marketPayment")
+    public String marketPayment(OrderVO orderVO) {
+        marketService.orderRegister(orderVO);
+        return "/market/결제완료";
+    }
+
 }

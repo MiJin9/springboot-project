@@ -15,7 +15,12 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 
 </head>
-
+<style>
+    li img{
+        width: 450px;
+        height: 450px;
+    }
+</style>
 <body class="homepage is-preload" onload="init()">
     <div id="page-wrapper">
 
@@ -31,6 +36,7 @@
             <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
             <a href="javascript:void(0)" id="goList" class="button primary small">목록보기</a>
             </div>
+            <br>
             <br>
             <div id="sit_ov_wrap" style="display:flex; width: 1100px;margin: auto; border-top: solid 0.5px;">
                 <!-- 상품이미지 미리보기 시작 { -->
@@ -86,7 +92,7 @@
                                 </form>
                             </section>
                             <!--버튼-->
-                            <input type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
+                            <input href="javascript:void(0)" type="button" class="button primary" value="구매하기" style="height: 40px;width: 300px;line-height: 2px;">
                             <!--버튼 끝-->
                     </div>
                 </section>
@@ -233,7 +239,10 @@
             location.href = "/market/marketModify" + paging + "&itemnum=" + itemnum;
         }
 
-
+        $("input.button").on("click", function (e) {
+            e.preventDefault();
+            location.href = "/market/marketPayment";
+        })
 
 
     </script>
