@@ -120,13 +120,13 @@
                 <h2 style="color: black; font-size: 20px">결제 상세</h2>
                 <br>
                 <div style="margin-left: 120px; font-size: 16px" th:object="${order}">
-                    <span style="display: flex">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p></span>
+                    <span style="display: flex">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p>&nbsp;원</span>
                     <br>
-                    <span style="display: flex">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p></span>
+                    <span style="display: flex">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p>&nbsp;원</span>
                     <br>
                     <hr style="width: 600px; margin-left: -3px">
                     <br>
-                    <span style="display: flex">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p></span>
+                    <span style="display: flex">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p>&nbsp;원</span>
                 </div>
             </div>
             <br>
@@ -135,13 +135,13 @@
             <br>
             <br>
             <br>
-            <input type="text" name="itemNum">
-            <input type="text" name="itemName">
-            <input type="text" name="userId">
-            <input type="text" name="buyerId" value="우정인">
-            <input type="text" name="itemdeliverprice">
-            <input type="text" name="orderPayment">
-            <input type="text" name="orderCount">
+            <input type="hidden" name="itemNum">
+            <input type="hidden" name="itemName">
+            <input type="hidden" name="userId">
+            <input type="hidden" name="buyerId" value="우정인">
+            <input type="hidden" name="itemdeliverprice">
+            <input type="hidden" name="orderPayment">
+            <input type="hidden" name="orderCount">
         </form>
     </div>
     <th:block th:include="footer.html"></th:block>
