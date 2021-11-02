@@ -94,6 +94,7 @@ public class MarketServiceImple implements MarketService {
     @Override
     public void orderRegister(OrderVO orderVO) {
         marketDAO.orderRegister(orderVO);
+        marketDAO.orderCountupdate(orderVO);
     }
 
     @Override
