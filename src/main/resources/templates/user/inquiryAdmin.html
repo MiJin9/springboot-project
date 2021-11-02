@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/myPage.css"/>
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+
+</head>
+<body class="homepage is-preload">
+<div id="page-wrapper">
+
+    <th:block th:include="header.html"></th:block>
+
+    <!--Main-->
+    <div class="main">
+        <div id="all" style="padding-bottom: 50px">
+            <div class="contentLeft">
+                <div>
+                    <h4><a href="/user/admin">관리자 페이지</a></h4>
+                    <hr style="margin: 20px 0 0 -1px; width: 120px">
+                    <ul class="subMenu">
+                        <li style="font-size: 18px; margin: 25px 0px">회원관리
+                            <ul class="sub_depth1">
+                                <li><a href="/user/inquiryAdmin">1:1 문의</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contentCenter">
+                <div id="content2">
+                    <div style="">
+                        <h3 style="margin-top: 40px">1:1 문의 </h3>
+                    </div>
+                    <div style="margin-right: 42px;">
+                        <a href="/user/inquiryWrite" class="button" id="inquiryBtn">문의하기</a>
+                    </div>
+                </div>
+
+                <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
+
+                <table style="width: 95%; font-size: 18px; margin-bottom: 30px">
+                    <thead>
+                    <tr class="tHead" style="height: 30px; line-height: 2;">
+                        <th class="num" style="width: 80px">번호</th>
+                        <th class="title">제목</th>
+                        <th class="regDate" style="width: 130px">작성일</th>
+                        <th class="answerState" style="width: 120px">답변여부</th>
+                    </tr>
+                    </thead>
+                    <tbody style="text-align: center">
+                    <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
+                        <tr class="tBody" style="height: 30px; line-height: 2;" th:object="${list.get(index)}">
+                            <td class="num" style="width: 80px" th:text="*{num}"></td>
+                            <td class="title"><a id="goRead2" th:href="*{num}" th:text="*{title}"></a></td>
+                            <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
+                            <td th:id="${index}" class="answerState" style="width: 120px" th:text="*{status}"></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <input type="hidden" id="id" name="id" th:value="${session.sessionId}">
+                <div th:object="${pageMaker}">
+                    <div class="big-width" style="text-align: center">
+                        <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                        <th:block
+                                th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                            <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}"
+                               th:href="${num}"><code th:text="${num}"></code></a>
+                        </th:block>
+                        <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                    </div>
+
+                    <form action="/user/inquiryAdmin" th:object="${criteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="footer.html"></th:block>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/jquery.slidertron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script th:inline="javascript">
+    // 글 등록 시 전달받는 게시글 번호를 alert으로 출력
+    let pageForm = $(document.pageForm);
+    let paging = [[${pageMaker.criteria.listLink}]];
+    let searchForm = $(document.searchForm);
+    let list = [[${list}]];
+    let str = "";
+
+    $(document).ready(function () {
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].status == 0) {
+                str = "답변 대기 중"
+            }
+            if (list[i].status == 1) {
+                str = "답변 완료"
+            }
+            $("#" + i).text(str);
+        }
+    });
+
+    $("a.changePage").click(function (e) {
+        e.preventDefault();
+        pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+        pageForm.submit();
+    });
+
+    $("a#goRead2").on("click", function (e) {
+        e.preventDefault();
+        location.href = "/user/inquiryRead" + paging + "&num=" + $(this).attr("href");
+    });
+
+    if ($("#id").val() == "yougnAdmin") {
+        $("#inquiryBtn").hide();
+    };
+
+
+</script>
+</body>
+</html>

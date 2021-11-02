@@ -1,5 +1,5 @@
 <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
-
+<html xmlns:th="http://www.thymeleaf.org/">
 <style>
     * {
         font-family: "Jeju Gothic";
@@ -18,16 +18,26 @@
     <div class="container" style="padding: 0 !important">
 
         <div class="info">
-            <a href="">로그인</a>&nbsp;&nbsp;
-            <a href="">회원가입</a>&nbsp;&nbsp;
-            <a href="">ID/PW 찾기</a>&nbsp;&nbsp;
-            <a href="">로그아웃</a>&nbsp;&nbsp;
-            <a href="">마이 페이지</a>&nbsp;&nbsp;
+            <th:block th:if="${session.sessionId == 'yougnAdmin'}">
+                <a href="/user/admin">관리자 페이지</a>&nbsp;&nbsp;
+                <a href="/user/logout">로그아웃</a>&nbsp;&nbsp;
+            </th:block>
+            <th:block th:if="${session.sessionId == null}">
+                <a href="/user/login">로그인</a>&nbsp;&nbsp;
+                <a href="/user/join">회원가입</a>&nbsp;&nbsp;
+                <a href="/user/findUser">ID/PW 찾기</a>&nbsp;&nbsp;
+            </th:block>
+            <th:block th:if="${session.sessionId != 'yougnAdmin' and session.sessionId != null}">
+                <a href="/user/myPage">마이 페이지</a>&nbsp;&nbsp;
+                <a id="logout" href="/user/logout">로그아웃</a>&nbsp;&nbsp;
+            </th:block>
         </div>
         <!-- Logo -->
         <div id="logo">
             <div style="box-shadow: none">
+                <a href="/">
                 <img src="/img/logo.png" width="700px" style="margin-bottom: -30px;">
+                </a>
             </div>
         </div>
 
@@ -74,3 +84,4 @@
 
     </div>
 </div>
+</html>

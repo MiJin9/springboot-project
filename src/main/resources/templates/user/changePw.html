@@ -23,65 +23,66 @@
     <!--Main-->
     <div class="main">
         <div id="all">
-            <div class="contentLeft">
-                <div>
-                    <h4>마이페이지</h4>
-                    <hr style="margin: 20px 0 0 -1px; width: 120px">
-                    <ul class="subMenu">
-                        <li style="font-size: 18px; margin: 25px 0px">회원정보
-                            <ul class="sub_depth1">
-                                <li><a href="">회원 정보 수정</a></li>
-                                <li><a href="">비밀번호 변경</a></li>
-                                <li><a href="">회원 탈퇴</a></li>
-                                <li><a href="">1:1 문의</a></li>
-                            </ul>
-                        </li>
-
-                        <li style="font-size: 18px; margin: 25px 0px">게시판
-                            <ul class="sub_depth1">
-                                <li><a href="">내 글 모아보기</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+            <th:block th:if="${session.sessionId != null}">
+                <input type="hidden" id="sessionId" th:value="${session.sessionId}">
+                <th:block th:include="user/subMenu.html"></th:block>
+            </th:block>
+            <th:block th:if="${session.sessionId == null}">
+                <div class="contentLeft">
+                    <div>
+                        <h4><a></a></h4>
+                        <ul class="subMenu">
+                            <li style="font-size: 18px; margin: 25px 0px">
+                                <ul class="sub_depth1">
+                                </ul>
+                            </li>
+                            <li style="font-size: 18px; margin: 25px 0px">
+                                <ul class="sub_depth1">
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </th:block>
             <div class="contentCenter">
-                <h3 style="margin-top: 40px">비밀번호 변경</h3>
-                <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
-                <table id="table">
-                    <tbody>
-                    <tr>
-                        <th style="background-color: #f5f2f2">현재 비밀번호</th>
-                        <td>
-                            <input type="text" value="">
-                        </td>
-                    <tr>
-                        <th style="background-color: #f5f2f2">새 비밀번호</th>
-                        <td>
-                            <div>
-                                <input type="text" value="">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th style="background-color: #f5f2f2">새 비밀번호 확인</th>
-                        <td>
-                            <div>
-                                <input type="text" value="">
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div style="margin-bottom: 20px; margin-left: 185px">
-                    <a href="" id="modify" class="button"
-                       style="height: 45px; font-size: 15px; width: 150px; font-family: 'Jeju Gothic'; line-height: 2;
+                <form id="changePwForm" action="/user/changePwOk" method="post" >
+                    <h3 style="margin-top: 40px">비밀번호 변경</h3>
+                    <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
+                    <table id="table">
+                        <tbody>
+                        <tr>
+                            <th style="background-color: #f5f2f2">새 비밀번호</th>
+                            <td>
+                                <div>
+                                    <input type="hidden" id="id" name="id" th:value="${userVO.id}">
+                                    <input id="newPw" name="newPw" type="password" value="">
+                                    <span ><p id="checkPw_text1" style="font-size: 14px"></p></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #f5f2f2">새 비밀번호 확인</th>
+                            <td>
+                                <div>
+                                    <input id="pwCheck" type="password" value="">
+                                    <span ><p id="checkPw_text2" style="font-size: 14px"></p></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <div style="margin-bottom: 20px; margin-left: 185px">
+                        <a id="modify" class="button"
+                           style="height: 45px; font-size: 15px; width: 150px; font-family: 'Jeju Gothic'; line-height: 2;
                         font-weight: 500; background: #c97b1f; color: white; text-align: center">수정</a>
-                    <a href="" id="cancel" class="button"
-                       style="height: 45px; font-size: 15px; width: 150px; margin-left: 8px; font-family: 'Jeju Gothic'; line-height: 2;
+                        <a id="cancel" class="button"
+                           style="height: 45px; font-size: 15px; width: 150px; margin-left: 8px; font-family: 'Jeju Gothic'; line-height: 2;
                         font-weight: 500; background: #888787; color: white; text-align: center">취소</a>
-                </div>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
 
@@ -99,4 +100,58 @@
 <script src="/js/main.js"></script>
 
 </body>
+<script>
+    $("#cancel").on("click", function(e){
+        e.preventDefault();
+        if(!$("#sessionId").length){
+            location.replace("/user/findUser");
+        }else {
+            location.replace("/user/myPage");
+        }
+    })
+
+    let form = $("#changePwForm");
+        $("#modify").on("click", function(e){
+            e.preventDefault();
+            setTimeout(function(){}, 100);
+            if($("#checkPw_text1").text() == "사용가능한 비밀번호입니다." &&  $("#checkPw_text2").text() == "비밀번호가 일치합니다."){
+                form.submit();
+            }else{
+                alert("다시 입력해주세요.");
+            }
+        })
+
+    $("#newPw").focusout(function(){
+        var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        var pw = $("#newPw").val();
+        checkPw();
+        //    1번태그 포커스아웃 빈칸시 리턴
+        if (!reg.test(pw)) {
+            $("#checkPw_text1").css("color","red");
+            $("#checkPw_text1").text("숫자와 영문을 포함해서 입력해주세요");
+        }else{
+            $("#checkPw_text1").css("color","green");
+            $("#checkPw_text1").text("사용가능한 비밀번호입니다.");
+        }
+    });
+
+    // 비밀번호 확인
+    $("#pwCheck").focusout(function() {
+        checkPw();
+    })
+
+    function checkPw(){
+        //    2번태그 포커스아웃 빈칸시 리턴
+        if(!($("#newPw").val() && $("#pwCheck").val())){return;}
+        if ($("#newPw").val() != $("#pwCheck").val()) {
+            $("#checkPw_text2").css("color", "red");
+            $("#checkPw_text2").text("비밀번호가 일치하지 않습니다.");
+        } else {
+            $("#checkPw_text2").css("color", "green");
+            $("#checkPw_text2").text("비밀번호가 일치합니다.");
+
+        }
+    }
+//    스판태그 일치확인
+</script>
 </html>

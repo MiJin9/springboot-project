@@ -53,23 +53,31 @@
                 <div class="list">
                     <table>
                         <tr>
-                            <th>정보이름 api이름</th>
+                            <th>정보명</th>
                             <th style="width: 50px;">자세히보기</th>
                         </tr>
-                        <tr>
-                            <td>정보이름 api이름</td>
-                            <td><input type="button" class="button" value="자세히보기"></td>
-                        </tr>
+                        <th:block th:each="vo:${list}">
+                            <tr th:object="${vo}">
+                                <td th:text="*{name}"></td>
+                                <td><a class="button" th:href="*{url}" >자세히보기</a></td>
+                            </tr>
+                        </th:block>
                     </table>
                 </div>
             </div>
             <div class="paging">
-                <table>
+                <table th:object="${pageMaker}">
                     <tr>
-                        <td>&lt;</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>&gt;</td>
+                        <td th:if="*{prev}"><a th:href="@{infoList(pageNum=*{criteria.pageNum -1})}">&lt;</a></td>
+                        <th:block th:each="num:${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <td th:if="${pageMaker.criteria.getPageNum() != num}">
+                                <a th:href="@{infoList(pageNum=${num})}">
+                                    <span th:text="${num}"></span>
+                                </a>
+                            </td>
+                            <td th:if="${pageMaker.criteria.getPageNum() == num}"><span th:text="${num}"></span></td>
+                        </th:block>
+                        <td th:if="*{next}"><a th:href="@{infoList(pageNum=*{criteria.pageNum +1})}">&gt;</a></td>
                     </tr>
                 </table>
             </div>
@@ -77,7 +85,7 @@
     </div>
 
 
-
+<input type="hidden" id="id" th:value="${id}">
     <th:block th:include="footer.html"></th:block>
 </div>
 
@@ -89,6 +97,16 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-
+<script>
+    $("a.button").on("click",function(e){
+        e.preventDefault();
+        if(!$("input#id").val()){
+            alert("로그인 후 이용 가능합니다.");
+            return;
+        }
+        let url = $(this).attr("href");
+        window.open(url);
+    })
+</script>
 </body>
 </html>

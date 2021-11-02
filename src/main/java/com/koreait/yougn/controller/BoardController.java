@@ -93,6 +93,8 @@ public class BoardController {
             rttr.addFlashAttribute("result", "fail");
         }
         return new RedirectView("list?boardType=" + boardType );
+
+
     }
 
 }

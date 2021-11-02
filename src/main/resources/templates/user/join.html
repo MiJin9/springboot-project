@@ -21,50 +21,69 @@
             <div class="group">
                 <h3 style="text-align: center">회원가입</h3>
                 <hr>
-                <form>
+                <form id="join" action="/user/join" method="post">
                     <div id="input">
                         <div class="input2">
                             <label class="labelName">아이디<span style="color: red">*</span></label>
-                            <input type="text" class="box" id="id" placeholder="아이디 입력(5~11자)" minlength="5"
+                            <input type="text" class="box" id="id" name="id" placeholder="아이디 입력(5~11자)" minlength="5"
                                    maxlength="11">
+                            <span>
+                                <p id="checkId_text" style="font-size: 14px"></p>
+                            </span>
                         </div>
+
                         <div class="input2">
                             <label class="labelName">비밀번호<span style="color: red">*</span></label>
-                            <input type="password" class="box" id="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)"
+                            <input type="password" class="box" id="pw" name="pw" placeholder="비밀번호 입력(숫자, 영문 조합 최소 8자)"
                                    minlength="8" maxlength="20" style="margin-bottom: 5px">
+                            <span><p id="checkPw_text1" style="font-size: 14px"></p></span>
                             <input type="password" class="box" id="pwCheck" placeholder="비밀번호 확인" minlength="8"
                                    maxlength="20">
+                            <span><p id="checkPw_text2" style="font-size: 14px"></p></span>
                         </div>
                         <div class="input2">
                             <label class="labelName">이름<span style="color: red">*</span></label>
-                            <input type="text" class="box" id="name" placeholder="이름">
+                            <input type="text" class="box" id="name" name="name" placeholder="이름">
+                        </div>
+                        <div class="input2">
+                            <label class="labelName">이메일<span style="color: red">*</span></label>
+                            <input type="text" class="box" id="email" name="email" placeholder="이메일">
+                            <p style="font-size: 13px">※입력하신 이메일 주소는 아이디 찾기에 사용되니 정확히 입력해주세요.</p>
                         </div>
                         <div class="input2">
                             <label class="labelName">핸드폰 번호<span style="color: red">*</span></label>
                             <div>
-                                <input type="text" class="box" id="phone" placeholder="-없이 입력하세요"
+                                <input type="text" class="box" id="phone" name="phone" placeholder="-없이 입력하세요"
                                        style="width: 68%; float: left">
-                                <input type="button" value="인증번호 받기">
-                                <input type="text" placeholder="인증번호를 입력하세요" style="margin-top: 5px;">
+                                <input type="button" id="pinButton" value="인증번호 받기">
+                                <input type="text" id="phoneCheck" placeholder="인증번호를 입력하세요" onclick="" style="margin-top: 5px; margin-bottom: 0px; width: 68%; float: left">
+                                <input type="button" id="checkButton" value="확인" style="margin-top: 15px">
+                                <span>
+                                <p id="checkPin_text" style="font-size: 14px; float: left"></p>
+                            </span>
                             </div>
                         </div>
-                        <div class="input2">
+                        <div class="input2" style="margin-top: 60px;">
                             <label class="labelName">주소</label>
                             <div>
-                                <input type="text" class="box" id="address" placeholder="우편번호"
+                                <input type="text" class="box postcodify_postcode5" id="address"
+                                       placeholder="우편번호" value=""
                                        style="width: 68%; float: left">
-                                <input type="button" value="우편번호 검색">
-                                <input type="text" placeholder="주소" style="margin-top: 5px;">
-                                <input type="text" placeholder="상세주소를 입력하세요" style="margin-top: 5px;">
+                                <input type="button" id="postcodify_search_button" value="우편번호 검색">
+                                <input type="text" class="postcodify_address" name="address" placeholder="도로명주소"
+                                       style="margin-top: 5px;" value="">
+                                <input type="text" class="postcodify_details" name="addressDetail" placeholder="상세주소"
+                                       style="margin-top: 5px;" value="">
+                                <!--<input type="text" class="postcodify_extra_info" name="" placeholder="참고항목" style="margin-top: 5px;" value="">-->
                             </div>
                         </div>
                         <div id="agree">
                             <div>
-                                <input type="checkbox" id="allAgree">
-                                <label for="allAgree" style="font-size: 18px"><strong>약관 전체동의</strong></label>
+                                <input type="checkbox" id="term">
+                                <label for="term" style="font-size: 18px"><strong>약관 전체동의</strong></label>
                             </div>
                             <div>
-                                <input type="checkbox" id="mustAgree1">
+                                <input type="checkbox" id="mustAgree1" class="terms">
                                 <label for="mustAgree1" style="font-size: 18px">이용약관(필수)</label>
                                 <a href="javascript:void(0)" id="open1"
                                    style="margin-top: 15px; float: right; font-size: 17px; color: black; text-decoration: underline;">약관보기</a>
@@ -249,7 +268,7 @@
 * 본 약관에 대한 저작권은 행정안전부에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.</textarea>
                             </div>
                             <div>
-                                <input type="checkbox" id="mustAgree2">
+                                <input type="checkbox" id="mustAgree2" class="terms">
                                 <label for="mustAgree1" style="font-size: 18px">개인정보 수집 이용동의(필수)</label>
                                 <a href="javascript:void(0)" id="open2"
                                    style="margin-top: 15px; float: right; font-size: 17px; color: black; text-decoration: underline;">약관보기</a>
@@ -270,8 +289,8 @@
                             </div>
                         </div>
                         <div>
-                            <a class="button"
-                               style="width:100%; height:45px; text-align: center; font-weight: 300; font-size: 20px; background: #888787">동의하고
+                            <a class="button" id="joinButton"
+                               style="width:100%; height:45px; text-align: center; font-weight: 300; font-size: 20px; background: #888787; line-height: 1.5">동의하고
                                 회원가입</a>
                         </div>
                     </div>
@@ -290,17 +309,200 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script>
 
+    // 주소검색 API
+    $(function () {
+        $("#postcodify_search_button").postcodifyPopUp();
+    });
+
+    // 약관 펼쳐보기 1
     $("#open1").on("click", function (e) {
         e.preventDefault();
         $("#text1").show();
     });
-
+    // 약관 펼쳐보기 2
     $("#open2").on("click", function (e) {
         e.preventDefault();
         $("#text2").show();
     });
+
+    // 동의하기 전체 버튼 클릭
+    $("#term").on("click", function () {
+        if ($(this).is(":checked")) {
+            //체크가 되어 있다면,
+            $(".terms").prop("checked", true);
+        } else {
+            //체크되어 있지 않다면
+            $(".terms").prop("checked", false);
+        }
+    })
+    // 동의 버튼 체크
+    $("input[name=terms]").click(function () {
+        var total = $("input[name=terms]").length;
+        var checked = $("input[name=terms]:checked").length;
+
+        if (total != checked) $("#term").prop("checked", false);
+        else $("#term").prop("checked", true);
+    })
+
+   // 아이디 중복 체크
+   $("#id").focusout(function(){
+       var id = $(this).val();
+       if(id == ""){return;}
+
+       $.ajax({
+           url: "/user/"+id,
+           dataType:"json",
+           type:"post",
+           contentType:"application/json",
+           success:function(result) {
+
+               console.log(result);
+               console.log("성공");
+
+           },
+           error:function(e){
+               console.log(e);
+               console.log("실패");
+               console.log(e.responseText);
+               console.log(e.status);
+               if(e.status == 200){
+                   $("#checkId_text").text(e.responseText);
+                   $("#checkId_text").css("color","green");
+                   $("#id").attr("readonly",true);
+               }else{
+                   $("#checkId_text").text(e.responseText);
+                   $("#checkId_text").css("color","red");
+
+               }
+           }
+       });
+   })
+    // 인증번호 보내기
+    let pin = "";
+
+    $('#pinButton').click(function(){
+        let phoneNumber = $('#phone').val();
+        alert("인증번호 발송 완료")
+
+        $.ajax({
+            type: "POST",
+            url: "/user/sendSMS",
+            data: {"phoneNumber" : phoneNumber},
+            success: function(map){
+                console.log(map);
+                console.log(map.result);
+                $("#checkPin_text").text(map.result);
+                pin = map.numStr;
+            }
+
+        })
+    });
+    //인증번호 일치 여부
+    $('#checkButton').click(function(){
+        if($("#phoneCheck").val() == null){
+            $("#checkPin_text").text("인증번호를 입력해주세요.");
+        }
+        if($("#phoneCheck").val() == pin){
+            $("#checkPin_text").text("인증번호가 일치합니다.");
+            $("#phoneCheck").attr("readonly",true);
+            $("#phone").attr("readonly",true);
+            $("#pinButton").off("click");
+        } else{
+            $("#checkPin_text").text("인증번호가 일치하지 않습니다.");
+        }
+    });
+
+
+    // 비밀번호 확인
+    $("#pwCheck").focusout(function() {
+        if ($("#pw").val() != $("#pwCheck").val()) {
+            $("#checkPw_text2").css("color","red");
+            $("#checkPw_text2").text("비밀번호가 일치하지 않습니다.");
+        }else{
+            $("#checkPw_text2").css("color","green");
+            $("#checkPw_text2").text("비밀번호가 일치합니다.");
+            $("#pwCheck").attr("readonly",true);
+            $("#pw").attr("readonly",true);
+
+        }
+    })
+
+    $("#pw").focusout(function(){
+        var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        var pw = $("#pw").val();
+        if (!reg.test(pw)) {
+            $("#checkPw_text1").css("color","red");
+            $("#checkPw_text1").text("숫자와 영문을 포함해서 입력해주세요");
+        }else{
+            $("#checkPw_text1").css("color","green");
+            $("#checkPw_text1").text("사용가능한 비밀번호입니다.");
+        }
+    });
+
+    $("#id").on("click", function(){
+        $("#id").attr("readonly",false);
+    });
+
+    $("#pw").on("click", function(){
+        $("#pw").attr("readonly",false);
+        $("#pwCheck").attr("readonly",false);
+    });
+
+    $("#joinButton").on("click", function(){
+        if(!$("#id").attr("readonly")){
+            alert("아이디를 입력해주세요.");
+            return;
+        }
+        if(!$("#pw").attr("readonly")){
+            alert("비밀번호를 입력해주세요.");
+            return;
+        }
+        if(!$("#pwCheck").attr("readonly")){
+            alert("비밀번호를 확인해주세요.");
+            return;
+        }
+        if(!$("#name").val()){
+            alert("이름을 입력해주세요.");
+            return;
+        }
+        if(!$("#email").val()){
+            alert("이메일을 입력해주세요.");
+            return;
+        }else if($("#email").val().indexOf("@") == -1 || $("#email").val().indexOf(".") == -1){
+            alert("이메일을 확인해주세요.");
+            return;
+        }
+        if($("#phone").val().indexOf("-") != -1){
+            alert("- 를 제외하고 핸드폰번호를 입력해주세요.");
+            return;
+        }
+        if(isNaN($("#phone").val())){
+            alert("핸드폰번호를 확인해주세요.");
+            return;
+        }
+        if(!$("#phoneCheck").attr("readonly")){
+            alert("핸드폰 인증을 해주세요.");
+            return;
+        }
+        if(!$("#term").is(":checked") == true){
+            alert("약관 동의를 해주세요.");
+            return;
+        }
+        var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        var pw = $("#pw").val();
+        if (!reg.test(pw)) {
+            alert("비밀번호에 숫자와 영문을 포함해서 입력해주세요");
+            return;
+        }
+
+        $("#join").submit();
+    });
+
+
 </script>
 </body>
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Error</title>
+
+
+    <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/errorPage.css" />
+    <title>Error</title>
+</head>
+<body>
+    <div class="notfound-404">
+        <img src="/img/404page.png" style="width: 1200px; position: relative; left: 20%; top: 230px;">
+    </div>
+    <div id="notfound">
+        <div class="notfound">
+
+            <div class="buttons" style="position: relative;top: -230px;">
+                <a href="javascript:history.go(-1)" class="goBack primary button" style="color:black; background:#fff">뒤로가기</a>
+                <a href="javascript:void(0)" class="backMain primary button">메인으로 돌아가기</a>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+</body>
+<script>
+
+    $("a.backMain").on("click", function(e){
+        e.preventDefault();
+        location.href = "/";
+    })
+
+</script>
+</html>

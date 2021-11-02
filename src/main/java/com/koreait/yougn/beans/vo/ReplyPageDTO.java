@@ -12,6 +12,5 @@ import java.util.List;
 public class ReplyPageDTO {
     private int replyCnt;
     private List<ReplyVO> list;
-
     public ReplyPageDTO() {;}
 }
