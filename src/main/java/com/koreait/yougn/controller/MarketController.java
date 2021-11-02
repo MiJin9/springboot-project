@@ -62,17 +62,18 @@ public class MarketController {
     /*글 작성*/
     //페이지 이동
     @GetMapping("marketWrite")
-    public void marketWrite(ItemVO itemVO, Criteria criteria, Model model) {
-        itemVO.setUserid("아이디1234");
+    public void marketWrite(ItemVO itemVO, Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        itemVO.setUserid(id);
         model.addAttribute("vo",itemVO);
         model.addAttribute("criteria",criteria);
     }
 
     //메소드
     @PostMapping("marketWrite")
-    public RedirectView marketWrite(ItemVO itemVO, RedirectAttributes rttr) {
-        itemVO.setUserid("아이디123");
-
+    public RedirectView marketWrite(ItemVO itemVO, RedirectAttributes rttr, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        itemVO.setUserid(id);
         if(itemVO.getAttachList() != null){
             itemVO.getAttachList().forEach(attach -> log.info(attach.toString()));
         }
