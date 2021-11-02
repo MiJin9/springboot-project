@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/main/*")
+@RequestMapping("/*")
 @RequiredArgsConstructor
 public class MainController {
 
-    @GetMapping("main")
-    public String list(){ return "/main";}
+    @GetMapping("")
+    public String list(){ return "/index";}
 
 
 }

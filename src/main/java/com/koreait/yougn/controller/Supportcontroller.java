@@ -3,6 +3,7 @@ package com.koreait.yougn.controller;
 import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.ClassService;
 import com.koreait.yougn.services.HallService;
+import com.koreait.yougn.services.InfoService;
 import com.koreait.yougn.services.ReturnService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ public class Supportcontroller {
     private final ReturnService returnService;
     private final HallService hallService;
     private final ClassService classService;
+    private final InfoService infoService;
 
     @GetMapping("hallList")
     public String hallList(HallCri hallCri, Model model){
@@ -95,7 +97,9 @@ public class Supportcontroller {
 
     private String getToday(){
         Calendar c =Calendar.getInstance();
-        String today = "" + c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.DAY_OF_MONTH);
+        String month = (c.get(Calendar.MONTH)+1) < 10? "0"+(c.get(Calendar.MONTH)+1) : (c.get(Calendar.MONTH)+1) + "";
+        String day = c.get(Calendar.DAY_OF_MONTH) < 10? "0"+c.get(Calendar.DAY_OF_MONTH) : c.get(Calendar.DAY_OF_MONTH)+"";
+        String today = "" + c.get(Calendar.YEAR) + "-" + month + "-" + day;
         return today;
     }
 
@@ -172,8 +176,14 @@ public class Supportcontroller {
     }
 
     @GetMapping("infoList")
-    public String infoList(){return "support/infoList";}
+    public String infoList(Criteria criteria,HttpServletRequest r, Model model){
+        String id = (String)r.getSession().getAttribute("sessionId");
+        List<InfoVO> list = infoService.getInfoList(criteria);
 
-    @GetMapping("home")
-    public String home(){ return "home";}
+        model.addAttribute("id",id==null?"":id);
+        model.addAttribute("list",list);
+        model.addAttribute("pageMaker",new PageDTO(infoService.getTotal(),10,criteria));
+        return "support/infoList";
+    }
+
 }
