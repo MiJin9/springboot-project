@@ -146,8 +146,8 @@ public class MarketController {
     public String marketMyorder() { return "/market/marketMyorder"; }
 
     @GetMapping("marketOrderList")
-    public String marketOrderList(Criteria criteria, Model model) {
-
+    public String marketOrderList(Criteria criteria, Model model){
+        criteria.setUserId("장태순");
         model.addAttribute("list", marketService.orderGetList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketOrderList";
@@ -168,7 +168,6 @@ public class MarketController {
 
     @PostMapping("marketPayment")
     public String marketPayment(OrderVO orderVO){
-        orderVO.setItemNum(36904L);
         marketService.orderRegister(orderVO);
         return "/market/marketPayDone";
     }
