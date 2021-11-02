@@ -51,4 +51,6 @@ public class MarketDAO {
         return marketMapper.orderMyList(criteria);
     }
     public int orderGetTotal(Criteria criteria){ return marketMapper.orderGetTotal(criteria); }
+
+    public boolean status(Long orderNum){return marketMapper.status(orderNum) == 1;}
 }

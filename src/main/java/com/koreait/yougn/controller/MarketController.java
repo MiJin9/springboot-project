@@ -4,13 +4,16 @@ import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.MarketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -175,5 +178,11 @@ public class MarketController {
     public String marketPayment(OrderVO orderVO){
         marketService.orderRegister(orderVO);
         return "/market/marketPayDone";
+    }
+
+    @GetMapping("marketStatus")
+    public RedirectView status(@RequestParam("orderNum") Long orderNum){
+        marketService.status(orderNum);
+        return new RedirectView("marketMyorder");
     }
 }

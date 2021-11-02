@@ -114,4 +114,9 @@ public class MarketServiceImple implements MarketService {
 
     @Override
     public List<OrderVO> orderMyList(Criteria criteria) { return marketDAO.orderMyList(criteria); }
+
+    @Override
+    public boolean status(Long orderNum) {
+        return marketDAO.status(orderNum);
+    }
 }
