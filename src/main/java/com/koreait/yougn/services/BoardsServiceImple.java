@@ -53,4 +53,19 @@ public class BoardsServiceImple implements BoardsService {
     public int getTotal(Criteria criteria) {
         return boardsDAO.getTotal(criteria);
     }
+
+    @Override
+    public List<BoardsVO> getMyList(Criteria criteria) {
+        List<BoardsVO> mylist = boardsDAO.getMyList(criteria);
+            for (BoardsVO vo : mylist){
+                vo.setRegDate(vo.getRegDate().split(" ")[0]);
+                vo.setUpdateDate(vo.getUpdateDate().split(" ")[0]);
+            }
+        return mylist;
+    }
+
+    @Override
+    public int getMyTotal(Criteria criteria) { return boardsDAO.getMyTotal(criteria);}
+
+
 }

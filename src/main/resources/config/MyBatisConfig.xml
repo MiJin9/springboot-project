@@ -15,5 +15,6 @@
         <typeAlias type="com.koreait.yougn.beans.vo.MarketThumbVO" alias="marketThumbVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.ItemVO" alias="itemVO"/>
         <typeAlias type="com.koreait.yougn.beans.vo.OrderVO" alias="orderVO"/>
+        <typeAlias type="com.koreait.yougn.beans.vo.InfoVO" alias="infoVO"/>
     </typeAliases>
 </configuration>

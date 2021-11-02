@@ -24,13 +24,18 @@ public interface MarketMapper {
     //    게시글 전체 개수
     public int getTotal(Criteria criteria);
 
+    /* 오더 */
     //전체 주문 리스트
     public int orderGetTotal(Criteria criteria);
 
     // 페이지별 주문 리스트
     public List<OrderVO> orderGetList(Criteria criteria);
 
+    // 내 주문 리스트
+    public List<OrderVO> orderMyList(Criteria criteria);
+
     public void orderInsert(OrderVO orderVO);
 
+    public int status(Long orderNum);
 
 }

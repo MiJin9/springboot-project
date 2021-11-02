@@ -26,15 +26,10 @@
     width: 300px;
     border: solid 0.5px;
 }
-.btn-box input[type="button"]{
-    top: -4px;
-}
 
 .btn-box a{
-    height: 32.8px;
-    line-height: 120%;
-    top: -2px;
-
+    height: 33px;
+    line-height: 110%;
 }
 
 .container {
@@ -92,4 +87,9 @@ div.four h1, div.four p{
 
 .thumbWrapper{
     justify-content: space-evenly;
+}
+
+ul>div>img{
+    width: 300px;
+    height: 300px;
 }

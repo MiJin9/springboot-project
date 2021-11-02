@@ -1,11 +1,11 @@
 package com.koreait.yougn.controller;
 
 import com.koreait.yougn.beans.vo.*;
+import com.koreait.yougn.services.BoardsService;
 import com.koreait.yougn.services.FaqService;
 import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.maven.doxia.module.fml.model.Faq;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +29,7 @@ public class UserController {
 
     private final UserService userService;
     private final FaqService faqService;
+    private final BoardsService boardsService;
 
     //회원가입
     @GetMapping("join")
@@ -37,9 +38,9 @@ public class UserController {
     }
 
     @PostMapping("join")
-    public String join(UserVO userVO) {
+    public RedirectView join(UserVO userVO) {
         userService.join(userVO);
-        return "index";
+        return new RedirectView("/");
     }
 
 
@@ -342,13 +343,6 @@ public class UserController {
         return new RedirectView("inquiry");
     }
 
-    //내 글 모아보기
-    @GetMapping("writeCollection")
-    public String writeCollection() {
-        return "/user/writeCollection";
-    }
-
-
     //관리자 페이지
     @GetMapping("admin")
     public String admin(Criteria criteria, Model model, HttpServletRequest r) {
@@ -367,6 +361,17 @@ public class UserController {
         model.addAttribute("list", faqService.getList(criteria));
         model.addAttribute("pageMaker", new PageDTO(faqService.getTotal(criteria), 10, criteria));
         return "user/inquiryAdmin";
+    }
+
+    //내 글 모아보기
+    @GetMapping("myList")
+    public String myList(Criteria criteria,Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        criteria.setKeyword(id);
+
+        model.addAttribute("myList", boardsService.getMyList(criteria));
+        model.addAttribute("pageMaker", new PageDTO(boardsService.getMyTotal(criteria), 10, criteria));
+        return "user/myList";
     }
 
 }

@@ -25,4 +25,10 @@ public interface BoardsMapper {
 
     //조회수 1증가
     public int plusOne(Long bno);
+
+    //내 글 모아보기
+    public List<BoardsVO> getMyList(Criteria criteria);
+
+    //내 글 모아보기 페이징
+    public int getMyTotal(Criteria criteria);
 }

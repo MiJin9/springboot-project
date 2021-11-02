@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.yougn.mappers.InfoMapper">
+    <select id="getInfoList" resultType="infoVO">
+        SELECT NUM, NAME, URL
+        FROM
+        (SELECT ROWNUM R, NUM, NAME, URL FROM T_INFO)
+        <![CDATA[
+        WHERE R <= #{pageNum} * #{amount} AND  R > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(NUM) FROM T_INFO
+    </select>
+</mapper>

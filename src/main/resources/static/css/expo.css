@@ -1,6 +1,7 @@
 h1, h2, h3, h4, a, p, li, div, input{
 }
 
+
 li>a {
     font-size: 20px;
 }
@@ -143,7 +144,7 @@ span > h1{
 }
 
 .listNum{
-    margin-left: 700px;
+    margin-left: 600px;
     display: flex;
 }
 
@@ -158,3 +159,5 @@ form[name="searchForm"]{
 div#text{
     visibility: hidden;
 }
+
+

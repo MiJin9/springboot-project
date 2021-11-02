@@ -12,6 +12,8 @@ public class Criteria {
     private int boardType;
     private String keyType;
     private String keyword;
+    private String userId;
+    private String buyerId;
 
     public Criteria(){
         this(1, 10);

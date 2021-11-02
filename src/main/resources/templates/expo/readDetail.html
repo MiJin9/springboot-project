@@ -20,7 +20,7 @@
     <section>
         <form action="/expo/remove" method="post" name="postForm">
         <div class="tle" style="height: auto;">
-            <div class="main" th:object="${expo}" style="height: auto;">
+            <div class="main" th:object="${expo}" style="height: auto;padding-bottom: 100px;">
                 <div class="category">
                     <img src="/img/pageBanner_detail.png">
                 </div>
@@ -42,7 +42,7 @@
                             <ul></ul>
                         </div>
                     </div>
-                    <div class="field">-->
+                    <div class="field">
 
                     </div>
             <!--내용 시작-->
@@ -86,12 +86,7 @@
                 <div class="expoContent" name="expoContent" rows="6" style="resize:none" readonly></div>
             </div>
 
-                <p 해당 EXPO 부스 글이 좋으셨다면 좋아요! 눌러주세요./>
-            <div class="BottomLike" style="text-align: center;">
-                <!--자바스크립트로 좋아요 효과 주기-->
 
-                <img class="likeStar" src="/img/like_sample.png">
-            </div>
             </div><!--outline-->
         </div>
 </form>
@@ -128,35 +123,6 @@
         location.href = "/expo/list" + paging;
 
     })
-
-    //게시글 삭제 기능 미완성
-    // function remove(rno, callback, error){
-    //     $.ajax({
-    //         type:"DELETE",
-    //         url:"/replies/" + rno,
-    //         success:function(result){
-    //             if(callback){
-    //                 callback(result);
-    //             }
-    //         },
-    //         error:function(xhr, status, er){
-    //             if(error){
-    //                 error(er);
-    //             }
-    //         }
-    //     });
-    // }
-    //
-    // $(".delete").on("click", "a.remove", function(e){
-    //     e.preventDefault();
-    //     let rnoValue = $(this).attr("href");
-    //     ExpoService.remove(rnoValue,
-    //         function(result){
-    //             alert(result);
-    //             showList(pageNum);
-    //         }
-    //     );
-    // })
 
     $(".modify").on("click", function () {
         location.href = "/expo/modifyExpo" + paging + "&expoNum=" + expoNum;

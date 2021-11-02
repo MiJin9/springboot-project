@@ -9,7 +9,7 @@
     <title>Expo 글 작성</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/market.css" />
+    <link rel="stylesheet" href="/css/expo.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <!--썸머노트-->
@@ -36,13 +36,21 @@
         list-style: none;
     }
 
+    h4{
+        color: black;
+    }
+
+    input{
+        font-family: "Jeju Gothic";
+    }
+
 </style>
 <body class="homepage is-preload"  style="background: #fbf9f4">
 <div id="page-wrapper">
 
     <th:block th:include="header.html"></th:block>
     <!--Main-->
-        <div class="main" style="height: auto;">
+        <div class="main" style="height: auto;padding-bottom: 100px;">
                 <div class="category">
                     <img src="/img/pageBanner_write.png" style="padding-top: 53px;">
                 </div>
@@ -50,45 +58,42 @@
             <input type="text" name="expoTitle"  placeholder ="제목을 입력해주세요." id="expoTitle" style="background:white;  width: 1060px; height: 50px; border: solid 0.3px #a9a9a9;margin-top: 20px; margin-left: 20px; font-size: 20px; padding-left: 10px;">
                 <hr>
                 <div class="thumbWrapper" style="display: flex">
-                    <div class="field" style="height: 390px; width: 371px;margin-top: 68px; margin-left: 10px;">
-                        <p style="text-align: center; font-size: 18px; font-weight: 600;">대표사진</p>
+                    <div class="field" style="height: 390px; width: 371px;margin:68px 40px 0 40px;">
+                        <p style="text-align: center; font-size: 18px; font-weight: 600;margin-left: 20px; width: 400px;">대표사진</p>
                         <input type="file" id="fileBtn" name="uploadFiles" style="display: block">
                         <div class="uploadResult">
                             <ul><!--이미지 들어갈 공간--></ul>
                         </div>
                     </div>
 
-                    <div class="bigPictureWrapper">
-                        <div class="bigPicture"></div>
-                    </div>
-                    <div style="margin-top: 30px">
+                    <div style="margin-top: 70px; margin-left: 50px;border-left: solid 1px black;">
                         <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
                         <div>
                             <input name="userId" th:field="${vo.userId}" type="hidden">
                         </div>
-                        <div>
+                        <div style="margin-top: 12px;">
                             <h4 style="margin-left: 50px">농장이름 *</h4>
-                            <input name="farmName" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 이름">
+                            <input name="farmName" style="height: 30px; width: 500px; margin-left: 50px;margin-top: 10px;" type="text" placeholder="농장 이름">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장주 *</h4>
-                            <input name="farmerName" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
+                            <input name="farmerName" style="margin-top: 10px;height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장주">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 주소 *</h4>
-                            <input name="farmAddress" style="height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
+                            <input name="farmAddress" style="margin-top: 10px;height:30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주소">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 전화번호</h4>
-                            <input name="farmPhone" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
+                            <input name="farmPhone" style="margin-top: 10px;height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 전화번호">
                         </div>
                         <br>
                         <div>
                             <h4 style="margin-left: 50px">농장 주요 품목</h4>
-                            <input name="farmProduct" style="height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
+                            <input name="farmProduct" style="margin-top: 10px;height: 30px; width: 500px; margin-left: 50px" type="text" placeholder="농장 주요 품목">
                         </div>
                     </div>
                 </div>
@@ -102,9 +107,8 @@
 
                 <div align="center" class="btn-box">
 
-                    <input type="submit" id="sendSummer" class="button" value="작성" >
-
-                    <a class="button" onclick="history.back()" >취소</a>
+                    <input type="submit" id="sendSummer" class="button" value="작성" style="top: -2px;font-weight: 500" >
+                    <a class="button" onclick="history.back()" style="padding: 6px; height: 31px; line-height: 23px; width: 81px; font-weight: 500" >취소</a>
 
                 </div>
 
