@@ -37,4 +37,9 @@ public class BoardsDAO {
     public int getTotal(Criteria criteria){ return mapper.getTotal(criteria); }
 
     public int plusOne(Long bno){return mapper.plusOne(bno);}
+
+    public List<BoardsVO> getMyList(Criteria criteria){return mapper.getMyList(criteria);}
+
+    public int getMyTotal(Criteria criteria){return mapper.getMyTotal(criteria);}
+
 }
