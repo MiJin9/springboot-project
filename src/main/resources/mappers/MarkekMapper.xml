@@ -3,31 +3,31 @@
 
 <mapper namespace="com.koreait.yougn.mappers.MarketMapper">
 
-    <!--검색-->
-    <sql id="search">
-        <if test="keyType != null and keyword != null">
-            <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-                <foreach item="keyType" collection="typeArr">
-                    <trim prefix="OR">
-                        <choose>
-                            <when test="keyType == 'N'.toString()">
-                                (ITEMNAME LIKE '%'||#{keyword}||'%')
-                            </when>
-                            <when test="keyType == 'C'.toString()">
-                                (ITEMCONTENT LIKE '%'||#{keyword}||'%')
-                            </when>
-                            <when test="keyType == 'W'.toString()">
-                                (USERID LIKE '%'||#{keyword}||'%')
-                            </when>
-                        </choose>
-                    </trim>
-                </foreach>
-            </trim>
-        </if>
-    </sql>
+<!--검색-->
+<sql id="search">
+    <if test="keyType != null and keyword != null">
+        <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+            <foreach item="keyType" collection="typeArr">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="keyType == 'N'.toString()">
+                            (ITEMNAME LIKE '%'||#{keyword}||'%')
+                        </when>
+                        <when test="keyType == 'C'.toString()">
+                            (ITEMCONTENT LIKE '%'||#{keyword}||'%')
+                        </when>
+                        <when test="keyType == 'W'.toString()">
+                            (USERID LIKE '%'||#{keyword}||'%')
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </if>
+</sql>
 
-    <select id="getList" resultType="itemVO">
-        <![CDATA[
+<select id="getList" resultType="itemVO">
+    <![CDATA[
         SELECT ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMREGDATE, ITEMUPDATEDATE, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT
         FROM
         (
@@ -37,54 +37,54 @@
             FROM T_ITEM
             WHERE
         ]]>
-        <include refid="search"></include>
-        <![CDATA[
+    <include refid="search"></include>
+    <![CDATA[
         ROWNUM <= #{pageNum} * #{amount}
         )
         WHERE R > (#{pageNum} - 1) * #{amount}
         ]]>
-    </select>
+</select>
 
-    <!--게시글 작성-->
-    <insert id="insert">
+        <!--게시글 작성-->
+<insert id="insert">
 INSERT INTO T_ITEM (ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT)
 VALUES(SEQ_ITEM.NEXTVAL,#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
 </insert>
 
-    <insert id="insertSelectKey_itemnum">
-        <selectKey keyProperty="itemnum" order="BEFORE" resultType="long">
-            SELECT SEQ_ITEM.NEXTVAL FROM DUAL
-        </selectKey>
-        INSERT INTO T_ITEM (ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT)
-        VALUES(#{itemnum},#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
-    </insert>
+<insert id="insertSelectKey_itemnum">
+<selectKey keyProperty="itemnum" order="BEFORE" resultType="long">
+    SELECT SEQ_ITEM.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO T_ITEM (ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT)
+VALUES(#{itemnum},#{itemname}, #{itemcontent}, #{userid}, #{itemdeliverprice}, #{itemhome}, #{itemprice}, #{itemtotalcount})
+</insert>
 
-    <!--상세보기-->
-    <select id="read" resultType="itemVO">
+        <!--상세보기-->
+<select id="read" resultType="itemVO">
 SELECT ITEMNUM, ITEMNAME, ITEMCONTENT, USERID, ITEMDELIVERPRICE, ITEMHOME, ITEMPRICE, ITEMTOTALCOUNT FROM T_ITEM
 WHERE ITEMNUM = #{itemnum}
 </select>
 
-    <!--수정-->
-    <update id="update">
+        <!--수정-->
+<update id="update">
 UPDATE T_ITEM
 SET ITEMNAME = #{itemname},ITEMCONTENT = #{itemcontent}, ITEMDELIVERPRICE = #{itemdeliverprice}, ITEMHOME = #{itemhome}, ITEMPRICE = #{itemprice}, ITEMUPDATEDATE = SYSDATE
 WHERE ITEMNUM = #{itemnum}
 </update>
 
-    <!--삭제-->
-    <delete id="delete">
+        <!--삭제-->
+<delete id="delete">
 DELETE FROM T_ITEM WHERE ITEMNUM = #{itemNum}
 </delete>
 
-    <select id="getTotal" resultType="_int">
-        SELECT COUNT(ITEMNUM) FROM T_ITEM
-        <where>
-            <trim suffixOverrides="AND">
-                <include refid="search"></include>
-            </trim>
-        </where>
-    </select>
+<select id="getTotal" resultType="_int">
+SELECT COUNT(ITEMNUM) FROM T_ITEM
+<where>
+    <trim suffixOverrides="AND">
+        <include refid="search"></include>
+    </trim>
+</where>
+</select>
 
 
 
