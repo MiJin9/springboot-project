@@ -109,7 +109,7 @@ DELETE FROM T_ITEM WHERE ITEMNUM = #{itemNum}
         ROWNUM R, ORDERNUM, ITEMNUM, ITEMNAME, USERID, ORDERPAYMENT, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO,ORDERDATE, ORDERCOUNT
         FROM T_ORDER
         WHERE
-    ROWNUM <= #{pageNum} * #{amount} AND BUYERID = #{buyerId};
+    ROWNUM <= #{pageNum} * #{amount} AND USERID = #{userId}
     )
     WHERE R > (#{pageNum} - 1) * #{amount}
     ]]>
@@ -136,8 +136,8 @@ DELETE FROM T_ITEM WHERE ITEMNUM = #{itemNum}
     <selectKey keyProperty="orderNum" order="BEFORE" resultType="long">
         SELECT SEQ_ORDER.NEXTVAL FROM DUAL
     </selectKey>
-    INSERT INTO T_ORDER (ORDERNUM, ITEMNUM, ITEMNAME, BUYERID, USERID, ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO, ORDERCOUNT)
-    VALUES (SEQ_ORDER.NEXTVAL, #{itemNum}, #{itemName}, #{buyerId}, #{userId}, #{orderAddress}, #{orderAddressDetail}, #{orderReceiver}, #{orderPhoneNum}, #{orderMemo}, #{orderCount})
+    INSERT INTO T_ORDER (ORDERNUM, ITEMNUM, ITEMNAME, BUYERID, USERID, ORDERPAYMENT,ORDERADDRESS, ORDERADDRESSDETAIL, ORDERRECEIVER, ORDERPHONENUM, ORDERMEMO, ORDERCOUNT)
+    VALUES (SEQ_ORDER.NEXTVAL, #{itemNum}, #{itemName}, #{buyerId}, #{userId}, #{orderPayment},#{orderAddress}, #{orderAddressDetail}, #{orderReceiver}, #{orderPhoneNum}, #{orderMemo}, #{orderCount})
 </insert>
 
 <!--    <select id="select" resultType="orderVO">-->
