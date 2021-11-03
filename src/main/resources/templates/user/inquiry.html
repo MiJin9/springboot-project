@@ -42,21 +42,13 @@
                     </tr>
                     </thead>
                     <tbody style="text-align: center">
+                    <th:block th:if="${list.size() != 0}">
                     <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
-                        <th:block th:if="${index} == null">
                         <tr class="tBody" style="height: 30px; line-height: 2;" th:object="${list.get(index)}">
                             <td class="num" style="width: 80px" th:text="*{num}"></td>
                             <td class="title"><a id="goRead2" th:href="*{num}" th:text="*{title}"></a></td>
                             <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
                             <td th:id="${index}" class="answerState" style="width: 120px" th:text="*{status}" ></td>
-                        </tr>
-                    </th:block>
-                    <th:block th:unless="${index} == null">
-                        <tr class="tBody" style="height: 30px; line-height: 2;">
-                            <td class="num" style="width: 80px"></td>
-                            <td class="title"><a></a></td>
-                            <td class="regDate" style="width: 130px"></td>
-                            <td class="answerState" style="width: 120px"></td>
                         </tr>
                     </th:block>
                     </th:block>
