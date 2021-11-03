@@ -146,6 +146,7 @@
 
 
     $(document).ready(function(){
+        $("input[type='file']").hide();
         let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
         let maxSize = 5242880;// 5MB
         let inputFile = $(".uploadDiv input");
@@ -172,7 +173,7 @@
             let str = "";
             $(uploadFiles).each(function(i, obj){
                 let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
-                let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+                let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
 
                 str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
                 str += "<div>";
@@ -183,6 +184,7 @@
 
             });
             uploadResult.append(str);
+
         }
         //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
         function checkExtension(fileName, fileSize){
@@ -217,6 +219,7 @@
                     setTimeout(function(){},100)
                     showUploadFile(fileList);
                     inputFile.val("");
+                    $("input[type='file']").hide();
                 }
             });
         });
