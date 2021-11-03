@@ -94,6 +94,11 @@
     let postForm = document.postForm;
     let type = [[${vo.type}]];
     console.log(type)
+    let sessionId = [[${vo.id}]];
+    if(sessionId == null){
+        alert("로그인 후 이용해 주세요.")
+        location.href = "/user/login";
+    }
 
     switch (type) {
         case 1:
@@ -119,8 +124,10 @@
         case 0:
             $(".smallTitle").html("공지");
             $(".pageBanner-w").children().attr("src", "/img/board/noticeWrite.png");
-            alert("접근이 불가 합니다.")
-            location.href = history.back(); /*관리자 아이디일때만 가능하게 만들기*/
+            if(sessionId != "yougnAdmin") {
+                alert("접근이 불가 합니다.")
+                location.href = history.back(); /*관리자 아이디일때만 가능하게 만들기*/
+            }
             break;
     };
 

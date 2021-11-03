@@ -94,6 +94,14 @@
     let title = [[${vo.title}]];
     let content = [[${vo.content}]];
     let boardType = [[${cri.boardType}]];
+    let sessionId = [[${cri.userId}]];
+
+    if(sessionId == null){
+        alert("로그인 후 이용해 주세요.")
+        location.href = "/user/login";
+    }
+
+
     $("#title").val(title);
 
     $(document).ready(function () {

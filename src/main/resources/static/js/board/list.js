@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    if(boardType == 0){
+
+    if(boardType == 0 && id != "yougnAdmin"){
         $(".a-write").parent().hide()
     }
     switch (boardType) {

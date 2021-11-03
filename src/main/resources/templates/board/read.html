@@ -44,14 +44,16 @@
                 <br>
                 <div class="Btn">
                     <input type="hidden" name="boardType" th:field="${criteria.boardType}">
-                    <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
-                    <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
+                    <th:block th:if="*{id} == ${criteria.userId}">
+                        <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
+                        <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
+                    </th:block>
                 </div>
                 <div class="horizon"><p style="font-size: 20px;margin-top: 8px; text-align: center;width: 1000px;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 댓글은 제재가 있을 수 있습니다.</p></div>
                 <br>
                 <div class="register-form">
                     <div>
-                        <input name="replier">
+                        <input name="replier" th:value="${criteria.userId}" readonly>
                         <textarea rows="6" id="reply" name="reply" placeholder="댓글은 여러분의 얼굴입니다. 신중하게 작성해주세요."></textarea>
                     </div>
                     <div style="text-align: right; margin-top:8px;">
@@ -94,8 +96,12 @@
     let paging = [[${criteria.listLink}]];
     let replyUL = $("ul.reply");
     let pageNum = 1;
+    let sessionId = [[${criteria.userId}]];
 
-    console.log(boardType);
+    if(sessionId == null){
+        alert("로그인 후 이용해 주세요.")
+        location.href = "/user/login";
+    }
 
     switch (boardType) {
         case 1:
@@ -140,9 +146,14 @@
 
     $("#delete").on("click", function (e) {
         e.preventDefault();
+        if(!confirm("게시물을 삭제하시겠습니까?")){return;}
         document.removeForm.submit();
     })
 
+    $(".cancel").on("click",function (e) {
+        e.preventDefault();
+        $("textarea[name='reply']").val("");
+    })
     showList(pageNum);
 
     $(".register").on("click", function(e){
@@ -158,8 +169,6 @@
 
         replyService.add({bno:bno, content:reply, id:replier},
             function(result){
-                alert(result);
-                $("input[name='replier']").val("");
                 $("textarea[name='reply']").val("");
                 showList(pageNum);
             }
@@ -183,11 +192,15 @@
                     if(list[i].regDate != list[i].updateDate){
                         str += "<br>수정된 날짜 " + replyService.displayTime(list[i].updateDate);
                     }
-                    str += "</strong></p></div>"
-                    str += "<div style='text-align: right'><a class='modify' href='" + list[i].rno + "'>수정</a>"
-                    str += "<a class='finish' style='display: none' href='" + list[i].rno + "'>수정완료</a>"
-                    str += "&nbsp;&nbsp;<a class='remove' href='" + list[i].rno + "'>삭제</a>"
-                    str += "</div></li>"
+                    if(sessionId == list[i].id) {
+                        str += "</strong></p></div>"
+                        str += "<div style='text-align: right'><a class='modify' href='" + list[i].rno + "'>수정</a>"
+                        str += "<a class='finish' style='display: none' href='" + list[i].rno + "'>수정완료</a>"
+                        str += "&nbsp;&nbsp;<a class='remove' href='" + list[i].rno + "'>삭제</a>"
+                        str += "</div>"
+                    }
+                    str += "</li>";
+
                     str += "<div class='line'></div>"
                 }
                 replyUL.html(str);
@@ -244,35 +257,6 @@
         showList(pageNum);
     });
 
-    function showList(page){
-        replyService.getList({bno:bno, page:page || 1},
-            function(replyCnt, list){
-                if(list == null || list.length == 0){
-                    replyUL.html("댓글이 없습니다.");
-                    return;
-                }
-                let str = "";
-                for(let i=0, len=list.length; i<len; i++){
-                    str += "<li style='display: block' data-rno='" + list[i].rno + "'>"
-                    str += "<strong>" + list[i].id + "</strong>"
-                    str += "<div>"
-                    str += "<p class='reply" + list[i].rno +"'>" + list[i].content + "</p>"
-                    str += "<p><strong class='date'>" + replyService.displayTime(list[i].regDate);
-                    if(list[i].regDate != list[i].updateDate){
-                        str += "<br>수정된 날짜 " + replyService.displayTime(list[i].updateDate);
-                    }
-                    str += "</strong></p></div>"
-                    str += "<div style='text-align: right'><a class='modify' href='" + list[i].rno + "'>수정</a>"
-                    str += "<a class='finish' style='display: none' href='" + list[i].rno + "'>수정완료</a>"
-                    str += "&nbsp;&nbsp;<a class='remove' href='" + list[i].rno + "'>삭제</a>"
-                    str += "</div></li>"
-                    str += "<div class='line'></div>"
-                }
-                replyUL.html(str);
-                showReplyPage(replyCnt);
-            }
-        );
-    }
 
     let check = false;
 
@@ -303,7 +287,6 @@
 
         replyService.update({rno:rnoValue, content:newReply},
             function(result){
-                alert(result);
                 check = false;
                 showList(pageNum);
             }
@@ -313,11 +296,11 @@
     //댓글 삭제
     $(".reply").on("click", "a.remove", function(e){
         e.preventDefault();
+        if(!confirm("댓글을 삭제하시겠습니까?")){return;}
         if(check){alert("댓글 수정 중에는 삭제하실 수 없습니다."); return;}
         let rnoValue = $(this).attr("href");
         replyService.remove(rnoValue,
             function(result){
-                alert(result);
                 showList(pageNum);
             }
         );
