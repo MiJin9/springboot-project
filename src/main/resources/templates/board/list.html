@@ -145,7 +145,7 @@
     $("a#goRead").on("click", function(e){
         e.preventDefault();
         if(id == "null" || id == null){
-            alert("로그인 후 이용해 주세요.")
+            alert("로그인이 필요합니다.");
             location.href = "/user/login"
             return;
         }
@@ -177,7 +177,7 @@
     $("a.a-write").on("click", function (e) {
         e.preventDefault();
         if(id == "null" || id == null){
-            alert("로그인 후 이용해 주세요.")
+            alert("로그인이 필요합니다.");
             location.href = "/user/login"
             return;
         }
