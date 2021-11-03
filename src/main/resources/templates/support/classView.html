@@ -172,7 +172,6 @@
         }, function(rsp) {
             console.log(rsp);
             if ( rsp.success ) {
-                console.log("들어옴")
                 let str = "";
                 str += "<input type='hidden' value='"+ classNum +"' name='classNum'>";
                 str += "<input type='hidden' value='"+rsp.merchant_uid+"' name='merchant_uid'>";

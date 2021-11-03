@@ -248,6 +248,10 @@
     //제목 눌렀을 때
     $("a#goRead").on("click", function(e){
         e.preventDefault();
+        if($("#sessionId").val() == ""){
+            alert("로그인이 필요합니다.");
+            return;
+        }
         location.href = "/market/marketView" + paging  + "&itemnum=" + $(this).attr("href");
     })
 

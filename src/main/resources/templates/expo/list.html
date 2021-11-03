@@ -63,7 +63,7 @@
                                                 <div class="itemTitle">
                                                     <h4><a target="_self" class="itemName goRead" name="expoTitle"
                                                            th:text="*{expoTitle}"
-                                                           th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a></h4>
+                                                           th:href="*{expoNum}"></a></h4>
                                                 </div>
                                                 <br>
                                                 <!--작성자-->
@@ -230,7 +230,7 @@
             alert("로그인이 필요합니다.");
             return;
         }
-        location.href = "/expo/readDetail" + paging + "&expoNum=" + $(this).attr("href");
+       location.href = "/expo/readDetail" + paging + "&expoNum=" + $(this).attr("href");
 
     })
 
