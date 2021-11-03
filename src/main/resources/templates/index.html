@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <!--
-	Axiom by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
+   Axiom by Pixelarity
+   pixelarity.com | hello@pixelarity.com
+   License: pixelarity.com/license
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
@@ -152,12 +152,12 @@
                 <div class="expo-wrap">
                     <div class="expo-board" >
                         <th:block th:each="i : ${#numbers.sequence(0,2)}">
-                            <div class="expo" th:object="${list.get(i)}">				<!--foreach로 얘만 반복-->
+                            <div class="expo" th:object="${list.get(i)}">            <!--foreach로 얘만 반복-->
                                 <div>
                                     <div class="uploadResult">
-                                       <ul class="imgList" th:id="*{expoNum}">
+                                        <ul class="imgList" th:id="*{expoNum}">
 
-                                       </ul>
+                                        </ul>
                                     </div>
                                     <div class="expo-title">
                                         <a class="itemName goRead" name="expoTitle" th:text="*{expoTitle}" th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a>
