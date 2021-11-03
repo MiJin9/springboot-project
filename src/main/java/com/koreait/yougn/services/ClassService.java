@@ -116,6 +116,7 @@ public class ClassService {
 
     //클래스 취소
     public boolean cancel(ApplyVO applyVO){
+        log.info("classNum : " + applyVO.getClassNum() );
         classDAO.applyDelete(applyVO);
         return classDAO.updateCountDown(applyVO.getClassNum());
     }
@@ -129,6 +130,10 @@ public class ClassService {
     public String getMerchant_uid(ApplyVO applyVO){
         ApplyVO vo = classDAO.getApply(applyVO);
         return vo == null? "" :  vo.getMerchant_uid();
+    }
+    public String getImp_uid(ApplyVO applyVO){
+        ApplyVO vo = classDAO.getApply(applyVO);
+        return vo == null? "" :  vo.getImp_uid();
     }
 
     //삭제

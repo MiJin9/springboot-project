@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 @Data
 public class ApplyVO {
     private Long num;
-    private Long ClassNum;
+    private Long classNum;
     private String id;
     private String merchant_uid;
+    private String imp_uid;
 }
