@@ -95,6 +95,7 @@
                         <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;font-weight: 100;padding:5px 12px;width: 100px;padding-left: 31px;font-size: 20px;">등록</a>
                     </div>
                     <ul class="itemList">
+                        <th:block th:if="${list.size() != 0}">
                         <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
                             <div>
                                 <li class="marketItem" th:object="${list.get(index)}">
@@ -125,6 +126,7 @@
                                     </div>
                                 </li>
                             </div>
+                        </th:block>
                         </th:block>
                     </ul>
 
@@ -167,6 +169,7 @@
                 </section>
             </div>
         </div>
+        <input type="hidden" th:value="${id}" id="sessionId">
         </section>
     </div>
     <!--footer-->
@@ -270,10 +273,12 @@
 
     $("a.writeButton").on("click", function (e) {
         e.preventDefault();
-        location.href = "/market/marketWrite";
+        if ($("#sessionId").val() == "") {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+            location.href = "/market/marketWrite";
     })
-
-
 
 </script>
 

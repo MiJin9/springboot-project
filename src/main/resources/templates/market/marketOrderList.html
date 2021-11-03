@@ -27,7 +27,7 @@
                 <img src="/img/yougnMarketKart.png" style="padding-top: 53px;">
             </div>
             <div class="ListTable">
-                <table style="height: 500px;font-size: 18px;text-align: center;">
+                <table style="height: auto;font-size: 16px;text-align: center;">
                     <thead>
                     <tr class="tHead">
                         <th class="ordernum">주문번호</th>
@@ -35,12 +35,13 @@
                         <th class="itemname">상품명</th>
                         <th class="orderpament">구매자 ID</th>
                         <th class="orderpament">수령인</th>
+                        <th class="orderpament">구매자연락처</th>
                         <th class="orderdate">구매날짜</th>
                         <th class="orderaddress">주소</th>
                         <th class="ordercount">수량</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height: 150px; line-height: 75px">
                     <th:block th:each="order : ${list}">
                         <tr class="tBody" th:object="${order}">
                             <td class="ordernum" th:text="*{orderNum}"></td>
@@ -48,6 +49,7 @@
                             <td class="itemname" th:text="*{itemName}"></td>
                             <td class="orderpament" th:text="*{buyerId}"></td>
                             <td class="orderpament" th:text="*{orderReceiver}"></td>
+                            <td class="orderphone" th:text="*{orderPhoneNum}"></td>
                             <td class="orderdate" th:text="*{orderDate}"></td>
                             <td class="orderaddress" th:text="|*{orderAddress} *{orderAddressDetail}|"></td>
                             <td class="ordercount" th:text="*{orderCount}"></td>

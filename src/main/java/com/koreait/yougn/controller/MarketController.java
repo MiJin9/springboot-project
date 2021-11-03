@@ -30,10 +30,13 @@ public class MarketController {
     private final UserService userService;
 
     /*리스트*/
-    @GetMapping("marketList")
-    public String marketList(Criteria criteria, Model model) {
+    @RequestMapping(value = "marketList", method = {RequestMethod.GET,RequestMethod.POST})
+    public String marketList(Criteria criteria, Model model,  HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        model.addAttribute("id",id==null?"":id);
         model.addAttribute("list", marketService.getList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.getTotal(criteria), 10, criteria));
+        log.info(id);
         return "/market/marketList";
     }
 
