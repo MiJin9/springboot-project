@@ -27,7 +27,7 @@
         SELECT RNO, BNO, CONTENT, ID, REGDATE, UPDATEDATE
         FROM
         (
-            SELECT /*+ INDEX_DESC(T_REPBO PK_REPLY) */
+            SELECT /*+ INDEX_DESC(T_REPBO PK_REPBO) */
             ROWNUM R, RNO, BNO, CONTENT, ID, REGDATE, UPDATEDATE
             FROM T_REPBO
             WHERE BNO = #{bno}

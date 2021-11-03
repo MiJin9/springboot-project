@@ -191,11 +191,16 @@ div.sub-title-wrap div.area-detail {
 }
 
 .expo-title {
-    display: inline-block;
     font-size: 25px;
     padding-left: 20px;
-    width: 290px;
+    width: 260px;
     padding-top: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 38px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
 }
 
 .expo-content {
@@ -204,6 +209,9 @@ div.sub-title-wrap div.area-detail {
     overflow: hidden;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+.tilteCon{
+    height: 110px;
 }
 
 .expo-wrap {
@@ -257,4 +265,13 @@ div.sub-title-wrap div.area-detail {
 .etc2 {
     background: #b3e6b7;
     border-color: #b3e6b7;
+}
+
+.uploadResult {
+    float: left;
+    height: 110px;
+}
+
+* li {
+    list-style: none;
 }

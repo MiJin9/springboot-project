@@ -146,6 +146,7 @@
 
 
     $(document).ready(function(){
+        $("input[type='file']").hide();
         let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
         let maxSize = 5242880;// 5MB
         let inputFile = $(".uploadDiv input");
@@ -159,10 +160,10 @@
             let form = $("form#postForm");
             let str = "";
             $(".uploadResult ul li").each(function(i, obj){
-                str += "<input type='text' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
             });
             form.append(str).submit();
         })
@@ -172,15 +173,18 @@
             let str = "";
             $(uploadFiles).each(function(i, obj){
                 let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
+
                 str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
                 str += "<div>";
-                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                str += "<img src='/upload/display?fileName=" + originPath + "'>";
+                str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
                 str += "</div>";
                 str += "</li>";
 
             });
             uploadResult.append(str);
+
         }
         //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
         function checkExtension(fileName, fileSize){
@@ -212,8 +216,10 @@
                 contentType: false,
                 processData: false,
                 success: function(fileList){
+                    setTimeout(function(){},100)
                     showUploadFile(fileList);
                     inputFile.val("");
+                    $("input[type='file']").hide();
                 }
             });
         });
@@ -238,6 +244,7 @@
         });
 
 
+
         (function(){
             $.getJSON("/expo/getAttachList", {expoNum: expoNum},
                 function(arr){
@@ -250,8 +257,8 @@
 
                         str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-name='" + attach.fileName.substring(attach.fileName.indexOf("_") + 1) + "' data-type='" + attach.image +"'>";
                         str += "<div>";
-                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                        str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                        str += "<img src='/upload/display?fileName=" + originPath + "'>";
+                        str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
                         str += "</div>";
                         str += "</li>";
 
