@@ -5,6 +5,7 @@ import com.koreait.yougn.beans.vo.ExpoVO;
 import com.koreait.yougn.beans.vo.ThumbVO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,4 +24,7 @@ public interface ExpoService {
     public int getTotal(Criteria criteria);
 
     public List<ThumbVO> getAttachList(Long expoNum);
+
+    public List<ExpoVO> getMainList(Criteria criteria);
+
 }
