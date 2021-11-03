@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Slf4j
 @Service
@@ -84,4 +85,15 @@ public class ExpoServiceImple implements ExpoService{
     public List<ThumbVO> getAttachList(Long expoNum) {
         return thumbDAO.findByNum(expoNum);
     }
+
+    @Override
+    public List<ExpoVO> getMainList(Criteria criteria) {
+        List<ExpoVO> expoVOmain = expoDAO.getMainList(criteria);
+        for (ExpoVO expoVO : expoVOmain){
+            expoVO.setExpoRegDate(expoVO.getExpoRegDate().split(" ")[0]);
+            expoVO.setExpoUpdateDate(expoVO.getExpoUpdateDate().split(" ")[0]);
+        }
+        return expoVOmain;
+    }
+
 }

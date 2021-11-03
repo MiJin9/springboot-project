@@ -38,4 +38,6 @@ public class ExpoDAO {
 
     public int getTotal(Criteria criteria){ return mapper.getTotal(criteria); }
 
+    public List<ExpoVO> getMainList(Criteria criteria){return mapper.getMainList(criteria);}
+
 }
