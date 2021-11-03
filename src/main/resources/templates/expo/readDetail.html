@@ -24,9 +24,12 @@
                 <div class="category">
                     <img src="/img/pageBanner_detail.png">
                 </div>
+
                 <div style="display: flex; float: right">
-                    <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="modify primary button" type="button" value="수정">
-                    <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="delete primary button" type="submit" value="삭제">
+                    <th:block th:if="${expo.userId == id}">
+                        <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="modify primary button" type="button" value="수정">
+                        <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="delete primary button" type="submit" value="삭제">
+                    </th:block>
                     <input style=" margin-right: 10px; height: 35px; width: 125px; line-height: normal;" class="goList primary button" type="button" value="목록보기">
                 </div>
                 <div class="readTitle">
@@ -95,6 +98,7 @@
        style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px; margin-left: 895px; margin-top: 8px;">
     </a>
 </section>
+    <input type="hidden" th:value="${id}" id="sessionId">
     <th:block th:include="footer.html"></th:block>
 </div>
 
@@ -127,6 +131,11 @@
     $(".modify").on("click", function () {
         location.href = "/expo/modifyExpo" + paging + "&expoNum=" + expoNum;
     })
+
+    if(!$("input#sessionId").val()){
+        alert("로그인이 필요합니다.");
+        location.href = "/user/login";
+    }
 
 
     $(document).ready(function(){

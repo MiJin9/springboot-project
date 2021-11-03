@@ -32,6 +32,7 @@ public class ExpoController {
         model.addAttribute("id", id);
         model.addAttribute("list", expoService.getList(criteria));
         model.addAttribute("pageMaker", new PageDTO(expoService.getTotal(criteria), 10, criteria));
+
         return "expo/list";
 
     }
@@ -39,9 +40,9 @@ public class ExpoController {
     /*글 작성*/
     //페이지 이동
     @GetMapping("writeExpo")
-    public void writeExpo(ExpoVO vo, Criteria criteria, Model model) {
-        vo.setUserId("아이디123");
-        model.addAttribute("vo", vo);
+    public void writeExpo(ExpoVO vo, Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        model.addAttribute("id", id);
         model.addAttribute("criteria", criteria);
     }
 
@@ -90,15 +91,13 @@ public class ExpoController {
 
 
     //상세보기
-    @GetMapping({"readDetail"})
+    @GetMapping("readDetail")
     public void readDetail(@RequestParam("expoNum") Long expoNum, Criteria criteria, Model model,  HttpServletRequest request) {
+
         String reqURI = request.getRequestURI();
         String reqType = reqURI.substring(reqURI.indexOf(request.getContextPath()) + 7);
-        //read 요청 시 read 출력
-        //modify 요청 시 modify 출력
-        log.info("-------------------------------");
-        log.info(reqType + " : " + expoNum);
-        log.info("-------------------------------");
+        String id = (String) request.getSession().getAttribute("sessionId");
+        model.addAttribute("id", id);
         model.addAttribute("expo", expoService.get(expoNum));
         model.addAttribute("criteria", criteria);
     }

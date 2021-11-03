@@ -69,7 +69,7 @@
                     <div style="margin-top: 70px; margin-left: 50px;border-left: solid 1px black;">
                         <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
                         <div>
-                            <input name="userId" th:field="${vo.userId}" type="hidden">
+                            <input name="userId" th:value="${id}" type="hidden">
                         </div>
                         <div style="margin-top: 12px;">
                             <h4 style="margin-left: 50px">농장이름 *</h4>
@@ -120,6 +120,7 @@
         </div>
 
         </div>
+<input type="hidden" th:value="${id}" id="sessionId">
     <th:block th:include="footer.html"></th:block>
 </div>
 
@@ -172,6 +173,7 @@
                     alert("내용을 입력해주세요.");
                     return;
                 }
+
             form.append(str).submit();
         })
 
@@ -202,6 +204,7 @@
             uploadResult.html(str);
         }
 
+
         $(".uploadResult").on("click", "span", function(){
             let targetFile = $(this).data("file");
             let type = $(this).data("type");
@@ -220,6 +223,14 @@
             });
 
         });
+
+        // if(!$("input#sessionId").val()){
+        //     alert("로그인이 필요합니다.");
+        //     location.href = "/user/login";
+        // }
+
+
+
 
         //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
         function checkExtension(fileName, fileSize){

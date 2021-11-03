@@ -57,7 +57,7 @@
                                         <div class="itemInfo">
                                             <!--제목-->
                                             <div class="itemTitle">
-                                                <h4><a target="_self" class="itemName" id="goRead" name="expoTitle" th:text="*{expoTitle}" th:href="*{expoNum}"></a></h4>
+                                                <h4><a target="_self" class="itemName goRead" name="expoTitle" th:text="*{expoTitle}" th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a></h4>
                                             </div>
                                             <br>
                                             <!--작성자-->
@@ -121,6 +121,7 @@
             </div>
         </div>
     </section>
+    <input type="hidden" th:value="${id}" id="sessionId">
 
 
     <th:block th:include="footer.html"></th:block>
@@ -198,11 +199,23 @@
         pageForm.submit();
     });
 
+    $("a.writeButton").on("click", function (e) {
+        e.preventDefault();
+        if (!$("#sessionId").val()) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+        location.href = "/expo/writeExpo";
+
 
     //제목 눌렀을 때
-    $("a#goRead").on("click", function(e){
+    $("a.goRead").on("click",function(e){
         e.preventDefault();
         console.log(expoNum);
+        if (!$("#sessionId").val()) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
         location.href = "/expo/readDetail" + paging  + "&expoNum=" + $(this).attr("href");
 
     })
@@ -228,9 +241,8 @@
         }
     })
 
-    $("a.writeButton").on("click", function (e) {
-        e.preventDefault();
-        location.href = "/expo/writeExpo";
+
+
     })
 
 
