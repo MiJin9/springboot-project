@@ -21,51 +21,51 @@
 
     <!--Main-->
     <div class="main">
-            <div id="findUser">
-                    <div class="findId">
-                    <h3 style="text-align: center">ID찾기</h3>
-                    <hr>
-                    <div id="idInput">
-                        <div class="input2">
-                            <input type="text" class="box" id="name" placeholder="이름" minlength="5" maxlength="11">
+        <div id="findUser">
+            <div class="findId">
+                <h3 style="text-align: center">ID찾기</h3>
+                <hr>
+                <div id="idInput">
+                    <div class="input2">
+                        <input type="text" class="box" id="name" placeholder="이름" minlength="5" maxlength="11">
+                    </div>
+                    <div class="input2">
+                        <input type="text" class="box phoneNum" id="idPhoneNum" placeholder="핸드폰번호 - 없이 입력" minlength="8" maxlength="20">
+                    </div>
+                </div>
+                <div class="pin">
+                    <input type="text" class="pinNum" id="idPinNum" >
+                    <input type="button" class="pinNumBtn" id="idPinNumBtn" value="인증번호">
+                </div>
+                <div class="findBtn">
+                    <a class="button" id="findIdBtn">확인</a>
+                </div>
+            </div>
+            <hr style="margin: 0; border-left: 1px solid #ddd; margin-top: 100px; height: 260px;">
+
+
+            <div class="findPw">
+                <h3 style="text-align: center">PW찾기</h3>
+                <hr>
+                <form action="/user/changePw" method="post" name="form">
+                    <div id="pwInput">
+                        <div class="input3">
+                            <input type="text" class="box" id="findId" name="id" placeholder="아이디" minlength="5" maxlength="11">
                         </div>
-                        <div class="input2">
-                            <input type="text" class="box phoneNum" id="idPhoneNum" placeholder="핸드폰번호 - 없이 입력" minlength="8" maxlength="20">
+                        <div class="input3">
+                            <input type="text" class="box phoneNum" id="pwPhoneNum" name="phone" placeholder="핸드폰번호 - 없이 입력" minlength="8" maxlength="20">
                         </div>
                     </div>
                     <div class="pin">
-                        <input type="text" class="pinNum" id="idPinNum" >
-                        <input type="button" class="pinNumBtn" id="idPinNumBtn" value="인증번호">
+                        <input type="text" class="pinNum" id="pwPinNum" >
+                        <input type="button" class="pinNumBtn" id="pwPinNumBtn" value="인증번호">
                     </div>
                     <div class="findBtn">
-                        <a class="button" id="findIdBtn">확인</a>
+                        <a class="button" id="findPwBtn">확인</a>
                     </div>
-                </div>
-                <hr style="margin: 0; border-left: 1px solid #ddd; margin-top: 100px; height: 260px;">
-
-
-                    <div class="findPw">
-                    <h3 style="text-align: center">PW찾기</h3>
-                    <hr>
-                    <form action="/user/changePw" method="post" name="form">
-                        <div id="pwInput">
-                            <div class="input3">
-                                <input type="text" class="box" id="findId" name="id" placeholder="아이디" minlength="5" maxlength="11">
-                            </div>
-                            <div class="input3">
-                                <input type="text" class="box phoneNum" id="pwPhoneNum" name="phone" placeholder="핸드폰번호 - 없이 입력" minlength="8" maxlength="20">
-                            </div>
-                        </div>
-                        <div class="pin">
-                            <input type="text" class="pinNum" id="pwPinNum" >
-                            <input type="button" class="pinNumBtn" id="pwPinNumBtn" value="인증번호">
-                        </div>
-                        <div class="findBtn">
-                            <a class="button" id="findPwBtn">확인</a>
-                        </div>
-                    </form>
-                </div>
+                </form>
             </div>
+        </div>
     </div>
 
 
@@ -109,7 +109,7 @@
         if(pwPin != $("#pwPinNum").val()){
             alert("인증번호를 확인해주세요.");
             return;
-        } else if($("#findId").text() == "" || $("#pwPhoneNum").text() == ""){
+        } else if($("#findId").val() == "" || $("#pwPhoneNum").val() == ""){
             alert("아이디, 핸드폰 번호를 모두 입력해주세요.");
             return;
         }
@@ -144,9 +144,6 @@
         if(inputPin != pin){
             alert("인증번호를 확인해주세요.");
             return;
-        // }else if($("#name").text() == "" || $("#idPhoneNum").text() == ""){
-        //     alert("이름, 핸드폰 번호를 모두 입력해주세요.");
-        //     return;
         }
         $.ajax({
             url:"/user/sendId",
