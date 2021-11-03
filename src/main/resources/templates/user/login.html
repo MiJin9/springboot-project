@@ -53,7 +53,7 @@
     </div>
 
 
-
+    <input type="hidden" th:value="${session.sessionId}" id="sessionId">
     <th:block th:include="footer.html"></th:block>
 </div>
 
@@ -68,6 +68,12 @@
 
 </body>
 <script>
+
+    if($("input#sessionId").val()) {
+        alert("로그인 되어 있습니다. 메인화면으로 이동합니다.")
+        location.href = "/";
+    }
+
     $("#login").on("click",function(){
         let id = $("#id").val();
         let pw = $("#pw").val();

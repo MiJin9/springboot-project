@@ -24,6 +24,7 @@
         <div class="tle" >
             <h1 class="h1">농사수업</h1>
             <h6>홈>귀농지원>농사수업</h6>
+            <a href="javascript:void(0)" style="float: right; margin-top: -40px; margin-right: 20px;" id="goList" class="button primary small">목록보기</a>
             <hr>
             <div id="sit_ov_wrap" style="display: flex;width: 1000px;margin: auto;">
                 <div id="sit_pvi">
@@ -143,6 +144,9 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script th:inline="javascript">
+    $("a#goList").on("click", function(){
+        location.href = "/support/classList";
+    });
 
     $("#apply").on("click",function(){
         if(!confirm("신청 후 취소 및 환불은 불가합니다.\n신청하시겠습니까?")){

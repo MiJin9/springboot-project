@@ -80,9 +80,10 @@
                 <h2 style="color: black; font-size: 20px">주문자 정보</h2>
                 <br>
                 <div style="margin-left: 120px; font-size: 16px">
-                <p>우정인</p>
-                <p>010-2395-5096</p>
-                <p>woojisi@naver.com</p>
+                <span style="display: flex">아이디&nbsp; : &nbsp;<p id="5" th:text="${user.getId()}"></p></span>
+                <span style="display: flex">이름&nbsp; : &nbsp;<p th:text="${user.getName()}"></p></span>
+                <span style="display: flex">연락처&nbsp; : &nbsp;<p id="6" th:text="${user.getPhone()}"></p></span>
+                <span style="display: flex">이메일&nbsp; : &nbsp;<p th:text="${user.getEmail()}"></p></span>
                 </div>
                 <br>
             </div>
@@ -95,7 +96,7 @@
                 <div style="margin-left: 120px; font-size: 16px">
                     수령인*<input type="text" class="orderinput" id="orderReceiver" name="orderReceiver" placeholder="50자 이내로 입력해주세요"><br>
                     <br>
-                    연락처*<input type="text" class="orderinput" id="orderPhonenum" name="orderPhoneNum" placeholder="' ㅡ ' 를 제외하고 입력해주세요"><br>
+                    연락처*<input type="text" class="orderinput" id="orderPhonenum" name="orderPhoneNum" value=""/><br>
                     <br>
                     우편번호*<input type="text" class="postcodify_postcode5 orderinput" id="address"
                                 placeholder="우편번호" style="width:200px ;margin-left: 59px" value="">
@@ -120,13 +121,12 @@
                 <h2 style="color: black; font-size: 20px">결제 상세</h2>
                 <br>
                 <div style="margin-left: 120px; font-size: 16px" th:object="${order}">
-                    <span style="display: flex">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p></span>
-                    <br>
-                    <span style="display: flex">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p></span>
-                    <br>
+                    <span style="display: flex">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p>&nbsp;원</span>
+                    <p style="margin-left: 16px; font-size: 22px">+</p>
+                    <span style="display: flex">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p>&nbsp;원</span>
+                    <p style="margin-left: 16px; font-size: 22px">=</p>
                     <hr style="width: 600px; margin-left: -3px">
-                    <br>
-                    <span style="display: flex">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p></span>
+                    <span style="display: flex">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p>&nbsp;원</span>
                 </div>
             </div>
             <br>
@@ -135,13 +135,13 @@
             <br>
             <br>
             <br>
-            <input type="text" name="itemNum">
-            <input type="text" name="itemName">
-            <input type="text" name="userId">
-            <input type="text" name="buyerId" value="우정인">
-            <input type="text" name="itemdeliverprice">
-            <input type="text" name="orderPayment">
-            <input type="text" name="orderCount">
+            <input type="hidden" name="itemNum">
+            <input type="hidden" name="itemName">
+            <input type="hidden" name="userId">
+            <input type="hidden" name="buyerId">
+            <input type="hidden" name="itemdeliverprice">
+            <input type="hidden" name="orderPayment">
+            <input type="hidden" name="orderCount">
         </form>
     </div>
     <th:block th:include="footer.html"></th:block>
@@ -170,6 +170,11 @@
     $("input[name='itemName']").val(상품명)
     $("input[name='itemNum']").val($("#1").text())
     $("input[name='orderCount']").val($("#4").text())
+    $("input[name='buyerId']").val($("#5").text())
+    let ph = $("#6").text()
+    console.log(ph);
+    $("input[name='orderPhoneNum']").attr('value',ph);
+
 
     // $("input[type='button']").on("click",function () {
     //     iamport()

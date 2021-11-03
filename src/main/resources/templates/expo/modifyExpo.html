@@ -119,6 +119,7 @@
         </div>
 
         </div>
+<input type="hidden" th:value="${id}" id="sessionId">
     <th:block th:include="footer.html"></th:block>
 </div>
 
@@ -169,6 +170,8 @@
         })
 
 
+
+
         function showUploadFile(uploadFiles){
             let str = "";
             $(uploadFiles).each(function(i, obj){
@@ -186,6 +189,7 @@
             uploadResult.append(str);
 
         }
+
         //확장자 별 업로드 제한, 특정 크기 이상의 파일은 업로드 제한
         function checkExtension(fileName, fileSize){
             if(regex.test(fileName)){
@@ -223,6 +227,11 @@
                 }
             });
         });
+
+        if(!$("input#sessionId").val()){
+            alert("로그인이 필요합니다.");
+            location.href = "/user/login";
+        }
 
         $(".uploadResult").on("click", "span", function(){
             let targetFile = $(this).data("file");

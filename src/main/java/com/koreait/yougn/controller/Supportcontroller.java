@@ -35,6 +35,14 @@ public class Supportcontroller {
     private final ClassService classService;
     private final InfoService infoService;
 
+    @GetMapping("testPage1")
+    public String testPage1(){return "/testPage1";}
+    @GetMapping("testPage2")
+    public String testPage2(){return "/testPage2";}
+    @GetMapping("test")
+    public String getJsp(){return "/test.jsp";}
+
+
     @GetMapping("hallList")
     public String hallList(HallCri hallCri, Model model){
         if(hallCri.getKeyword() != null){

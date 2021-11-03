@@ -7,6 +7,7 @@ import com.koreait.yougn.beans.vo.OrderVO;
 import com.koreait.yougn.mappers.MarketMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.thymeleaf.standard.expression.OrExpression;
 
 import java.util.List;
 
@@ -42,6 +43,10 @@ public class MarketDAO {
     // 오더
     public void orderRegister(OrderVO orderVO){
         marketMapper.orderInsert(orderVO);
+    }
+
+    public void orderCountupdate(OrderVO orderVO) {
+        marketMapper.orderCountupdate(orderVO);
     }
 
     public List<OrderVO> orderGetList(Criteria criteria){
