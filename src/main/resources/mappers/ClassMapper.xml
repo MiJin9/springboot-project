@@ -91,12 +91,12 @@
         <selectKey keyProperty="num" order="BEFORE" resultType="long">
             SELECT SEQ_APPLY.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO T_APPLY (NUM, CLASSNUM, ID, MERCHANT_UID)
-        VALUES (#{num}, #{classNum}, #{id}, #{merchant_uid})
+        INSERT INTO T_APPLY (NUM, CLASSNUM, ID, MERCHANT_UID, IMP_UID)
+        VALUES (#{num}, #{classNum}, #{id}, #{merchant_uid}, #{imp_uid})
     </insert>
 
     <delete id="applyDelete">
-        DELETE FROM T_APPLY WHERE NUM = #{num}
+        DELETE FROM T_APPLY WHERE CLASSNUM = #{classNum} AND ID=#{id}
     </delete>
 
     <select id="selectApplyList" resultType="_int">
@@ -110,7 +110,7 @@
     </select>
 
     <select id="selectApply" resultMap="applyResult">
-        SELECT NUM, CLASSNUM, ID, MERCHANT_UID FROM T_APPLY WHERE ID=#{id} AND CLASSNUM = #{classNum}
+        SELECT NUM, CLASSNUM, ID, MERCHANT_UID, IMP_UID FROM T_APPLY WHERE ID=#{id} AND CLASSNUM = #{classNum}
     </select>
 
     <resultMap id="applyResult" type="applyVO">
@@ -118,6 +118,7 @@
         <result property="classNum" column="CLASSNUM"/>
         <result property="id" column="ID"/>
         <result property="merchant_uid" column="MERCHANT_UID"/>
+        <result property="imp_uid" column="IMP_UID"/>
     </resultMap>
 
     <select id="getApplyTotal" resultType="_int">

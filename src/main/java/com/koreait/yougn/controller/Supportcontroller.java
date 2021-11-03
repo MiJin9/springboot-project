@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -114,6 +115,7 @@ public class Supportcontroller {
         applyVO.setClassNum(num);
 
         model.addAttribute("merchant_uid",classService.getMerchant_uid(applyVO));
+        model.addAttribute("imp_uid",classService.getImp_uid(applyVO));
         model.addAttribute("applyCheck",classService.checkApply(applyVO));
         model.addAttribute("check" , classVO.getRecruitDate().compareTo(getToday()) <= 0);
         model.addAttribute("class",classVO);
@@ -123,22 +125,29 @@ public class Supportcontroller {
     // 결제 완료 후 merchant_uid를 받아서 요청을 보냄
     // 클래스 신청
     @Transactional(rollbackFor = Exception.class)
-    @PostMapping(value = "apply",consumes = "application/json; charset=utf-8",produces = "text/plain; charset=utf-8")
-    public ResponseEntity<String> apply(@RequestBody ApplyVO applyVO, HttpServletRequest r) throws UnsupportedEncodingException {
+    @PostMapping(value = "apply")
+    public RedirectView apply( ApplyVO applyVO, HttpServletRequest r,RedirectAttributes rtts){
         String id = (String)r.getSession().getAttribute("sessionId");
         applyVO.setId(id);
-        return classService.apply(applyVO)? new ResponseEntity<>(new String("신청 완료".getBytes(),"UTF-8"), HttpStatus.OK):
-                new ResponseEntity<>(new String("신청 실패".getBytes(),"UTF-8"),HttpStatus.INTERNAL_SERVER_ERROR);
+        classService.apply(applyVO);
+        rtts.addAttribute("num",applyVO.getClassNum());
+        return new RedirectView("classView");
     }
 
     // 클래스 취소
     @Transactional(rollbackFor = Exception.class)
-    @PostMapping(value = "cancel",consumes = "application/json; charset=utf-8",produces = "text/plain; charset=utf-8")
-    public ResponseEntity<String> cancel(@RequestBody ApplyVO applyVO, HttpServletRequest r) throws UnsupportedEncodingException {
+    @PostMapping(value = "cancel", consumes = "application/json; charset=utf-8", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public HashMap<String,String> cancel(@RequestBody ApplyVO applyVO, HttpServletRequest r){
+        HashMap<String,String> map = new HashMap<>();
         String id = (String)r.getSession().getAttribute("sessionId");
         applyVO.setId(id);
-        return classService.cancel(applyVO)? new ResponseEntity<>(new String("취소 완료".getBytes(),"UTF-8"), HttpStatus.OK):
-                new ResponseEntity<>(new String("취소 실패".getBytes(),"UTF-8"),HttpStatus.INTERNAL_SERVER_ERROR);
+        if(classService.cancel(applyVO)){
+            map.put("result","성공");
+        }else{
+            map.put("result","실패");
+        }
+        return map;
     }
 
     @GetMapping("classRegister")

@@ -84,7 +84,7 @@
                         </div>
                         <div class="con_w" style="font-size: 17px">
                             <span class="ttl">비용&nbsp;&nbsp;-&nbsp;&nbsp; </span>
-                            <span class="con" th:text="*{price}">비용 값</span><span>원</span>
+                            <span class="con" id="price" th:text="*{price}">비용 값</span><span>원</span>
                         </div>
                         <!-- 선택옵션 시작 { -->
                         <hr>
@@ -104,7 +104,7 @@
                             </th:block>
                         </th:block>
                         <th:block th:unless="${applyCheck}">
-                            <input type="button" class="button large primary" id="cancel" value="신청취소" style=" height:40px;width:150px;background:#d1161678;">
+                            <input type="button" class="button large primary" id="cancel" value="신청완료" style=" height:40px;width:150px;background:#d1161678;">
                         </th:block>
                         <!--버튼 끝-->
                     </div>
@@ -123,8 +123,9 @@
             <hr>
         </div>
     </div>
-
-
+    >
+    <form th:if="${applyCheck}" action="/support/apply" method="post" id="applyForm"></form>
+    <form th:unless="${applyCheck}" action="/support/cancel" method="post" id="cancelForm"></form>
 
     <th:block th:include="footer.html"></th:block>
 </div>
@@ -137,10 +138,115 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script th:inline="javascript">
 
-</body>
-<script>
+    $("#apply").on("click",function(){
+        if(!confirm("신청 후 취소 및 환불은 불가합니다.\n신청하시겠습니까?")){
+            return;
+        }
+        iamport();
+    })
     let classNum = [[${class.num}]];
     let merchant_uid = [[${merchant_uid}]];
+    let imp_uid = [[${imp_uid}]];
+    let name = $("h2#sit_title").text();
+    let amount = $("#price").text();
+    function iamport(){
+        //가맹점 식별코드
+        IMP.init('imp10833768');
+        IMP.request_pay({
+            pg : 'kakaoPay',
+            pay_method : 'kakaoPay',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : name , //결제창에서 보여질 이름
+            amount : amount, //실제 결제되는 가격
+        }, function(rsp) {
+            console.log(rsp);
+            if ( rsp.success ) {
+                console.log("들어옴")
+                let str = "";
+                str += "<input type='hidden' value='"+ classNum +"' name='classNum'>";
+                str += "<input type='hidden' value='"+rsp.merchant_uid+"' name='merchant_uid'>";
+                str += "<input type='hidden' value='"+rsp.imp_uid+"' name='imp_uid'>";
+                console.log(str);
+                $("#applyForm").append(str).submit();
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                alert(msg);
+            }
+        });
+    }
+
+    $("#cancel").on("click",function () {
+        // alert("취소 및 환불은 불가능합니다.");
+        // return;
+        token = getToken();
+        if(payCancel(token,imp_uid,amount)){
+            cancelClass();
+        }
+    })
+    function cancelClass() {
+        console.log(classNum);
+        jQuery.ajax({
+            "url": "/support/cancel", // 예: http://www.myservice.com/payments/cancel
+            "type": "POST",
+            "contentType": "application/json; charset=utf-8",
+            "data": JSON.stringify({
+                "merchant_uid": merchant_uid, // 예: ORD20180131-0000011
+                "cancel_request_amount": amount, // 환불금액
+                "reason": "테스트 결제 환불", // 환불사유
+                classNum : classNum
+            }),
+            "dataType": "json"
+        }).done(function(result) { // 환불 성공시 로직
+            alert("환불 성공");
+        }).fail(function(error) { // 환불 실패시 로직
+            alert("환불 실패");
+        });
+    }
+    let token;
+    function getToken() {
+        $.ajax({
+          url: "https://api.iamport.kr/users/getToken",
+          method: "post", // POST method
+          headers: { "Content-Type": "application/json" }, // "Content-Type": "application/json"
+          data: {
+              imp_key: "7051986632130181", // REST API키
+              imp_secret: "ddf3e4f95225bf63fdcc591e429762d8585ca53e4bcde8a22d936a9bea2ad549c1512723856e71b2" // REST API Secret
+          },
+            success:function(r){
+                token = r.response.access_token;
+                console.log("토큰 가져옴")
+                console.log(token);
+                return token;
+            }
+        })
+    }
+    function payCancel(token,imp_uid,amount){
+        $.ajax({
+            url: "https://api.iamport.kr/payments/cancel",
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token // 아임포트 서버로부터 발급받은 엑세스 토큰
+            },
+            data: {
+                reason : "결제 취소", // 가맹점 클라이언트로부터 받은 환불사유
+                imp_uid : imp_uid, // imp_uid를 환불 `unique key`로 입력
+                amount: amount, // 가맹점 클라이언트로부터 받은 환불금액
+                checksum: amount // [권장] 환불 가능 금액 입력
+            },
+            success:function(r){
+                console.log(r);
+                return true;
+            }
+        });
+    }
 </script>
+</body>
 </html>
