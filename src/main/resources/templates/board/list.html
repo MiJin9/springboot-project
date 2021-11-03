@@ -120,8 +120,9 @@
     let pageForm = $(document.pageForm);
     let paging = [[${pageMaker.criteria.listLink}]];
     let searchForm = $(document.searchForm);
-
     let boardType = [[${criteria.boardType}]];
+    let id = [[${id}]]; // 세션아이디
+    console.log(id);
     console.log(boardType);
     $(document).ready(function(){
 
@@ -140,8 +141,14 @@
         pageForm.submit();
     });
 
+    //상세보기
     $("a#goRead").on("click", function(e){
         e.preventDefault();
+        if(id == "null" || id == null){
+            alert("로그인이 필요합니다.");
+            location.href = "/user/login"
+            return;
+        }
         location.href = "/board/read" + paging + "&boardType=" + boardType + "&bno=" + $(this).attr("href");
     })
 
@@ -166,9 +173,20 @@
         }
     })
 
+    //글 등록
     $("a.a-write").on("click", function (e) {
         e.preventDefault();
-        location.href = "/board/write?type=" + boardType;
+        if(id == "null" || id == null){
+            alert("로그인이 필요합니다.");
+            location.href = "/user/login"
+            return;
+        }
+        if(id == "yougnAdmin"){
+            location.href = "/board/write?type=" + boardType;
+        }
+        if(boardType != 0) {
+            location.href = "/board/write?type=" + boardType;
+        }
     })
 
 </script>

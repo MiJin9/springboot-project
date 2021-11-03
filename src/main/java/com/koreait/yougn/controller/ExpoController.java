@@ -1,9 +1,6 @@
 package com.koreait.yougn.controller;
 
-import com.koreait.yougn.beans.vo.Criteria;
-import com.koreait.yougn.beans.vo.ExpoVO;
-import com.koreait.yougn.beans.vo.PageDTO;
-import com.koreait.yougn.beans.vo.ThumbVO;
+import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.ExpoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,17 +25,14 @@ public class ExpoController {
 
     private final ExpoService expoService;
 
-    @GetMapping("detailfuck")
-    public void detailfuck(){
-
-    }
-
     /*리스트*/
     @GetMapping("list")
-    public String list(Criteria criteria, Model model) {
+    public String list(Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        model.addAttribute("id", id);
         model.addAttribute("list", expoService.getList(criteria));
         model.addAttribute("pageMaker", new PageDTO(expoService.getTotal(criteria), 10, criteria));
-        return "/expo/list";
+        return "expo/list";
 
     }
 
@@ -157,4 +151,6 @@ public class ExpoController {
         log.info("getAttachList " + expoNum);
         return expoService.getAttachList(expoNum);
     }
+
+
 }
