@@ -28,7 +28,7 @@
             <img src="/img/yougnMarketKart.png" style="padding-top: 53px;">
         </div>
         <div class="ListTable">
-            <table style="height: 500px;font-size: 18px;text-align: center;">
+            <table style="height: auto;font-size: 16px;text-align: center;">
                 <thead>
                 <tr class="tHead">
                     <th class="ordernum">주문번호</th>
@@ -42,7 +42,8 @@
                     <th class="orderstate">상태</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="height: 150px; line-height: 53px";>
+                <th:block th:if="${list.size() != 0}">
                 <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
                     <tr class="tBody" th:object="${list.get(index)}">
                         <td class="ordernum" th:text="*{orderNum}"></td>
@@ -54,8 +55,9 @@
                         <td class="orderdetailaddress" th:text="*{orderPayment}"></td>
                         <td class="ordercount" th:text="*{orderCount}"></td>
                         <td class="orderstate" th:id="${index}" th:text="*{status}"></td>
-                        <td><a style="height: 47px" th:href="*{orderNum}" class="button tag">배송확인</a></td>
+                        <td><a style="height: 47px; padding-top: 0px" th:href="*{orderNum}" class="button tag">배송확인</a></td>
                     </tr>
+                </th:block>
                 </th:block>
                 </tbody>
                 <tfoot>
