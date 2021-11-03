@@ -54,6 +54,7 @@
                     </tr>
                     </thead>
                     <tbody style="text-align: center">
+                    <th:block th:if="${list.size() != 0}">
                     <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
                         <tr class="tBody" style="height: 30px; line-height: 2;" th:object="${list.get(index)}">
                             <td class="num" style="width: 80px" th:text="*{num}"></td>
@@ -61,6 +62,7 @@
                             <td class="regDate" style="width: 130px" th:text="*{regDate}"></td>
                             <td th:id="${index}" class="answerState" style="width: 120px" th:text="*{status}"></td>
                         </tr>
+                    </th:block>
                     </th:block>
                     </tbody>
                     <tfoot>
