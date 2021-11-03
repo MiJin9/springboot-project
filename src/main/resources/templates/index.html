@@ -159,11 +159,13 @@
 
                                        </ul>
                                     </div>
-                                    <div class="expo-title">
-                                        <a class="itemName goRead" name="expoTitle" th:text="*{expoTitle}" th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a>
-                                    </div>
-                                    <div class="expo-content">
-                                        <p th:utext="*{expoContent}" name="expoContent"></p>
+                                    <div class="tilteCon">
+                                        <div class="expo-title">
+                                            <a class="itemName goRead" name="expoTitle" th:text="*{expoTitle}" th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a>
+                                        </div>
+                                        <div class="expo-content">
+                                            <p th:utext="*{expoContent}" name="expoContent"></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
