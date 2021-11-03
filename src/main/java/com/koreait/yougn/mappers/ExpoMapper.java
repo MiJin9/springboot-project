@@ -22,4 +22,6 @@ public interface ExpoMapper {
     public int delete(Long expoNum);
     //    게시글 전체 개수
     public int getTotal(Criteria criteria);
+    //    메인화면 게시글
+    public List<ExpoVO> getMainList(Criteria criteria);
 }

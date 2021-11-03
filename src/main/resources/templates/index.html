@@ -6,7 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>Untitled</title>
+    <title>메인-유귀농</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="/css/main.css"/>
@@ -144,30 +144,32 @@
                     </div>
 
                 </div>
+                <th:block th:each="i : ${#numbers.sequence(0,2)}">
+                    <th:block th:object="${list.get(i)}">
+                        <input type="hidden" th:value="*{expoNum}" th:id="${i}">
+                    </th:block>
+                </th:block>
                 <div class="expo-wrap">
-                    <div class="expo-board">
-                        <div class="expo">
-                            <div>
-                                <div class="expo-img"><img src="/img/info.png"></div>
-                                <div class="expo-title">제목</div>
-                                <div class="expo-content">내용</div>
+                    <div class="expo-board" >
+                        <th:block th:each="i : ${#numbers.sequence(0,2)}">
+                            <div class="expo" th:object="${list.get(i)}">				<!--foreach로 얘만 반복-->
+                                <div>
+                                    <div class="uploadResult">
+                                       <ul class="imgList" th:id="*{expoNum}">
+
+                                       </ul>
+                                    </div>
+                                    <div class="expo-title">
+                                        <a class="itemName goRead" name="expoTitle" th:text="*{expoTitle}" th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a>
+                                    </div>
+                                    <div class="expo-content">
+                                        <p th:utext="*{expoContent}" name="expoContent"></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="expo" style="border-bottom: 1px solid lightgrey;border-top: 1px solid lightgrey;">
-                            <div>
-                                <div class="expo-img"><img src="/img/info.png"></div>
-                                <div class="expo-title">제목</div>
-                                <div class="expo-content">내용</div>
-                            </div>
-                        </div>
-                        <div class="expo">
-                            <div>
-                                <div class="expo-img"><img src="/img/info.png"></div>
-                                <div class="expo-title">제목</div>
-                                <div class="expo-content">내용</div>
-                            </div>
-                        </div>
+                        </th:block>
                     </div>
+
                     <div class="etc">
                         <div class="etc1">
                             <div class="etc-content">
@@ -207,6 +209,10 @@
 </body>
 <script>
     let $pined = $("#gyeonggi-pin");
+    let uploadResult = $(".uploadResult ul") // expo이미지 들어갈 태그
+    let expoNum = $("#expoNumber").text(); // 엑스포 넘버
+
+
 
     let giyuk = ["경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"]
     let listArr = [
@@ -255,8 +261,44 @@
     }
 
     $(document).ready(function () {
+        history.replaceState({}, null, " ");
         $pined.trigger("click");
-        $('.slider').slider();
+        // $('.slider').slider();
+
+        /*expo 이미지*/
+
+        for(let a = 0; a < 3; a++) {
+            (function () {
+                $.getJSON("/expo/getAttachList",
+                    {expoNum: $("#" + a).val()},
+                    function (arr) {
+                        console.log(arr);
+                        let str = "";
+
+                        $(arr).each(function (i, attach) {
+                            console.log(attach.image);
+                            if (!attach.image) {
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/img/info.png' width='100px'>";
+                                str += "</div>";
+                                str += "</li>";
+                            } else {
+                                let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+                                let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
+
+                                str += "<li>";
+                                str += "<div>";
+                                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
+                                str += "</div>";
+                                str += "</li>";
+                            }
+                        });
+                        $("#" + $("#" + a).val()).html(str);
+                    });//getJSON
+            })();
+        }
     });
 
     $(".etc1").mouseenter(function () {
@@ -300,5 +342,6 @@
         }
         location.href = "/support/hallList?sido="+sido+"&gugun="+gugun;
     })
+
 </script>
 </html>
