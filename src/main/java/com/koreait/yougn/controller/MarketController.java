@@ -2,6 +2,7 @@ package com.koreait.yougn.controller;
 
 import com.koreait.yougn.beans.vo.*;
 import com.koreait.yougn.services.MarketService;
+import com.koreait.yougn.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,12 +27,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MarketController {
     private final MarketService marketService;
+    private final UserService userService;
 
     /*리스트*/
-    @GetMapping("marketList")
-    public String marketList(Criteria criteria, Model model) {
+    @RequestMapping(value = "marketList", method = {RequestMethod.GET,RequestMethod.POST})
+    public String marketList(Criteria criteria, Model model,  HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        model.addAttribute("id",id==null?"":id);
         model.addAttribute("list", marketService.getList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.getTotal(criteria), 10, criteria));
+        log.info(id);
         return "/market/marketList";
     }
 
@@ -59,17 +65,18 @@ public class MarketController {
     /*글 작성*/
     //페이지 이동
     @GetMapping("marketWrite")
-    public void marketWrite(ItemVO itemVO, Criteria criteria, Model model) {
-        itemVO.setUserid("아이디1234");
+    public void marketWrite(ItemVO itemVO, Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        itemVO.setUserid(id);
         model.addAttribute("vo",itemVO);
         model.addAttribute("criteria",criteria);
     }
 
     //메소드
     @PostMapping("marketWrite")
-    public RedirectView marketWrite(ItemVO itemVO, RedirectAttributes rttr) {
-        itemVO.setUserid("아이디123");
-
+    public RedirectView marketWrite(ItemVO itemVO, RedirectAttributes rttr, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        itemVO.setUserid(id);
         if(itemVO.getAttachList() != null){
             itemVO.getAttachList().forEach(attach -> log.info(attach.toString()));
         }
@@ -146,24 +153,32 @@ public class MarketController {
     }
 
     @GetMapping("marketMyorder")
-    public String marketMyorder(Criteria criteria, Model model) {
-        criteria.setBuyerId("우정인");
+    public String marketMyorder(Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        criteria.setBuyerId(id);
         model.addAttribute("list", marketService.orderMyList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketMyorder";
     }
 
     @GetMapping("marketOrderList")
-    public String marketOrderList(Criteria criteria, Model model){
-        criteria.setUserId("장태순");
+    public String marketOrderList(Criteria criteria, Model model, HttpServletRequest r){
+        String id = (String) r.getSession().getAttribute("sessionId");
+        log.info("-----------------------------------------------");
+        log.info(id);
+        log.info("-----------------------------------------------");
+        criteria.setUserId(id);
         model.addAttribute("list", marketService.orderGetList(criteria));
         model.addAttribute("pageMaker", new PageDTO(marketService.orderGetTotal(criteria), 10, criteria));
         return "/market/marketOrderList";
     }
 
     @GetMapping("marketPayment")
-    public String marketPayment(@RequestParam("count") String count, ItemVO itemVO, Model model) {
+    public String marketPayment(@RequestParam("count") String count, ItemVO itemVO, Model model, HttpServletRequest r) {
+        String id = (String) r.getSession().getAttribute("sessionId");
+        UserVO user = userService.getUser(id);
 
+        model.addAttribute("user", user);
         model.addAttribute("count", count);
         model.addAttribute("order", itemVO);
         return "/market/marketPayment";

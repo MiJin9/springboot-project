@@ -56,7 +56,7 @@
                     <div id="sit_title" style="color: #4a514f; font-size: 22px" th:text="*{itemname}" ></div>
                     <hr>
                     <div class="con_w" style="display: flex">
-                        시중가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>
+                        가격&nbsp;&nbsp;-&nbsp;&nbsp; <p th:text="*{itemprice}"></p>원
                     </div>
                     <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
                     <div class="con_w">
@@ -73,11 +73,11 @@
                         원산지&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<p th:text="*{itemhome}"></p>
                     </div>
                     <div class="con_w" style="display: flex">
-                        배송비결제&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemdeliverprice}"></p>
+                        배송비&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemdeliverprice}"></p>원
                     </div>
 
                     <div class="con_w" style="display: flex">
-                        잔여수량&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemtotalcount}"></p>
+                        잔여수량&nbsp;&nbsp;-&nbsp;&nbsp;<p th:text="*{itemtotalcount}"></p>개
                     </div>
                     <hr>
                     <br>
@@ -111,7 +111,6 @@
                 </div>
             </div>
             <!-- 필독끝 -->
-    <input type="text" name="input" class="input111">
             <!-- 상풍 상세설명 -->
             <hr>
             <br>

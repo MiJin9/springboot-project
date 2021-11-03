@@ -270,7 +270,6 @@ public class UserController {
     @PostMapping("sendSMS")
     @ResponseBody
     public HashMap<String, String> sendSMS(String phoneNumber) {
-
         Random rand = new Random();
         HashMap<String, String> map = new HashMap<>();
         String numStr = "";
@@ -278,6 +277,7 @@ public class UserController {
             String ran = Integer.toString(rand.nextInt(10));
             numStr += ran;
         }
+
         userService.certified(phoneNumber, numStr);
         map.put("result", "번호가 전송되었습니다.");
         map.put("numStr", numStr);
