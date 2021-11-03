@@ -6,21 +6,22 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <title>EXPO목록 - you귀농</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/expo.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/expo.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <style>
 
-        ul>li>div>img{
+        ul > li > div > img {
             width: 250px;
             height: 215px;
             margin-top: 15px;
         }
 
-        h2, h3, h4,h5,h6{
+        h2, h3, h4, h5, h6 {
             color: black;
         }
     </style>
@@ -37,49 +38,57 @@
                     <img src="/img/pageBanner_dark3.png">
                 </div>
                 <!--            <hr style="border-top: solid 1px green; margin-top: 0px;">-->
-                <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">EXPO 참가 등록</a></h3>
+                <a href="javascript:void(0)" class="writeButton primary button"
+                   style="float: right;margin-right: 20px;border: solid 1px green;font-weight: 100;padding:5px 12px;">EXPO
+                    참가 등록</a></h3>
                 <ul class="expoList">
-                    <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
-                        <div>
-                            <li class="expoItem" th:object="${list.get(index)}">
-                                <div class="expoItemInner">
-                                    <div class="thumbWrapper" style="display: flex">
-                                        <div class="field">
-                                            <div class="uploadResult">
-                                                <ul th:id="${index}">
-                                                    <!--                                                <p id="hiddenNum" th:text='${index.index}'></p>-->
-                                                </ul>
+                    <th:block th:if="${list.size() != 0}">
+                        <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
+                            <div>
+                                <li class="expoItem" th:object="${list.get(index)}">
+                                    <div class="expoItemInner">
+                                        <div class="thumbWrapper" style="display: flex">
+                                            <div class="field">
+                                                <div class="uploadResult">
+                                                    <ul th:id="${index}">
+                                                        <!--                                                <p id="hiddenNum" th:text='${index.index}'></p>-->
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="field">
-
-                                        </div>
-                                        <div class="itemInfo">
-                                            <!--제목-->
-                                            <div class="itemTitle">
-                                                <h4><a target="_self" class="itemName goRead" name="expoTitle" th:text="*{expoTitle}" th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a></h4>
-                                            </div>
-                                            <br>
-                                            <!--작성자-->
-                                            <div class="userId">
-                                                작성자 : &nbsp;<p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userId}"></p>
+                                            <div class="field">
 
                                             </div>
-                                            <!--내용-->
-                                            <div class="itemDetail">
-                                                농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
-                                                주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
-                                                주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
-                                                전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
-                                            </div>
-                                            <div class="listNum">
-                                                No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
+                                            <div class="itemInfo">
+                                                <!--제목-->
+                                                <div class="itemTitle">
+                                                    <h4><a target="_self" class="itemName goRead" name="expoTitle"
+                                                           th:text="*{expoTitle}"
+                                                           th:href="@{/expo/readDetail(expoNum=*{expoNum})}"></a></h4>
+                                                </div>
+                                                <br>
+                                                <!--작성자-->
+                                                <div class="userId">
+                                                    작성자 : &nbsp;<p
+                                                        style="color: black;margin-bottom: 10px;font-size: 13px;"
+                                                        name="userId" th:text="*{userId}"></p>
+
+                                                </div>
+                                                <!--내용-->
+                                                <div class="itemDetail">
+                                                    농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
+                                                    주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
+                                                    주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
+                                                    전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
+                                                </div>
+                                                <div class="listNum">
+                                                    No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </div>
+                                </li>
+                            </div>
+                        </th:block>
                     </th:block>
                 </ul>
                 <form action="/expo/list" name="searchForm">
@@ -87,15 +96,17 @@
                         <div class="field"></div>
                         <div style="margin-bottom: 50px; margin-top: 50px; ">
                             <div id="searchWrap" th:object="${pageMaker}" style="display: flex;">
-                                <select name="keyType" th:object="${criteria}" style="padding: 0; width: 100px; font-weight: bold;">
+                                <select name="keyType" th:object="${criteria}"
+                                        style="padding: 0; width: 100px; font-weight: bold;">
                                     <option value="">전체 ▼</option>
                                     <option value="T" th:selected="*{keyType} == 'T'">제목</option>
                                     <option value="C" th:selected="*{keyType} == 'C'">내용</option>
                                     <option value="W" th:selected="*{keyType} == 'W'">작성자</option>
                                 </select>
-                                <input id="keyword" type="text" name="keyword" >
+                                <input id="keyword" type="text" name="keyword">
                                 <!--버튼-->
-                                <a href="javascript:void(0)" class="search button primary icon solid fa-search" style="height: 37px;font-size: 14px;font-weight: 500;border: solid 1px green;">
+                                <a href="javascript:void(0)" class="search button primary icon solid fa-search"
+                                   style="height: 37px;font-size: 14px;font-weight: 500;border: solid 1px green;">
                                     검색
                                 </a>
                             </div>
@@ -105,9 +116,11 @@
                 <div th:object="${pageMaker}">
                     <div class="big-width" style="text-align: center">
                         <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
-                        <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                        <th:block
+                                th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                             <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
-                            <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                            <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}"
+                               th:href="${num}"><code th:text="${num}"></code></a>
                         </th:block>
                         <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                     </div>
@@ -136,7 +149,7 @@
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </body>
 <script th:inline="javascript">
 
@@ -148,9 +161,9 @@
     let list = [[${list}]];
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         history.replaceState({}, null, "/expo/list");
-        for(let a = 0; a < list.length; a++) {
+        for (let a = 0; a < list.length; a++) {
             (function () {
                 $.getJSON("/expo/getAttachList", {expoNum: list[a].expoNum},
                     function (arr) {
@@ -183,7 +196,7 @@
         }
 
 
-        if(expoNum != null || history.state){
+        if (expoNum != null || history.state) {
             return;
         }
         alert("게시글 " + expoNum + "번이 등록되었습니다.");
@@ -192,7 +205,7 @@
 
 
     // 페이징 양쪽 부등호
-    $("a.changePage").click(function(e){
+    $("a.changePage").click(function (e) {
         e.preventDefault();
         pageForm.attr("action", "/expo/list")
         pageForm.find("input[name='pageNum']").val($(this).attr("href"));
@@ -206,45 +219,41 @@
             return;
         }
         location.href = "/expo/writeExpo";
+    })
 
 
     //제목 눌렀을 때
-    $("a.goRead").on("click",function(e){
+    $("a.goRead").on("click", function (e) {
         e.preventDefault();
         console.log(expoNum);
         if (!$("#sessionId").val()) {
             alert("로그인이 필요합니다.");
             return;
         }
-        location.href = "/expo/readDetail" + paging  + "&expoNum=" + $(this).attr("href");
+        location.href = "/expo/readDetail" + paging + "&expoNum=" + $(this).attr("href");
 
     })
 
     //검색할 때
-    $("a.search").on("click", function(e){
+    $("a.search").on("click", function (e) {
         e.preventDefault();
-        if(!searchForm.find("option:selected").val()){
+        if (!searchForm.find("option:selected").val()) {
             alert("검색 종류를 선택하세요");
             return;
         }
 
-        if(!searchForm.find("input#keyword").val()){
+        if (!searchForm.find("input#keyword").val()) {
             alert("키워드를 입력하세요");
             return;
         }
         searchForm.submit();
     });
 
-    $("input#keyword").on("keydown", function(e){
-        if(e.keyCode == 13){
+    $("input#keyword").on("keydown", function (e) {
+        if (e.keyCode == 13) {
             e.preventDefault();
         }
     })
-
-
-
-    })
-
 
 
 </script>
