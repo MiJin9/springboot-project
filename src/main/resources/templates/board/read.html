@@ -49,6 +49,10 @@
                         <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
                         <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
                     </th:block>
+                    <th:block th:if="${criteria.userId == 'yougnAdmin'}">
+                        <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
+                        <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
+                    </th:block>
                 </div>
                 <div class="horizon"><p style="font-size: 20px;margin-top: 8px; text-align: center;width: 1000px;">명예훼손이나 비방, 불쾌감을 주는 글, 욕설, 남을 모욕하는 댓글은 제재가 있을 수 있습니다.</p></div>
                 <br>
@@ -193,7 +197,7 @@
                     if(list[i].regDate != list[i].updateDate){
                         str += "<br>수정된 날짜 " + replyService.displayTime(list[i].updateDate);
                     }
-                    if(sessionId == list[i].id) {
+                    if(sessionId == list[i].id || sessionId == "yougnAdmin") {
                         str += "</strong></p></div>"
                         str += "<div style='text-align: right'><a class='modify' href='" + list[i].rno + "'>수정</a>"
                         str += "<a class='finish' style='display: none' href='" + list[i].rno + "'>수정완료</a>"

@@ -50,7 +50,7 @@
 
                 <input type="text" placeholder ="제목" name="title" id="title" style="border: solid 0.1px #a9a9a9;">
 
-                <textarea id="summernote" name="content" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
+                <textarea id="summernote" name="content" th:utext="${vo.content}" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
                 <!-- 버튼과 관련된 영역 -->
 
@@ -93,7 +93,6 @@
 <script th:inline="javascript">
 
     let title = [[${vo.title}]];
-    let content = [[${vo.content}]];
     let boardType = [[${cri.boardType}]];
     let sessionId = [[${cri.userId}]];
 
@@ -107,8 +106,6 @@
 
     $(document).ready(function () {
         $("#title").val(title);
-        $(".note-placeholder").css("display","none");
-        $("div.panel-body").html(content);
     })
 
 

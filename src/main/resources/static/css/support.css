@@ -184,3 +184,7 @@ table a.button.stop {
 .note-icon-bar, .note-resizebar {
     display: none;
 }
+
+* li {
+    list-style: none;
+}

@@ -110,18 +110,19 @@
                             <hr>
                         </div>
                     </section>
+                    <input type="hidden" th:value="${session.sessionId}" id="id">
                 </div>
             </div>
             <div class="tle">
                 <div id="bottom">
                     <!-- 상풍 상세설명 -->
-                    <textarea id="summernote" name="content" style="resize: none;" th:text="*{content}"></textarea>
+                    <textarea id="summernote" name="content" style="resize: none;" th:utext="${class.content}"></textarea>
                     <!-- 상풍 상세설명 끝 -->
                 </div>
             </div>
             <input type="submit" id="sendSummer" class="button" value="작성" >
 
-            <a class="button" onclick="history.back()" >취소</a>
+            <a class="button" onclick="history.back()" style="line-height: 1; height: 30px;">취소</a>
         </form>
     </div>
 
@@ -151,11 +152,19 @@
 </body>
 <script>
     let classNum = [[${class.num}]];
+
+    let session = $("#id").val();
+    if (session != "yougnAdmin" || session == "") {
+        alert("관리자 이외에는 접근하실 수 없습니다.");
+        history.back();
+    }
+
     // 주소검색 API
     $(function () {
         $("#postcodify_search_button").postcodifyPopUp();
     });
     $(document).ready(function () {
+        $("#file").hide();
         var fontList = ['맑은 고딕', '돋움', '궁서', '굴림', '굴림체', '궁서체', '나눔 고딕', '바탕', '바탕체', '새굴림', 'HY견고딕', 'HY견명조', 'HY궁서B', 'HY그래픽M', 'HY목각파임B', 'HY신명조', 'HY얕은샘물M', 'HY엽서L', 'HY엽서M', 'HY중고딕', 'HY헤드라인M', '휴먼매직체', '휴먼모음T', '휴먼아미체', '휴먼둥근헤드라인', '휴먼편지체', '휴먼옛체'];
         var setting = {
             placeholder: "" ,
@@ -280,8 +289,8 @@
 
                 str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
                 str += "<div>";
-                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                str += "<img src='/upload/display?fileName=" + originPath + "' style='width: 480px; max-width: 480px; max-height:350px; height: 350px;'>";
+                str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
                 str += "</div>";
                 str += "</li>";
             });
@@ -319,6 +328,7 @@
                 contentType: false,
                 processData: false,
                 success: function(fileList){
+                    $("#file").hide()
                     showUploadFile(fileList);
                     inputFile.val("");
                 }
@@ -333,11 +343,11 @@
 
                     $(arr).each(function(i, attach){
                         let fileCallPath = encodeURIComponent("classThumb/"+attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-
+                        let originPath = encodeURIComponent("classThumb/" + attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
                         str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-name='" + attach.fileName.substring(attach.fileName.indexOf("_") + 1) + "' data-type='" + attach.image +"'>";
                         str += "<div>";
-                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                        str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                        str += "<img src='/upload/display?fileName=" + originPath + "' style='width: 480px; max-width: 480px; max-height:350px; height: 350px;'>";
+                        str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
                         str += "</div>";
                         str += "</li>";
                     });
@@ -351,6 +361,7 @@
         let type = $(this).data("type");
         let li = $(this).parents("li");
         li.remove();
+        $("#file").show()
     });
 </script>
 </html>

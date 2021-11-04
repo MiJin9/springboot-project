@@ -44,7 +44,7 @@ public class ClassService {
              srcArr.add(null);
              continue;
             }
-            temp = "classThumb/" + vo.getUploadPath() + "/s_" + vo.getUuid() + "_" +vo.getFileName();
+            temp = "classThumb/" + vo.getUploadPath() + "/" + vo.getUuid() + "_" +vo.getFileName();
             srcArr.add(temp);
         }
         return srcArr;

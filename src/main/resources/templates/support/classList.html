@@ -78,7 +78,7 @@
                         <th:block th:if="${list.size() != 0}">
                             <th:block th:each="num:${#numbers.sequence(0,list.size() -1)}">
                                 <tr th:object="${list.get(num)}">
-                                    <td><img th:src="@{/upload/display(fileName=${srcList.get(num)})}"></td>
+                                    <td><img th:src="@{/upload/display(fileName=${srcList.get(num)})}" style="width: 100px;height: 100px;"></td>
                                     <td th:text="*{name}"></td>
                                     <td th:text="*{title}"></td>
                                     <th:block th:switch="${checkList.get(num)}">
