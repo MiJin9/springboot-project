@@ -28,6 +28,8 @@
         <div class="category">
             <img src="/img/myOrderList.png" style="padding-top: 53px;">
         </div>
+        <br>
+        <p id="no">* 반드시 상품수령 후 배송확인을 눌러주세요.</p>
         <div class="ListTable">
             <table style="height: auto;font-size: 16px;text-align: center;">
                 <thead>
@@ -37,7 +39,6 @@
                     <th class="itemname">상품명</th>
                     <th class="orderdate">구매날짜</th>
                     <th class="orderaddress">주소</th>
-                    <th class="orderdetailaddress">상세주소</th>
                     <th class="orderpayment">결제가격</th>
                     <th class="ordercount">수량</th>
                     <th class="orderstate">상태</th>
@@ -51,12 +52,15 @@
                         <td class="itemnum" th:text="*{itemNum}"></td>
                         <td class="itemname" th:text="*{itemName}"></td>
                         <td class="orderdate" th:text="*{orderDate}"></td>
-                        <td class="orderaddress" th:text="*{orderAddress}"></td>
-                        <td class="orderdetailaddress" th:text="*{orderAddressDetail}"></td>
+                        <td class="orderaddress">
+                            <p th:text="*{orderAddress}"></p>
+                            <p th:text="*{orderAddressDetail}"></p>
+                        </td>
                         <td class="orderdetailaddress" th:text="*{orderPayment}"></td>
                         <td class="ordercount" th:text="*{orderCount}"></td>
                         <td class="orderstate" th:id="${index}" th:text="*{status}"></td>
-                        <td><a style="height: 47px; padding-top: 0px" th:href="*{orderNum}" class="button tag">배송확인</a></td>
+                        <td th:if="*{status == 1}"><a style="height: 47px; padding-top: 0px" href="javascript:void(0)" class="button tag">배송완료</a></td>
+                        <td th:if="*{status == 0}"><a style="height: 47px; padding-top: 0px" th:href="*{orderNum}" class="button tag">배송확인</a></td>
                     </tr>
                 </th:block>
                 </th:block>
@@ -83,7 +87,8 @@
 <script src="/js/main.js"></script>
 <script th:inline="javascript">
     let list = [[${list}]];
-
+    let status = [[${list[0].status}]];
+    console.log(status)
     for (let i = 0; i < list.length; i++){
         let str = $("#"+i).text() == 0 ? "배송 중" : "배송 완료";
         $("#"+i).html(str);
@@ -92,6 +97,10 @@
 
     $(".tag").on("click", function (e) {
         e.preventDefault();
+        if($(this).text() == "배송완료"){
+            return;
+        }
+        alert("배송이 확인되었습니다.")
         location.href = "/market/marketStatus?orderNum=" + $(this).attr("href");
     })
 

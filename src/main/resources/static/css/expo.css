@@ -80,6 +80,7 @@ li{
 
 .itemInfo{
     margin-left: 50px;
+    width: 700px;
 }
 .itemDetailInner{
     font-size: 15px;
@@ -160,4 +161,12 @@ div#text{
     visibility: hidden;
 }
 
+.uploadResult ul li img {
+    width: 200px;
+    height: 200px;
+}
+
+.note-icon-bar, .note-resizebar {
+    display: none;
+}
 

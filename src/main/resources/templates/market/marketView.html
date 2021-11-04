@@ -85,13 +85,14 @@
                     <hr>
                     <br>
                     <section style="display: flex">
-                        <form name="form" method="get" style="font-size: 20px">
+                        <form  method="get" name="form" style="font-size: 20px">
                             수량 : <input type=hidden name="sell_price" th:value="*{itemprice}">
                             <input type="text" name="amount" size="3" style="font-size: 18px" onchange="change();">
                             <input style="height: 29px;line-height: 0px;width: 62px;padding: 10px" type="button" value=" + " onclick="add();">
                             <input style="height: 29px;line-height: 0px;width: 62px;padding: 10px" type="button" value=" - " onclick="del();"><br>
 
                             금액 : <input type="text" name="sum" size="11" style="width: 190px;font-size: 18px; margin-top: 3px" readonly> 원
+
                         </form>
                     </section>
                     <!--버튼-->
@@ -124,13 +125,13 @@
     <br>
     <br>
 
-    <form action="/market/marketPayment" method="get" name="getForm" style="display: none" th:object="${item}">
+    <form action="/market/marketPayment" method="get" name="getForm" style="display: block" th:object="${item}">
         <input type="hidden" name="itemnum" id="itemnum" th:field="*{itemnum}">
         <input type="hidden" name="itemname" id="itemname" th:field="*{itemname}">
         <input type="hidden" name="itemprice" id="itemprice" th:field="*{itemprice}">
         <input type="hidden" name="userId" id="userId" th:field="*{userid}">
         <input type="hidden" name="itemdeliverprice" id="itemdeliverprice" th:field="*{itemdeliverprice}">
-        <input type='text' name='count' class='count'>
+        <input type='hidden' name='count' class='count'>
     </form>
 
     <th:block th:include="footer.html"></th:block>
@@ -147,6 +148,13 @@
 <script src="/js/main.js"></script>
 <script th:inline="javascript">
 
+    let sessionId = [[${session.sessionId}]];
+    if(sessionId == null){
+        alert("로그인이 필요합니다.")
+        location.href = "/user/login";
+    }
+
+
     let itemnum = $("#itemnum").val();
     let paging = [[${criteria.listLink}]]; // 페이징
     console.log(itemnum);
@@ -162,6 +170,7 @@
 
         });
     });
+
 
     var sell_price;
     var amount;
@@ -206,12 +215,9 @@
 
 
 
-     let count = 1; /*기본값 1*/
-    console.log(count);
-    $(".count").val(count);
+
     function add () {
-        count ++; /* 플러스 누르때 마다 1 증가 */
-        $(".count").val(count);
+
         hm = document.form.amount;
         sum = document.form.sum;
         hm.value ++ ;
@@ -220,8 +226,7 @@
     }
 
     function del () {
-        count -- ; /* 마이너스 누를때마다 1 감소*/
-        $(".count").val(count);
+
         hm = document.form.amount;
         sum = document.form.sum;
         if (hm.value > 1) {
@@ -229,11 +234,17 @@
             sum.value = parseInt(hm.value) * parseInt(sell_price);
         }
     }
+    $("input[name='amount']").change(function () {
+        if($(this).val() < 1 ){
+            $(this).val(1);
+            $(".count").val($(this).val()); // 이거 맞지?
+            alert("최소 1개 이상 주문 해야합니다.");
+        }
 
+    })
     function change () {
         hm = document.form.amount;
         sum = document.form.sum;
-
         if (hm.value < 0) {
             hm.value = 0;
         }
@@ -262,7 +273,7 @@
 
 
     $("input.button").on("click", function () {
-        $(".count").val(count);
+        $(".count").val($("input[name='amount']").val());
        document.getForm.submit();
     })
 

@@ -148,7 +148,7 @@
 
 
     $(document).ready(function(){
-        $("input[type='file']").hide();
+        $("#fileBtn").hide();
         let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
         let maxSize = 5242880;// 5MB
         let inputFile = $(".uploadDiv input");
@@ -224,7 +224,7 @@
                     setTimeout(function(){},100)
                     showUploadFile(fileList);
                     inputFile.val("");
-                    $("input[type='file']").hide();
+                    $("#fileBtn").hide();
                 }
             });
         });
@@ -239,17 +239,9 @@
             let type = $(this).data("type");
             let li = $(this).parents("li");
 
-            $.ajax({
-                url: "/upload/deleteFile",
-                type: "POST",
-                data: {fileName:targetFile, type:type},
-                dataType: "text",
-                success: function(result){
-                    alert(result);
                     li.remove();
-                    $("input[type='file']").show();
-                }
-            });
+                    $("#fileBtn").show();
+
 
         });
 

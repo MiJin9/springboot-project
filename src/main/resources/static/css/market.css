@@ -93,3 +93,16 @@ ul>div>img{
     width: 300px;
     height: 300px;
 }
+
+th.orderdate {
+    width: 100px;
+}
+
+td.orderaddress p{
+    margin-bottom: -23px;
+}
+
+p#no {
+    color: #3c763d;
+    float: right;
+}
