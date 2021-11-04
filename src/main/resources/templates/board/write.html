@@ -8,17 +8,17 @@
 <head>
     <link rel="shortcut icon" href="/img/favicon.ico">
     <title>게시판 글 작성</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/board/write.css" />
-    <link rel="stylesheet" href="/css/board/pageBanner.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/board/write.css"/>
+    <link rel="stylesheet" href="/css/board/pageBanner.css"/>
 
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
     <!--썸머노트-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/main.css"/>
 
 </head>
 <body class="homepage is-preload">
@@ -47,19 +47,20 @@
 
                 <!-- summernote와 관련된 영역 -->
 
-                <input type="text" placeholder ="제목" name="title" id="title" style="border: solid 0.1px #a9a9a9;">
+                <input type="text" placeholder="제목" name="title" id="title" style="border: solid 0.1px #a9a9a9;">
 
-                <textarea id="summernote" name="content" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
-
+                <textarea id="summernote" name="content" onKeyup="inputLimitByteChecked( this );" data-byte="4000"
+                          style="resize: none;"></textarea>
 
 
                 <!-- 버튼과 관련된 영역 -->
 
                 <div align="center" class="btn-box">
 
-                    <input type="button" id="sendSummer" class="button" value="작성">
+                    <input type="button" id="sendSummer" class="button" style="height: 33px;" value="작성">
 
-                    <a class="button" onclick="history.back()">취소</a>
+                    <a class="button" style="padding: 6px; height: 33px; line-height: 25px; width: 81px;
+                        top: -2px;" onclick="history.back()">취소</a>
 
                 </div>
 
@@ -70,7 +71,6 @@
         <br>
         <br>
     </div>
-
 
 
     <th:block th:include="footer.html"></th:block>
@@ -96,7 +96,7 @@
     let type = [[${vo.type}]];
     console.log(type)
     let sessionId = [[${vo.id}]];
-    if(sessionId == null){
+    if (sessionId == null) {
         alert("로그인이 필요합니다.");
         location.href = "/user/login";
     }
@@ -125,12 +125,13 @@
         case 0:
             $(".smallTitle").html("공지");
             $(".pageBanner-w").children().attr("src", "/img/board/noticeWrite.png");
-            if(sessionId != "yougnAdmin") {
+            if (sessionId != "yougnAdmin") {
                 alert("접근이 불가 합니다.")
                 location.href = history.back(); /*관리자 아이디일때만 가능하게 만들기*/
             }
             break;
-    };
+    }
+    ;
 
 
 </script>
