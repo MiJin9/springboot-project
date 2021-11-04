@@ -225,10 +225,11 @@
 
         });
 
-        // if(!$("input#sessionId").val()){
-        //     alert("로그인이 필요합니다.");
-        //     location.href = "/user/login";
-        // }
+        if(!$("input#sessionId").val()){
+            alert("로그인이 필요합니다.");
+            location.href = "/user/login";
+            return;
+        }
 
 
 

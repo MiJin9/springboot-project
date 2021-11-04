@@ -105,6 +105,7 @@
         e.preventDefault();
         if(!$("input#id").val()){
             alert("로그인 후 이용 가능합니다.");
+            location.href = "/user/login";
             return;
         }
         let url = $(this).attr("href");
