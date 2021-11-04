@@ -27,10 +27,11 @@ public class MainController {
 
     @GetMapping("/")
     public String list(Criteria criteria, Model model, HttpServletRequest r) {
-        //List<ExpoVO> list = expoService.getList(criteria);
+        List<ExpoVO> list = expoService.getList(criteria);
         String id = (String) r.getSession().getAttribute("sessionId");
         model.addAttribute("id", id);
-        model.addAttribute("list", expoService.getList(criteria));
+        model.addAttribute("list", list);
+        log.info("---------list : " + list);
 
     return "index";
     }

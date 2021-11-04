@@ -94,9 +94,14 @@ public class MarketController {
 
     /*상세보기*/
     @GetMapping({"marketView"})
-    public void marketView(@RequestParam("itemnum") Long itemnum, Criteria criteria, Model model) {
+    public void marketView(@RequestParam("itemnum") Long itemnum, Criteria criteria, Model model, HttpServletRequest r) {
+        String id = (String)r.getSession().getAttribute("sessionId");
+        log.info("들어옴");
+        log.info("id : " + id);
+        model.addAttribute("id",id);
         model.addAttribute("item", marketService.get(itemnum));
         model.addAttribute("criteria",criteria);
+
     }
 
 

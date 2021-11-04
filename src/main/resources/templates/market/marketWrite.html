@@ -6,6 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <title>마켓상품등록</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -152,10 +153,10 @@
             let form = $("form#writeForm");
             let str = "";
             $(".uploadResult ul li").each(function(i, obj){
-                str += "<input type='text' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
-                str += "<input type='text' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + $(obj).data('name') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + $(obj).data('uuid') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + $(obj).data('path') + "'>"
+                str += "<input type='hidden' name='attachList[" + i + "].image' value='" + $(obj).data('type') + "'>"
             });
             form.append(str).submit();
         })

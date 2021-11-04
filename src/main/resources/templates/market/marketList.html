@@ -6,6 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <title>마켓리스트</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -247,6 +248,10 @@
     //제목 눌렀을 때
     $("a#goRead").on("click", function(e){
         e.preventDefault();
+        if($("#sessionId").val() == ""){
+            alert("로그인이 필요합니다.");
+            return;
+        }
         location.href = "/market/marketView" + paging  + "&itemnum=" + $(this).attr("href");
     })
 

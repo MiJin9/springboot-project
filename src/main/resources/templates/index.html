@@ -6,6 +6,7 @@
 -->
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <title>메인-유귀농</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -353,6 +354,15 @@
         }
         location.href = "/support/hallList?sido="+sido+"&gugun="+gugun;
     })
+
+    $("div.etc1").on("click", function(){
+        location.href = "/board/list?boardType=5";
+    })
+
+    $("div.etc2").on("click", function(){
+        location.href = "/market/marketList";
+    })
+
 
 </script>
 </html>
