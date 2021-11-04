@@ -152,7 +152,7 @@
                         </div>
                     </form>
                     <div th:object="${pageMaker}">
-                        <div class="big-width" style="font-size: 25px;text-align: center">
+                        <div class="big-width" style="font-size: 13px;text-align: center">
                             <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
                             <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
                                 <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
@@ -250,6 +250,7 @@
         e.preventDefault();
         if($("#sessionId").val() == ""){
             alert("로그인이 필요합니다.");
+            location.href = "/user/login";
             return;
         }
         location.href = "/market/marketView" + paging  + "&itemnum=" + $(this).attr("href");
@@ -280,6 +281,7 @@
         e.preventDefault();
         if ($("#sessionId").val() == "") {
             alert("로그인이 필요합니다.");
+            location.href = "/user/login";
             return;
         }
             location.href = "/market/marketWrite";

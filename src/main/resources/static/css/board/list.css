@@ -1,51 +1,57 @@
-.table-wrapper{
+.table-wrapper {
     width: 1050px;
     margin: 0 auto;
     margin-top: 30px;
     padding-bottom: 30px;
 }
-tr.tHead th{
+
+tr.tHead th {
     font-weight: bold;
     color: #888888;
     background: #EEEEEE;
     text-align: center;
 }
 
-#keyword, #keyword1{
-    margin:0;
+#keyword, #keyword1 {
+    margin: 0;
     border: 1px solid;
     width: 562px;
 }
-select{
+
+select {
     width: 125px;
     max-height: 31px;
-    padding: 0!important;
+    padding: 0 !important;
     max-width: 168px;
-    background: white!important;
+    background: white !important;
 }
-a.search{
+
+a.search {
     width: 70px;
     max-height: 31px;
 }
 
-#searchWrap{
+#searchWrap {
     display: flex;
     width: 900px;
     justify-content: center;
 
 }
-.tle{
+
+.tle {
     background: white;
 }
-th.title{
+
+th.title {
     width: 430px;
 }
-th.bno{
+
+th.bno {
     width: 80px;
 }
 
 
-.inputBtn{ /*팝니다 삽니다 버튼*/
+.inputBtn { /*팝니다 삽니다 버튼*/
     display: flex;
     width: 636px;
     height: fit-content;
@@ -55,7 +61,7 @@ th.bno{
 }
 
 
-#choice1, #choice2{
+#choice1, #choice2 {
     background: #FFFFFF;
     width: 120px;
     font-size: 20px;
@@ -66,7 +72,8 @@ th.bno{
 #choice2 {
     margin-left: -4px;
 }
-.bno, .writer, .regDate, .updateDate, .viewCtn{/*테이블 내용 가운제 정렬 (제목 제외)*/
+
+.bno, .writer, .regDate, .updateDate, .viewCtn { /*테이블 내용 가운제 정렬 (제목 제외)*/
     text-align: center;
 }
 
@@ -74,20 +81,21 @@ th.bno{
     margin-top: 50px;
 }
 
-.tBody{
+.tBody {
     border-bottom: 1px solid black;
+    height: 45px;
 }
 
-table{
+table {
     background: white;
-    min-height: 350px;
+    min-height: 150px;
 }
 
-.tBody td{
+.tBody td {
     vertical-align: middle;
 }
 
-.a-write{
+.a-write {
     margin-top: 87px;
     float: right;
     height: 30px;
@@ -96,7 +104,7 @@ table{
     background: #EEEEEE;
 }
 
-.smallTitle{
+.smallTitle {
     font-size: 30px;
     margin-left: 90px;
     font-weight: 900;
@@ -109,20 +117,20 @@ table{
     margin-left: 90px;
 }
 
-.main{
-    padding-top: 60px!important;
+.main {
+    padding-top: 60px !important;
 }
 
 a#goRead {
-    color : #7a8186;
+    color: #7a8186;
 }
 
 
-.big-width{
+.big-width {
     text-align: center;
 }
 
-select[NAME="keyType"]{
+select[NAME="keyType"] {
     border: solid 0.5px black;
 }
 

@@ -52,9 +52,9 @@
     list-style: none;
 }
 
-ul li a{
-    font-size: 15px; color: #aaaaaa;
-}
+/*ul li a{*/
+/*    font-size: 15px; color: #aaaaaa;*/
+/*}*/
 
 .contentCenter {
     width: 100%;
@@ -91,9 +91,9 @@ ul li a{
     padding-left: 20px;
 }
 
-a {
+#table a, .changePage {
     text-decoration: none;
-    color: #696f72;
+    color: black;
 }
 
 #all input {
@@ -107,6 +107,10 @@ a {
 .subMenu {
     padding-left: 0px;
     color: black;
+}
+.subMenu ul li a {
+    text-decoration: none;
+    color: #696f72!important;
 }
 
 .sub_depth1 li {

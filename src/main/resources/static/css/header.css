@@ -27,3 +27,7 @@ ul.dropdown {
 #banner {
     background: #4e321c21;
 }
+
+div.info a {
+    color: #80B763;
+}

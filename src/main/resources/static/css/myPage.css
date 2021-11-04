@@ -80,9 +80,9 @@
     padding-left: 20px;
 }
 
-a {
+.subMenu ul li a {
     text-decoration: none;
-    color: #696f72;
+    color: #696f72!important;
 }
 
 #all input {

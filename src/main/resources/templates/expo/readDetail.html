@@ -8,10 +8,11 @@
 <head>
     <link rel="shortcut icon" href="/img/favicon.ico">
     <title>EXPO 상세보기 - you귀농</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/expoDetail.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/expoDetail.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
 
@@ -20,85 +21,88 @@
     <th:block th:include="header.html"></th:block>
     <section>
         <form action="/expo/remove" method="post" name="postForm">
-        <div class="tle" style="height: auto;">
-            <div class="main" th:object="${expo}" style="height: auto;padding-bottom: 100px;">
-                <div class="category">
-                    <img src="/img/pageBanner_detail.png">
-                </div>
+            <div class="tle" style="height: auto;">
+                <div class="main" th:object="${expo}" style="height: auto;padding-bottom: 100px;">
+                    <div class="category">
+                        <img src="/img/pageBanner_detail.png">
+                    </div>
 
-                <div style="display: flex; float: right">
-                    <th:block th:if="${expo.userId == id}">
-                        <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="modify primary button" type="button" value="수정">
-                        <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;" class="delete primary button" type="submit" value="삭제">
-                    </th:block>
-                    <input style=" margin-right: 10px; height: 35px; width: 125px; line-height: normal;" class="goList primary button" type="button" value="목록보기">
-                </div>
-                <div class="readTitle">
-                    <input type="hidden" name="expoNum" th:field="*{expoNum}">
-                    <input name="expoTitle"
-                           style="height: 30px; width: 900px; margin-left: 50px; border:none; color: black; font-weight: bold; font-size: 30px;text-align: center; padding-top: 5px; margin-top: 30px;" type="text" th:field="*{expoTitle}" readonly>
-                </div>
-                <div class="thumbWrapper" style="display: flex">
-                    <div class="thumbButton">
-                        <p style="text-align: center; font-size: 18px; font-weight: 600; margin-left: 50px;color: black;">대표사진</p>
+                    <div style="display: flex; float: right">
+                        <th:block th:if="${expo.userId == id}">
+                            <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;"
+                                   class="modify primary button" type="button" value="수정">
+                            <input style=" margin-right: 10px; height: 35px; width: 100px; line-height: normal;"
+                                   class="delete primary button" type="submit" value="삭제">
+                        </th:block>
+                    </div>
+                    <div class="readTitle">
+                        <input type="hidden" name="expoNum" th:field="*{expoNum}">
+                        <p name="expoTitle"
+                           style="height: auto; line-height: 37px; width: 900px; border:none; color: black; font-weight: bold; font-size: 30px;text-align: center; padding-top: 5px; margin: 0 auto;"
+                           th:text="*{expoTitle}"></p>
+                    </div>
+                    <div class="thumbWrapper" style="display: flex">
+                        <div class="thumbButton">
+                            <p style="text-align: center; font-size: 18px; font-weight: 600; margin-left: 50px;color: black;">
+                                대표사진</p>
 
-                        <div class="uploadResult">
-                            <ul></ul>
+                            <div class="uploadResult">
+                                <ul></ul>
+                            </div>
+                        </div>
+                        <div class="field">
+
+                        </div>
+                        <!--내용 시작-->
+                        <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
+                        <div class="bodyText">
+                            <div>
+                                <input name="userId" th:field="*{userId}" type="hidden">
+                            </div>
+                            <div class="field">
+                                <h3>농장이름</h3>
+                                <p th:text="*{farmName}" name="farmName" style="height: 30px;"></p>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="field">
+                                <h4>농장주</h4>
+                                <p th:text="*{farmerName}" name="farmerName" style="height: 30px;"></p>
+                            </div>
+                            <hr>
+                            <br>
+                            <div>
+                                <h4>주소</h4>
+                                <p th:text="*{farmAddress}" name="farmAddress" style="height: 30px;"></p>
+                            </div>
+                            <hr>
+                            <br>
+                            <div>
+                                <h4>전화번호</h4>
+                                <p th:text="*{farmPhone}" name="farmPhone" style="height: 30px;"></p>
+                            </div>
+                            <hr>
+                            <br>
+                            <div>
+                                <h4>주요품목</h4>
+                                <p th:text="*{farmProduct}" name="farmProduct" style="height: 30px;"></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="field">
+                    <hr>
+                    <div class="contentOutLine"><!--본문-->
+                        <div class="expoContent" name="expoContent" rows="6" style="resize:none" readonly></div>
+                    </div>
 
-                    </div>
-            <!--내용 시작-->
-                    <!--농장이름, 농장주(작성자), 농장 전화번호(?), 농장 주소-->
-                <div class="bodyText">
-                    <div>
-                        <input name="userId" th:field="*{userId}" type="hidden">
-                    </div>
-                    <div class="field">
-                        <h3>농장이름</h3>
-                        <p th:text="*{farmName}" name="farmName" style="height: 30px;"></p>
-                    </div>
-                    <hr>
-                    <br>
-                    <div class="field">
-                        <h4>농장주</h4>
-                        <p th:text="*{farmerName}" name="farmerName" style="height: 30px;"></p>
-                    </div>
-                    <hr>
-                    <br>
-                    <div>
-                        <h4>주소</h4>
-                        <p th:text="*{farmAddress}" name="farmAddress" style="height: 30px;"></p>
-                    </div>
-                    <hr>
-                    <br>
-                    <div>
-                        <h4>전화번호</h4>
-                        <p th:text="*{farmPhone}" name="farmPhone" style="height: 30px;"></p>
-                    </div>
-                    <hr>
-                    <br>
-                    <div>
-                        <h4>주요품목</h4>
-                        <p th:text="*{farmProduct}" name="farmProduct" style="height: 30px;"></p>
-                    </div>
-                </div>
+
+                </div><!--outline-->
             </div>
-            <hr>
-            <div class="contentOutLine"><!--본문-->
-                <div class="expoContent" name="expoContent" rows="6" style="resize:none" readonly></div>
-            </div>
-
-
-            </div><!--outline-->
+        </form>
+        <br>
+        <div style="text-align: center;">
+            <input class="goList primary button" type="button" value="목록보기" style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px;">
         </div>
-</form>
-    <br>
-        <input class="goList primary button" type="button" value="목록보기"
-       style="border: solid 1px green;font-weight: 100;width: 124px;height: 35px; padding-top: 4px; margin-left: 895px; margin-top: 8px;">
-    </a>
-</section>
+    </section>
     <input type="hidden" th:value="${id}" id="sessionId">
     <th:block th:include="footer.html"></th:block>
 </div>
@@ -133,29 +137,30 @@
         location.href = "/expo/modifyExpo" + paging + "&expoNum=" + expoNum;
     })
 
-    if(!$("input#sessionId").val()){
+    if (!$("input#sessionId").val()) {
         alert("로그인이 필요합니다.");
         location.href = "/user/login";
+
     }
 
 
-    $(document).ready(function(){
-        (function(){
+    $(document).ready(function () {
+        (function () {
             $.getJSON("/expo/getAttachList", {expoNum: expoNum},
-                function(arr){
+                function (arr) {
                     console.log(arr);
                     let str = "";
 
-                    $(arr).each(function(i, attach){
+                    $(arr).each(function (i, attach) {
                         console.log(attach.image);
-                        if(!attach.image){
+                        if (!attach.image) {
                             let fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
                             str += "<li>";
                             str += "<div>";
                             str += "<img src='/img/attach.png' width='100px'>";
                             str += "</div>";
                             str += "</li>";
-                        }else{
+                        } else {
                             let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
                             let originPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid + "_" + attach.fileName);
 
