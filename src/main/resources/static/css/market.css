@@ -1,74 +1,84 @@
-#sit_pvi_big{
+#sit_pvi_big {
     opacity: 1;
     float: left;
     width: 500px;
     margin-left: 40px;
     margin-top: 30px
 }
-.owl-wrapper{
+
+.owl-wrapper {
     width: 500px;
     left: 0px;
     display: block;
     transition: all 1000ms ease 0s;
     transform: translate3d(0px, 0px, 0px);
 }
-.detailView{
+
+.detailView {
     width: 500px;
     float: left;
     margin-left: 50px;
     margin-top: 70px
 }
-.con_w{
+
+.con_w {
     font-size: 17px;
 }
-.option{
-    font-family:'Jeju Gothic';
+
+.option {
+    font-family: 'Jeju Gothic';
     width: 300px;
     border: solid 0.5px;
 }
 
-.btn-box a{
+.btn-box a {
     height: 33px;
     line-height: 110%;
 }
 
 .container {
-    width: 100%!important;
+    width: 100% !important;
 }
 
-#logo div img{
-    vertical-align: inherit!important;
+#logo div img {
+    vertical-align: inherit !important;
 }
 
-footer{
-    margin-left: -40px!important;
+footer {
+    margin-left: -40px !important;
 }
-div.four{
+
+div.four {
     font-size: 10pt;
 }
-div.four h1, div.four p{
+
+div.four h1, div.four p {
     font-size: 1em;
 }
 
-.info{
-    top: 12px!important;
+.info {
+    top: 12px !important;
     font-size: 13.3333333333333px;
 }
+
 .info a {
     color: #80B763;
 }
-.sct{
+
+.sct {
     display: flex;
     justify-content: space-around;
-    list-style:none;
+    list-style: none;
 }
-.sct_name{
+
+.sct_name {
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-#h_name{
+
+#h_name {
     font-size: 44px;
     font-weight: 100;
     background: #7ebf5b;
@@ -81,15 +91,15 @@ div.four h1, div.four p{
 }
 
 
-.thumbTitle{
-    height:20px;
+.thumbTitle {
+    height: 20px;
 }
 
-.thumbWrapper{
+.thumbWrapper {
     justify-content: space-evenly;
 }
 
-ul>div>img{
+ul > div > img {
     width: 300px;
     height: 300px;
 }
@@ -98,11 +108,38 @@ th.orderdate {
     width: 100px;
 }
 
-td.orderaddress p{
+td.orderaddress p {
     margin-bottom: -23px;
 }
 
 p#no {
     color: #3c763d;
     float: right;
+}
+
+.tBody {
+    line-height: 46px;
+    height: 80px;
+    border-bottom: 1px solid;
+}
+
+.orderstate {
+    padding-top: 10px;
+}
+
+.ordernum {
+    width: 72px;
+}
+
+.itemnum {
+    width: 73px;
+}
+.itemname{
+    width: 120px;
+}
+.orderpament{
+    width: 91px;
+}
+.orderaddress{
+    width: 420px;
 }

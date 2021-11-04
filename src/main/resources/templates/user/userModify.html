@@ -123,9 +123,8 @@
     if(result == "fail"){
         alert("회원수정 실패");
     }
-
+    let phoneNumber = $('#phone').val();
     $('#pinButton').click(function () {
-        let phoneNumber = $('#phone').val();
         //인증번호 일치 여부
         if($("#phone").val().indexOf("-") != -1){
             alert("- 를 제외하고 핸드폰번호를 입력해주세요.");
@@ -146,12 +145,13 @@
                 console.log(map.result);
                 $("#checkPin_text").text(map.result);
                 pin = map.numStr;
-                phone = $("#phone").val()
+                phoneNumber = $('#phone').val();
             }
 
         })
     });
     $('#checkButton').click(function () {
+        if(pin == ""){alert("인증번호 받기 먼저 해주세요.");return;}
         if ($("#phoneCheck").val() == null) {
             $("#checkPin_text").text("인증번호를 입력해주세요.");
         }
@@ -160,7 +160,7 @@
             $("#phoneCheck").attr("readonly", true);
             $("#phone").attr("readonly", true);
             $("#pinButton").off("click");
-            phone = $("#phone").val();
+
         } else {
             $("#checkPin_text").text("인증번호가 일치하지 않습니다.");
         }
@@ -185,20 +185,25 @@
             alert("이메일을 확인해주세요.")
             return;
         }
-        if ($("#phone").val() != phone){
-            console.log($("#phone").val() + "밸류")
-            console.log(phone + "변수 ") // 이거가 인증번호가 들어가네
-            alert("핸드폰 번호를 확인해주세요.2") // 이건 폰
-            return;
-        }
-        if(!check) { 펄스
-            $("#modifyForm").submit();
-        }
-        if(check){ 트루 아니야?
-            if($("#phone").val() == phone){
-                $("#modifyForm").submit();
+
+        if(check) {
+            if ($("#phone").val() != phoneNumber) {
+                console.log($("#phone").val() + "밸류")
+                console.log(phone + "변수 ") // 이거가 인증번호가 들어가네
+                alert("핸드폰 번호를 확인해주세요.2") // 이건 폰
+                return;
+            }
+        }else{
+            if(phone != $("#phone").val()){
+                alert("핸드폰 번호를 확인해주세요.3")
+                return;
             }
         }
+
+
+            $("#modifyForm").submit();
+
+
     });
 
     $("#cancelButton").on("click", function(){

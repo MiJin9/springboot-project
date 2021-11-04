@@ -103,7 +103,7 @@ public class MarketServiceImple implements MarketService {
         //빠른 for문
         for (OrderVO orderVO : orderList){
             //반복돌려서 sysdate에서 시간만 잘려서 나오게
-            orderVO.setOrderDate(orderVO.getOrderDate().split("")[0]);
+            orderVO.setOrderDate(orderVO.getOrderDate().split(" ")[0]);
         }
         return orderList;
     }

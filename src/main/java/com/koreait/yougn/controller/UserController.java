@@ -334,11 +334,15 @@ public class UserController {
 
     //문의글 삭제
     @PostMapping("remove")
-    public RedirectView remove(@RequestParam("num") Long num, RedirectAttributes rttr){
+    public RedirectView remove(@RequestParam("num") Long num, RedirectAttributes rttr, HttpServletRequest r){
+        String id = (String)r.getSession().getAttribute("sessionId");
         if(faqService.remove(num)){
             rttr.addFlashAttribute("result", "success");
         } else{
             rttr.addFlashAttribute("result", "fail");
+        }
+        if(id.equals("yougnAdmin")) {
+            return new RedirectView("inquiryAdmin");
         }
         return new RedirectView("inquiry");
     }
