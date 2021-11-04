@@ -4,7 +4,7 @@
 <mapper namespace="com.koreait.yougn.mappers.ReplyMapper">
     <insert id="insert">
         INSERT INTO T_REPBO (RNO, BNO, CONTENT, ID)
-        VALUES (SEQ_REPLY.NEXTVAL, #{bno}, #{content}, #{id})
+        VALUES (SEQ_REPBO.NEXTVAL, #{bno}, #{content}, #{id})
     </insert>
 
     <select id="read" resultType="replyVO">
