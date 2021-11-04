@@ -27,7 +27,14 @@ public class UserServiceImple implements UserService {
 
     @Override
     public boolean login(UserVO userVO) {
-        return userDAO.getUser(userVO.getId()).getPw().equals(userVO.getPw());
+        UserVO vo = userDAO.getUser(userVO.getId());
+        boolean check = false;
+        if(vo != null) {
+            if (vo.getPw().equals(userVO.getPw())) {
+                check = true;
+            }
+        }
+        return check;
     }
 
     @Override
