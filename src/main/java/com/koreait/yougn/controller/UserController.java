@@ -112,16 +112,17 @@ public class UserController {
 
     //비밀번호 수정
     @PostMapping("changePwOk")
-    public String changePw(String newPw, String id, HttpServletRequest r, Model model) {
+    public RedirectView changePw(String newPw, String id, HttpServletRequest r, RedirectAttributes rttr) {
         UserVO user = userService.getUser(id);
 
         user.setPw(newPw);
         if (userService.modifyPw(user)) {
             r.getSession().invalidate();
-            return "index";
+            return new RedirectView("/");
         }
-        model.addAttribute("result", "비밀번호 변경에 실패하였습니다.");
-        return "user/changePw";
+
+        rttr.addAttribute("result", "비밀번호 변경에 실패하였습니다.");
+        return new RedirectView("user/changePw");
     }
 
     @PostMapping("changePw")
@@ -173,13 +174,12 @@ public class UserController {
     @PostMapping("userModify")
     public String userModify(UserVO user, Model model) {
         if (userService.modifyUserInfo(user)) {
-            model.addAttribute("result", "success");
             model.addAttribute("user", userService.getUser(user.getId()));
-            return "user/userModify";
+            return "user/myPage"; //성공..
         }
         model.addAttribute("result", "fail");
         model.addAttribute("user", user);
-        return "user/userModify";
+        return "user/userModify"; // 실~패!
     }
 
     //아이디 찾기(인증번호 보내기)

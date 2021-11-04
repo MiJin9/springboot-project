@@ -46,7 +46,7 @@
                             <th>이름<span style="color: red">*</span></th>
                             <td>
                                 <div>
-                                    <input type="text" th:field="*{name}">
+                                    <input type="text" name="name" th:field="*{name}">
                                 </div>
                             </td>
                         </tr>
@@ -54,7 +54,7 @@
                             <th>이메일<span style="color: red">*</span></th>
                             <td class="member_email">
                                 <div>
-                                    <input type="text" th:field="*{email}">
+                                    <input type="text" name="email" th:field="*{email}">
                                 </div>
                             </td>
                         </tr>
@@ -62,8 +62,8 @@
                             <th>휴대폰번호<span style="color: red">*</span></th>
                             <td class="member_address">
                                 <div class="address_postcode">
-                                    <input type="text" class="box" id="phone" maxlength="12"
-                                           style="float: left; width: 43%; margin-bottom: 0px" th:field="*{phone}">
+                                    <input type="text" class="box" id="phone" name="phone" maxlength="12"
+                                           style="float: left; width: 43%; margin-bottom: 0px" th:value="*{phone}">
                                     <input type="button" id="pinButton" value="인증번호 받기">
                                     <div style="margin-bottom: 10px">
                                         <input type="text" id="phoneCheck"
@@ -82,9 +82,9 @@
                                     <input type="text" class="box postcodify_postcode5" id="address" placeholder="우편번호"
                                            style="width: 43%; float: left">
                                     <input type="button" id="postcodify_search_button" value="우편번호 검색">
-                                    <input type="text" placeholder="주소" class="postcodify_address"
+                                    <input type="text" placeholder="주소" name="address" class="postcodify_address"
                                            style="margin-top: 5px;" th:field="*{address}">
-                                    <input type="text" placeholder="상세주소" class="postcodify_details"
+                                    <input type="text" placeholder="상세주소" name="addressDetail" class="postcodify_details"
                                            style="margin-top: 5px;" th:field="*{addressDetail}">
                                 </div>
                             </td>
@@ -94,6 +94,7 @@
                     <div style="margin-bottom: 40px; margin-left: 185px">
                         <input type="button" id="modifyButton" class="button" value="수정">
                         <input type="button" id="cancelButton" class="button" value="취소" style="margin-left: 8px; background-color: #888787">
+                        <input type="hidden" th:if="${result != null}" th:value="${result}" id="result">
                     </div>
                 </div>
             </form>
@@ -117,6 +118,11 @@
 <script>
     // 인증번호 보내기
     let pin = "";
+    let result = $("#result").val()
+    console.log(result);
+    if(result == "fail"){
+        alert("회원수정 실패");
+    }
 
     $('#pinButton').click(function () {
         let phoneNumber = $('#phone').val();
@@ -126,7 +132,7 @@
             return;
         }
         if(isNaN($("#phone").val())){
-            alert("핸드폰번호를 확인해주세요.");
+            alert("핸드폰번호를 확인해주세요.1");
             return;
         }
         $.ajax({
@@ -135,10 +141,12 @@
             data: {"phoneNumber": phoneNumber},
             success: function (map) {
                 alert("인증번호 발송 완료");
+                check = true;
                 console.log(map);
                 console.log(map.result);
                 $("#checkPin_text").text(map.result);
                 pin = map.numStr;
+                phone = $("#phone").val()
             }
 
         })
@@ -152,7 +160,7 @@
             $("#phoneCheck").attr("readonly", true);
             $("#phone").attr("readonly", true);
             $("#pinButton").off("click");
-            phone = $("#phoneCheck").val();
+            phone = $("#phone").val();
         } else {
             $("#checkPin_text").text("인증번호가 일치하지 않습니다.");
         }
@@ -178,16 +186,30 @@
             return;
         }
         if ($("#phone").val() != phone){
-            alert("핸드폰 번호를 확인해주세요.")
+            console.log($("#phone").val() + "밸류")
+            console.log(phone + "변수 ") // 이거가 인증번호가 들어가네
+            alert("핸드폰 번호를 확인해주세요.2") // 이건 폰
             return;
         }
-
-        $("#modifyForm").submit();
+        if(!check) { 펄스
+            $("#modifyForm").submit();
+        }
+        if(check){ 트루 아니야?
+            if($("#phone").val() == phone){
+                $("#modifyForm").submit();
+            }
+        }
     });
 
     $("#cancelButton").on("click", function(){
         location.href="/user/myPage";
     })
+
+    let check = false;
+
+
+
+
 </script>
 </body>
 </html>
