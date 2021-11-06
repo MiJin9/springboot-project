@@ -23,11 +23,11 @@
                     <hr style="width: 95%; margin-top: 22px; margin-left: 0px">
                     <table id="table">
                         <tr class="tHead">
-                            <th class="boardType">게시판 분류</th>
-                            <th class="bno" width="90px">번호</th>
-                            <th class="title">제목</th>
-                            <th class="regDate" width="150px">작성일</th>
-                            <th class="updateDate" width="150px">수정일</th>
+                            <th class="boardType" style="width: 225px;">게시판 분류</th>
+                            <th class="bno" style="width: 75px;">번호</th>
+                            <th class="title" style="width: 300px;">제목</th>
+                            <th class="regDate" style="width: 150px;">작성일</th>
+                            <th class="updateDate" style="width: 150px;">수정일</th>
                         </tr>
                         <th:block th:each="board : ${myList}">
                             <tr class="tBody" th:object="${board}">

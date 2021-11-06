@@ -93,7 +93,7 @@
             <div id="container">
                 <section class="sct_wrap" style="width: 1100px;">
                     <div style="height: 40px">
-                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;font-weight: 100;padding:5px 12px;width: 100px;padding-left: 31px;font-size: 20px;">등록</a>
+                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;font-weight: 100;padding:5px 12px;width: 100px;padding-left: 31px;font-size: 18px;">등록</a>
                     </div>
                     <ul class="itemList">
                         <th:block th:if="${list.size() != 0}">
@@ -117,7 +117,7 @@
                                                 작성자 :<p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userid}"></p><br>
                                                 가격 : <p th:text="*{itemprice}" name="itemprice"></p>원<br>
                                                 원산지 : <p th:text="*{itemhome}" name="itemhome"></p><br>
-                                                제고 : <p th:text="*{itemtotalcount}" name="itemtotalcount"></p><br>
+                                                재고 : <p th:text="*{itemtotalcount}" name="itemtotalcount"></p><br>
                                                 배송비 : <p th:text="*{itemdeliverprice}" name="itemdeliverprice"></p>원<br>
                                             </div>
                                             <div class="listNum">

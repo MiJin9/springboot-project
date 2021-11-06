@@ -101,7 +101,7 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 }
 
 body, input, textarea, select {
-    font-family: 'PT Sans', sans-serif;
+    font-family:'Jeju Gothic';
     font-size: 10pt;
     line-height: 2em;
     color: #7a8186;
