@@ -198,7 +198,7 @@ public class UserController {
         String content = "유귀농 아이디 찾기 인증번호입니다. 노출되지 않게 유의 부탁드립니다.\n인증번호 : " +pin;
         if(userService.sendEmail(userService.getEmailList(userVO),title,content)){
             map.put("pin",pin);
-            map.put("result","이메일을 확인해주세요.");
+            map.put("result","회원 가입시 입력하신 이메일로 인증번호가 발송되었습니다.");
             return map;
         }
         map.put("result","이메일 전송에 실패하였습니다.");
@@ -225,7 +225,7 @@ public class UserController {
         content += "입니다.";
 
         if(userService.sendEmail(userService.getEmailList(userVO),title,content)){
-            map.put("result","이메일을 확인해주세요.");
+            map.put("result","인증 성공, 이메일로 아이디를 전송했습니다.");
             return map;
         }
         map.put("result","이메일 전송에 실패하였습니다.");
@@ -248,7 +248,7 @@ public class UserController {
         String content = "유귀농 비밀번호 찾기 인증번호입니다. 노출되지 않게 유의 부탁드립니다.\n인증번호 : " +pin;
         if(userService.sendEmail(userService.getEmailList(userVO),title,content)){
             map.put("pin",pin);
-            map.put("result","이메일을 확인해주세요.");
+            map.put("result","회원 가입시 입력하신 이메일로 인증번호가 발송되었습니다.");
             return map;
         }
         map.put("result","이메일 전송에 실패하였습니다.");
