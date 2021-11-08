@@ -1866,7 +1866,6 @@ table.default tfoot {
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
-button,
 .button {
     -moz-transition: background-color 0.2s ease-in-out;
     -webkit-transition: background-color 0.2s ease-in-out;
@@ -1876,6 +1875,7 @@ button,
     display: inline-block;
     letter-spacing: 0.10em;
     text-decoration: none;
+    padding: 0.5em 1.5em 0.5em 1.5em;
     font-size: 1.2em;
     background: #80B763;
     color: #FFF;
@@ -1883,6 +1883,9 @@ button,
     cursor: pointer;
     letter-spacing: 2px;
     font-weight: 700;
+}
+input[type="password"]{
+    font-family: 'PT Sans', sans-serif;
 }
 
 input[type="submit"]:hover,
