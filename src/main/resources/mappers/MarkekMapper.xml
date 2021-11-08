@@ -68,7 +68,7 @@ WHERE ITEMNUM = #{itemnum}
         <!--수정-->
 <update id="update">
 UPDATE T_ITEM
-SET ITEMNAME = #{itemname},ITEMCONTENT = #{itemcontent}, ITEMDELIVERPRICE = #{itemdeliverprice}, ITEMHOME = #{itemhome}, ITEMPRICE = #{itemprice}, ITEMUPDATEDATE = SYSDATE
+SET ITEMNAME = #{itemname},ITEMCONTENT = #{itemcontent}, ITEMDELIVERPRICE = #{itemdeliverprice}, ITEMHOME = #{itemhome}, ITEMTOTALCOUNT = #{itemtotalcount}, ITEMPRICE = #{itemprice}, ITEMUPDATEDATE = SYSDATE
 WHERE ITEMNUM = #{itemnum}
 </update>
 
