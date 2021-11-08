@@ -77,32 +77,30 @@
             </div>
             <br>
             <br>
-            <div style="margin-left: 70px;">
+            <div style="width: 300px; float: right">
                 <h2 style="color: black; font-size: 20px">주문자 정보</h2>
                 <br>
-                <div style="margin-left: 120px; font-size: 16px">
+                <div style="font-size: 16px">
                 <span style="display: flex">아이디&nbsp; : &nbsp;<p id="5" th:text="${user.getId()}"></p></span>
                 <span style="display: flex">이름&nbsp; : &nbsp;<p th:text="${user.getName()}"></p></span>
                 <span style="display: flex">연락처&nbsp; : &nbsp;<p id="6" th:text="${user.getPhone()}"></p></span>
                 <span style="display: flex">이메일&nbsp; : &nbsp;<p th:text="${user.getEmail()}"></p></span>
+                <p style="font-size: 13px; color: #3c763d">※주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.</p>
                 </div>
                 <br>
             </div>
-            <hr style="width: 1000px;margin-right: 50px;margin-left: 50px;">
-            <br>
-            <br>
-            <div style="margin-left: 70px;">
+            <div style="margin-left: 70px; width: 700px; float: left">
                 <h2 style="color: black; font-size: 20px">배송지 정보</h2>
                 <br>
-                <div style="margin-left: 120px; font-size: 16px">
+                <div style="margin-left: 90px;font-size: 16px;border-right: solid 0.5px;width: 570px;margin-bottom: 50px;">
                     수령인*<input type="text" class="orderinput" id="orderReceiver" name="orderReceiver" placeholder="50자 이내로 입력해주세요"><br>
                     <br>
                     연락처*<input type="number" class="orderinput" id="orderPhonenum" name="orderPhoneNum" value=""/><br>
                     <br>
-                    우편번호*<input type="text" class="postcodify_postcode5 orderinput" id="address"
+                    <div>우편번호*<input type="text" class="postcodify_postcode5 orderinput" id="address"
                                 placeholder="우편번호" style="width:200px ;margin-left: 59px" value="">
-                    <input type="button" id="postcodify_search_button" style="width: 146px;font-size: 16px;padding: 16px;line-height: 14px;font-family: 'Jeju Gothic';font-weight: 500;" value="우편번호 검색"><br>
-                    <br>
+                    <input type="button" id="postcodify_search_button" style="width: 146px;font-size: 16px;padding: 16px;font-family: 'Jeju Gothic';font-weight: 500;" value="우편번호 검색"></div><br>
+
                     <input type="text" class="postcodify_address orderinput" style="margin-left: 127px" name="orderAddress" placeholder="도로명주소" value=""><br>
                     <br>
                     <input type="text" class="postcodify_details orderinput" style="margin-left: 127px" name="orderAddressDetail" placeholder="상세주소" value=""><br>
@@ -111,23 +109,16 @@
                     <br>
                     <p style="font-size: 13px; color: #3c763d">※도서산간 지역의 경우 추후 수령 시 추가 배송비가 과금될 수 있습니다.</p>
                 </div>
-                <br>
             </div>
-            <br>
-            <br>
-            <hr style="width: 1000px;margin-right: 50px;margin-left: 50px;">
-            <br>
-            <br>
-            <div style="margin-left: 70px;">
+            <div style="width: 300px; float: right;">
+                <br>
                 <h2 style="color: black; font-size: 20px">결제 상세</h2>
                 <br>
-                <div style="margin-left: 120px; font-size: 16px" th:object="${order}">
-                    <span style="display: flex">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p>&nbsp;원</span>
-                    <p style="margin-left: 16px; font-size: 22px">+</p>
-                    <span style="display: flex">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p>&nbsp;원</span>
-                    <p style="margin-left: 16px; font-size: 22px">=</p>
-                    <hr style="width: 600px; margin-left: -3px">
-                    <span style="display: flex">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p>&nbsp;원</span>
+                <div style="font-size: 16px" th:object="${order}">
+                    <span style="display: flex; font-size: 18px; font-weight: 800">주문 금액<p style="margin-left: 100px" id="a" th:text="${count} * *{itemprice}"></p>&nbsp;원</span>
+                    <span style="display: flex; margin-left: 30px">배송비<p style="margin-left: 120px" id="b" th:text="*{itemdeliverprice}"></p>&nbsp;원</span>
+                    <hr style="width: 250px; margin-left: -20px">
+                    <span style="display: flex; font-size: 18px; font-weight: 800">총 결제금액<p style="margin-left: 80px" id="c" th:text="${count} * *{itemprice} + *{itemdeliverprice}"></p>&nbsp;원</span>
                 </div>
             </div>
             <br>
