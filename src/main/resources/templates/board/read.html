@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/board/pageBanner.css">
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 </head>
-<body class="homepage is-preload">
+<body class="homepage is-preload" style="zoom:0.75;">
 <div id="page-wrapper">
 
     <th:block th:include="header.html"></th:block>
@@ -45,11 +45,7 @@
                 <br>
                 <div class="Btn">
                     <input type="hidden" name="boardType" th:field="${criteria.boardType}">
-                    <th:block th:if="*{id} == ${criteria.userId}">
-                        <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
-                        <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
-                    </th:block>
-                    <th:block th:if="${criteria.userId == 'yougnAdmin'}">
+                    <th:block th:if="*{id} == ${criteria.userId} or ${criteria.userId == 'yougnAdmin'}">
                         <a href="javascript:void(0)" id="modify" class="button primary small">수정</a>
                         <a href="javascript:void(0)" id="delete" class="button primary small">삭제</a>
                     </th:block>
