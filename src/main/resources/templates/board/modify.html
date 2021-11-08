@@ -48,7 +48,7 @@
 
                 <!-- summernote와 관련된 영역 -->
 
-                <input type="text" placeholder ="제목" name="title" id="title" style="border: solid 0.1px #a9a9a9;">
+                <input type="text" placeholder ="제목" name="title" id="title" th:value="${vo.title}" style="border: solid 0.1px #a9a9a9;">
 
                 <textarea id="summernote" name="content" th:utext="${vo.content}" onKeyup="inputLimitByteChecked( this );" data-byte="4000" style="resize: none;"></textarea>
 
@@ -99,8 +99,7 @@
     if(sessionId == null){
         alert("로그인이 필요합니다.");
         location.href = "/user/login";
-    }
-
+    } // 이거 확률성으로 막아주는거야 ?? 쓸모가 없는 코드네 ..
 
     $("#title").val(title);
 

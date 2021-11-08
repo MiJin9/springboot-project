@@ -130,6 +130,7 @@
 <script th:inline="javascript">
     let itemnum = $("#itemnum").val();
     $(document).ready(function(){
+        $("#fileBtn").hide();
         let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
         let maxSize = 5242880;// 5MB
         let inputFile = $(".uploadDiv input");
@@ -153,10 +154,11 @@
             let str = "";
             $(uploadFiles).each(function(i, obj){
                 let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.fileName);
+                let originPath = encodeURIComponent(obj.uploadPath + "/" + obj.fileName);
                 str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-name='" + obj.fileName.substring(obj.fileName.indexOf("_") + 1) + "' data-type='" + obj.image +"'>";
                 str += "<div>";
-                str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                str += "<img src='/upload/display?fileName=" + originPath + "'>";
+                str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
                 str += "</div>";
                 str += "</li>";
 
@@ -195,6 +197,7 @@
                 success: function(fileList){
                     showUploadFile(fileList);
                     inputFile.val("");
+                    $("#fileBtn").hide();
                 }
             });
         });
@@ -231,8 +234,8 @@
 
                         str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-name='" + attach.fileName.substring(attach.fileName.indexOf("_") + 1) + "' data-type='" + attach.image +"'>";
                         str += "<div>";
-                        str += "<img src='/upload/display?fileName=" + fileCallPath + "'>";
-                        str += "<span data-file='" + fileCallPath + "' data-type='image'>x</span>";
+                        str += "<img src='/upload/display?fileName=" + originPath + "'>";
+                        str += "<span data-file='" + originPath + "' data-type='image'>x</span>";
                         str += "</div>";
                         str += "</li>";
 

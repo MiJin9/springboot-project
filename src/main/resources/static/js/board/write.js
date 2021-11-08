@@ -4,7 +4,7 @@ $("#sendSummer").click(function(){
         alert("제목을 입력해주세요.");
         return;
     }
-    if(!$("#summernote").val()){
+    if(!$("#summernote").val() || $("#summernote").val() == null){
         alert("내용을 입력해주세요.");
         return;
     }

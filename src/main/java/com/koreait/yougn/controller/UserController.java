@@ -88,12 +88,12 @@ public class UserController {
 
     //회원 탈퇴
     @PostMapping("byeOk")
-    public String bye(HttpServletRequest r) {
+    public RedirectView bye(HttpServletRequest r) {
         String id = (String) r.getSession().getAttribute("sessionId");
         UserVO user = userService.getUser(id);
         userService.singOut(user);
         r.getSession().invalidate();
-        return "index";
+        return new RedirectView("/");
     }
 
     @PostMapping("bye")

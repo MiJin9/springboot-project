@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/userModify.css">
     <link rel="stylesheet" href="/css/join.css">
+    <style>
+        body {
+        zoom: 0.75!important;
+        }
+    </style>
 </head>
-<body class="homepage is-preload" style="zoom:0.75;">
+<body class="homepage is-preload">
 <div id="page-wrapper">
 
     <th:block th:include="header.html"></th:block>
@@ -356,7 +361,7 @@
 
        $.ajax({
            url: "/user/"+id,
-           dataType:"json",
+           dataType:"text/plain",
            type:"post",
            contentType:"application/json",
            success:function(result) {
@@ -437,7 +442,7 @@
         var pw = $("#pw").val();
         if (!reg.test(pw)) {
             $("#checkPw_text1").css("color","red");
-            $("#checkPw_text1").text("숫자와 영문을 포함해서 입력해주세요");
+            $("#checkPw_text1").text("숫자와 영문을 포함, 8자리 이상으로 입력해주세요");
         }else{
             $("#checkPw_text1").css("color","green");
             $("#checkPw_text1").text("사용가능한 비밀번호입니다.");
