@@ -34,6 +34,7 @@ public class MarketDAO {
     }
 
     public List<ItemVO> getList(Criteria criteria){
+        criteria.setAmount(6);
         return marketMapper.getList(criteria);
     }
 

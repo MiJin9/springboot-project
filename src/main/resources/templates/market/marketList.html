@@ -16,8 +16,10 @@
     <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet">
 <style>
     li img{
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 215px;
+        margin-top: 15px;
+        border-radius: 5%;
     }
     li>a {
         font-size: 20px;
@@ -34,15 +36,17 @@
     }
 
     .marketItem{
-        background-color: #fafcff;
-        padding : 20px 0;
-        border-bottom: 1px solid #3c3c3c;
-        height: 260px;
+        padding : 0;
     }
 
     .marketItemInner{
         width: 970px;
         display: flex;
+    }
+    .uploadResult ul li img{
+        width: 300px;
+        height: 300px;
+        border-radius: 5%;
     }
 
     .itemTitle{
@@ -55,7 +59,13 @@
     }
 
     .itemInfo{
-        margin-left: 50px;
+        margin-left: 10px;
+    }
+    .listNum{
+        margin: 0 auto;
+    }
+    ul{
+        padding: 0;
     }
 
     div#searchWrap{display: flex;}
@@ -64,17 +74,15 @@
         width: 80%; margin: 0 auto; padding: 0 0; border: solid 1px black;height: 37px;border-radius: 0%;color: #000000;padding-left: 10px;}
     form[name='searchForm']{overflow: hidden;}
 
-    .thumbImg {
-        position: relative;
-        display: table-cell;
-        margin-top: 10px;
-        vertical-align: top;
-        width:200px;
-        height:200px;
-        margin-left:30px;>
-    }
+
     .itemList{
         list-style: none;
+    }
+
+    .marketItemInner{
+        width: 300px;
+        display: flex;
+        flex-direction: column;
     }
 
 </style>
@@ -93,13 +101,17 @@
             <div id="container">
                 <section class="sct_wrap" style="width: 1100px;">
                     <div style="height: 40px">
-                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 20px;font-weight: 100;padding:5px 12px;width: 100px;padding-left: 31px;font-size: 18px;">등록</a>
+                        <a href="javascript:void(0)" class="writeButton primary button" style="float: right;margin-right: 45px;font-weight: 100;padding:5px 12px;margin-bottom: -1px;">>등록</a>
                     </div>
-                    <ul class="itemList">
+                    <ul class="itemList"
+                        style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-between;width: 1000px; margin-left: 50px;">
                         <th:block th:if="${list.size() != 0}">
                         <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
-                            <div>
-                                <li class="marketItem" th:object="${list.get(index)}">
+                            <div style="width: 300px;height: 580px;">
+                                <li class="marketItem" th:object="${list.get(index)}" style="height: 335px;width:350px;">
+                                    <div class="listNum">
+                                        No.<p id="itemnum" name="itemnum" th:text="*{itemnum}"></p>
+                                    </div>
                                     <div class="marketItemInner">
                                         <!--썸네일 나중에-->
                                         <div class="marketImgThumbnail">
@@ -107,22 +119,25 @@
 
                                             </ul>
                                         </div>
-                                        <div class="itemInfo" style="margin-top: -15px">
+                                        <div class="itemInfo" style="width: 300px; ">
                                             <!--제목-->
-                                            <div class="itemTitle">
-                                                <h4><a target="_self" class="itemName" id="goRead" th:href="*{itemnum}" name="itemname" th:text="*{itemname}"></a></h4>
+                                            <div class="itemTitle" style="height: 70px;margin-top: 20px;">
+                                                <h4><a target="_self" class="itemName" id="goRead"
+                                                       th:href="*{itemnum}"
+                                                       name="itemname" th:text="*{itemname}"
+                                                       style="font-size: 40px;line-height: 46px;height: 70px;"></a></h4>
                                             </div>
                                             <!--내용-->
                                             <div class="itemDetail" style="height: 165px">
-                                                작성자 :<p style="color: black;margin-bottom: 10px;font-size: 13px;" name="userId" th:text="*{userid}"></p><br>
-                                                가격 : <p th:text="*{itemprice}" name="itemprice"></p>원<br>
-                                                원산지 : <p th:text="*{itemhome}" name="itemhome"></p><br>
-                                                재고 : <p th:text="*{itemtotalcount}" name="itemtotalcount"></p><br>
+                                                <div style="font-size: 25px;color: #ff7f00; display: inline-flex;">
+                                                    <p th:text="*{itemprice}" name="itemprice" style="height: 12px;"></p>원<br>
+                                                </div><br>
+                                                작성자 :<p name="userId" th:text="*{userid}"  style="height: 24px;"></p><br>
+                                                원산지 : <p th:text="*{itemhome}" name="itemhome" style="height: 12px;display: inline-flex;"></p><br>
+                                                재고 : <p th:text="*{itemtotalcount}" name="itemtotalcount" style="height: 12px;"></p><br>
                                                 배송비 : <p th:text="*{itemdeliverprice}" name="itemdeliverprice"></p>원<br>
                                             </div>
-                                            <div class="listNum">
-                                                No.<p id="itemnum" name="itemnum" th:text="*{itemnum}"></p>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </li>
@@ -160,7 +175,7 @@
                             </th:block>
                             <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
                         </div>
-                        <form action="/market/marketList" th:object="${criteria}" name="pageForm">
+                        <form action="/market/marketList" th:object="${criteria}" name="pageForm" style="margin-top: -44px;">
                             <input type="hidden" name="pageNum" th:field="*{pageNum}">
                             <input type="hidden" name="amount" th:field="*{amount}">
                             <input type="hidden" name="keyType" th:field="*{keyType}">
