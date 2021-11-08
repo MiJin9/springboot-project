@@ -33,6 +33,7 @@ public class ExpoDAO {
     }
 
     public List<ExpoVO> getList(Criteria criteria){
+        criteria.setAmount(6);
         return mapper.getList(criteria);
     }
 

@@ -25,9 +25,38 @@
         h2, h3, h4, h5, h6 {
             color: black;
         }
+
+        .expoItem{
+            background: #ffffff;
+            padding: 0;
+        }
+        .uploadResult ul li img{
+            width: 300px;
+            height: 300px;
+            border-radius: 5%;
+        }
+        ul>li>div>img{
+           margin: 0;
+        }
+        .listNum{
+            margin: 0 auto;
+        }
+        .expoItem{
+            border: none;
+        }
+        .expoItemInner{
+            width: 300px;
+        }
+        ul{
+            padding: 0;
+        }
+
+        .itemInfo{
+            margin-left: 10px;
+        }
     </style>
 </head>
-<body class="homepage is-preload">
+<body class="homepage is-preload" style="zoom:0.75;">
 <div id="page-wrapper">
     <th:block th:include="header.html"></th:block>
 
@@ -40,15 +69,19 @@
                 </div>
                 <!--            <hr style="border-top: solid 1px green; margin-top: 0px;">-->
                 <a href="javascript:void(0)" class="writeButton primary button"
-                   style="float: right;margin-right: 20px;font-weight: 100;padding:5px 12px;">EXPO
+                   style="float: right;margin-right: 45px;font-weight: 100;padding:5px 12px;margin-bottom: -1px;">EXPO
                     참가 등록</a></h3>
-                <ul class="expoList">
+                <ul class="expoList"
+                    style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-between;width: 1000px; margin-left: 50px;">
                     <th:block th:if="${list.size() != 0}">
                         <th:block th:each="index : ${#numbers.sequence(0,list.size()-1)}">
-                            <div>
-                                <li class="expoItem" th:object="${list.get(index)}">
+                            <div style="width: 300px;height: 620px; margin-bottom: 50px;">
+                                <li class="expoItem" th:object="${list.get(index)}" style="height: 335px;width:350px;">
+                                    <div class="listNum">
+                                        No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
+                                    </div>
                                     <div class="expoItemInner">
-                                        <div class="thumbWrapper" style="display: flex">
+                                        <div class="thumbWrapper" style="width: 300px;">
                                             <div class="field">
                                                 <div class="uploadResult">
                                                     <ul th:id="${index}">
@@ -59,30 +92,31 @@
                                             <div class="field">
 
                                             </div>
-                                            <div class="itemInfo">
+                                            <div class="itemInfo" style="width: 300px; ">
                                                 <!--제목-->
-                                                <div class="itemTitle">
+                                                <div class="itemTitle" style="height: 70px;margin-top: 20px;">
                                                     <h4><a target="_self" class="itemName goRead" name="expoTitle"
                                                            th:text="*{expoTitle}"
-                                                           th:href="*{expoNum}"></a></h4>
+                                                           th:href="*{expoNum}"
+                                                            style="font-size: 40px;line-height: 46px;height: 70px;"></a></h4>
                                                 </div>
-                                                <br>
+                                                <p> </p>
                                                 <!--작성자-->
-                                                <div class="userId">
-                                                    작성자 : &nbsp;<p
-                                                        style="color: black;margin-bottom: 10px;font-size: 13px;"
-                                                        name="userId" th:text="*{userId}"></p>
+                                                <div class="perPage">
+                                                    <div class="userId" style="height: 24px;">
+                                                        작성자 : &nbsp;<p
+                                                            style="color: black;margin-bottom: 10px;font-size: 13px;"
+                                                            name="userId" th:text="*{userId}"></p>
 
-                                                </div>
-                                                <!--내용-->
-                                                <div class="itemDetail">
-                                                    농장 이름 : <p th:text="*{farmName}" name="farmName"></p><br>
-                                                    주소 : <p th:text="*{farmAddress}" name="farmAddress"></p><br>
-                                                    주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"></p><br>
-                                                    전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
-                                                </div>
-                                                <div class="listNum">
-                                                    No.<p id="expoNumber" name="expoNum" th:text="*{expoNum}"></p>
+                                                    </div>
+                                                    <!--내용-->
+                                                    <div class="itemDetail">
+                                                        농장 이름 : <p th:text="*{farmName}" name="farmName" style="height: 12px;"></p><br>
+                                                        주소 : <p th:text="*{farmAddress}" name="farmAddress"style="height: 12px;"></p><br>
+                                                        주요 품목 : <p th:text="*{farmProduct}" name="farmProduct"style="height: 12px;"></p><br>
+                                                        전화번호 : <p th:text="*{farmPhone}" name="farmPhone"></p><br>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

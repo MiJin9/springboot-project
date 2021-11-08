@@ -143,3 +143,7 @@ p#no {
 .orderaddress{
     width: 420px;
 }
+
+.note-icon-bar, .note-resizebar {
+    display: none;
+}
